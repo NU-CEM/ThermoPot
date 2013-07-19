@@ -3,6 +3,10 @@ from scipy import constants # Library provides 2010 CODATA values for physical c
 from interpolate_phonopy import get_potential_aims
 
 def main():
+################ Set conditions ###############
+    T = 298.15 # K
+    P = 1e5    # Pa
+############# Data and parameters from DFT calcs ################
 
     pbesol_energy_eV=dict(czts=-0.706480597450521e06,
                           Cu=-0.180838109862865e06,
@@ -17,16 +21,27 @@ def main():
                  Sn=4,
                  alpha_S=32,
                  S8=1)
+    
+    thermo_file=dict()
+    U_func = dict()
 
-    eV2J = constants.physical_constants['electron volt-joule relationship'][0]
+    phonon_species = ('czts','Cu','Zn','Sn','alpha_S')
+    for species in phonon_species:
+        thermo_file[species] = 'phonopy_output/' + species + '.dat'
+        U_func[species] = get_potential_aims(thermo_file[species],'U')
 
     ### Copy energies and convert to J: ###
+    eV2J = constants.physical_constants['electron volt-joule relationship'][0]
     pbesol_energy_J = pbesol_energy_eV.copy()
     for species in pbesol_energy_eV:
         pbesol_energy_J[species] = pbesol_energy_eV[species]*eV2J*constants.N_A
 
 ############## Enthalpy for each species #####################
-
+        V = 1E-30 # Need to import correct cell volume from geometry file
+    H = dict()
+    for species in phonon_species:
+        H[species] = pbesol_energy_eV[species] + U_func[species](T)*eV2J*constants.N_A + P*V
+        print H
 
 ######### Calculate some formation energies! #################
     formation_alpha_eV = (pbesol_energy_eV['czts']/fu_cell['czts'] -
