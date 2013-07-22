@@ -1,26 +1,13 @@
 """Calculate enthalpies of formation for CZTS over a range of temperatures at standard pressure."""
 from scipy import constants # Library provides 2010 CODATA values for physical constants
 from interpolate_phonopy import get_potential_aims
+from aims import pbesol_energy_eV, fu_cell  # Data file of FHI-aims computed systems and results
 
 def main():
 ################ Set conditions ###############
     T = 298.15 # K
     P = 1e5    # Pa
 ############# Data and parameters from DFT calcs ################
-
-    pbesol_energy_eV=dict(czts=-0.706480597450521e06,
-                          Cu=-0.180838109862865e06,
-                          Zn=-0.981595848099161e05, 
-                          Sn=-0.681162478362528e06, 
-                          alpha_S=-0.347575504588933e06,
-                          S8=-0.868936310037924e05)
-    
-    fu_cell=dict(czts=2,
-                 Cu=4,
-                 Zn=2,
-                 Sn=4,
-                 alpha_S=32,
-                 S8=1)
     
     thermo_file=dict()
     U_func = dict()
