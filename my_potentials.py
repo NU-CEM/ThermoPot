@@ -60,7 +60,7 @@ def H_eV(species,T,P):
         H_func = get_potential_nist_table(thermo_file,'H')
         return (pbesol_energy_eV[species] + 
                 H_func(T)*constants.physical_constants['joule-electron volt relationship'][0]
-                )/fu_cell[species]
+                )
     else:
             raise RuntimeError("Species \'{0:s}\' not found in aims.py".format(species))    
 
@@ -91,6 +91,7 @@ def H_kJ(species,T,P):
     Other T, P arrays may result in undefined behaviour.
     """
     return H_J(species,T,P)/1000.
+
 
 
 def main():
