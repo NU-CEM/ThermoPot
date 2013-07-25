@@ -55,17 +55,31 @@ def main():
                            pbesol_energy_eV['Sn']/fu_cell['Sn'] +
                            4*pbesol_energy_eV['alpha_S']/fu_cell['alpha_S']
                            ))
-    print "Formation energy 2 Cu + Zn + Sn + 4 S(alpha) -> CZTS: {0:4.2f} eV".format(formation_alpha_eV)
     
-    DH_S8_eV = (H['czts']/fu_cell['czts'] -
+    DH_alpha_eV = (H['czts']/fu_cell['czts'] -
                 (2*H['Cu']/fu_cell['Cu'] +
                  H['Zn']/fu_cell['Zn'] +
                  H['Sn']/fu_cell['Sn'] +
                  4*H['alpha_S']/fu_cell['alpha_S']
                  ))
+    DG_alpha_eV = (mu['czts']/fu_cell['czts'] -
+                (2*mu['Cu']/fu_cell['Cu'] +
+                 mu['Zn']/fu_cell['Zn'] +
+                 mu['Sn']/fu_cell['Sn'] +
+                 4*mu['alpha_S']/fu_cell['alpha_S']
+                 ))
 
-    print "Formation enthalpy @ {0:3.5g} K, {1:3.3g} bar:".format(T,P/1E5)
-    print "2 Cu + Zn + Sn + 4 S(alpha) -> CZTS: {0:4.2f} eV".format(DH_S8_eV)
+
+    ###### Formatted print: heading with underline followed by values in eV and kJ #####
+
+    alphastring = "2 Cu + Zn + Sn + 4 S(alpha) -> CZTS"
+    print alphastring + "\n" + len(alphastring) * "="
+    print "Crude DFT energy @ {0:3.5g} K, {1:3.3g} bar:".format(T,P/1E5).ljust(50)+"{0:5.3g} eV".format(formation_alpha_eV)
+    print "{0}{1:5.3g} kJ/mol".format((50*" "),formation_alpha_eV*constants.N_A*eV2J/1000)
+    print "Enthalpy change @ {0:3.5g} K, {1:3.3g} bar:".format(T,P/1E5).ljust(50)+"{0:5.3g} eV".format(DH_alpha_eV)
+    print "{0}{1:5.3g} kJ/mol".format((50*" "),DH_alpha_eV*constants.N_A*eV2J/1000)
+    print "Gibbs free energy @ {0:3.5g} K, {1:3.3g} bar:".format(T,P/1E5).ljust(50)+"{0:5.3g} eV".format(DG_alpha_eV)
+    print "{0}{1:5.3g} kJ/mol".format((50*" "),DG_alpha_eV*constants.N_A*eV2J/1000)
                     
     return 0
 
