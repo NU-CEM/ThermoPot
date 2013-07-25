@@ -12,5 +12,14 @@ fu_cell=dict(czts=2,
                  Cu=4,
                  Zn=2,
                  Sn=4,
-                 alpha_S=32,
-                 S8=1)
+                 alpha_S=32)
+
+#### MADE-UP VOLUMES TO BE REPLACED!!! ###                 
+volume=dict(czts=10,
+                 Cu=10,
+                 Zn=10,
+                 Sn=10,
+                 alpha_S=10,
+                 S8=10)
+
+
