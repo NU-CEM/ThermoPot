@@ -1,7 +1,5 @@
 """Calculate enthalpies of formation for CZTS over a range of temperatures at standard pressure."""
 import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.mlab as mlab
 from scipy import constants # Library provides 2010 CODATA values for physical constants
 from interpolate_thermal_property import get_potential_aims, get_potential_nist_table
 from aims import pbesol_energy_eV, fu_cell  # Data file of FHI-aims computed systems and results
@@ -12,8 +10,8 @@ def main():
     k = constants.physical_constants['Boltzmann constant in eV/K'][0]
 
 ################ Set conditions ###############
-    T = np.linspace(100,1000,num=10) # K
-    P = np.array(10**np.linspace(4,6,num=5),ndmin=2).transpose()    # Pa
+    T = 298.15 # K
+    P = 1e5    # Pa
 ############# Data and parameters from DFT calcs ################
  
     ### Copy energies and convert to J: ###
@@ -72,21 +70,17 @@ def main():
                  ))
 
 
-    print DG_alpha_eV
-    print (P*V)/(eV2J*constants.N_A)
+    ###### Formatted print: heading with underline followed by values in eV and kJ #####
 
-    fig = plt.figure()
-    ax = fig.add_subplot(1,1,1)
-    a = plt.contour(T,P.flatten(),DG_alpha_eV,10, linewidths = 0.5, colors = 'k')
-    plt.pcolormesh(T,P.flatten(),DG_alpha_eV,cmap=plt.get_cmap('rainbow'))                
-    colours = plt.colorbar()
-    plt.xlabel('Temperature / K')
-    plt.ylabel('Pressure / Pa')
-    colours.set_label('DG / eV')
-    ax.set_yscale('log')
-    plt.clabel(a)
-    plt.show()
-    plt.savefig("formation_from_alpha-S.eps")
+    alphastring = "2 Cu + Zn + Sn + 4 S(alpha) -> CZTS"
+    print alphastring + "\n" + len(alphastring) * "="
+    print "Crude DFT energy @ {0:3.5g} K, {1:3.3g} bar:".format(T,P/1E5).ljust(50)+"{0:5.3g} eV".format(formation_alpha_eV)
+    print "{0}{1:5.3g} kJ/mol".format((50*" "),formation_alpha_eV*constants.N_A*eV2J/1000)
+    print "Enthalpy change @ {0:3.5g} K, {1:3.3g} bar:".format(T,P/1E5).ljust(50)+"{0:5.3g} eV".format(DH_alpha_eV)
+    print "{0}{1:5.3g} kJ/mol".format((50*" "),DH_alpha_eV*constants.N_A*eV2J/1000)
+    print "Gibbs free energy @ {0:3.5g} K, {1:3.3g} bar:".format(T,P/1E5).ljust(50)+"{0:5.3g} eV".format(DG_alpha_eV)
+    print "{0}{1:5.3g} kJ/mol".format((50*" "),DG_alpha_eV*constants.N_A*eV2J/1000)
+                    
     return 0
 
 
@@ -94,6 +88,3 @@ def main():
 
 if __name__=="__main__":
     main()
-
-
-
