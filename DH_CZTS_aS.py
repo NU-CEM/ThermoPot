@@ -5,6 +5,7 @@ import matplotlib.mlab as mlab
 from scipy import constants # Library provides 2010 CODATA values for physical constants
 from interpolate_thermal_property import get_potential_aims, get_potential_nist_table
 from aims import pbesol_energy_eV, fu_cell  # Data file of FHI-aims computed systems and results
+from aims import volume as cell_volume
 
 def main():
 ########## Alias physical constants ###########
@@ -41,11 +42,10 @@ def main():
         S_func[species] = get_potential_nist_table(thermo_file[species],'S')
         
 ############## Enthalpy for each species #####################
-    V = 1E-30 # Need to import correct cell volume from geometry file
     H = dict()
     mu = dict()
     for species in phonon_species:
-        H[species] = pbesol_energy_eV[species] + U_func[species](T) + (P*V)/(eV2J*constants.N_A)
+        H[species] = pbesol_energy_eV[species] + U_func[species](T) + (P*cell_volume[species]*1E-30)/(eV2J*constants.N_A)
         mu[species] = H[species] - TS_func[species](T)
     for species in gas_species:
         H[species] = pbesol_energy_eV[species] + (H_func[species](T))/(eV2J*constants.N_A) # Assuming ideality
@@ -71,14 +71,10 @@ def main():
                  4*mu['alpha_S']/fu_cell['alpha_S']
                  ))
 
-
-    print DG_alpha_eV
-    print (P*V)/(eV2J*constants.N_A)
-
     fig = plt.figure()
     ax = fig.add_subplot(1,1,1)
     a = plt.contour(T,P.flatten(),DG_alpha_eV,10, linewidths = 0.5, colors = 'k')
-    plt.pcolormesh(T,P.flatten(),DG_alpha_eV,cmap=plt.get_cmap('rainbow'))                
+    plt.pcolormesh(T,P.flatten(),DG_alpha_eV,cmap=plt.get_cmap('BuPu'),vmin=-4, vmax=-3.4)
     colours = plt.colorbar()
     plt.xlabel('Temperature / K')
     plt.ylabel('Pressure / Pa')
@@ -88,9 +84,6 @@ def main():
     plt.show()
     plt.savefig("formation_from_alpha-S.eps")
     return 0
-
-
-
 
 if __name__=="__main__":
     main()

@@ -15,11 +15,26 @@ fu_cell=dict(czts=2,
                  alpha_S=32)
 
 #### MADE-UP VOLUMES TO BE REPLACED!!! ###                 
-volume=dict(czts=10,
-                 Cu=10,
-                 Zn=10,
-                 Sn=10,
-                 alpha_S=10,
-                 S8=10)
+volume=dict(czts=310.86645888987351,
+                 Cu=45.38855878494433,
+                 Zn=27.956078493840639,
+                 Sn=108.8943337793184,
+                 alpha_S=832.91786077871541
+                 )
 
 
+def volume_calc(filename):
+    """Calculate unit cell volume in cubic angstroms from geometry.in file"""
+    import numpy as np
+    lattice_vectors = []
+    with open(filename, 'r') as f:
+        for line in f:
+            if line.split()[0] == 'lattice_vector':
+                lattice_vectors.append(line.split()[1:4])
+
+    lattice_vectors = np.array(lattice_vectors).astype(float)
+    volume = np.dot(lattice_vectors[0],np.cross(lattice_vectors[1],lattice_vectors[2]))
+
+    return abs(volume)
+
+    
