@@ -35,7 +35,7 @@ class solid(material):
         self.volume = volume
         self.phonons = phonons
 
-    def U_eV(self,T):
+    def U_eV(self,T,*P):
         """Internal energy of one formula unit of solid, expressed in eV.
         U = solid.U_eV(T)
         Returns a matrix with the same dimensions as T
@@ -192,27 +192,33 @@ class ideal_gas(material):
         """
         return self.U_J(T) * 0.001
 
-    def H_eV(self,T):
+    def H_eV(self,T,*P):
         """Enthalpy of one formula unit of ideal gas, expressed in eV
         H = ideal_gas.H_eV(T)
         Returns an array with the same dimensions as T
+
+        Accepts ideal_gas.H_eV(T,P): P is unused
         """
         H_func = get_potential_nist_table(self.thermo_file,'H')
         return (self.pbesol_energy_eV + 
                 H_func(T)*constants.physical_constants['joule-electron volt relationship'][0]/constants.N_A
                 )
 
-    def H_J(self,T):
+    def H_J(self,T,*P):
         """Enthalpy of one gram-mole of ideal gas, expressed in J/mol
         H = ideal_gas.H_J(T)
         Returns an array with the same dimensions as T
+
+        Accepts ideal_gas.H_eV(T,P): P is unused
         """
         return self.H_eV(T) * constants.physical_constants['electron volt-joule relationship'][0] * constants.N_A
     
-    def H_kJ(self,T):
+    def H_kJ(self,T,*P):
         """Enthalpy of one gram-mole of ideal gas, expressed in kJ/mol
         H = ideal_gas.H_kJ(T,P)
         Returns an array with the same dimensions as T
+
+        Accepts ideal_gas.H_eV(T,P): P is unused
         """
         return self.H_J(T) * 0.001
 
