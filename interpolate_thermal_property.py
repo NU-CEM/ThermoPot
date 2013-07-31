@@ -2,7 +2,9 @@ from scipy.interpolate import interp1d
 from numpy import genfromtxt
 
 def get_potential_aims(file,property):
-    """Thermodynamic property interpolation function. Requires phonopy-FHI-aims output file."""
+    """Thermodynamic property interpolation function. Requires phonopy-FHI-aims output file.
+    Cv in kB/cell. All other properties in eV/cell
+    """
     data = genfromtxt(file)
     T = data[:,0]
     if property in ('Cv','Cp','heat_capacity','C'):
