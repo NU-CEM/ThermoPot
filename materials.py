@@ -116,7 +116,7 @@ class solid(material):
         """
         TS_func = get_potential_aims(self.phonons,'TS')
         H = self.H_eV(T,P)
-        return H - TS_func(T)
+        return H - TS_func(T)/self.fu_cell
 
     def mu_J(self,T,P):
         """
