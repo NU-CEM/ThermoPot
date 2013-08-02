@@ -7,14 +7,15 @@ from interpolate_thermal_property import get_potential_aims, get_potential_nist_
 from aims import pbesol_energy_eV, fu_cell  # Data file of FHI-aims computed systems and results
 from aims import volume as cell_volume
 
+
 def main():
 ########## Alias physical constants ###########
     eV2J = constants.physical_constants['electron volt-joule relationship'][0]
     k = constants.physical_constants['Boltzmann constant in eV/K'][0]
 
 ################ Set conditions ###############
-    T = np.linspace(100,1000,num=100) # K
-    P = np.array(10**np.linspace(4,6,num=50),ndmin=2).transpose()    # Pa
+    T = np.linspace(100,1000,num=1000) # K
+    P = np.array(10**np.linspace(4,6,num=1000),ndmin=2).transpose()    # Pa
 ############# Data and parameters from DFT calcs ################
  
     ### Copy energies and convert to J: ###
@@ -57,38 +58,38 @@ def main():
                            pbesol_energy_eV['Sn']/fu_cell['Sn'] +
                            0.5*pbesol_energy_eV['S8']
                            ))
-    print formation_S8_eV
+ #   print formation_S8_eV
     DH_S8_eV = (H['czts']/fu_cell['czts'] -
                 (2*H['Cu']/fu_cell['Cu'] +
                  H['Zn']/fu_cell['Zn'] +
                  H['Sn']/fu_cell['Sn'] +
                  0.5*H['S8']
                  ))
-    print DH_S8_eV
+#    print DH_S8_eV
     DG_S8_eV = (mu['czts']/fu_cell['czts'] -
                 (2*mu['Cu']/fu_cell['Cu'] +
                  mu['Zn']/fu_cell['Zn'] +
                  mu['Sn']/fu_cell['Sn'] +
                  0.5*mu['S8']
                  ))
-    print DG_S8_eV
-    fig = plt.figure()
+    #    print DG_S8_eV
+
+    fig = plt.figure(1)
     ax = fig.add_subplot(1,1,1)
     a = plt.contour(T,P.flatten(),DG_S8_eV,10, linewidths = 0.5, colors = 'k')
-    plt.pcolormesh(T,P.flatten(),DG_S8_eV,cmap=plt.get_cmap('BuPu'))
+    plt.pcolormesh(T,P.flatten(),DG_S8_eV,cmap=plt.get_cmap('summer'),vmin=-4)
     colours = plt.colorbar()
     plt.xlabel('Temperature / K')
     plt.ylabel('Pressure / Pa')
     plt.title('2 Cu + Zn + Sn + 0.5 S8 --> CZTS')
-    colours.set_label('DG / eV')
+    colours.set_label('$\Delta$G / eV')
     ax.set_yscale('log')
-    plt.clabel(a)
-    plt.show()
-    plt.savefig("formation_from_S8.eps")
+    plt.clabel(a, manual=[(200,1E5),(300,1E5),(400,1E5),(550,1E5),(700,1E5),(800,1E5),(1000,1E5)])
+    fig.savefig("formation_from_S8.png",dpi=300)
+#    plt.show()
     return 0
 
 if __name__=="__main__":
     main()
-
 
 
