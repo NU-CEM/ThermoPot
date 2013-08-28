@@ -146,6 +146,41 @@ class solid(material):
         """
         return self.mu_J(T,P) * 0.001
 
+    def Cv_kB(self,T):
+        """
+        Constant-volume heat capacity of one formula unit of solid, expressed in units
+        of the Boltzmann constant kB:
+        Cv = solid.Cv_kB(T)
+        T may be an array, in which case Cv will be an array of the same dimensions.
+        """
+        Cv_func = get_potential_aims(self.phonons,'Cv')
+        return Cv_func(T)/self.fu_cell
+
+    def Cv_eV(self,T):
+        """
+        Constant-volume heat capacity of one formula unit of solid, expressed in units
+        of the Boltzmann constant kB:
+        Cv = solid.Cv_eV(T)
+        T may be an array, in which case Cv will be an array of the same dimensions.
+        """
+        return self.Cv_kB(T) / constants.physical_constants['Boltzmann constant in eV/K']
+    
+    def Cv_J(self,T):
+        """
+        Constant-volume heat capacity of solid, expressed in J/mol.
+        Cv = solid.Cv_J(T)
+        T may be an array, in which case Cv will be an array of the same dimensions.
+        """
+        return (self.Cv_kB(T) * constants.N_A  / constants.physical_constants['Boltzmann constant'][0] )
+
+    def Cv_kJ(self,T):
+       """
+        Constant-volume heat capacity of solid, expressed in kJ/mol.
+        Cv = solid.Cv_kJ(T)
+        T may be an array, in which case Cv will be an array of the same dimensions.
+        """
+       return self.Cv_J(T) * 0.001
+    
 class ideal_gas(material):
     """
     Class for ideal gas properties. 
