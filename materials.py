@@ -201,16 +201,23 @@ class ideal_gas(material):
     Enthalpy has no P dependence as volume is not restricted / expansion step is defined as isothermal
     """
 
-    def __init__(self,name,pbesol_energy_eV,thermo_file):
+    def __init__(self,name,pbesol_energy_eV,thermo_file,zpe_pbesol=0):
         material.__init__(self, name, pbesol_energy_eV)
         self.thermo_file = thermo_file
+        # Initialise ZPE to PBEsol value if provided. This looks redundant at the moment: the intent is
+        # to implement some kind of switch or heirarchy of methods further down the line.
+        if zpe_pbesol > 0:
+            self.zpe = zpe_pbesol
+        else:
+            self.zpe = 0
+
     def U_eV(self,T):
         """Internal energy of one formula unit of ideal gas, expressed in eV.
         U = ideal_gas.U_eV(T)
         Returns a matrix with the same dimensions as T
         """
         U_func = get_potential_nist_table(self.thermo_file,'U')
-        return (self.pbesol_energy_eV + 
+        return (self.pbesol_energy_eV + self.zpe +
                 U_func(T)*constants.physical_constants['joule-electron volt relationship'][0]/constants.N_A
                 )
     def U_J(self,T):
@@ -235,7 +242,7 @@ class ideal_gas(material):
         Accepts ideal_gas.H_eV(T,P): P is unused
         """
         H_func = get_potential_nist_table(self.thermo_file,'H')
-        return (self.pbesol_energy_eV + 
+        return (self.pbesol_energy_eV + self.zpe +
                 H_func(T)*constants.physical_constants['joule-electron volt relationship'][0]/constants.N_A
                 )
 
@@ -346,9 +353,16 @@ alpha_S=solid(
 S8=ideal_gas(
     name='S8',
     pbesol_energy_eV=-0.868936310037924e05,
-    thermo_file='nist_janaf/S8.dat'
+    thermo_file='nist_janaf/S8.dat',
+    zpe_pbesol=0.32891037
 )
 
+S2=ideal_gas(
+    name='S2',
+    pbesol_energy_eV=-0.217220682510473e05,
+    thermo_file='nist_janaf/S2.dat',
+    zpe_pbesol=0.04421415
+)
 
 def volume_calc(filename):
     """Calculate unit cell volume in cubic angstroms from geometry.in file"""
