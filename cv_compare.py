@@ -1,6 +1,7 @@
 import numpy as np
 from materials import Cu, Zn, Sn, alpha_S, CZTS
 from matplotlib import pyplot as plt
+from matplotlib2tikz import save as tikz_save
 
 T = np.linspace(0,1200,100)
 
@@ -14,4 +15,5 @@ plt.xlabel('Temperature (K)')
 plt.ylabel('$C_v$ ($k_B$ atom$^{-1}$)')
 plt.legend()
 plt.savefig('Cv.pdf')
-plt.show()
+tikz_save("Cv.tex",figureheight="8cm",figurewidth="10cm")
+#plt.show()
