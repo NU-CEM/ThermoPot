@@ -322,7 +322,7 @@ CZTS = solid(name='CZTS',
 )
 
 Cu = solid(name='Cu',
-           pbesol_energy_eV=0.180838109862865e06,
+           pbesol_energy_eV=-0.180838109862865e06,
            fu_cell=4,
            volume=45.38855878494433,
            phonons='phonopy_output/Cu.dat'
