@@ -279,7 +279,7 @@ class ideal_gas(material):
         S_func = get_potential_nist_table(self.thermo_file,'S')
         S = S_func(T) * constants.physical_constants['joule-electron volt relationship'][0]/constants.N_A
         H = self.H_eV(T)
-        return H - T*S + constants.k * T * np.log(P/1E5)
+        return H - T*S + constants.physical_constants['Boltzmann constant in eV/K'][0] * T * np.log(P/1E5)
 
     def mu_J(self,T,P):
         """
