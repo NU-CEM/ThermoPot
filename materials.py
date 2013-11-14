@@ -350,6 +350,39 @@ alpha_S=solid(
     phonons='phonopy_output/alpha_S.dat'
 )
 
+Cu2S_low=solid(
+    name='Low Cu2S',
+    pbesol_energy_eV=-0.486150076546942e07,
+    fu_cell=48,
+    volume=2055.8786918601486,
+    phonons='phonopy_output/Cu2S_low.dat'
+)
+
+SnS2=solid(
+    name='SnS2',
+    pbesol_energy_eV=-0.192015393819437e06,
+    fu_cell=1,
+    volume=69.55551898436056,
+    phonons='phonopy_output/SnS2.dat'
+)
+
+ZnS_wurtzite=solid(
+    name='ZnS (wurtzite)',
+    pbesol_energy_eV=-119886.323698657,
+    fu_cell=2,
+    volume=76.9580344589,
+    phonons='phonopy_output/ZnS_wurtzite.dat'
+)
+
+ZnS_zincblende=solid(
+    name='ZnS (zinc blende)',
+    pbesol_energy_eV=-59943.163599041,
+    fu_cell=1,
+    volume=38.4544005985,
+    phonons='phonopy_output/ZnS_zincblende.dat'
+)
+
+
 S8=ideal_gas(
     name='S8',
     pbesol_energy_eV=-0.868936310037924e05,
