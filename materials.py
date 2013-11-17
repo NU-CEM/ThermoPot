@@ -329,9 +329,9 @@ Cu = solid(name='Cu',
 )
 
 Sn = solid(name='Beta Sn',
-           pbesol_energy_eV=-0.681162478362528e06, 
-           fu_cell=4,
-           volume=108.8943337793184,
+           pbesol_energy_eV=-0.340581355063278e06, 
+           fu_cell=2,
+           volume=69.6092979612,
            phonons='phonopy_output/Sn.dat'
 )
 
