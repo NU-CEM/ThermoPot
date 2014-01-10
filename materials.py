@@ -336,9 +336,9 @@ Sn = solid(name='Beta Sn',
 )
 
 Zn = solid(name='Zn',
-           pbesol_energy_eV=-0.981595848099161e05, 
+           pbesol_energy_eV=-0.981596036898606e05, 
            fu_cell=2,
-           volume=27.956078493840639,
+           volume=28.256317,
            phonons='phonopy_output/Zn.dat'
 )
 
