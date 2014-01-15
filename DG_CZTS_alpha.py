@@ -5,7 +5,7 @@ def main():
     from DG_CZTS_S8 import plot_potential
 
     T = np.linspace(100,1000,100)    # K
-    P = np.array( np.logspace(3,7,100),ndmin=2).transpose() # Pa
+    P = np.array( np.logspace(1,7,100),ndmin=2).transpose() # Pa
     
     D_mu = CZTS.mu_kJ(T,P) - (2*Cu.mu_kJ(T,P) +
                                     Zn.mu_kJ(T,P) +

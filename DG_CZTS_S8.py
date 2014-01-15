@@ -2,7 +2,7 @@ def main():
     from materials import CZTS, Cu, Zn, Sn, S8
     import numpy as np
     T = np.linspace(100,1000,100)    # K
-    P = np.array( np.logspace(3,7,100),ndmin=2).transpose() # Pa
+    P = np.array( np.logspace(1,7,100),ndmin=2).transpose() # Pa
     
     D_mu = CZTS.mu_kJ(T,P) - (2*Cu.mu_kJ(T,P) +
                                     Zn.mu_kJ(T,P) +
@@ -32,7 +32,7 @@ def plot_potential(T,P,potential,potential_label,scale_range):
     plt.ylabel('Pressure / Pa')
     colours.set_label(potential_label)
     ax.set_yscale('log')
-    plt.clabel(a)
+    plt.clabel(a,fmt="%d<")
     
     plt.show()
     
