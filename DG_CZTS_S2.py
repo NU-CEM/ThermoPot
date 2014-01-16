@@ -4,7 +4,7 @@ def main():
 
     from DG_CZTS_S8 import plot_potential
 
-    T = np.linspace(100,1600,100)    # K
+    T = np.linspace(100,1500,100)    # K
     P = np.array( np.logspace(1,7,100),ndmin=2).transpose() # Pa
     
     D_mu = CZTS.mu_kJ(T,P) - (2*Cu.mu_kJ(T,P) +
@@ -16,7 +16,7 @@ def main():
     D_mu_label = '$\Delta G_f$ / kJ mol$^{-1}$'
     scale_range = [-650,50]
     
-    plot_potential(T,P,D_mu,D_mu_label,scale_range)
+    plot_potential(T,P,D_mu,D_mu_label,scale_range, filename='plots/DG_CZTS_S2.png')
 
 if __name__ == "__main__":
     main()
