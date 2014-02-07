@@ -309,16 +309,21 @@ class ideal_gas(material):
         """
         return self.mu_J(T,P) * 0.001
 
-    
-
       
-CZTS = solid(name='CZTS',
-             pbesol_energy_eV=-0.706480597450521e06,
-             fu_cell=2,
-             volume=310.86645888987351,
-             phonons='phonopy_output/czts.dat'
+CZTS_kesterite = solid(name='Kesterite CZTS',
+                       pbesol_energy_eV=-0.706480597450521e06,
+                       fu_cell=2,
+                       volume=310.86645888987351,
+                       phonons='phonopy_output/czts.dat'
+                      )
 
+CZTS = CZTS_kesterite
 
+CZTS_stannite = solid(name='Stannite CZTS',
+                      pbesol_energy_eV=-0.353240264472923e06 ,
+                      fu_cell=1,
+                      volume=155.572938002,
+                      phonons='phonopy_output/czts_stannite.dat'    
 )
 
 Cu = solid(name='Cu',
