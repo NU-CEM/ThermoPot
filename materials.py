@@ -366,6 +366,16 @@ SnS2=solid(
     phonons='phonopy_output/SnS2.dat'
 )
 
+SnS_pcma=solid(
+    name='SnS',
+    pbesol_energy_eV=-0.724613674134358E+06,
+    fu_cell=4,
+    volume=186.605514927,
+    phonons='phonopy_output/SnS_pcma.dat'
+)
+
+SnS=SnS_pcma
+
 ZnS_wurtzite=solid(
     name='ZnS (wurtzite)',
     pbesol_energy_eV=-119886.323698657,

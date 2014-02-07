@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-from materials import CZTS, Cu, Zn, Sn, alpha_S, Cu2S_low as Cu2S, SnS2, ZnS_zincblende as ZnS
+from materials import CZTS, Cu, Zn, Sn, alpha_S, Cu2S_low as Cu2S, SnS2, ZnS_zincblende as ZnS, SnS_pcma as SnS
 
 T = 298.15  # K
 P = 1E5     # Pa
@@ -43,6 +43,14 @@ DH_f_Cu2S_kJ = Cu2S.H_kJ(T,P) - (
                2.*Cu.H_kJ(T,P) + alpha_S.H_kJ(T,P)
                )           
 
+DH_f_SnS_eV = SnS.H_eV(T,P) - (
+    Sn.H_eV(T,P) + alpha_S.H_eV(T,P)
+               )
+
+DH_f_SnS_kJ = SnS.H_kJ(T,P) - (
+    Sn.H_kJ(T,P) + alpha_S.H_kJ(T,P)
+               )
+
 DH_f_SnS2_eV = SnS2.H_eV(T,P) - (
     Sn.H_eV(T,P) + 2.*alpha_S.H_eV(T,P)
                )
@@ -68,6 +76,14 @@ print ('                                      ' +
        '{0:3.2f} kJ / mol'.format(DH_f_Cu2S_kJ)
        )
 
+print ('Formation enthalpy of SnS: ' +
+       '{0:3.2f} eV / formula unit'.format(DH_f_SnS_eV)
+       )
+
+print ('                                      ' +
+       '{0:3.2f} kJ / mol'.format(DH_f_SnS_kJ)
+       )
+
 print ('Formation enthalpy of SnS2: ' +
        '{0:3.2f} eV / formula unit'.format(DH_f_SnS2_eV)
        )
@@ -75,6 +91,7 @@ print ('Formation enthalpy of SnS2: ' +
 print ('                                      ' +
        '{0:3.2f} kJ / mol'.format(DH_f_SnS2_kJ)
        )
+
 
 print ('Formation enthalpy of zinc blende: ' +
        '{0:3.2f} eV / formula unit'.format(DH_f_ZnS_eV)
