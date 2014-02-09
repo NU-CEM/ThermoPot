@@ -4,9 +4,10 @@ from interpolate_thermal_property import get_potential_aims, get_potential_nist_
 
 class material(object):
     """Parent class for materials properties"""
-    def __init__(self,name,pbesol_energy_eV=False):
+    def __init__(self,name,pbesol_energy_eV=False, N=1):
         self.name = name
         self.pbesol_energy_eV = pbesol_energy_eV
+        self.N = N
 
 class solid(material):
     """
@@ -14,11 +15,12 @@ class solid(material):
 
     Sets properties:
     -------------------
-    solid.name             (string)
+    solid.name             (Identifying string)
     solid.pbesol_energy_eV (DFT total energy in eV with PBEsol XC functional)
     solid.fu_cell          (Number of formula units in periodic unit cell)
     solid.volume           (Volume of unit cell in cubic angstroms (m3 * 10^30))
     solid.phonons          (String containing path to phonopy-FHI-aims output data file)
+    solid.N                (Number of atoms per formula unit)
 
     Sets methods:
     -------------------
@@ -28,8 +30,8 @@ class solid(material):
 
     The material is assumed to be incompressible and without thermal expansion
     """
-    def __init__(self, name, pbesol_energy_eV, fu_cell, volume, phonons=False):
-        material.__init__(self,name,pbesol_energy_eV)
+    def __init__(self, name, pbesol_energy_eV, fu_cell, volume, phonons=False, N=1):
+        material.__init__(self,name,pbesol_energy_eV,N)
 
         self.fu_cell = fu_cell
         self.volume = volume
@@ -190,6 +192,7 @@ class ideal_gas(material):
     ideal_gas.name             (string)
     ideal_gas.pbesol_energy_eV (DFT total energy in eV with PBEsol XC functional)
     ideal_gas.thermo_data      (String containing path to aims.vibrations output data file)
+    ideal_gas.N                (Number of atoms per formula unit)
 
     Sets methods:
     -------------------
@@ -201,11 +204,12 @@ class ideal_gas(material):
     Enthalpy has no P dependence as volume is not restricted / expansion step is defined as isothermal
     """
 
-    def __init__(self,name,pbesol_energy_eV,thermo_file,zpe_pbesol=0):
-        material.__init__(self, name, pbesol_energy_eV)
+    def __init__(self,name,pbesol_energy_eV,thermo_file,zpe_pbesol=0,N=1):
+        material.__init__(self, name, pbesol_energy_eV,N=1)
         self.thermo_file = thermo_file
-        # Initialise ZPE to PBEsol value if provided. This looks redundant at the moment: the intent is
-        # to implement some kind of switch or heirarchy of methods further down the line.
+        # Initialise ZPE to PBEsol value if provided. 
+        # This looks redundant at the moment: the intent is to implement
+        # some kind of switch or heirarchy of methods further down the line.
         if zpe_pbesol > 0:
             self.zpe = zpe_pbesol
         else:
@@ -314,7 +318,8 @@ CZTS_kesterite = solid(name='Kesterite CZTS',
                        pbesol_energy_eV=-0.706480597450521e06,
                        fu_cell=2,
                        volume=310.86645888987351,
-                       phonons='phonopy_output/czts.dat'
+                       phonons='phonopy_output/czts.dat',
+                       N=8
                       )
 
 CZTS = CZTS_kesterite
@@ -323,8 +328,9 @@ CZTS_stannite = solid(name='Stannite CZTS',
                       pbesol_energy_eV=-0.353240264472923e06 ,
                       fu_cell=1,
                       volume=155.572938002,
-                      phonons='phonopy_output/czts_stannite.dat'    
-)
+                      phonons='phonopy_output/czts_stannite.dat',
+                      N=8
+                      )
 
 Cu = solid(name='Cu',
            pbesol_energy_eV=-0.180838109862865e06,
@@ -360,15 +366,19 @@ Cu2S_low=solid(
     pbesol_energy_eV=-0.486150076546942e07,
     fu_cell=48,
     volume=2055.8786918601486,
-    phonons='phonopy_output/Cu2S_low.dat'
+    phonons='phonopy_output/Cu2S_low.dat',
+    N=3
 )
+
+Cu2S=Cu2S_low
 
 SnS2=solid(
     name='SnS2',
     pbesol_energy_eV=-0.192015393819437e06,
     fu_cell=1,
     volume=69.55551898436056,
-    phonons='phonopy_output/SnS2.dat'
+    phonons='phonopy_output/SnS2.dat',
+    N=3
 )
 
 SnS_pcma=solid(
@@ -376,7 +386,8 @@ SnS_pcma=solid(
     pbesol_energy_eV=-0.724613674134358E+06,
     fu_cell=4,
     volume=186.605514927,
-    phonons='phonopy_output/SnS_pcma.dat'
+    phonons='phonopy_output/SnS_pcma.dat',
+    N=2
 )
 
 SnS=SnS_pcma
@@ -386,7 +397,8 @@ ZnS_wurtzite=solid(
     pbesol_energy_eV=-119886.323698657,
     fu_cell=2,
     volume=76.9580344589,
-    phonons='phonopy_output/ZnS_wurtzite.dat'
+    phonons='phonopy_output/ZnS_wurtzite.dat',
+    N=2
 )
 
 ZnS_zincblende=solid(
@@ -394,26 +406,31 @@ ZnS_zincblende=solid(
     pbesol_energy_eV=-59943.163599041,
     fu_cell=1,
     volume=38.4544005985,
-    phonons='phonopy_output/ZnS_zincblende.dat'
+    phonons='phonopy_output/ZnS_zincblende.dat',
+    N=2
 )
+
+ZnS=ZnS_zincblende
 
 
 S8=ideal_gas(
     name='S8',
     pbesol_energy_eV=-0.868936310037924e05,
     thermo_file='nist_janaf/S8.dat',
-    zpe_pbesol=0.32891037
+    zpe_pbesol=0.32891037,
+    N=8
 )
 
 S2=ideal_gas(
     name='S2',
     pbesol_energy_eV=-0.217220682510473e05,
     thermo_file='nist_janaf/S2.dat',
-    zpe_pbesol=0.04421415
+    zpe_pbesol=0.04421415,
+    N=2
 )
 
 def volume_calc(filename):
-    """Calculate unit cell volume in cubic angstroms from geometry.in file"""
+    """Calculate unit cell volume in cubic angstroms from FHI-aims geometry.in file"""
     import numpy as np
     lattice_vectors = []
     with open(filename, 'r') as f:
