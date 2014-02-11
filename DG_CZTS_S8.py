@@ -15,22 +15,47 @@ def main():
     
     plot_potential(T,P,D_mu,D_mu_label,scale_range, filename='plots/DG_CZTS_S8.png')
 
-def plot_potential(T,P,potential,potential_label,scale_range,filename=False,precision="%d"):
+def plot_potential(T,P,potential,potential_label,scale_range,filename=False,
+                   precision="%d",T_units='K',P_units='Pa'):
     import matplotlib.pyplot as plt
     import matplotlib as mpl
     mpl.rcParams['font.family'] = 'serif'
     mpl.rcParams['font.serif'] = 'Times New Roman'
     mpl.rcParams['font.size'] = 16
-    
+
+    # Unit conversions (all calculations are in SI units, conversion needed for plots)
+    if T_units=='K':
+        x_values = T
+        x_unitlabel = 'K'
+    elif T_units=='C':
+        x_values = T - 273.15
+        x_unitlabel = '$^\circ$ C'
+    else:
+        raise ValueError('Invalid temperature unit: {0}'.format(T_units))
+
+
+    if P_units=='Pa':
+        y_values = P.flatten()
+    elif P_units=='Bar' or P_units=='bar':
+        y_values = P.flatten()*1E-5
+    elif P_units=='mbar': 
+        y_values = P.flatten()*1E-5*1E3
+    elif P_units=='kPa':
+        y_values = P.flatten()*1E-3
+    elif P_units=='mmHg' or P_units=='torr':
+        y_values = P.flatten()*760/(1.01325E5)
+    else:
+        raise ValueError('Invalid pressure unit: {0}.'.format(T_units))
+
     fig = plt.figure()
     ax = fig.add_subplot(1,1,1)
-    a = plt.contour(T,P.flatten(),potential,10, linewidths = 1, colors = 'k')
-    plt.pcolormesh(T,P.flatten(),potential,
+    a = plt.contour(x_values,y_values,potential,10, linewidths = 1, colors = 'k')
+    plt.pcolormesh(x_values,y_values,potential,
     #              cmap=plt.get_cmap('BuPu'),vmin=scale_range[0], vmax=scale_range[1])
                    cmap=plt.get_cmap('summer'),vmin=scale_range[0], vmax=scale_range[1])
     colours = plt.colorbar()
-    plt.xlabel('Temperature / K')
-    plt.ylabel('Pressure / Pa')
+    plt.xlabel('Temperature / {0}'.format(x_unitlabel))    
+    plt.ylabel('Pressure / {0}'.format(P_units))
     colours.set_label(potential_label, labelpad=20)
     ax.set_yscale('log')
     plt.clabel(a,fmt=precision)
@@ -38,6 +63,7 @@ def plot_potential(T,P,potential,potential_label,scale_range,filename=False,prec
         plt.savefig(filename,dpi=200)
     else:
         plt.show()
+
     
 if __name__ == "__main__":
     main()
