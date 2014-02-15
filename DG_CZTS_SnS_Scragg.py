@@ -13,7 +13,7 @@ def main():
                               0.5*S2.mu_kJ(T,P) )
     
     D_mu_label = '$\Delta G_f$ / kJ mol$^{-1}$'
-    scale_range = [-300,100]
+    scale_range = [-50,70]
 
     # Stability lines from figure 5, J. J. Scragg et al., Chem. Mater. (2011) 23 4625-4633
     kinetic_data = np.genfromtxt('jscragg_2011.csv',delimiter=',',skip_header=1)
@@ -60,7 +60,7 @@ def plot_potential(T,P,potential,potential_label,scale_range,filename=False,
     if overlay.any():
         #        ax.plot(overlay[:,0],overlay[:,1:],'r')
         ax.fill_between(si_to_other(overlay[:,0],T_units),si_to_other(overlay[:,1],P_units),
-                        si_to_other(overlay[:,2],P_units),edgecolor='r',facecolor='none',hatch='xx')
+                        si_to_other(overlay[:,2],P_units),edgecolor='#444444',facecolor='none',hatch='xx')
         ax.axis([min(x_values),max(x_values),min(y_values),max(y_values)])
         
 
