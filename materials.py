@@ -2,6 +2,13 @@ import numpy as np
 from scipy import constants
 from interpolate_thermal_property import get_potential_aims, get_potential_nist_table
 
+import os  # get correct path for datafiles when called from another directory
+materials_directory = os.path.dirname(__file__)
+# Append a trailing slash to make coherent directory name - this would select the
+#  root directory in the case of no prefix, so we need to check
+if materials_directory:
+    materials_directory = materials_directory + '/'
+
 class material(object):
     """Parent class for materials properties"""
     def __init__(self,name,pbesol_energy_eV=False, N=1):
@@ -35,7 +42,7 @@ class solid(material):
 
         self.fu_cell = fu_cell
         self.volume = volume
-        self.phonons = phonons
+        self.phonons = materials_directory + phonons
 
     def U_eV(self,T,*P):
         """Internal energy of one formula unit of solid, expressed in eV.
@@ -206,7 +213,7 @@ class ideal_gas(material):
 
     def __init__(self,name,pbesol_energy_eV,thermo_file,zpe_pbesol=0,N=1):
         material.__init__(self, name, pbesol_energy_eV,N=1)
-        self.thermo_file = thermo_file
+        self.thermo_file = materials_directory + thermo_file
         # Initialise ZPE to PBEsol value if provided. 
         # This looks redundant at the moment: the intent is to implement
         # some kind of switch or heirarchy of methods further down the line.
