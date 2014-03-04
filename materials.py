@@ -211,7 +211,7 @@ class ideal_gas(material):
     Enthalpy has no P dependence as volume is not restricted / expansion step is defined as isothermal
     """
 
-    def __init__(self,name,pbesol_energy_eV,thermo_file,zpe_pbesol=0,N=1):
+    def __init__(self,name,pbesol_energy_eV,thermo_file,zpe_pbesol=0,zpe_lit=0,N=1):
         material.__init__(self, name, pbesol_energy_eV,N=1)
         self.thermo_file = materials_directory + thermo_file
         # Initialise ZPE to PBEsol value if provided. 
@@ -219,6 +219,8 @@ class ideal_gas(material):
         # some kind of switch or heirarchy of methods further down the line.
         if zpe_pbesol > 0:
             self.zpe = zpe_pbesol
+        elif zpe_lit > 0:
+            self.zpe = zpe_lit
         else:
             self.zpe = 0
 
@@ -450,3 +452,10 @@ def volume_calc(filename):
 
     return abs(volume)
 
+O2=ideal_gas(
+    name='O2',
+    pbesol_energy_eV=-0.408004839112704e04,
+    thermo_file='nist_janaf/O2.dat',
+    zpe_lit=0.0976,
+    N=2
+)
