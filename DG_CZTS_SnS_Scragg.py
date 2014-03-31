@@ -4,7 +4,7 @@ def main():
 
     # Surface model from ab initio calcs and NIST data
 
-    T = np.linspace(573.15,873.15,10)    # K
+    T = np.linspace(573.15,873.15,100)    # K
     P = np.array( np.logspace(-8,2,100),ndmin=2).transpose() # Pa
     
     D_mu = CZTS.mu_kJ(T,P) - (Cu2S_low.mu_kJ(T,P) +
