@@ -2,12 +2,15 @@ CZTS thermodynamic modelling
 ============================
 
 Research data and calculations for ab initio thermodynamic modelling of
-the formation of CZTS
+the formation and decomposition of Cu2ZnSnS4 (CZTS).
 
 Provided as supplementary information for publication, this is also an active project currently hosted at
 [http://github.com/WMD-Bath/CZTS-model](http://github.com/WMD-Bath/CZTS-model).
+The v1.0 tag indicates the version supplied with the project's first publication.
 
 (c) Adam Jackson 2014
+This code is made available under the GNU General Public Licence (GPL) v3.
+See the LICENSE file for the full text.
 
 Contents
 --------
