@@ -212,7 +212,7 @@ class ideal_gas(material):
     """
 
     def __init__(self,name,pbesol_energy_eV,thermo_file,zpe_pbesol=0,zpe_lit=0,N=1):
-        material.__init__(self, name, pbesol_energy_eV,N=1)
+        material.__init__(self, name, pbesol_energy_eV,N)
         self.thermo_file = materials_directory + thermo_file
         # Initialise ZPE to PBEsol value if provided. 
         # This looks redundant at the moment: the intent is to implement
@@ -456,6 +456,8 @@ O2=ideal_gas(
     name='O2',
     pbesol_energy_eV=-0.408004839112704e04,
     thermo_file='nist_janaf/O2.dat',
-    zpe_lit=0.0976,
+    zpe_lit=0.0976, # Irikura, K. K. (2007). Journal of Physical and 
+    #                 Chemical Reference Data, 36(2), 389-397.
+    #                 doi:10.1063/1.2436891
     N=2
 )
