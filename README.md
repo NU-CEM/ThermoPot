@@ -1,8 +1,7 @@
 CZTS thermodynamic modelling
 ============================
 
-Research data and calculations for ab initio thermodynamic modelling of
-the formation of CZTS
+Research data and calculations for ab initio thermodynamic modelling of the formation of Cu2ZnSnS4 (CZTS), which is kesterite-structured semiconductor used in thin-film solar cells. 
 
 Provided as supplementary information for publication, this is also an active project currently hosted at
 [http://github.com/WMD-Bath/CZTS-model](http://github.com/WMD-Bath/CZTS-model).
