@@ -189,19 +189,19 @@ class solid(material):
         Cv = solid.Cv_eV(T)
         T may be an array, in which case Cv will be an array of the same dimensions.
         """
-        return self.Cv_kB(T) / constants.physical_constants['Boltzmann constant in eV/K']
+        return self.Cv_kB(T) * constants.physical_constants['Boltzmann constant in eV/K'][0]
     
     def Cv_J(self,T):
         """
-        Constant-volume heat capacity of solid, expressed in J/mol.
+        Constant-volume heat capacity of solid, expressed in J/molK.
         Cv = solid.Cv_J(T)
         T may be an array, in which case Cv will be an array of the same dimensions.
         """
-        return (self.Cv_kB(T) * constants.N_A  / constants.physical_constants['Boltzmann constant'][0] )
+        return (self.Cv_kB(T)  * constants.physical_constants['Boltzmann constant'][0] * constants.N_A)
 
     def Cv_kJ(self,T):
        """
-        Constant-volume heat capacity of solid, expressed in kJ/mol.
+        Constant-volume heat capacity of solid, expressed in kJ/molK.
         Cv = solid.Cv_kJ(T)
         T may be an array, in which case Cv will be an array of the same dimensions.
         """
