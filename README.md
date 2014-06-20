@@ -1,10 +1,16 @@
 CZTS thermodynamic modelling
 ============================
 
-Research data and calculations for ab initio thermodynamic modelling of the formation of Cu2ZnSnS4 (CZTS), which is kesterite-structured semiconductor used in thin-film solar cells. 
+Research data and calculations for ab initio thermodynamic modelling of
+the formation and decomposition of Cu2ZnSnS4 (CZTS).
 
 Provided as supplementary information for publication, this is also an active project currently hosted at
 [http://github.com/WMD-Bath/CZTS-model](http://github.com/WMD-Bath/CZTS-model).
+The v1.0 tag indicates the version supplied with the project's first publication.
+
+(c) Adam Jackson 2014
+This code is made available under the GNU General Public Licence (GPL) v3.
+See the LICENSE file for the full text.
 
 Contents
 --------
@@ -30,3 +36,9 @@ Contents
   `python plots/DG_CZTS_S2.py`.
 
 * **report_H_standard.py** Calculate and print key formation energies.
+
+* **sanity\_checks** contains several functions which compare thermodynamic properties over
+  a temperature range, rescaled for direct comparison. This is intended to highlight basic
+  issues in calculations. The files need to be run from the parent directory, i.e.:
+
+      python sanity_checks/mu_compare.py

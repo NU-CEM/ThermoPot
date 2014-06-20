@@ -1,6 +1,30 @@
+################################################################################
+#  Copyright Adam J. Jackson (2014)                                            #
+#                                                                              #
+#   This program is free software: you can redistribute it and/or modify       #
+#   it under the terms of the GNU General Public License as published by       #
+#   the Free Software Foundation, either version 3 of the License, or          #
+#   (at your option) any later version.                                        #
+#                                                                              #
+#   This program is distributed in the hope that it will be useful,            #
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of             #
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the              #
+#   GNU General Public License for more details.                               #
+#                                                                              #
+#   You should have received a copy of the GNU General Public License          #
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>.      #
+################################################################################
+
 import numpy as np
 from scipy import constants
 from interpolate_thermal_property import get_potential_aims, get_potential_nist_table
+
+import os  # get correct path for datafiles when called from another directory
+materials_directory = os.path.dirname(__file__)
+# Append a trailing slash to make coherent directory name - this would select the
+#  root directory in the case of no prefix, so we need to check
+if materials_directory:
+    materials_directory = materials_directory + '/'
 
 class material(object):
     """Parent class for materials properties"""
@@ -35,7 +59,7 @@ class solid(material):
 
         self.fu_cell = fu_cell
         self.volume = volume
-        self.phonons = phonons
+        self.phonons = materials_directory + phonons
 
     def U_eV(self,T,*P):
         """Internal energy of one formula unit of solid, expressed in eV.
@@ -165,19 +189,19 @@ class solid(material):
         Cv = solid.Cv_eV(T)
         T may be an array, in which case Cv will be an array of the same dimensions.
         """
-        return self.Cv_kB(T) / constants.physical_constants['Boltzmann constant in eV/K']
+        return self.Cv_kB(T) * constants.physical_constants['Boltzmann constant in eV/K'][0]
     
     def Cv_J(self,T):
         """
-        Constant-volume heat capacity of solid, expressed in J/mol.
+        Constant-volume heat capacity of solid, expressed in J/molK.
         Cv = solid.Cv_J(T)
         T may be an array, in which case Cv will be an array of the same dimensions.
         """
-        return (self.Cv_kB(T) * constants.N_A  / constants.physical_constants['Boltzmann constant'][0] )
+        return (self.Cv_kB(T)  * constants.physical_constants['Boltzmann constant'][0] * constants.N_A)
 
     def Cv_kJ(self,T):
        """
-        Constant-volume heat capacity of solid, expressed in kJ/mol.
+        Constant-volume heat capacity of solid, expressed in kJ/molK.
         Cv = solid.Cv_kJ(T)
         T may be an array, in which case Cv will be an array of the same dimensions.
         """
@@ -204,14 +228,16 @@ class ideal_gas(material):
     Enthalpy has no P dependence as volume is not restricted / expansion step is defined as isothermal
     """
 
-    def __init__(self,name,pbesol_energy_eV,thermo_file,zpe_pbesol=0,N=1):
-        material.__init__(self, name, pbesol_energy_eV,N=1)
-        self.thermo_file = thermo_file
+    def __init__(self,name,pbesol_energy_eV,thermo_file,zpe_pbesol=0,zpe_lit=0,N=1):
+        material.__init__(self, name, pbesol_energy_eV,N)
+        self.thermo_file = materials_directory + thermo_file
         # Initialise ZPE to PBEsol value if provided. 
         # This looks redundant at the moment: the intent is to implement
         # some kind of switch or heirarchy of methods further down the line.
         if zpe_pbesol > 0:
             self.zpe = zpe_pbesol
+        elif zpe_lit > 0:
+            self.zpe = zpe_lit
         else:
             self.zpe = 0
 
@@ -443,3 +469,12 @@ def volume_calc(filename):
 
     return abs(volume)
 
+O2=ideal_gas(
+    name='O2',
+    pbesol_energy_eV=-0.408004839112704e04,
+    thermo_file='nist_janaf/O2.dat',
+    zpe_lit=0.0976, # Irikura, K. K. (2007). Journal of Physical and 
+    #                 Chemical Reference Data, 36(2), 389-397.
+    #                 doi:10.1063/1.2436891
+    N=2
+)
