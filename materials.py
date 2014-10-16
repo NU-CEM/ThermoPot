@@ -438,6 +438,23 @@ ZnS_zincblende=solid(
 
 ZnS=ZnS_zincblende
 
+Cu2SnS3_mo1=solid(
+    name='Cu2SnS3 (Mo-1)',
+    pbesol_energy_eV=-0.117318818763261e07,
+    fu_cell=4,
+    volume=469.83485422571772,
+    phonons='phonopy_output/Cu2SnS3-mo1.dat',
+    N=6
+)
+
+Cu2SnS3_mo2=solid(
+    name='Cu2SnS3 (Mo-2)',
+    pbesol_energy_eV=-0.293297062672424e06,
+    fu_cell=1,
+    volume=117.43775202426687,
+    phonons='phonopy_output/Cu2SnS3-mo2.dat',
+    N=6
+)
 
 S8=ideal_gas(
     name='S8',
