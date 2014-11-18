@@ -2,7 +2,7 @@ CZTS thermodynamic modelling
 ============================
 
 Research data and calculations for ab initio thermodynamic modelling of
-the formation and decomposition of Cu2ZnSnS4 (CZTS).
+the formation and decomposition of Cu<sub>2</sub>ZnSnS<sub>4</sub> (CZTS).
 
 Provided as supplementary information for publication, this is also an active project currently hosted at
 [http://github.com/WMD-Bath/CZTS-model](http://github.com/WMD-Bath/CZTS-model).
@@ -42,3 +42,7 @@ Contents
   issues in calculations. The files need to be run from the parent directory, i.e.:
 
       python sanity_checks/mu_compare.py
+
+* **jscragg_2011.csv** Data file containing kinetic model stability boundary
+  data from [Scragg et al. (2011)](http://dx.doi.org/10.1021/cm202379s). This
+  data is used in **plots/DG_CZTS_SnS_Scragg.py** to reproduce Fig. 7 of [Jackson and Walsh (2014)](http://dx.doi.org/10.1039/c4ta00892h).
