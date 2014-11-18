@@ -456,6 +456,23 @@ Cu2SnS3_mo2=solid(
     N=6
 )
 
+SnO=solid(
+    name='SnO',
+    pbesol_energy_eV=-0.344666615074050E+06,
+    fu_cell=2,
+    volume=68.1249805813,
+    phonons='phonopy_output/SnO.dat',
+    N=2
+)
+
+SnO2=solid(
+    name='SnO2',
+    pbesol_energy_eV=-0.348751648981493E+06,
+    fu_cell=2,
+    volume=73.2239419677,
+    phonons='phonopy_output/SnO2.dat'
+)
+
 S8=ideal_gas(
     name='S8',
     pbesol_energy_eV=-0.868936310037924e05,
