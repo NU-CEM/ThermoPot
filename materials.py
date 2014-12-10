@@ -489,6 +489,32 @@ S2=ideal_gas(
     N=2
 )
 
+O2=ideal_gas(
+    name='O2',
+    pbesol_energy_eV=-0.408004839112704e04,
+    thermo_file='nist_janaf/O2.dat',
+    zpe_lit=0.0976, # Irikura, K. K. (2007). Journal of Physical and 
+    #                 Chemical Reference Data, 36(2), 389-397.
+    #                 doi:10.1063/1.2436891
+    N=2
+)
+
+H2=ideal_gas(
+    name='H2',
+    pbesol_energy_eV=-0.312204882567064e02,
+    thermo_file='nist_janaf/H2.dat',
+    zpe_pbesol=0.26465608, # Experimental values are ~ 0.27
+    N=2
+)
+
+H2S=ideal_gas(
+    name='H2S',
+    pbesol_energy_eV=-0.108932246222711e05,
+    thermo_file='nist_janaf/H2S.dat',
+    zpe_pbesol=0.39799970,
+    N=3
+)
+
 def volume_calc(filename):
     """Calculate unit cell volume in cubic angstroms from FHI-aims geometry.in file"""
     import numpy as np
@@ -502,13 +528,3 @@ def volume_calc(filename):
     volume = np.dot(lattice_vectors[0],np.cross(lattice_vectors[1],lattice_vectors[2]))
 
     return abs(volume)
-
-O2=ideal_gas(
-    name='O2',
-    pbesol_energy_eV=-0.408004839112704e04,
-    thermo_file='nist_janaf/O2.dat',
-    zpe_lit=0.0976, # Irikura, K. K. (2007). Journal of Physical and 
-    #                 Chemical Reference Data, 36(2), 389-397.
-    #                 doi:10.1063/1.2436891
-    N=2
-)
