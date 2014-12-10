@@ -339,6 +339,7 @@ class ideal_gas(material):
         """
         return self.mu_J(T,P) * 0.001
 
+################ Quaternary compounds ###############
       
 CZTS_kesterite = solid(name='Kesterite CZTS',
                        pbesol_energy_eV=-0.706480597450521e06,
@@ -357,6 +358,8 @@ CZTS_stannite = solid(name='Stannite CZTS',
                       phonons='phonopy_output/czts_stannite.dat',
                       N=8
                       )
+
+############### Elements ###############
 
 Cu = solid(name='Cu',
            pbesol_energy_eV=-0.180838109862865e06,
@@ -386,6 +389,8 @@ alpha_S=solid(
     volume= 832.91786077871541,
     phonons='phonopy_output/alpha_S.dat'
 )
+
+############### Binary sulfides ###############
 
 Cu2S_low=solid(
     name='Low Cu2S',
@@ -438,6 +443,8 @@ ZnS_zincblende=solid(
 
 ZnS=ZnS_zincblende
 
+########## Ternary compounds ##########
+
 Cu2SnS3_mo1=solid(
     name='Cu2SnS3 (Mo-1)',
     pbesol_energy_eV=-0.117318818763261e07,
@@ -455,6 +462,8 @@ Cu2SnS3_mo2=solid(
     phonons='phonopy_output/Cu2SnS3-mo2.dat',
     N=6
 )
+
+############### Binary oxides ###############
 
 SnO=solid(
     name='SnO',
