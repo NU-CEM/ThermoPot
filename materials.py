@@ -463,6 +463,15 @@ Cu2SnS3_mo2=solid(
     N=6
 )
 
+Cu4SnS4=solid(
+    name='Cu4SnS4 (pnma)',
+    pbesol_energy_eV=-0.157831255950904e07,
+    fu_cell=4,
+    volume=640.981231346,
+    phonons='phonopy_output/Cu4SnS4.dat',
+    N=36
+)
+
 ############### Binary oxides ###############
 
 SnO=solid(
