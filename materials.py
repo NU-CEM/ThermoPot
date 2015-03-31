@@ -405,9 +405,9 @@ Cu2S=Cu2S_low
 
 SnS2=solid(
     name='SnS2',
-    pbesol_energy_eV=-0.192015393819437e06,
+    pbesol_energy_eV=-0.192015452706802e06,
     fu_cell=1,
-    volume=69.55551898436056,
+    volume=69.3883090547,
     phonons='phonopy_output/SnS2.dat',
     N=3
 )
