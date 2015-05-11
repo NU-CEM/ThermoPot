@@ -206,7 +206,9 @@ class solid(material):
         T may be an array, in which case Cv will be an array of the same dimensions.
         """
        return self.Cv_J(T) * 0.001
-    
+
+
+   
 class ideal_gas(material):
     """
     Class for ideal gas properties. 
@@ -338,6 +340,41 @@ class ideal_gas(material):
         Other T, P arrays may result in undefined behaviour.
         """
         return self.mu_J(T,P) * 0.001
+
+class sulfur_model(ideal_gas):
+    """
+    Class for calculated , combining data from multiple models.
+
+    Initialisation:
+    ---------------
+
+    transferred_ideal_gas = ideal_gas_transfer(name,pbesol_energy_eV,thermo_file,thermo_file_correction=0,zpe_pbesol=0,zpe_lit=0,N=1):
+
+    Sets properties:
+    -------------------
+    ideal_gas.name             (string)
+    ideal_gas.pbesol_energy_eV (DFT total energy in eV with PBEsol XC functional)
+    ideal_gas.thermo_data      (String containing path to T/P effects data file)
+    ideal_gas.N                (Number of atoms per formula unit)
+
+    Sets methods:
+    -------------------
+    ideal_gas.U_eV(T), ideal_gas.U_J(T), ideal_gas.U_kJ(T) : Internal energy 
+    ideal_gas.H_eV(T), ideal_gas.H_J(T), ideal_gas.H_kJ(T) : Enthalpy H = U + PV
+    ideal_gas.mu_eV(T,P), ideal_gas.mu_J(T,P), ideal_gas.mu_kJ(T,P) : Chemical potential mu = U + PV - TS
+
+    Ideal gas law PV=nRT is applied: specifically (dH/dP) at const. T = 0 and int(mu)^P2_P1 dP = kTln(P2/P1)
+    Enthalpy has no P dependence as volume is not restricted / expansion step is defined as isothermal
+
+    Thermo data file format:
+    ------------------------
+
+    CSV file containing header line:
+    # T/K, mu (x1 Pa) / J mol-1,mu (x2 Pa) / J mol-1
+
+
+    """
+
 
 ################ Quaternary compounds ###############
       
@@ -490,6 +527,14 @@ SnO2=solid(
     volume=73.2239419677,
     phonons='phonopy_output/SnO2.dat'
 )
+
+ZnO=solid(
+    name='ZnO',
+    pbesol_energy_eV=-102245.514300524,
+    fu_cell=2,
+    volume=47.0750741794,
+    phonons='phonopy_output/ZnO.dat'
+    )
 
 S8=ideal_gas(
     name='S8',
