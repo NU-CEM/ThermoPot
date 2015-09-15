@@ -393,7 +393,7 @@ CZTS_kesterite=solid(name='Kesterite CZTS (primitive basis)',
 #                        fu_cell=2,
 #                        volume=310.86645888987351,
 #                        phonons='phonopy_output/czts-conventional.dat',
-#                        N=16
+#                        N=8
 #                       )
 
 CZTS = CZTS_kesterite
@@ -410,23 +410,33 @@ CZTS_stannite = solid(name='Stannite CZTS',
 ############### Elements ###############
 
 Cu = solid(name='Cu',
-           pbesol_energy_eV=-0.180838109862865e06,
+           pbesol_energy_eV=-180838.168712673,
            fu_cell=4,
-           volume=45.38855878494433,
+           volume=45.2576997892,
            phonons='phonopy_output/Cu.dat'
 )
 
-Sn = solid(name='Beta Sn',
-           pbesol_energy_eV=-0.340581355063278e06, 
+beta_Sn = solid(name='Beta Sn',
+           pbesol_energy_eV=-340581.414964630,
            fu_cell=2,
-           volume=69.6092979612,
-           phonons='phonopy_output/Sn.dat'
+           volume=53.538071915,
+           phonons='phonopy_output/beta-Sn.dat'
 )
+
+alpha_Sn = solid(name='Alpha Sn',
+                 pbesol_energy_eV=-0.340581355039346E+06,
+                 fu_cell=2,
+                 volume=69.6092979612,
+                 phonons='phonopy_output/alpha-Sn.dat'
+    )
+
+Sn = beta_Sn
+
 
 Zn = solid(name='Zn',
            pbesol_energy_eV=-0.981596036898606e05, 
            fu_cell=2,
-           volume=28.256317,
+           volume=28.2580218348
            phonons='phonopy_output/Zn.dat'
 )
 
@@ -510,6 +520,15 @@ Cu2SnS3_mo2=solid(
     phonons='phonopy_output/Cu2SnS3-mo2.dat',
     N=6
 )
+
+Cu3SnS4=solid(
+    name='Cu3SnS4 (pmn21)',
+    pbesol_energy_eV=-0.698738136506990E+06,
+    fu_cell=2,
+    volume=299.906413446,
+    phonons='phonopy_output/Cu3SnS4.dat',
+    N=8
+    )
 
 Cu4SnS4=solid(
     name='Cu4SnS4 (pnma)',
