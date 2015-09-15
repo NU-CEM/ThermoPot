@@ -377,16 +377,27 @@ class sulfur_model(ideal_gas):
 
 
 ################ Quaternary compounds ###############
-      
-CZTS_kesterite = solid(name='Kesterite CZTS',
-                       pbesol_energy_eV=-0.706480597450521e06,
-                       fu_cell=2,
-                       volume=310.86645888987351,
-                       phonons='phonopy_output/czts.dat',
-                       N=8
-                      )
+
+CZTS_kesterite=solid(name='Kesterite CZTS (primitive basis)',
+                          pbesol_energy_eV= -0.353240291658938E+06,
+                          fu_cell=1,
+                          volume=155.433224529,
+                          phonons='phonopy_output/czts-kest-primitive.dat',
+                          N=8
+    )
+
+#### Deprecated conventional cell model used in Mater. Chem. A paper.
+#### Difference is not critical: about 1 kJ/mol
+# CZTS_kesterite = solid(name='Kesterite CZTS',
+#                        pbesol_energy_eV=-0.706480597450521e06,
+#                        fu_cell=2,
+#                        volume=310.86645888987351,
+#                        phonons='phonopy_output/czts-conventional.dat',
+#                        N=16
+#                       )
 
 CZTS = CZTS_kesterite
+
 
 CZTS_stannite = solid(name='Stannite CZTS',
                       pbesol_energy_eV=-0.353240264472923e06 ,
