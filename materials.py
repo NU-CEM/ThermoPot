@@ -1,5 +1,5 @@
 ################################################################################
-#  Copyright Adam J. Jackson (2014)                                            #
+#  Copyright Adam J. Jackson (2015)                                            #
 #                                                                              #
 #   This program is free software: you can redistribute it and/or modify       #
 #   it under the terms of the GNU General Public License as published by       #
@@ -17,7 +17,8 @@
 
 import numpy as np
 from scipy import constants
-from interpolate_thermal_property import get_potential_aims, get_potential_nist_table
+from interpolate_thermal_property import get_potential_aims, get_potential_nist_table, get_potential_sulfur_table
+import re
 
 import os  # get correct path for datafiles when called from another directory
 materials_directory = os.path.dirname(__file__)
@@ -26,6 +27,8 @@ materials_directory = os.path.dirname(__file__)
 if materials_directory:
     materials_directory = materials_directory + '/'
 
+eV2Jmol = constants.physical_constants['electron volt-joule relationship'][0] * constants.N_A
+    
 class material(object):
     """Parent class for materials properties"""
     def __init__(self,name,pbesol_energy_eV=False, N=1):
@@ -343,37 +346,72 @@ class ideal_gas(material):
 
 class sulfur_model(ideal_gas):
     """
-    Class for calculated , combining data from multiple models.
-
-    Initialisation:
-    ---------------
-
-    transferred_ideal_gas = ideal_gas_transfer(name,pbesol_energy_eV,thermo_file,thermo_file_correction=0,zpe_pbesol=0,zpe_lit=0,N=1):
+    Class for calculated sulfur equilibria.
 
     Sets properties:
     -------------------
     ideal_gas.name             (string)
-    ideal_gas.pbesol_energy_eV (DFT total energy in eV with PBEsol XC functional)
+    ideal_gas.s8_pbesol_energy_eV (DFT total energy in eV with PBEsol XC functional for D4d S8 cluster)
     ideal_gas.thermo_data      (String containing path to T/P effects data file)
     ideal_gas.N                (Number of atoms per formula unit)
 
     Sets methods:
     -------------------
-    ideal_gas.U_eV(T), ideal_gas.U_J(T), ideal_gas.U_kJ(T) : Internal energy 
-    ideal_gas.H_eV(T), ideal_gas.H_J(T), ideal_gas.H_kJ(T) : Enthalpy H = U + PV
     ideal_gas.mu_eV(T,P), ideal_gas.mu_J(T,P), ideal_gas.mu_kJ(T,P) : Chemical potential mu = U + PV - TS
 
     Ideal gas law PV=nRT is applied: specifically (dH/dP) at const. T = 0 and int(mu)^P2_P1 dP = kTln(P2/P1)
-    Enthalpy has no P dependence as volume is not restricted / expansion step is defined as isothermal
+    Methods not yet implemented:
+    ----------------------------
+    ideal_gas.U_eV(T), ideal_gas.U_J(T), ideal_gas.U_kJ(T) : Internal energy 
+    ideal_gas.H_eV(T), ideal_gas.H_J(T), ideal_gas.H_kJ(T) : Enthalpy H = U + PV
 
     Thermo data file format:
     ------------------------
 
     CSV file containing header line:
-    # T/K, mu (x1 Pa) / J mol-1,mu (x2 Pa) / J mol-1
+    # T/K, mu (x1 Pa) / J mol-1,mu (x2 Pa) / J mol-1...
+
+    followed by comma-separated data rows
+
+    t1,mu11,mu12 ...
+    t2,mu21,mu22 ...
+    ...
 
 
     """
+    def __init__(self,name,s8_pbesol_energy_eV,mu_file,mu_file_0,zpe=0,N=1):
+        self.s8_pbesol_energy_eV = s8_pbesol_energy_eV
+        self.mu_file = materials_directory + mu_file
+        self.mu_file_0 = mu_file_0
+        self.zpe = zpe
+
+        self._mu_tab = get_potential_sulfur_table(self.mu_file)
+
+    def mu_J(self,T,P):
+
+        mu_tab_0 = 100.416/8. * 1e3 # J mol from kJmol-1
+        E0 = self.s8_pbesol_energy_eV * eV2Jmol
+        ZPE_tab = self.zpe * eV2Jmol
+        return self._mu_tab(T.flatten(),P.flatten()) - mu_tab_0 + 0.125 * (E0 + ZPE_tab)
+
+    def mu_kJ(self,T,P):
+        return self.mu_J(T,P) * 1e-3
+
+    def mu_eV(self,T,P):
+        return self.mu_J(T,P) / eV2Jmol
+    
+    # def __init__(self,name,pbesol_energy_eV,thermo_file,zpe_pbesol=0,zpe_lit=0,N=1):
+    #     material.__init__(self, name, pbesol_energy_eV,N)
+    #     self.thermo_file = materials_directory + thermo_file
+    #     # Initialise ZPE to PBEsol value if provided. 
+    #     # This looks redundant at the moment: the intent is to implement
+    #     # some kind of switch or heirarchy of methods further down the line.
+    #     if zpe_pbesol > 0:
+    #         self.zpe = zpe_pbesol
+    #     elif zpe_lit > 0:
+    #         self.zpe = zpe_lit
+    #     else:
+    #         self.zpe = 0
 
 
 ################ Quaternary compounds ###############
@@ -420,7 +458,7 @@ beta_Sn = solid(name='Beta Sn',
            pbesol_energy_eV=-340581.414964630,
            fu_cell=2,
            volume=53.538071915,
-           phonons='phonopy_output/beta-Sn.dat'
+           phonons='phonopy_output/beta_Sn.dat'
 )
 
 alpha_Sn = solid(name='Alpha Sn',
@@ -436,7 +474,7 @@ Sn = beta_Sn
 Zn = solid(name='Zn',
            pbesol_energy_eV=-0.981596036898606e05, 
            fu_cell=2,
-           volume=28.2580218348
+           volume=28.2580218348,
            phonons='phonopy_output/Zn.dat'
 )
 
@@ -607,6 +645,11 @@ H2S=ideal_gas(
     zpe_pbesol=0.39799970,
     N=3
 )
+
+S_model = sulfur_model('S model',-0.868936310037924e05,'sulfur/mu_pbe0_scaled.csv',
+                       -10879.641688137717, zpe=0.33587176822026876)
+
+S = S_model
 
 def volume_calc(filename):
     """Calculate unit cell volume in cubic angstroms from FHI-aims geometry.in file"""
