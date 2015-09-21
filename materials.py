@@ -30,9 +30,10 @@ if materials_directory:
 eV2Jmol = constants.physical_constants['electron volt-joule relationship'][0] * constants.N_A
     
 class material(object):
-    """Parent class for materials properties"""
-    def __init__(self,name,pbesol_energy_eV=False, N=1):
+    """Parent class for materials properties. See docstrings for derived classes solid, ideal_gas"""
+    def __init__(self,name,stoichiometry,pbesol_energy_eV=False, N=1):
         self.name = name
+        self.stoichiometry = stoichiometry
         self.pbesol_energy_eV = pbesol_energy_eV
         self.N = N
 
@@ -43,6 +44,7 @@ class solid(material):
     Sets properties:
     -------------------
     solid.name             (Identifying string)
+    solid.stoichiometry    (Dict relating element to number of atoms in a single formula unit)
     solid.pbesol_energy_eV (DFT total energy in eV with PBEsol XC functional)
     solid.fu_cell          (Number of formula units in periodic unit cell)
     solid.volume           (Volume of unit cell in cubic angstroms (m3 * 10^30))
@@ -57,8 +59,8 @@ class solid(material):
 
     The material is assumed to be incompressible and without thermal expansion
     """
-    def __init__(self, name, pbesol_energy_eV, fu_cell, volume, phonons=False, N=1):
-        material.__init__(self,name,pbesol_energy_eV,N)
+    def __init__(self, name, stoichiometry, pbesol_energy_eV, fu_cell, volume, phonons=False, N=1):
+        material.__init__(self,name,stoichiometry,pbesol_energy_eV,N)
 
         self.fu_cell = fu_cell
         self.volume = volume
@@ -219,6 +221,7 @@ class ideal_gas(material):
     Sets properties:
     -------------------
     ideal_gas.name             (string)
+    ideal_gas.stoichiometry    (Dict relating element to number of atoms in a single formula unit)
     ideal_gas.pbesol_energy_eV (DFT total energy in eV with PBEsol XC functional)
     ideal_gas.thermo_data      (String containing path to aims.vibrations output data file)
     ideal_gas.N                (Number of atoms per formula unit)
@@ -233,8 +236,8 @@ class ideal_gas(material):
     Enthalpy has no P dependence as volume is not restricted / expansion step is defined as isothermal
     """
 
-    def __init__(self,name,pbesol_energy_eV,thermo_file,zpe_pbesol=0,zpe_lit=0,N=1):
-        material.__init__(self, name, pbesol_energy_eV,N)
+    def __init__(self,name,stoichiometry,pbesol_energy_eV,thermo_file,zpe_pbesol=0,zpe_lit=0,N=1):
+        material.__init__(self, name, stoichiometry, pbesol_energy_eV,N)
         self.thermo_file = materials_directory + thermo_file
         # Initialise ZPE to PBEsol value if provided. 
         # This looks redundant at the moment: the intent is to implement
@@ -344,26 +347,26 @@ class ideal_gas(material):
         """
         return self.mu_J(T,P) * 0.001
 
-class sulfur_model(ideal_gas):
+class sulfur_model(object):
     """
     Class for calculated sulfur equilibria.
 
     Sets properties:
     -------------------
-    ideal_gas.name             (string)
-    ideal_gas.s8_pbesol_energy_eV (DFT total energy in eV with PBEsol XC functional for D4d S8 cluster)
-    ideal_gas.thermo_data      (String containing path to T/P effects data file)
-    ideal_gas.N                (Number of atoms per formula unit)
+    sulfur_model.name             (string)
+    sulfur_model.s8_pbesol_energy_eV (DFT total energy in eV with PBEsol XC functional for D4d S8 cluster)
+    sulfur_model.thermo_data      (String containing path to T/P effects data file)
+    sulfur_model.N                (Number of atoms per formula unit)
 
     Sets methods:
     -------------------
-    ideal_gas.mu_eV(T,P), ideal_gas.mu_J(T,P), ideal_gas.mu_kJ(T,P) : Chemical potential mu = U + PV - TS
+    sulfur_model.mu_eV(T,P), sulfur_model.mu_J(T,P), sulfur_model.mu_kJ(T,P) : Chemical potential mu = U + PV - TS
 
     Ideal gas law PV=nRT is applied: specifically (dH/dP) at const. T = 0 and int(mu)^P2_P1 dP = kTln(P2/P1)
     Methods not yet implemented:
     ----------------------------
-    ideal_gas.U_eV(T), ideal_gas.U_J(T), ideal_gas.U_kJ(T) : Internal energy 
-    ideal_gas.H_eV(T), ideal_gas.H_J(T), ideal_gas.H_kJ(T) : Enthalpy H = U + PV
+    sulfur_model.U_eV(T), sulfur_model.U_J(T), sulfur_model.U_kJ(T) : Internal energy 
+    sulfur_model.H_eV(T), sulfur_model.H_J(T), sulfur_model.H_kJ(T) : Enthalpy H = U + PV
 
     Thermo data file format:
     ------------------------
@@ -377,22 +380,33 @@ class sulfur_model(ideal_gas):
     t2,mu21,mu22 ...
     ...
 
+    DEV NOTE:
+    ---------
+    Not currently a derived class of "material" due to substantially different operation.
 
     """
     def __init__(self,name,s8_pbesol_energy_eV,mu_file,mu_file_0,zpe=0,N=1):
+        self.name = name
+        self.stoichiometry = {'S':1}
         self.s8_pbesol_energy_eV = s8_pbesol_energy_eV
         self.mu_file = materials_directory + mu_file
         self.mu_file_0 = mu_file_0
         self.zpe = zpe
+        self.N = 1
 
         self._mu_tab = get_potential_sulfur_table(self.mu_file)
 
     def mu_J(self,T,P):
+        if type(T) == np.ndarray:
+            T = T.flatten()
+        if type(P) == np.ndarray:
+            P = P.flatten()
+
 
         mu_tab_0 = 100.416/8. * 1e3 # J mol from kJmol-1
         E0 = self.s8_pbesol_energy_eV * eV2Jmol
         ZPE_tab = self.zpe * eV2Jmol
-        return self._mu_tab(T.flatten(),P.flatten()) - mu_tab_0 + 0.125 * (E0 + ZPE_tab)
+        return self._mu_tab(T,P) - mu_tab_0 + 0.125 * (E0 + ZPE_tab)
 
     def mu_kJ(self,T,P):
         return self.mu_J(T,P) * 1e-3
@@ -417,12 +431,13 @@ class sulfur_model(ideal_gas):
 ################ Quaternary compounds ###############
 
 CZTS_kesterite=solid(name='Kesterite CZTS (primitive basis)',
-                          pbesol_energy_eV= -0.353240291658938E+06,
-                          fu_cell=1,
-                          volume=155.433224529,
-                          phonons='phonopy_output/czts-kest-primitive.dat',
-                          N=8
-    )
+                     stoichiometry={'Cu':2,'Zn':1,'Sn':1,'S':4},
+                     pbesol_energy_eV= -0.353240291658938E+06,
+                     fu_cell=1,
+                     volume=155.433224529,
+                     phonons='phonopy_output/czts-kest-primitive.dat',
+                     N=8
+                     )
 
 #### Deprecated conventional cell model used in Mater. Chem. A paper.
 #### Difference is not critical: about 1 kJ/mol
@@ -438,6 +453,7 @@ CZTS = CZTS_kesterite
 
 
 CZTS_stannite = solid(name='Stannite CZTS',
+                      stoichiometry={'Cu':2,'Zn':1,'Sn':1,'S':4},
                       pbesol_energy_eV=-0.353240264472923e06 ,
                       fu_cell=1,
                       volume=155.572938002,
@@ -448,6 +464,7 @@ CZTS_stannite = solid(name='Stannite CZTS',
 ############### Elements ###############
 
 Cu = solid(name='Cu',
+           stoichiometry={'Cu':1},
            pbesol_energy_eV=-180838.168712673,
            fu_cell=4,
            volume=45.2576997892,
@@ -455,6 +472,7 @@ Cu = solid(name='Cu',
 )
 
 beta_Sn = solid(name='Beta Sn',
+           stoichiometry={'Sn':1},
            pbesol_energy_eV=-340581.414964630,
            fu_cell=2,
            volume=53.538071915,
@@ -462,16 +480,18 @@ beta_Sn = solid(name='Beta Sn',
 )
 
 alpha_Sn = solid(name='Alpha Sn',
+                 stoichiometry={'Sn':1},
                  pbesol_energy_eV=-0.340581355039346E+06,
                  fu_cell=2,
                  volume=69.6092979612,
-                 phonons='phonopy_output/alpha-Sn.dat'
+                 phonons='phonopy_output/alpha_Sn.dat'
     )
 
 Sn = beta_Sn
 
 
 Zn = solid(name='Zn',
+           stoichiometry={'Zn':1},
            pbesol_energy_eV=-0.981596036898606e05, 
            fu_cell=2,
            volume=28.2580218348,
@@ -480,6 +500,7 @@ Zn = solid(name='Zn',
 
 alpha_S=solid(
     name='Alpha S',
+    stoichiometry={'S':1},
     pbesol_energy_eV=-0.347575504588933e06,
     fu_cell=32,
     volume= 832.91786077871541,
@@ -490,6 +511,7 @@ alpha_S=solid(
 
 Cu2S_low=solid(
     name='Low Cu2S',
+    stoichiometry={'Cu':2,'S':1},
     pbesol_energy_eV=-0.486150076546942e07,
     fu_cell=48,
     volume=2055.8786918601486,
@@ -501,6 +523,7 @@ Cu2S=Cu2S_low
 
 SnS2=solid(
     name='SnS2',
+    stoichiometry={'Sn':1,'S':2},
     pbesol_energy_eV=-0.192015452706802e06,
     fu_cell=1,
     volume=69.3883090547,
@@ -510,6 +533,7 @@ SnS2=solid(
 
 SnS_pcma=solid(
     name='SnS',
+    stoichiometry={'Sn':1,'S':1},
     pbesol_energy_eV=-0.724613674134358E+06,
     fu_cell=4,
     volume=186.605514927,
@@ -521,6 +545,7 @@ SnS=SnS_pcma
 
 ZnS_wurtzite=solid(
     name='ZnS (wurtzite)',
+    stoichiometry={'Zn':1,'S':1},
     pbesol_energy_eV=-119886.323698657,
     fu_cell=2,
     volume=76.9580344589,
@@ -530,6 +555,7 @@ ZnS_wurtzite=solid(
 
 ZnS_zincblende=solid(
     name='ZnS (zinc blende)',
+    stoichiometry={'Zn':1,'S':1},
     pbesol_energy_eV=-59943.163599041,
     fu_cell=1,
     volume=38.4544005985,
@@ -543,6 +569,7 @@ ZnS=ZnS_zincblende
 
 Cu2SnS3_mo1=solid(
     name='Cu2SnS3 (Mo-1)',
+    stoichiometry={'Cu':2,'Sn':1,'S':3},
     pbesol_energy_eV=-0.117318818763261e07,
     fu_cell=4,
     volume=469.83485422571772,
@@ -552,6 +579,7 @@ Cu2SnS3_mo1=solid(
 
 Cu2SnS3_mo2=solid(
     name='Cu2SnS3 (Mo-2)',
+    stoichiometry={'Cu':2,'Sn':1,'S':3},
     pbesol_energy_eV=-0.293297062672424e06,
     fu_cell=1,
     volume=117.43775202426687,
@@ -561,6 +589,7 @@ Cu2SnS3_mo2=solid(
 
 Cu3SnS4=solid(
     name='Cu3SnS4 (pmn21)',
+    stoichiometry={'Cu':3,'Sn':1,'S':4},
     pbesol_energy_eV=-0.698738136506990E+06,
     fu_cell=2,
     volume=299.906413446,
@@ -570,6 +599,7 @@ Cu3SnS4=solid(
 
 Cu4SnS4=solid(
     name='Cu4SnS4 (pnma)',
+    stoichiometry={'Cu':4,'Sn':1,'S':4},
     pbesol_energy_eV=-0.157831255950904e07,
     fu_cell=4,
     volume=640.981231346,
@@ -581,6 +611,7 @@ Cu4SnS4=solid(
 
 SnO=solid(
     name='SnO',
+    stoichiometry={'Sn':1,'O':1},
     pbesol_energy_eV=-0.344666615074050E+06,
     fu_cell=2,
     volume=68.1249805813,
@@ -590,6 +621,7 @@ SnO=solid(
 
 SnO2=solid(
     name='SnO2',
+    stoichiometry={'Sn':1,'O':2},
     pbesol_energy_eV=-0.348751648981493E+06,
     fu_cell=2,
     volume=73.2239419677,
@@ -598,14 +630,17 @@ SnO2=solid(
 
 ZnO=solid(
     name='ZnO',
+    stoichiometry={'Zn':1,'O':1},
     pbesol_energy_eV=-102245.514300524,
     fu_cell=2,
     volume=47.0750741794,
-    phonons='phonopy_output/ZnO.dat'
+    phonons='phonopy_output/ZnO.dat',
+    N=2
     )
 
 S8=ideal_gas(
     name='S8',
+    stoichiometry={'S':8},
     pbesol_energy_eV=-0.868936310037924e05,
     thermo_file='nist_janaf/S8.dat',
     zpe_pbesol=0.32891037,
@@ -614,6 +649,7 @@ S8=ideal_gas(
 
 S2=ideal_gas(
     name='S2',
+    stoichiometry={'S':2},
     pbesol_energy_eV=-0.217220682510473e05,
     thermo_file='nist_janaf/S2.dat',
     zpe_pbesol=0.04421415,
@@ -622,6 +658,7 @@ S2=ideal_gas(
 
 O2=ideal_gas(
     name='O2',
+    stoichiometry={'O':2},
     pbesol_energy_eV=-0.408004839112704e04,
     thermo_file='nist_janaf/O2.dat',
     zpe_lit=0.0976, # Irikura, K. K. (2007). Journal of Physical and 
@@ -632,6 +669,7 @@ O2=ideal_gas(
 
 H2=ideal_gas(
     name='H2',
+    stoichiometry={'H':2},
     pbesol_energy_eV=-0.312204882567064e02,
     thermo_file='nist_janaf/H2.dat',
     zpe_pbesol=0.26465608, # Experimental values are ~ 0.27
@@ -640,13 +678,14 @@ H2=ideal_gas(
 
 H2S=ideal_gas(
     name='H2S',
+    stoichiometry={'H':2,'S':1},
     pbesol_energy_eV=-0.108932246222711e05,
     thermo_file='nist_janaf/H2S.dat',
     zpe_pbesol=0.39799970,
     N=3
 )
 
-S_model = sulfur_model('S model',-0.868936310037924e05,'sulfur/mu_pbe0_scaled.csv',
+S_model = sulfur_model('S vapours',-0.868936310037924e05,'sulfur/mu_pbe0_scaled.csv',
                        -10879.641688137717, zpe=0.33587176822026876)
 
 S = S_model
