@@ -347,7 +347,7 @@ class ideal_gas(material):
         """
         return self.mu_J(T,P) * 0.001
 
-class sulfur_model(object):
+class sulfur_model_legacy(object):
     """
     Class for calculated sulfur equilibria.
 
@@ -426,6 +426,83 @@ class sulfur_model(object):
     #         self.zpe = zpe_lit
     #     else:
     #         self.zpe = 0
+
+
+class sulfur_model(object):
+    """
+    Class for calculated sulfur equilibria.
+
+    Sets properties:
+    -------------------
+    sulfur_model.name             (string)
+    sulfur_model.s8_pbesol_energy_eV (DFT total energy in eV with PBEsol XC functional for D4d S8 cluster)
+    sulfur_model.thermo_data      (String containing path to T/P effects data file)
+    sulfur_model.N                (Number of atoms per formula unit)
+
+    Sets methods:
+    -------------------
+    sulfur_model.mu_eV(T,P), sulfur_model.mu_J(T,P), sulfur_model.mu_kJ(T,P) : Chemical potential mu = U + PV - TS
+
+    Ideal gas law PV=nRT is applied: specifically (dH/dP) at const. T = 0 and int(mu)^P2_P1 dP = kTln(P2/P1)
+    Methods not yet implemented:
+    ----------------------------
+    sulfur_model.U_eV(T), sulfur_model.U_J(T), sulfur_model.U_kJ(T) : Internal energy 
+    sulfur_model.H_eV(T), sulfur_model.H_J(T), sulfur_model.H_kJ(T) : Enthalpy H = U + PV
+
+    Thermo data file format:
+    ------------------------
+
+    CSV file containing header line:
+    # T/K, mu (x1 Pa) / J mol-1,mu (x2 Pa) / J mol-1...
+
+    followed by comma-separated data rows
+
+    t1,mu11,mu12 ...
+    t2,mu21,mu22 ...
+    ...
+
+    DEV NOTE:
+    ---------
+    Not currently a derived class of "material" due to substantially different operation.
+
+    """
+    def __init__(self,name,s8_pbesol_energy_eV,mu_file,N=1):
+        self.name = name
+        self.stoichiometry = {'S':1}
+        self.s8_pbesol_energy_eV = s8_pbesol_energy_eV
+        self.mu_file = materials_directory + mu_file
+        self.N = 1
+
+        self._mu_tab = get_potential_sulfur_table(self.mu_file)
+
+    def mu_J(self,T,P):
+        if type(T) == np.ndarray:
+            T = T.flatten()
+        if type(P) == np.ndarray:
+            P = P.flatten()
+
+        E0 = self.s8_pbesol_energy_eV * eV2Jmol
+        return self._mu_tab(T,P) + 0.125 * E0
+
+    def mu_kJ(self,T,P):
+        return self.mu_J(T,P) * 1e-3
+
+    def mu_eV(self,T,P):
+        return self.mu_J(T,P) / eV2Jmol
+    
+    # def __init__(self,name,pbesol_energy_eV,thermo_file,zpe_pbesol=0,zpe_lit=0,N=1):
+    #     material.__init__(self, name, pbesol_energy_eV,N)
+    #     self.thermo_file = materials_directory + thermo_file
+    #     # Initialise ZPE to PBEsol value if provided. 
+    #     # This looks redundant at the moment: the intent is to implement
+    #     # some kind of switch or heirarchy of methods further down the line.
+    #     if zpe_pbesol > 0:
+    #         self.zpe = zpe_pbesol
+    #     elif zpe_lit > 0:
+    #         self.zpe = zpe_lit
+    #     else:
+    #         self.zpe = 0
+
 
 
 ################ Quaternary compounds ###############
@@ -685,8 +762,11 @@ H2S=ideal_gas(
     N=3
 )
 
-S_model = sulfur_model('S vapours',-0.868936310037924e05,'sulfur/mu_pbe0_scaled.csv',
+S_model_legacy = sulfur_model_legacy('S vapours',-0.868936310037924e05,'sulfur/mu_pbe0_scaled.csv',
                        -10879.641688137717, zpe=0.33587176822026876)
+
+S_model = sulfur_model('S vapours',-0.868936310037924e05,'sulfur/mu_pbe0_scaled_S8ref.csv')
+
 
 S = S_model
 
