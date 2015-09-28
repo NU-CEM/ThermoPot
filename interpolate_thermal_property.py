@@ -15,6 +15,7 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.      #
 ################################################################################
 
+import numpy as np
 from scipy.interpolate import interp1d, interp2d
 from numpy import genfromtxt
 import re
@@ -78,5 +79,9 @@ def get_potential_sulfur_table(filename):
     with open(filename,'r') as f:
         header=f.readline()
     P = [float(p) for p in re.findall(r'\d+.\d+',header)]
-    thefunction = interp2d(T,P,data[:,1:].transpose(), kind='cubic')
-    return thefunction
+    thefunction = interp2d(T,np.log(P),data[:,1:].transpose(), kind='cubic')
+
+    def lin_P_function(T,P):
+        return thefunction(T,np.log(P))
+        
+    return lin_P_function
