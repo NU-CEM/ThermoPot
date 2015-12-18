@@ -620,6 +620,15 @@ SnS_pcma=solid(
 
 SnS=SnS_pcma
 
+Sn2S3=solid(
+    name='Sn2S3',
+    stoichiometry={'Sn':2,'S':3},
+    pbesol_energy_eV=-0.149267503419682e07,
+    fu_cell=4,
+    volume=457.334873727,
+    phonons='phonopy_output/Sn2S3.dat'
+    )
+
 ZnS_wurtzite=solid(
     name='ZnS (wurtzite)',
     stoichiometry={'Zn':1,'S':1},
