@@ -674,9 +674,11 @@ Cu2SnS3_mo2=solid(
 )
 
 Cu3SnS4=solid(
+    # Note that a correction is applied to the total energy;
+    # this is based on HSE06 calculations
     name='Cu3SnS4 (pmn21)',
     stoichiometry={'Cu':3,'Sn':1,'S':4},
-    pbesol_energy_eV=-0.698738136506990E+06,
+    pbesol_energy_eV=-0.698738136506990E+06 + 2*0.667,
     fu_cell=2,
     volume=299.906413446,
     phonons='phonopy_output/Cu3SnS4.dat',
