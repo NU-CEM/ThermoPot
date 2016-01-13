@@ -354,9 +354,10 @@ class sulfur_model_legacy(object):
     Sets properties:
     -------------------
     sulfur_model.name             (string)
-    sulfur_model.s8_pbesol_energy_eV (DFT total energy in eV with PBEsol XC functional for D4d S8 cluster)
+    sulfur_model.pbesol_energy_eV (DFT total energy in eV with PBEsol XC functional for D4d S8 cluster)
     sulfur_model.thermo_data      (String containing path to T/P effects data file)
     sulfur_model.N                (Number of atoms per formula unit)
+    sulfur_model.N_ref            (Number of atoms in reference energy)
 
     Sets methods:
     -------------------
@@ -385,14 +386,15 @@ class sulfur_model_legacy(object):
     Not currently a derived class of "material" due to substantially different operation.
 
     """
-    def __init__(self,name,s8_pbesol_energy_eV,mu_file,mu_file_0,zpe=0,N=1):
+    def __init__(self,name,pbesol_energy_eV,mu_file,mu_file_0,zpe=0,N=1,N_ref=8):
         self.name = name
         self.stoichiometry = {'S':1}
-        self.s8_pbesol_energy_eV = s8_pbesol_energy_eV
+        self.pbesol_energy_eV = pbesol_energy_eV
         self.mu_file = materials_directory + mu_file
         self.mu_file_0 = mu_file_0
         self.zpe = zpe
         self.N = 1
+        self.N_ref=N_ref
 
         self._mu_tab = get_potential_sulfur_table(self.mu_file)
 
@@ -404,9 +406,9 @@ class sulfur_model_legacy(object):
 
 
         mu_tab_0 = 100.416/8. * 1e3 # J mol from kJmol-1
-        E0 = self.s8_pbesol_energy_eV * eV2Jmol
+        E0 = self.pbesol_energy_eV * eV2Jmol
         ZPE_tab = self.zpe * eV2Jmol
-        return self._mu_tab(T,P) - mu_tab_0 + 0.125 * (E0 + ZPE_tab)
+        return self._mu_tab(T,P) - mu_tab_0 + (E0 + ZPE_tab)/self.N_ref
 
     def mu_kJ(self,T,P):
         return self.mu_J(T,P) * 1e-3
@@ -435,9 +437,10 @@ class sulfur_model(object):
     Sets properties:
     -------------------
     sulfur_model.name             (string)
-    sulfur_model.s8_pbesol_energy_eV (DFT total energy in eV with PBEsol XC functional for D4d S8 cluster)
+    sulfur_model.pbesol_energy_eV (DFT total energy in eV with PBEsol XC functional for D4d S8 cluster)
     sulfur_model.thermo_data      (String containing path to T/P effects data file)
     sulfur_model.N                (Number of atoms per formula unit)
+    sulfur_model.N_ref            (Number of atoms per formula unit of reference state)
 
     Sets methods:
     -------------------
@@ -466,12 +469,13 @@ class sulfur_model(object):
     Not currently a derived class of "material" due to substantially different operation.
 
     """
-    def __init__(self,name,s8_pbesol_energy_eV,mu_file,N=1):
+    def __init__(self,name,pbesol_energy_eV,mu_file,N=1,N_ref=8):
         self.name = name
         self.stoichiometry = {'S':1}
-        self.s8_pbesol_energy_eV = s8_pbesol_energy_eV
+        self.pbesol_energy_eV = pbesol_energy_eV
         self.mu_file = materials_directory + mu_file
         self.N = 1
+        self.N_ref = N_ref
 
         self._mu_tab = get_potential_sulfur_table(self.mu_file)
 
@@ -481,8 +485,8 @@ class sulfur_model(object):
         if type(P) == np.ndarray:
             P = P.flatten()
 
-        E0 = self.s8_pbesol_energy_eV * eV2Jmol
-        return self._mu_tab(T,P) + 0.125 * E0
+        E0 = self.pbesol_energy_eV * eV2Jmol
+        return self._mu_tab(T,P) + E0/self.N_ref
 
     def mu_kJ(self,T,P):
         return self.mu_J(T,P) * 1e-3
@@ -776,7 +780,9 @@ H2S=ideal_gas(
 S_model_legacy = sulfur_model_legacy('S vapours',-0.868936310037924e05,'sulfur/mu_pbe0_scaled.csv',
                        -10879.641688137717, zpe=0.33587176822026876)
 
-S_model = sulfur_model('S vapours',-0.868936310037924e05,'sulfur/mu_pbe0_scaled_S8ref.csv')
+S_model_S8ref = sulfur_model('S vapours',-0.868936310037924e05,'sulfur/mu_pbe0_scaled_S8ref.csv')
+
+S_model = sulfur_model('S vapours',S2.pbesol_energy_eV,'sulfur/mu_pbe0_scaled_S2ref.csv',N_ref=2)
 
 
 S = S_model
