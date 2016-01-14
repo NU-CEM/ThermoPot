@@ -553,16 +553,16 @@ Cu = solid(name='Cu',
 )
 
 beta_Sn = solid(name='Beta Sn',
-           stoichiometry={'Sn':1},
-           pbesol_energy_eV=-340581.414964630,
-           fu_cell=2,
-           volume=53.538071915,
-           phonons='phonopy_output/beta_Sn.dat'
+                stoichiometry={'Sn':1},
+                pbesol_energy_eV=-0.340581412216286E+06,
+                fu_cell=2,
+                volume=53.538071915,
+                phonons='phonopy_output/beta_Sn.dat'
 )
 
 alpha_Sn = solid(name='Alpha Sn',
                  stoichiometry={'Sn':1},
-                 pbesol_energy_eV=-0.340581355039346E+06,
+                 pbesol_energy_eV=-0.340581358439856E+06,
                  fu_cell=2,
                  volume=69.6092979612,
                  phonons='phonopy_output/alpha_Sn.dat'
