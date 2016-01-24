@@ -511,7 +511,7 @@ class sulfur_model(object):
 
 ################ Quaternary compounds ###############
 
-CZTS_kesterite=solid(name='Kesterite CZTS (primitive basis)',
+CZTS_kesterite=solid(name='Kesterite CZTS',
                      stoichiometry={'Cu':2,'Zn':1,'Sn':1,'S':4},
                      pbesol_energy_eV= -0.353240291658938E+06,
                      fu_cell=1,
