@@ -8,6 +8,8 @@ Provided as supplementary information for publication, this is also an active pr
 [http://github.com/WMD-Bath/CZTS-model](http://github.com/WMD-Bath/CZTS-model).
 The v1.0 tag indicates the version supplied with the project's first publication.
 
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.18732.svg)](http://dx.doi.org/10.5281/zenodo.18732)
+
 (c) Adam Jackson 2014
 This code is made available under the GNU General Public Licence (GPL) v3.
 See the LICENSE file for the full text.
