@@ -1,16 +1,24 @@
 CZTS thermodynamic modelling
 ============================
 
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.18732.svg)](http://dx.doi.org/10.5281/zenodo.18732)
+
 Research data and calculations for ab initio thermodynamic modelling of
 the formation and decomposition of Cu<sub>2</sub>ZnSnS<sub>4</sub> (CZTS).
 
-Provided as supplementary information for publication, this is also an active project currently hosted at
-[http://github.com/WMD-Bath/CZTS-model](http://github.com/WMD-Bath/CZTS-model).
-The v1.0 tag indicates the version supplied with the project's first publication.
+This repository acts as supplementary information for a [2014 publication in *J. Mater. Chem. A*](http://dx.doi.org/10.1039/C4TA00892H), and is also an active project currently hosted at
+[http://github.com/WMD-Group/CZTS-model](http://github.com/WMD-Group/CZTS-model).
+The [releases](https://github.com/WMD-group/CZTS-model/releases) correspond to key publication points in the project:
 
-[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.18732.svg)](http://dx.doi.org/10.5281/zenodo.18732)
+* [report-confirmation](https://github.com/WMD-group/CZTS-model/releases/tag/report-confirmation) [ajjackson](https://github.com/ajjackson)'s 1st year PhD confirmation report. [Not public]
+* [v1.0](https://github.com/WMD-group/CZTS-model/releases/tag/v1.0) Initial submission to *J. Mater. Chem. A*.
+* [v1.2a](https://github.com/WMD-group/CZTS-model/releases/tag/v1.2a) Supporting data for publication in *J. Mater. Chem. A.*. Includes minor bug fixes and data for comparison with [another study](https://dx.doi.org/10.1021/cm202379s), with permission from Jonathan Scragg.
+* [thesis-submission](https://github.com/WMD-group/CZTS-model/releases/tag/thesis-submission) Supporting data for ajjackson PhD thesis submission. [Initial submission is not public]
 
-(c) Adam Jackson 2014
+
+
+
+(c) Adam Jackson 2016
 This code is made available under the GNU General Public Licence (GPL) v3.
 See the LICENSE file for the full text.
 
