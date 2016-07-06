@@ -1,7 +1,7 @@
 CZTS thermodynamic modelling
 ============================
 
-[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.18732.svg)](http://dx.doi.org/10.5281/zenodo.18732)
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.57130.svg)](http://dx.doi.org/10.5281/zenodo.57130)
 
 Research data and calculations for ab initio thermodynamic modelling of
 the formation and decomposition of Cu<sub>2</sub>ZnSnS<sub>4</sub> (CZTS).
@@ -14,7 +14,6 @@ The [releases](https://github.com/WMD-group/CZTS-model/releases) correspond to k
 * [v1.0](https://github.com/WMD-group/CZTS-model/releases/tag/v1.0) Initial submission to *J. Mater. Chem. A*.
 * [v1.2a](https://github.com/WMD-group/CZTS-model/releases/tag/v1.2a) Supporting data for publication in *J. Mater. Chem. A.*. Includes minor bug fixes and data for comparison with [another study](https://dx.doi.org/10.1021/cm202379s), with permission from Jonathan Scragg.
 * [thesis-submission](https://github.com/WMD-group/CZTS-model/releases/tag/thesis-submission) Supporting data for ajjackson PhD thesis submission. [Initial submission is not public]
-
 
 
 
