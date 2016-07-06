@@ -56,3 +56,37 @@ Contents
 * **jscragg_2011.csv** Data file containing kinetic model stability boundary
   data from [Scragg et al. (2011)](http://dx.doi.org/10.1021/cm202379s). This
   data is used in **plots/DG_CZTS_SnS_Scragg.py** to reproduce Fig. 7 of [Jackson and Walsh (2014)](http://dx.doi.org/10.1039/c4ta00892h).
+
+Example
+-------
+
+Each material is made available as an object in the module namespace,
+and has methods which retrieve various properties. For example, to
+generate a CSV file containing the chemical potentials of a selection of phases:
+
+``` python
+import csv
+import numpy as np
+from materials import CZTS_kesterite, Cu, beta_Sn, alpha_Sn
+from materials import Cu2S, SnS2, SnS, Sn2S3, ZnS, S2, S8
+
+T = np.arange(400, 1200, 50)
+
+titles = []
+data = []
+for material in (CZTS_kesterite, Cu, beta_Sn,
+                 alpha_Sn, Cu2S, SnS2,
+                 SnS, Sn2S3, ZnS, S2, S8):
+
+    titles.append(material.name)
+    data.append(list(material.mu_kJ(T, 1E5)))
+
+# Zip and list unpacking can be used together to transpose
+# a matrix expressed as a list of lists
+data = zip(*data)
+
+with open('mu_data_Jmol.csv', 'wb') as f:
+    writer = csv.writer(f)
+    writer.writerow(titles)
+    writer.writerows(data)
+```
