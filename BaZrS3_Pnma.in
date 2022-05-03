@@ -1,0 +1,44 @@
+# 
+# This is the geometry file that corresponds to the current relaxation step.
+# If you do not want this file to be written, set the "write_restart_geometry" flag to .false.
+#  aims_uuid : 2457F10D-C418-4BD5-A74C-9AEAD111B4F4                                
+# 
+lattice_vector      7.07164343      0.00000000      0.00000000
+lattice_vector      0.00000000      9.92525193      0.00000000
+lattice_vector      0.00000000      0.00000000      6.95243419
+atom_frac       0.94972897      0.25000000      0.51103933 Ba
+atom_frac       0.55027103      0.75000000      0.01103933 Ba
+atom_frac       0.05027103      0.75000000      0.48896067 Ba
+atom_frac       0.44972897      0.25000000      0.98896067 Ba
+atom_frac       0.00545554      0.25000000      0.06395482 S
+atom_frac       0.49454446      0.75000000     -0.43604518 S
+atom_frac       0.99454446      0.75000000      0.93604518 S
+atom_frac       0.50545554      0.25000000      0.43604518 S
+atom_frac       0.21012421      0.03362379      0.70990450 S
+atom_frac       0.28987579      0.96637621      0.20990450 S
+atom_frac       0.78987579      0.53362379      0.29009550 S
+atom_frac       0.71012421      0.46637621      0.79009550 S
+atom_frac       0.78987579      0.96637621      0.29009550 S
+atom_frac       0.71012421      0.03362379      0.79009550 S
+atom_frac       0.21012421      0.46637621      0.70990450 S
+atom_frac       0.28987579      0.53362379      0.20990450 S
+atom_frac       0.00000000      0.00000000      0.00000000 Zr
+atom_frac       0.50000000      0.00000000      0.50000000 Zr
+atom_frac       0.00000000      0.50000000      0.00000000 Zr
+atom_frac       0.50000000      0.50000000      0.50000000 Zr
+# 
+# What follows is the current estimated Hessian matrix constructed by the BFGS algorithm.
+# This is NOT the true Hessian matrix of the system.
+# If you do not want this information here, switch it off using the "hessian_to_restart_geometry" keyword.
+# 
+trust_radius             0.0481278581
+hessian_block                1       1           9.206994           2.756579          -1.447395           2.756579          10.852221          -0.495314          -1.447395          -0.495314           8.749263
+hessian_block                1       2           0.083623          -2.648852          -0.527181          -1.438193          -2.510954          -2.828950           5.400553           1.410985           1.015375
+hessian_block                1       3          -3.537770          -1.364678           1.715370           0.000000           0.000000           0.000000           0.000000           0.000000           0.000000
+hessian_block                2       2          10.251343           2.327181          -7.514499           2.327181          48.809461          -1.943017          -7.514499          -1.943017          48.212082
+hessian_block                2       3          -0.655400         -26.108033          -5.826252           0.000000           0.000000           0.000000           0.000000           0.000000           0.000000
+hessian_block                3       3          41.169961           0.000000           0.000000           0.000000           0.000000           0.000000           0.000000           0.000000           0.000000
+hessian_block_lv             1       1          15.253103           1.107367          12.143213           1.107367          14.247191          -1.414619          12.143213          -1.414619          18.214683
+hessian_block_lv_atom        1       1           1.873223          -0.184155          -0.145381          -0.177993          -1.115905           1.675703          -0.863958           0.031428           0.500534
+hessian_block_lv_atom        1       2          -0.083632           0.189314          -0.383651          -2.563554           1.014569           1.031239          -2.788494          -0.721560           0.084022
+hessian_block_lv_atom        1       3           2.348802          -0.541901          -1.926962           0.000000           0.000000           0.000000           0.000000           0.000000           0.000000
