@@ -1,38 +1,3 @@
-        _
-  _ __ | |__   ___  _ __   ___   _ __  _   _
- | '_ \| '_ \ / _ \| '_ \ / _ \ | '_ \| | | |
- | |_) | | | | (_) | | | | (_) || |_) | |_| |
- | .__/|_| |_|\___/|_| |_|\___(_) .__/ \__, |
- |_|                            |_|    |___/
-                                       2.8.1
-
-Python version 3.9.7
-Spglib version 1.16.3
-
-Phonopy configuration was read from "mesh.conf".
-Calculator interface: aims
-Crystal structure was read from "phonopy_disp.yaml".
-Unit of length: angstrom
-Mesh sampling mode
-Settings:
-  Sampling mesh: [32 32 16]
-  Supercell: [2 2 2]
-  Primitive matrix (Auto):
-    [-1.00000000e+00  1.11022302e-16  0.00000000e+00]
-    [ 0. -1.  0.]
-    [0. 0. 1.]
-Spacegroup: C2/c (15)
-Use -v option to watch primitive cell, unit cell, and supercell structures.
-
-Force sets were not found in "phonopy_disp.yaml".
-Forces and displacements were read from "FORCE_SETS".
-Computing force constants...
-Max drift of force constants: -0.003099 (xz) 0.000000 (yy)
-
-Mesh numbers: [32 32 16]
-Number of irreducible q-points on sampling mesh: 4224/16384
-Calculating phonons on sampling mesh...
-Calculating thermal properties...
 #      T [K]      F [kJ/mol]    S [J/K/mol]  C_v [J/K/mol]     E [kJ/mol]
        0.000      17.5737760      0.0000000      0.0000000     17.5737760
       10.000      17.5716249      0.8006242      2.2763056     17.5796311
@@ -135,11 +100,3 @@ Calculating thermal properties...
      980.000    -240.0912359    395.6694317    148.5652059    147.6648071
      990.000    -244.0554848    397.1778271    148.5860566    149.1505640
     1000.000    -248.0347426    398.6712689    148.6062960    150.6365262
-
-Summary of calculation was written in "phonopy.yaml".
-                 _
-   ___ _ __   __| |
-  / _ \ '_ \ / _` |
- |  __/ | | | (_| |
-  \___|_| |_|\__,_|
-

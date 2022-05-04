@@ -1,20 +1,3 @@
-################################################################################
-#  Copyright Adam J. Jackson (2015)                                            #
-#                                                                              #
-#   This program is free software: you can redistribute it and/or modify       #
-#   it under the terms of the GNU General Public License as published by       #
-#   the Free Software Foundation, either version 3 of the License, or          #
-#   (at your option) any later version.                                        #
-#                                                                              #
-#   This program is distributed in the hope that it will be useful,            #
-#   but WITHOUT ANY WARRANTY; without even the implied warranty of             #
-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the              #
-#   GNU General Public License for more details.                               #
-#                                                                              #
-#   You should have received a copy of the GNU General Public License          #
-#   along with this program.  If not, see <http://www.gnu.org/licenses/>.      #
-################################################################################
-
 import numpy as np
 from scipy import constants
 from interpolate_thermal_property import get_potential_aims, get_potential_nist_table, get_potential_sulfur_table
@@ -31,10 +14,11 @@ eV2Jmol = constants.physical_constants['electron volt-joule relationship'][0] * 
     
 class material(object):
     """Parent class for materials properties. See docstrings for derived classes solid, ideal_gas"""
-    def __init__(self,name,stoichiometry,pbesol_energy_eV=False, N=1):
+    def __init__(self,name,stoichiometry,pbesol_energy_eV=False, hse06_energy_eV=False, N=1):
         self.name = name
         self.stoichiometry = stoichiometry
         self.pbesol_energy_eV = pbesol_energy_eV
+        self.hse06_energy_eV = hse06_energy_eV
         self.N = N
 
 class solid(material):
@@ -46,6 +30,7 @@ class solid(material):
     solid.name             (Identifying string)
     solid.stoichiometry    (Dict relating element to number of atoms in a single formula unit)
     solid.pbesol_energy_eV (DFT total energy in eV with PBEsol XC functional)
+    solid.hse06_energy_eV  (DFT total energy in eV with HSE06 XC functional)
     solid.fu_cell          (Number of formula units in periodic unit cell)
     solid.volume           (Volume of unit cell in cubic angstroms (m3 * 10^30))
     solid.phonons          (String containing path to phonopy-FHI-aims output data file)
@@ -66,31 +51,37 @@ class solid(material):
         self.volume = volume
         self.phonons = materials_directory + phonons
 
-    def U_eV(self,T,*P):
+    def U_eV(self,T,xc='pbesol'):
         """Internal energy of one formula unit of solid, expressed in eV.
+        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
         U = solid.U_eV(T)
         Returns a matrix with the same dimensions as T
         """
         U_func = get_potential_aims(self.phonons,'U')
-        return (self.pbesol_energy_eV + U_func(T))/self.fu_cell
+        if xc == 'pbesol':
+            E_dft = self.pbesol_energy_eV
+        else:
+            E_dft == self.hse06_energy_eV
+        return (E_dft + U_func(T))/self.fu_cell
 
-    def U_J(self,T):
+    def U_J(self,T,xc='pbesol'):
         """Internal energy of one gram-mole of solid, expressed in J/mol
         U = solid.U_J(T)
         Returns a matrix with the same dimensions as T
         """
-        return self.U_eV(T) * constants.physical_constants['electron volt-joule relationship'][0] * constants.N_A
+        return self.U_eV(T,xc=xc) * constants.physical_constants['electron volt-joule relationship'][0] * constants.N_A
 
-    def U_kJ(self,T):
+    def U_kJ(self,T,xc='pbesol'):
         """Internal energy of one gram-mole of solid, expressed in kJ/mol
         U = solid.U_kJ(T)
         Returns a matrix with the same dimensions as T
         """
-        return self.U_J(T)/1000.
+        return self.U_J(T,xc=xc)/1000.
 
-    def H_eV(self,T,P):
+    def H_eV(self,T,P,xc='pbesol'):
         """
         Enthalpy of one formula unit of solid, expressed in eV
+        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
         H = solid.H_eV(T,P)
  
         T, P may be orthogonal 2D arrays of length m and n, populated in one row/column:
@@ -103,9 +94,13 @@ class solid(material):
         """
         U_func = get_potential_aims(self.phonons,'U')
         PV = P * self.volume * 1E-30 * constants.physical_constants['joule-electron volt relationship'][0] / constants.N_A
-        return ((self.pbesol_energy_eV + U_func(T)) + PV)/self.fu_cell
+        if xc == 'pbesol':
+            E_dft = self.pbesol_energy_eV
+        else:
+            E_dft == self.hse06_energy_eV
+        return ((E_dft+ U_func(T)) + PV)/self.fu_cell
 
-    def H_J(self,T,P):
+    def H_J(self,T,P,xc='pbesol'):
         """Enthalpy of one gram-mole of solid, expressed in J/mol
         H = solid.H_J(T,P)
 
@@ -117,9 +112,9 @@ class solid(material):
 
         Other T, P arrays may result in undefined behaviour.
         """
-        return self.H_eV(T,P) * constants.physical_constants['electron volt-joule relationship'][0] * constants.N_A
+        return self.H_eV(T,P,xc=xc) * constants.physical_constants['electron volt-joule relationship'][0] * constants.N_A
     
-    def H_kJ(self,T,P):
+    def H_kJ(self,T,P,xc='pbesol'):
         """Enthalpy of one gram-mole of solid, expressed in kJ/mol
         H = solid.H_kJ(T,P)
 
@@ -131,9 +126,9 @@ class solid(material):
 
         Other T, P arrays may result in undefined behaviour.
         """
-        return self.H_J(T,P) * 0.001
+        return self.H_J(T,P,xc=xc) * 0.001
 
-    def mu_eV(self,T,P):
+    def mu_eV(self,T,P,xc='pbesol'):
         """
         Free energy of one formula unit of solid, expressed in eV
         mu = solid.mu_eV(T,P)
@@ -146,10 +141,10 @@ class solid(material):
         Other T, P arrays may result in undefined behaviour.
         """
         TS_func = get_potential_aims(self.phonons,'TS')
-        H = self.H_eV(T,P)
+        H = self.H_eV(T,P,xc=xc)
         return H - TS_func(T)/self.fu_cell
 
-    def mu_J(self,T,P):
+    def mu_J(self,T,P,xc='pbesol'):
         """
         Free energy of one mol of solid, expressed in J/mol
         mu = solid.mu_J(T,P)
@@ -161,9 +156,9 @@ class solid(material):
 
         Other T, P arrays may result in undefined behaviour.
         """
-        return self.mu_eV(T,P) * constants.physical_constants['electron volt-joule relationship'][0] * constants.N_A
+        return self.mu_eV(T,P,xc=xc) * constants.physical_constants['electron volt-joule relationship'][0] * constants.N_A
 
-    def mu_kJ(self,T,P):
+    def mu_kJ(self,T,P,xc='pbesol'):
         """
         Free energy of one mol of solid, expressed in kJ/mol
         mu = solid.mu_kJ(T,P)
@@ -175,7 +170,7 @@ class solid(material):
 
         Other T, P arrays may result in undefined behaviour.
         """
-        return self.mu_J(T,P) * 0.001
+        return self.mu_J(T,P,xc=xc) * 0.001
 
     def Cv_kB(self,T):
         """
@@ -236,43 +231,49 @@ class ideal_gas(material):
     Enthalpy has no P dependence as volume is not restricted / expansion step is defined as isothermal
     """
 
-    def __init__(self,name,stoichiometry,pbesol_energy_eV,thermo_file,zpe_pbesol=0,zpe_lit=0,N=1):
-        material.__init__(self, name, stoichiometry, pbesol_energy_eV,N)
+    def __init__(self,name,stoichiometry,pbesol_energy_eV,hse06_energy_eV,thermo_file,zpe_pbesol=0,zpe_hse06=0,zpe_lit=0,N=1):
+        material.__init__(self, name, stoichiometry, pbesol_energy_eV,hse06_energy_eV,N)
         self.thermo_file = materials_directory + thermo_file
-        # Initialise ZPE to PBEsol value if provided. 
+        # Initialise ZPE to HSE06 value if provided. 
         # This looks redundant at the moment: the intent is to implement
         # some kind of switch or heirarchy of methods further down the line.
-        if zpe_pbesol > 0:
+        if zpe_hse06 > 0:
+            self.zpe = zpe_pbesol
+        elif zpe_pbesol > 0:
             self.zpe = zpe_pbesol
         elif zpe_lit > 0:
             self.zpe = zpe_lit
         else:
             self.zpe = 0
 
-    def U_eV(self,T):
+    def U_eV(self,T,xc='pbesol'):
         """Internal energy of one formula unit of ideal gas, expressed in eV.
         U = ideal_gas.U_eV(T)
         Returns a matrix with the same dimensions as T
         """
         U_func = get_potential_nist_table(self.thermo_file,'U')
-        return (self.pbesol_energy_eV + self.zpe +
+        if xc == 'pbesol':
+            E_dft = self.pbesol_energy_eV
+        else:
+            E_dft == self.hse06_energy_eV
+        return (E_dft + self.zpe +
                 U_func(T)*constants.physical_constants['joule-electron volt relationship'][0]/constants.N_A
                 )
-    def U_J(self,T):
+    def U_J(self,T,xc='pbesol'):
         """Internal energy of one gram-mole of ideal gas, expressed in J/mol
         U = ideal_gas.U_J(T)
         Returns a matrix with the same dimensions as T
         """
-        return self.U_eV(T) * constants.physical_constants['electron volt-joule relationship'][0] * constants.N_A
+        return self.U_eV(T,xc=xc) * constants.physical_constants['electron volt-joule relationship'][0] * constants.N_A
 
-    def U_kJ(self,T):
+    def U_kJ(self,T,xc='pbesol'):
         """Internal energy of one gram-mole of ideal gas, expressed in kJ/mol
         U = ideal_gas.U_kJ(T)
         Returns a matrix with the same dimensions as T
         """
-        return self.U_J(T) * 0.001
+        return self.U_J(T,xc=xc) * 0.001
 
-    def H_eV(self,T,*P):
+    def H_eV(self,T,*P,xc='pbesol'):
         """Enthalpy of one formula unit of ideal gas, expressed in eV
         H = ideal_gas.H_eV(T)
         Returns an array with the same dimensions as T
@@ -280,29 +281,33 @@ class ideal_gas(material):
         Accepts ideal_gas.H_eV(T,P): P is unused
         """
         H_func = get_potential_nist_table(self.thermo_file,'H')
+        if xc == 'pbesol':
+            E_dft = self.pbesol_energy_eV
+        else:
+            E_dft == self.hse06_energy_eV
         return (self.pbesol_energy_eV + self.zpe +
-                H_func(T)*constants.physical_constants['joule-electron volt relationship'][0]/constants.N_A
+                H_func(T,xc=xc)*constants.physical_constants['joule-electron volt relationship'][0]/constants.N_A
                 )
 
-    def H_J(self,T,*P):
+    def H_J(self,T,*P,xc='pbesol'):
         """Enthalpy of one gram-mole of ideal gas, expressed in J/mol
         H = ideal_gas.H_J(T)
         Returns an array with the same dimensions as T
 
         Accepts ideal_gas.H_eV(T,P): P is unused
         """
-        return self.H_eV(T) * constants.physical_constants['electron volt-joule relationship'][0] * constants.N_A
+        return self.H_eV(T,xc=xc) * constants.physical_constants['electron volt-joule relationship'][0] * constants.N_A
     
-    def H_kJ(self,T,*P):
+    def H_kJ(self,T,*P,xc='pbesol'):
         """Enthalpy of one gram-mole of ideal gas, expressed in kJ/mol
         H = ideal_gas.H_kJ(T,P)
         Returns an array with the same dimensions as T
 
         Accepts ideal_gas.H_eV(T,P): P is unused
         """
-        return self.H_J(T) * 0.001
+        return self.H_J(T,xc=xc) * 0.001
 
-    def mu_eV(self,T,P):
+    def mu_eV(self,T,P,xc='pbesol'):
         """
         Free energy of one formula unit of ideal gas, expressed in eV
         mu = ideal_gas.mu_eV(T,P)
@@ -316,10 +321,10 @@ class ideal_gas(material):
         """
         S_func = get_potential_nist_table(self.thermo_file,'S')
         S = S_func(T) * constants.physical_constants['joule-electron volt relationship'][0]/constants.N_A
-        H = self.H_eV(T)
+        H = self.H_eV(T,xc=xc)
         return H - T*S + constants.physical_constants['Boltzmann constant in eV/K'][0] * T * np.log(P/1E5)
 
-    def mu_J(self,T,P):
+    def mu_J(self,T,P,xc='pbesol'):
         """
         Free energy of one mol of ideal gas, expressed in J/mol
         mu = ideal_gas.mu_J(T,P)
@@ -331,9 +336,9 @@ class ideal_gas(material):
 
         Other T, P arrays may result in undefined behaviour.
         """
-        return self.mu_eV(T,P) * constants.physical_constants['electron volt-joule relationship'][0] * constants.N_A
+        return self.mu_eV(T,P,xc=xc) * constants.physical_constants['electron volt-joule relationship'][0] * constants.N_A
 
-    def mu_kJ(self,T,P):
+    def mu_kJ(self,T,P,xc='pbesol'):
         """
         Free energy of one mol of ideal gas, expressed in kJ/mol
         mu = ideal_gas.mu_kJ(T,P)
@@ -345,89 +350,7 @@ class ideal_gas(material):
 
         Other T, P arrays may result in undefined behaviour.
         """
-        return self.mu_J(T,P) * 0.001
-
-class sulfur_model_legacy(object):
-    """
-    Class for calculated sulfur equilibria.
-
-    Sets properties:
-    -------------------
-    sulfur_model.name             (string)
-    sulfur_model.pbesol_energy_eV (DFT total energy in eV with PBEsol XC functional for D4d S8 cluster)
-    sulfur_model.thermo_data      (String containing path to T/P effects data file)
-    sulfur_model.N                (Number of atoms per formula unit)
-    sulfur_model.N_ref            (Number of atoms in reference energy)
-
-    Sets methods:
-    -------------------
-    sulfur_model.mu_eV(T,P), sulfur_model.mu_J(T,P), sulfur_model.mu_kJ(T,P) : Chemical potential mu = U + PV - TS
-
-    Ideal gas law PV=nRT is applied: specifically (dH/dP) at const. T = 0 and int(mu)^P2_P1 dP = kTln(P2/P1)
-    Methods not yet implemented:
-    ----------------------------
-    sulfur_model.U_eV(T), sulfur_model.U_J(T), sulfur_model.U_kJ(T) : Internal energy 
-    sulfur_model.H_eV(T), sulfur_model.H_J(T), sulfur_model.H_kJ(T) : Enthalpy H = U + PV
-
-    Thermo data file format:
-    ------------------------
-
-    CSV file containing header line:
-    # T/K, mu (x1 Pa) / J mol-1,mu (x2 Pa) / J mol-1...
-
-    followed by comma-separated data rows
-
-    t1,mu11,mu12 ...
-    t2,mu21,mu22 ...
-    ...
-
-    DEV NOTE:
-    ---------
-    Not currently a derived class of "material" due to substantially different operation.
-
-    """
-    def __init__(self,name,pbesol_energy_eV,mu_file,mu_file_0,zpe=0,N=1,N_ref=8):
-        self.name = name
-        self.stoichiometry = {'S':1}
-        self.pbesol_energy_eV = pbesol_energy_eV
-        self.mu_file = materials_directory + mu_file
-        self.mu_file_0 = mu_file_0
-        self.zpe = zpe
-        self.N = 1
-        self.N_ref=N_ref
-
-        self._mu_tab = get_potential_sulfur_table(self.mu_file)
-
-    def mu_J(self,T,P):
-        if type(T) == np.ndarray:
-            T = T.flatten()
-        if type(P) == np.ndarray:
-            P = P.flatten()
-
-
-        mu_tab_0 = 100.416/8. * 1e3 # J mol from kJmol-1
-        E0 = self.pbesol_energy_eV * eV2Jmol
-        ZPE_tab = self.zpe * eV2Jmol
-        return self._mu_tab(T,P) - mu_tab_0 + (E0 + ZPE_tab)/self.N_ref
-
-    def mu_kJ(self,T,P):
-        return self.mu_J(T,P) * 1e-3
-
-    def mu_eV(self,T,P):
-        return self.mu_J(T,P) / eV2Jmol
-    
-    # def __init__(self,name,pbesol_energy_eV,thermo_file,zpe_pbesol=0,zpe_lit=0,N=1):
-    #     material.__init__(self, name, pbesol_energy_eV,N)
-    #     self.thermo_file = materials_directory + thermo_file
-    #     # Initialise ZPE to PBEsol value if provided. 
-    #     # This looks redundant at the moment: the intent is to implement
-    #     # some kind of switch or heirarchy of methods further down the line.
-    #     if zpe_pbesol > 0:
-    #         self.zpe = zpe_pbesol
-    #     elif zpe_lit > 0:
-    #         self.zpe = zpe_lit
-    #     else:
-    #         self.zpe = 0
+        return self.mu_J(T,P,xc=xc) * 0.001
 
 
 class sulfur_model(object):
@@ -493,297 +416,181 @@ class sulfur_model(object):
 
     def mu_eV(self,T,P):
         return self.mu_J(T,P) / eV2Jmol
-    
-    # def __init__(self,name,pbesol_energy_eV,thermo_file,zpe_pbesol=0,zpe_lit=0,N=1):
-    #     material.__init__(self, name, pbesol_energy_eV,N)
-    #     self.thermo_file = materials_directory + thermo_file
-    #     # Initialise ZPE to PBEsol value if provided. 
-    #     # This looks redundant at the moment: the intent is to implement
-    #     # some kind of switch or heirarchy of methods further down the line.
-    #     if zpe_pbesol > 0:
-    #         self.zpe = zpe_pbesol
-    #     elif zpe_lit > 0:
-    #         self.zpe = zpe_lit
-    #     else:
-    #         self.zpe = 0
 
 
+################ Ternary compounds ###############
 
-################ Quaternary compounds ###############
-
-CZTS_kesterite=solid(name='Kesterite CZTS',
-                     stoichiometry={'Cu':2,'Zn':1,'Sn':1,'S':4},
-                     pbesol_energy_eV= -0.353240291658938E+06,
-                     fu_cell=1,
-                     volume=155.433224529,
-                     phonons='phonopy_output/czts-kest-primitive.dat',
-                     N=8
+BaZrS3_perovskite=solid(name='Perovskite BaZrS3',
+                     stoichiometry={'Ba':1,'Zr':1,'S':3},
+                     pbesol_energy_eV= None,
+                     hse06_energy_eV = None,
+                     fu_cell=None,
+                     volume=None,
+                     phonons=None,
+                     N=None
                      )
 
-#### Deprecated conventional cell model used in Mater. Chem. A paper.
-#### Difference is not critical: about 1 kJ/mol
-# CZTS_kesterite = solid(name='Kesterite CZTS',
-#                        pbesol_energy_eV=-0.706480597450521e06,
-#                        fu_cell=2,
-#                        volume=310.86645888987351,
-#                        phonons='phonopy_output/czts-conventional.dat',
-#                        N=8
-#                       )
+BaZrS3 = BaZrS3_perovskite
 
-CZTS = CZTS_kesterite
+Ba2ZrS4_RP=solid(name='Ruddlesden-Popper Ba2ZrS4',
+                     stoichiometry={'Ba':2,'Zr':1,'S':4},
+                     pbesol_energy_eV= None,
+                     hse06_energy_eV = None,
+                     fu_cell=None,
+                     volume=None,
+                     phonons=None,
+                     N=None
+                     )
+
+Ba2ZrS4 = Ba2ZrS4_RP
+
+Ba3Zr2S7_RP=solid(name='Ruddlesden-Popper Ba3Zr2S7',
+                     stoichiometry={'Ba':3,'Zr':2,'S':7},
+                     pbesol_energy_eV= None,
+                     hse06_energy_eV = None,
+                     fu_cell=None,
+                     volume=None,
+                     phonons=None,
+                     N=None
+                     )
 
 
-CZTS_stannite = solid(name='Stannite CZTS',
-                      stoichiometry={'Cu':2,'Zn':1,'Sn':1,'S':4},
-                      pbesol_energy_eV=-0.353240264472923e06 ,
-                      fu_cell=1,
-                      volume=155.572938002,
-                      phonons='phonopy_output/czts_stannite.dat',
-                      N=8
-                      )
+Ba3Zr2S7_Needle=solid(name='Needle-like Ba3Zr2S7',
+                     stoichiometry={'Ba':3,'Zr':2,'S':7},
+                     pbesol_energy_eV= None,
+                     hse06_energy_eV = None,
+                     fu_cell=None,
+                     volume=None,
+                     phonons=None,
+                     N=None
+                     )
 
 ############### Elements ###############
 
-Cu = solid(name='Cu',
-           stoichiometry={'Cu':1},
-           pbesol_energy_eV=-180838.168712673,
-           fu_cell=4,
-           volume=45.2576997892,
-           phonons='phonopy_output/Cu.dat'
+Ba = solid(name='Ba',
+           stoichiometry={'Ba':1},
+           pbesol_energy_eV=None,
+           hse06_energy_eV = None,
+           fu_cell=None,
+           volume=None,
+           phonons=None
 )
 
-beta_Sn = solid(name='Beta Sn',
-                stoichiometry={'Sn':1},
-                pbesol_energy_eV=-0.340581412216286E+06,
-                fu_cell=2,
-                volume=53.538071915,
-                phonons='phonopy_output/beta_Sn.dat'
+Zr = solid(name='Zr',
+                stoichiometry={'Zr':1},
+                pbesol_energy_eV=None,
+                hse06_energy_eV = None,
+                fu_cell=None,
+                volume=None,
+                phonons=None
 )
 
-alpha_Sn = solid(name='Alpha Sn',
-                 stoichiometry={'Sn':1},
-                 pbesol_energy_eV=-0.340581358439856E+06,
-                 fu_cell=2,
-                 volume=69.6092979612,
-                 phonons='phonopy_output/alpha_Sn.dat'
-    )
-
-Sn = beta_Sn
-
-
-Zn = solid(name='Zn',
-           stoichiometry={'Zn':1},
-           pbesol_energy_eV=-0.981596036898606e05, 
-           fu_cell=2,
-           volume=28.2580218348,
-           phonons='phonopy_output/Zn.dat'
+S = solid(name='S',
+                 stoichiometry={'S':1},
+                 pbesol_energy_eV=None,
+                 hse06_energy_eV = None,
+                 fu_cell=None,
+                 volume=None,
+                 phonons=None
 )
 
-alpha_S=solid(
-    name='Alpha S',
-    stoichiometry={'S':1},
-    pbesol_energy_eV=-0.347575504588933e06,
-    fu_cell=32,
-    volume= 832.91786077871541,
-    phonons='phonopy_output/alpha_S.dat'
-)
 
 ############### Binary sulfides ###############
 
-Cu2S_low=solid(
-    name='Low Cu2S',
-    stoichiometry={'Cu':2,'S':1},
-    pbesol_energy_eV=-0.486150076546942e07,
-    fu_cell=48,
-    volume=2055.8786918601486,
-    phonons='phonopy_output/Cu2S_low.dat',
-    N=3
+BaS = solid(name='BaS',
+    stoichiometry={'Ba':1,'S':1},
+    pbesol_energy_eV=None,
+    fu_cell=None,
+    volume=None,
+    phonons=None,
+    N=None,
 )
 
-Cu2S=Cu2S_low
-
-SnS2=solid(
-    name='SnS2',
-    stoichiometry={'Sn':1,'S':2},
-    pbesol_energy_eV=-0.192015452706802e06,
-    fu_cell=1,
-    volume=69.3883090547,
-    phonons='phonopy_output/SnS2.dat',
-    N=3
+BaS2 = solid(name='BaS2',
+    stoichiometry={'Ba':1,'S':2},
+    pbesol_energy_eV=None,
+    fu_cell=None,
+    volume=None,
+    phonons=None,
+    N=None,
 )
 
-SnS_pcma=solid(
-    name='SnS',
-    stoichiometry={'Sn':1,'S':1},
-    pbesol_energy_eV=-0.724613674134358E+06,
-    fu_cell=4,
-    volume=186.605514927,
-    phonons='phonopy_output/SnS_pcma.dat',
-    N=2
+BaS3 = solid(name='BaS3',
+    stoichiometry={'Ba':1,'S':3},
+    pbesol_energy_eV=None,
+    fu_cell=None,
+    volume=None,
+    phonons=None,
+    N=None,
 )
 
-SnS=SnS_pcma
-
-Sn2S3=solid(
-    name='Sn2S3',
-    stoichiometry={'Sn':2,'S':3},
-    pbesol_energy_eV=-0.149267503419682e07,
-    fu_cell=4,
-    volume=457.334873727,
-    phonons='phonopy_output/Sn2S3.dat'
-    )
-
-ZnS_wurtzite=solid(
-    name='ZnS (wurtzite)',
-    stoichiometry={'Zn':1,'S':1},
-    pbesol_energy_eV=-119886.323698657,
-    fu_cell=2,
-    volume=76.9580344589,
-    phonons='phonopy_output/ZnS_wurtzite.dat',
-    N=2
+ZrS_A = solid(name='A ZrS',        # NOTE: needs adjusting with xtal type
+    stoichiometry={'Zr':1,'S':1},
+    pbesol_energy_eV=None,
+    fu_cell=None,
+    volume=None,
+    phonons=None,
+    N=None,
 )
 
-ZnS_zincblende=solid(
-    name='ZnS (zinc blende)',
-    stoichiometry={'Zn':1,'S':1},
-    pbesol_energy_eV=-59943.163599041,
-    fu_cell=1,
-    volume=38.4544005985,
-    phonons='phonopy_output/ZnS_zincblende.dat',
-    N=2
+ZrS_B = solid(name='B ZrS',        # NOTE: needs adjusting with xtal type
+    stoichiometry={'Zr':1,'S':1},
+    pbesol_energy_eV=None,
+    fu_cell=None,
+    volume=None,
+    phonons=None,
+    N=None,
 )
 
-ZnS=ZnS_zincblende
+ZrS = None # NOTE: Needs to be set to most stable isomer
 
-########## Ternary compounds ##########
 
-Cu2SnS3_mo1=solid(
-    name='Cu2SnS3 (Mo-1)',
-    stoichiometry={'Cu':2,'Sn':1,'S':3},
-    pbesol_energy_eV=-0.117318818763261e07,
-    fu_cell=4,
-    volume=469.83485422571772,
-    phonons='phonopy_output/Cu2SnS3-mo1.dat',
-    N=6
+ZrS2 = solid(name='ZrS2',        
+    stoichiometry={'Zr':1,'S':2},
+    pbesol_energy_eV=None,
+    fu_cell=None,
+    volume=None,
+    phonons=None,
+    N=None,
 )
 
-Cu2SnS3_mo2=solid(
-    name='Cu2SnS3 (Mo-2)',
-    stoichiometry={'Cu':2,'Sn':1,'S':3},
-    pbesol_energy_eV=-0.293297062672424e06,
-    fu_cell=1,
-    volume=117.43775202426687,
-    phonons='phonopy_output/Cu2SnS3-mo2.dat',
-    N=6
+ZrS3 = solid(name='ZrS3',        
+    stoichiometry={'Zr':1,'S':3},
+    pbesol_energy_eV=None,
+    fu_cell=None,
+    volume=None,
+    phonons=None,
+    N=None,
 )
 
-Cu3SnS4=solid(
-    # Note that a correction is applied to the total energy;
-    # this is based on HSE06 calculations
-    name='Cu3SnS4 (pmn21)',
-    stoichiometry={'Cu':3,'Sn':1,'S':4},
-    pbesol_energy_eV=-0.698738136506990E+06 + 2*0.667,
-    fu_cell=2,
-    volume=299.906413446,
-    phonons='phonopy_output/Cu3SnS4.dat',
-    N=8
-    )
 
-Cu4SnS4=solid(
-    name='Cu4SnS4 (pnma)',
-    stoichiometry={'Cu':4,'Sn':1,'S':4},
-    pbesol_energy_eV=-0.157831255950904e07,
-    fu_cell=4,
-    volume=640.981231346,
-    phonons='phonopy_output/Cu4SnS4.dat',
-    N=36
-)
+############### Gases ###############
 
-############### Binary oxides ###############
-
-SnO=solid(
-    name='SnO',
-    stoichiometry={'Sn':1,'O':1},
-    pbesol_energy_eV=-0.344666615074050E+06,
-    fu_cell=2,
-    volume=68.1249805813,
-    phonons='phonopy_output/SnO.dat',
-    N=2
-)
-
-SnO2=solid(
-    name='SnO2',
-    stoichiometry={'Sn':1,'O':2},
-    pbesol_energy_eV=-0.348751648981493E+06,
-    fu_cell=2,
-    volume=73.2239419677,
-    phonons='phonopy_output/SnO2.dat'
-)
-
-ZnO=solid(
-    name='ZnO',
-    stoichiometry={'Zn':1,'O':1},
-    pbesol_energy_eV=-102245.514300524,
-    fu_cell=2,
-    volume=47.0750741794,
-    phonons='phonopy_output/ZnO.dat',
-    N=2
-    )
 
 S8=ideal_gas(
     name='S8',
     stoichiometry={'S':8},
-    pbesol_energy_eV=-0.868936310037924e05,
+    pbesol_energy_eV=None,
+    hse06_energy_eV=None,
     thermo_file='nist_janaf/S8.dat',
-    zpe_pbesol=0.32891037,
+    zpe_pbesol=None
     N=8
 )
 
 S2=ideal_gas(
     name='S2',
     stoichiometry={'S':2},
-    pbesol_energy_eV=-0.217220682510473e05,
+    pbesol_energy_eV=None,
+    hse06_energy_eV=None,
     thermo_file='nist_janaf/S2.dat',
-    zpe_pbesol=0.04421415,
+    zpe_pbesol=None,
     N=2
 )
 
-O2=ideal_gas(
-    name='O2',
-    stoichiometry={'O':2},
-    pbesol_energy_eV=-0.408004839112704e04,
-    thermo_file='nist_janaf/O2.dat',
-    zpe_lit=0.0976, # Irikura, K. K. (2007). Journal of Physical and 
-    #                 Chemical Reference Data, 36(2), 389-397.
-    #                 doi:10.1063/1.2436891
-    N=2
-)
 
-H2=ideal_gas(
-    name='H2',
-    stoichiometry={'H':2},
-    pbesol_energy_eV=-0.312204882567064e02,
-    thermo_file='nist_janaf/H2.dat',
-    zpe_pbesol=0.26465608, # Experimental values are ~ 0.27
-    N=2
-)
+S_model_S8ref = sulfur_model('S vapours',S8.pbesol_energy_eV, S8.hse06_energy_eV,'sulfur/mu_pbe0_scaled_S8ref.csv')
 
-H2S=ideal_gas(
-    name='H2S',
-    stoichiometry={'H':2,'S':1},
-    pbesol_energy_eV=-0.108932246222711e05,
-    thermo_file='nist_janaf/H2S.dat',
-    zpe_pbesol=0.39799970,
-    N=3
-)
-
-S_model_legacy = sulfur_model_legacy('S vapours',-0.868936310037924e05,'sulfur/mu_pbe0_scaled.csv',
-                       -10879.641688137717, zpe=0.33587176822026876)
-
-S_model_S8ref = sulfur_model('S vapours',-0.868936310037924e05,'sulfur/mu_pbe0_scaled_S8ref.csv')
-
-S_model = sulfur_model('S vapours',S2.pbesol_energy_eV,'sulfur/mu_pbe0_scaled_S2ref.csv',N_ref=2)
-
+S_model = sulfur_model('S vapours',S2.pbesol_energy_eV, S2.hse06_energy_eV,'sulfur/mu_pbe0_scaled_S2ref.csv',N_ref=2)
 
 S = S_model
 
