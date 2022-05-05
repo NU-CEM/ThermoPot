@@ -10,6 +10,7 @@ materials_directory = os.path.dirname(__file__)
 if materials_directory:
     materials_directory = materials_directory + '/'
 
+# See https://phonopy.github.io/phonopy/setting-tags.html#tprop-tmin-tmax-and-tstep for notes on conversion
 eV2Jmol = constants.physical_constants['electron volt-joule relationship'][0] * constants.N_A
     
 class material(object):
@@ -20,6 +21,22 @@ class material(object):
         self.pbesol_energy_eV = pbesol_energy_eV
         self.hse06_energy_eV = hse06_energy_eV
         self.N = N
+
+    def get_energy(xc='pbesol'):
+        """ DFT calculated energy, expressed in eV.
+
+        Keyword argument specifies the functional. 
+        It can take one of two values:'pbesol' or 'hse06'.
+        If not specified, it defaults to 'pbesol'."""
+
+        if xc == 'pbesol':
+            E_dft = self.pbesol_energy_eV
+        elif xc == 'hse06':
+            E_dft == self.hse06_energy_eV
+        else:
+            raise RuntimeError('xc functional not found')
+        return E_dft
+
 
 class solid(material):
     """
@@ -53,20 +70,22 @@ class solid(material):
 
     def U_eV(self,T,xc='pbesol'):
         """Internal energy of one formula unit of solid, expressed in eV.
-        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
         U = solid.U_eV(T)
+
+        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
+        If not specified, it defaults to `pbesol`.
         Returns a matrix with the same dimensions as T
         """
-        U_func = get_potential_aims(self.phonons,'U')
-        if xc == 'pbesol':
-            E_dft = self.pbesol_energy_eV
-        else:
-            E_dft == self.hse06_energy_eV
+        U_func = get_potential_aims(self.phonons,'U') 
+        E_dft = self.get_energy(xc=xc)
         return (E_dft + U_func(T))/self.fu_cell
 
     def U_J(self,T,xc='pbesol'):
         """Internal energy of one gram-mole of solid, expressed in J/mol
         U = solid.U_J(T)
+
+        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
+        If not specified, it defaults to `pbesol`.
         Returns a matrix with the same dimensions as T
         """
         return self.U_eV(T,xc=xc) * constants.physical_constants['electron volt-joule relationship'][0] * constants.N_A
@@ -74,6 +93,9 @@ class solid(material):
     def U_kJ(self,T,xc='pbesol'):
         """Internal energy of one gram-mole of solid, expressed in kJ/mol
         U = solid.U_kJ(T)
+
+        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
+        If not specified, it defaults to `pbesol`.
         Returns a matrix with the same dimensions as T
         """
         return self.U_J(T,xc=xc)/1000.
@@ -81,8 +103,10 @@ class solid(material):
     def H_eV(self,T,P,xc='pbesol'):
         """
         Enthalpy of one formula unit of solid, expressed in eV
-        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
         H = solid.H_eV(T,P)
+
+        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
+        If not specified, it defaults to `pbesol`.
  
         T, P may be orthogonal 2D arrays of length m and n, populated in one row/column:
         in this case H is an m x n matrix.
@@ -94,10 +118,7 @@ class solid(material):
         """
         U_func = get_potential_aims(self.phonons,'U')
         PV = P * self.volume * 1E-30 * constants.physical_constants['joule-electron volt relationship'][0] / constants.N_A
-        if xc == 'pbesol':
-            E_dft = self.pbesol_energy_eV
-        else:
-            E_dft == self.hse06_energy_eV
+        E_dft = self.get_energy(xc=xc)
         return ((E_dft+ U_func(T)) + PV)/self.fu_cell
 
     def H_J(self,T,P,xc='pbesol'):
@@ -106,6 +127,9 @@ class solid(material):
 
         T, P may be orthogonal 2D arrays of length m and n, populated in one row/column:
         in this case H is an m x n matrix.
+
+        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
+        If not specified, it defaults to `pbesol`.
 
         T, P may instead be equal-length non-orthogonal 1D arrays, in which case H is a vector
         of H values corresponding to T,P pairs.
@@ -117,6 +141,9 @@ class solid(material):
     def H_kJ(self,T,P,xc='pbesol'):
         """Enthalpy of one gram-mole of solid, expressed in kJ/mol
         H = solid.H_kJ(T,P)
+
+        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
+        If not specified, it defaults to `pbesol`.
 
         T, P may be orthogonal 2D arrays of length m and n, populated in one row/column:
         in this case H is an m x n matrix.
@@ -132,6 +159,10 @@ class solid(material):
         """
         Free energy of one formula unit of solid, expressed in eV
         mu = solid.mu_eV(T,P)
+
+        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
+        If not specified, it defaults to `pbesol`.
+
         T, P may be orthogonal 2D arrays of length m and n, populated in one row/column:
         in this case H is an m x n matrix.
 
@@ -148,6 +179,10 @@ class solid(material):
         """
         Free energy of one mol of solid, expressed in J/mol
         mu = solid.mu_J(T,P)
+
+        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
+        If not specified, it defaults to `pbesol`.
+
         T, P may be orthogonal 2D arrays of length m and n, populated in one row/column:
         in this case H is an m x n matrix.
 
@@ -162,6 +197,10 @@ class solid(material):
         """
         Free energy of one mol of solid, expressed in kJ/mol
         mu = solid.mu_kJ(T,P)
+
+        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
+        If not specified, it defaults to `pbesol`.
+
         T, P may be orthogonal 2D arrays of length m and n, populated in one row/column:
         in this case H is an m x n matrix.
 
@@ -249,19 +288,25 @@ class ideal_gas(material):
     def U_eV(self,T,xc='pbesol'):
         """Internal energy of one formula unit of ideal gas, expressed in eV.
         U = ideal_gas.U_eV(T)
+
+        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
+        If not specified, it defaults to `pbesol`.
+
         Returns a matrix with the same dimensions as T
         """
         U_func = get_potential_nist_table(self.thermo_file,'U')
-        if xc == 'pbesol':
-            E_dft = self.pbesol_energy_eV
-        else:
-            E_dft == self.hse06_energy_eV
+        E_dft = self.get_energy(xc=xc)
         return (E_dft + self.zpe +
                 U_func(T)*constants.physical_constants['joule-electron volt relationship'][0]/constants.N_A
                 )
+
     def U_J(self,T,xc='pbesol'):
         """Internal energy of one gram-mole of ideal gas, expressed in J/mol
         U = ideal_gas.U_J(T)
+
+        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
+        If not specified, it defaults to `pbesol`.
+
         Returns a matrix with the same dimensions as T
         """
         return self.U_eV(T,xc=xc) * constants.physical_constants['electron volt-joule relationship'][0] * constants.N_A
@@ -269,6 +314,10 @@ class ideal_gas(material):
     def U_kJ(self,T,xc='pbesol'):
         """Internal energy of one gram-mole of ideal gas, expressed in kJ/mol
         U = ideal_gas.U_kJ(T)
+
+        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
+        If not specified, it defaults to `pbesol`.
+
         Returns a matrix with the same dimensions as T
         """
         return self.U_J(T,xc=xc) * 0.001
@@ -276,15 +325,16 @@ class ideal_gas(material):
     def H_eV(self,T,*P,xc='pbesol'):
         """Enthalpy of one formula unit of ideal gas, expressed in eV
         H = ideal_gas.H_eV(T)
+
+        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
+        If not specified, it defaults to `pbesol`.
+
         Returns an array with the same dimensions as T
 
         Accepts ideal_gas.H_eV(T,P): P is unused
         """
         H_func = get_potential_nist_table(self.thermo_file,'H')
-        if xc == 'pbesol':
-            E_dft = self.pbesol_energy_eV
-        else:
-            E_dft == self.hse06_energy_eV
+        E_dft = self.get_energy(xc=xc)
         return (self.pbesol_energy_eV + self.zpe +
                 H_func(T,xc=xc)*constants.physical_constants['joule-electron volt relationship'][0]/constants.N_A
                 )
@@ -292,6 +342,10 @@ class ideal_gas(material):
     def H_J(self,T,*P,xc='pbesol'):
         """Enthalpy of one gram-mole of ideal gas, expressed in J/mol
         H = ideal_gas.H_J(T)
+
+        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
+        If not specified, it defaults to `pbesol`.
+
         Returns an array with the same dimensions as T
 
         Accepts ideal_gas.H_eV(T,P): P is unused
@@ -301,6 +355,10 @@ class ideal_gas(material):
     def H_kJ(self,T,*P,xc='pbesol'):
         """Enthalpy of one gram-mole of ideal gas, expressed in kJ/mol
         H = ideal_gas.H_kJ(T,P)
+
+        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
+        If not specified, it defaults to `pbesol`.
+
         Returns an array with the same dimensions as T
 
         Accepts ideal_gas.H_eV(T,P): P is unused
@@ -311,6 +369,10 @@ class ideal_gas(material):
         """
         Free energy of one formula unit of ideal gas, expressed in eV
         mu = ideal_gas.mu_eV(T,P)
+
+        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
+        If not specified, it defaults to `pbesol`.
+
         T, P may be orthogonal 2D arrays of length m and n, populated in one row/column:
         in this case H is an m x n matrix.
 
@@ -328,6 +390,10 @@ class ideal_gas(material):
         """
         Free energy of one mol of ideal gas, expressed in J/mol
         mu = ideal_gas.mu_J(T,P)
+
+        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
+        If not specified, it defaults to `pbesol`.
+
         T, P may be orthogonal 2D arrays of length m and n, populated in one row/column:
         in this case H is an m x n matrix.
 
@@ -342,6 +408,10 @@ class ideal_gas(material):
         """
         Free energy of one mol of ideal gas, expressed in kJ/mol
         mu = ideal_gas.mu_kJ(T,P)
+
+        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
+        If not specified, it defaults to `pbesol`.
+
         T, P may be orthogonal 2D arrays of length m and n, populated in one row/column:
         in this case H is an m x n matrix.
 

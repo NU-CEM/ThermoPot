@@ -20,22 +20,28 @@ from scipy.interpolate import interp1d, interp2d
 from numpy import genfromtxt
 import re
 
+eV2Jmol = constants.physical_constants['electron volt-joule relationship'][0] * constants.N_A
+eV2kJmol = constants.physical_constants['electron volt-joule relationship'][0] * constants.N_A / 1000
+
+kB2JKmol =  constants.physical_constants['Boltzmann constant'] * constants.N_A
+
 def get_potential_aims(file,property):
     """Thermodynamic property interpolation function. Requires phonopy-FHI-aims output file.
-    Cv in kB/cell. All other properties in eV/cell
+    Reads data for S and Cv expressed in J/K/mol, F and U in kJ/mol.
+    Outputs data for S and Cv in kB/cell, U, F and TS in eV/cell.
     """
     data = genfromtxt(file)
     T = data[:,0]
     if property in ('Cv','Cp','heat_capacity','C'):
-        potential = data[:,3]
+        potential = data[:,3] / kB2JKmol
     elif property in ('U','internal_energy'):
-        potential = data[:,2]
+        potential = data[:,4] / eV2kJmol
     elif property in ('F','A','Helmholtz','free_energy'):
-        potential = data[:,1]
-    elif property in ('TS'):
-        potential = -data[:,4]
+        potential = data[:,1] / eV2kJmol
     elif property in ('S','Entropy','entropy'):
-        potential = -data[:,4]/T
+        potential = data[:,2] / kB2JKmol
+    elif property in ('TS'):
+        potential = T*data[:,2]
     else:
         raise RuntimeError('Property not found')        
 
