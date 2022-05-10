@@ -17,13 +17,13 @@
 
 import numpy as np
 from scipy.interpolate import interp1d, interp2d
+from scipy import constants
 from numpy import genfromtxt
 import re
 
 eV2Jmol = constants.physical_constants['electron volt-joule relationship'][0] * constants.N_A
 eV2kJmol = constants.physical_constants['electron volt-joule relationship'][0] * constants.N_A / 1000
-
-kB2JKmol =  constants.physical_constants['Boltzmann constant'] * constants.N_A
+kB2JKmol =  constants.physical_constants['Boltzmann constant'][0] * constants.N_A
 
 def get_potential_aims(file,property):
     """Thermodynamic property interpolation function. Requires phonopy-FHI-aims output file.
