@@ -62,6 +62,8 @@ class solid(material):
         self.fu_cell = self.NAtoms / self.N
         self.phonons = materials_directory + phonons
 
+        # TODO: allow calculations without giving phonons
+
     def U_eV(self,T,xc='pbesol'):
         """Internal energy of one formula unit of solid, expressed in eV.
         U = solid.U_eV(T)
