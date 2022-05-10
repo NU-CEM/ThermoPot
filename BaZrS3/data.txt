@@ -3,7 +3,7 @@
 BaZrS3_perovskite=solid(name='Perovskite BaZrS3',
                      stoichiometry={'Ba':1,'Zr':1,'S':3},
                      pbesol_energy_eV = -1425525.405951922,
-                     hse06_energy_eV = None,
+                     hse06_energy_eV = -1426337.557532134,
                      fu_cell=4,
                      volume = 0.487976E+03,
                      phonons = None,
@@ -14,10 +14,10 @@ BaZrS3 = BaZrS3_perovskite
 
 Ba2ZrS4_RP=solid(name='Ruddlesden-Popper Ba2ZrS4',
                      stoichiometry={'Ba':2,'Zr':1,'S':4},
-                     pbesol_energy_eV= None,
-                     hse06_energy_eV = None,
+                     pbesol_energy_eV= -592308.418827245,
+                     hse06_energy_eV = -592619.518998020,
                      fu_cell=1,
-                     volume=None,
+                     volume = 0.188486E+03,
                      phonons=None,
                      N=None
                      )
@@ -49,10 +49,10 @@ Ba3Zr2S7_Needle=solid(name='Needle-like Ba3Zr2S7',
 
 Ba = solid(name='Ba',
            stoichiometry={'Ba':1},
-           pbesol_energy_eV=None,
-           hse06_energy_eV = None,
+           pbesol_energy_eV = -225060.517335015,
+           hse06_energy_eV = -225150.274162429,
            fu_cell=None,
-           volume=None,
+           volume = 0.564599E+02,
            phonons=None
 )
 
