@@ -1,11 +1,11 @@
-BaZrS3 thermodynamic modelling
+Ab-initio thermodynamic modelling package
 ============================
 
-Research data and calculations for ab initio thermodynamic modelling of
-the formation and decomposition of BaZrS<sub>3</sub>.
+Software for ab-initio thermodynamic modelling of material formation and decomposition.
+Examples given for the BaZrS<sub>3</sub> system.
 
-*Note: This repository has been modelled on [one previously published for CZTS](http://dx.doi.org/10.5281/zenodo.57130). 
-It adapts (with copyright permissions) code originally designed and written by Adam Jackson.*
+*Note: This repository has been built on one previously developed for a [thermodynamic model of CZTS](http://dx.doi.org/10.5281/zenodo.57130). 
+It adapts and extends (with copyright permissions) code originally designed and written by Adam Jackson.*
 
 This code is made available under the GNU General Public Licence (GPL) v3.
 See the LICENSE file for the full text.
