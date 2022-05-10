@@ -492,11 +492,11 @@ class sulfur_model(object):
 
 BaZrS3_perovskite=solid(name='Perovskite BaZrS3',
                      stoichiometry={'Ba':1,'Zr':1,'S':3},
-                     pbesol_energy_eV= None,
+                     pbesol_energy_eV = -1425525.405951922,
                      hse06_energy_eV = None,
                      fu_cell=4,
-                     volume=None,
-                     phonons=None,
+                     volume = 0.487976E+03,
+                     phonons = None,
                      N=None
                      )
 
@@ -569,67 +569,74 @@ S = solid(name='S',
 
 BaS = solid(name='BaS',
     stoichiometry={'Ba':1,'S':1},
-    pbesol_energy_eV=None,
+    pbesol_energy_eV = -235926.586148547,
+    hse06_energy_eV = -236035.102423373,
     fu_cell=1,
-    volume=None,
-    phonons=None,
+    volume = 0.632552E+02,
+    phonons = 'phonopy_output/BaS_Fm-3m.dat',
     N=None,
 )
 
 BaS2 = solid(name='BaS2',
     stoichiometry={'Ba':1,'S':2},
-    pbesol_energy_eV=None,
+    pbesol_energy_eV = -493576.992662581,
+    hse06_energy_eV = -493830.665268581,
     fu_cell=2,
-    volume=None,
-    phonons=None,
+    volume = 0.168953E+03,
+    phonons = 'phonopy_output/BaS2_C2_c.dat',
     N=None,
 )
 
 BaS3 = solid(name='BaS3',
     stoichiometry={'Ba':1,'S':3},
-    pbesol_energy_eV=None,
+    pbesol_energy_eV = -515300.801230511,
+    hse06_energy_eV = -515590.836038465,
     fu_cell=2,
-    volume=None,
-    phonons=None,
+    volume = 0.188541E+03,
+    phonons = 'phonopy_output/BaS3_P-42_1m.dat',
     N=None,
 )
 
 ZrS_P4_nmm = solid(name='A ZrS',        # NOTE: needs adjusting with xtal type
     stoichiometry={'Zr':1,'S':1},
-    pbesol_energy_eV=None,
+    pbesol_energy_eV = -219183.017830408,
+    hse06_energy_eV = -219333.530165110,
     fu_cell=2,
-    volume=None,
-    phonons=None,
+    volume = 0.691428E+02,
+    phonons = 'phonopy_output/ZrS_P4_nmm.dat',
     N=None,
 )
 
 ZrS_Fm_3m = solid(name='B ZrS',        # NOTE: needs adjusting with xtal type
     stoichiometry={'Zr':1,'S':1},
-    pbesol_energy_eV=None,
+    pbesol_energy_eV = -109591.347151412,
+    hse06_energy_eV = -109666.520964123,
     fu_cell=1,
-    volume=None,
-    phonons=None,
+    volume = 0.344611E+02,
+    phonons = 'phonopy_output/ZrS_Fm-3m.dat',
     N=None,
 )
 
-ZrS = None # NOTE: Needs to be set to most stable isomer
+ZrS = None # NOTE: Needs to be set to most stable isomer #PK: This is P4_nmm
 
 
 ZrS2_P_31m = solid(name='ZrS2',        
     stoichiometry={'Zr':1,'S':2},
-    pbesol_energy_eV=None,
+    pbesol_energy_eV = -120454.748375135,
+    hse06_energy_eV = -120548.868543571,
     fu_cell=1,
-    volume=None,
-    phonons=None,
+    volume = 0.667493E+02,
+    phonons = 'phonopy_output/ZrS2_P-3m1.dat',
     N=None,
 )
 
 ZrS3 = solid(name='ZrS3',        
     stoichiometry={'Zr':1,'S':3},
-    pbesol_energy_eV=None,
+    pbesol_energy_eV = -262633.853463458,
+    hse06_energy_eV = -262858.502038437,
     fu_cell=2,
-    volume=None,
-    phonons=None,
+    volume = 0.164584E+03,
+    phonons = 'phonopy_output/ZrS3_P2_1m.dat',
     N=None,
 )
 
