@@ -28,7 +28,7 @@ Contents
 
 * **nist_janaf/** Folder containing thermodynamic data for S2 and S8 gases from the literature.
 
-* **phonopy_output/** Numerically tabulated thermodynamic properties from [Phonopy](http://phonopy.sourceforge.net) runs.
+* **phonopy_output/** Numerically tabulated thermodynamic properties from [Phonopy](http://phonopy.github.io/phonopy/) runs.
 
 * **plots/** Plotting programs, primarily for computing free energy surfaces and Ellingham diagrames.
   The main plotting routine is contained in **(TODO)** and this function is imported
