@@ -4,12 +4,12 @@ from thermopot import calculations, materials
 
 @pytest.fixture()
 def BaS_hybrid_calculation():
-    return calculations.calculation(os.path.join(os.path.dirname(
+    return calculations.Calculation(os.path.join(os.path.dirname(
         __file__), 'data/BaS_hse06_outfile'))
 
 @pytest.fixture()
 def BaS_pbesol_calculation():
-    return calculations.calculation(os.path.join(os.path.dirname(
+    return calculations.Calculation(os.path.join(os.path.dirname(
         __file__), 'data/BaS_pbesol_relax_outfile'))
 
 @pytest.fixture()
