@@ -10,3 +10,4 @@ jobs:
       - uses: psf/black@stable
         with: 
           options: "--verbose"
+      - uses: EndBug/add-and-commit@v9 
