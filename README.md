@@ -1,4 +1,4 @@
-Ab-initio thermodynamic modelling package
+ThermoPot: An ab-initio thermodynamic modelling package
 ============================
 
 Software for ab-initio thermodynamic modelling of material formation and decomposition.
