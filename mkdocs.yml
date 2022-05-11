@@ -17,6 +17,10 @@ theme:
   logo: images/1FAD6_color.png
   favicon: images/1FAD6_color.png
   
+plugins:
+- search
+- mkdocstrings
+  
 markdown_extensions:
   - def_list
   - tables
@@ -27,8 +31,6 @@ markdown_extensions:
   - attr_list
   - abbr
   - pymdownx.snippets
-  - codehilite
-  - mkautodoc
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg      
