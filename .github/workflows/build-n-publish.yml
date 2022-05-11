@@ -15,7 +15,7 @@ jobs:
     - name: Install build
       run: pip install build --user
     - name: Build a binary wheel and source tarball
-      run: build --sdist --wheel --outdir dist/
+      run: python3 -m build --sdist --wheel --outdir dist/
     - name: Publish distribution to PYPI
       if: startsWith(github.ref, 'refs/tags')
       uses: pypa/gh-action-pypi-publish@master
