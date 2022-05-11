@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#please-note" class="md-skip">
+        <a href="#features" class="md-skip">
           Skip to content
         </a>
       
@@ -236,8 +236,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#please-note" class="md-nav__link">
-    Please note
+  <a href="#features" class="md-nav__link">
+    Features
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#supported-software" class="md-nav__link">
+    Supported software
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-software" class="md-nav__link">
+    Related software
   </a>
   
 </li>
@@ -350,8 +364,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#please-note" class="md-nav__link">
-    Please note
+  <a href="#features" class="md-nav__link">
+    Features
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#supported-software" class="md-nav__link">
+    Supported software
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-software" class="md-nav__link">
+    Related software
   </a>
   
 </li>
@@ -383,8 +411,24 @@
 <li>🔄 This code is made available under the GNU General Public Licence (GPL) v3. See the LICENSE file for the full text.</li>
 <li>🖊 If you use this package for your research please <a href="https://github.com/NU-CEM/ThermoPot/blob/main/citation.cff">cite accordingly</a>.</li>
 </ul>
-<h3 id="please-note">Please note</h3>
 <p>This work adapts and extends a previous repository developed by <a href="https://orcid.org/0000-0001-5272-6530">Adam Jackson</a>: <a href="http://dx.doi.org/10.5281/zenodo.57130">Thermodynamic model of CZTS</a>. </p>
+<h2 id="features">Features</h2>
+<p>ThermoPot calculates temperature and pressure dependent thermodynamic potentials using first-principles data. Thermopot can:</p>
+<ul>
+<li>calculate the internal energy, enthalpy and Gibbs free energy at a given temperature and pressure</li>
+<li>calculate the change in energy/enthalpy for a given reaction</li>
+<li>work with solid or gases</li>
+<li>plot potentials as a function of T and P</li>
+<li>Parse DFT data from an FHI-aims output file and lattice dynamics data from Phonopy output</li>
+<li>Parse experimental data from NIST</li>
+</ul>
+<h2 id="supported-software">Supported software</h2>
+<p>ThermoPot is compatible with a range of materials modelling packages as DFT energies and thermal properties data can be provided by the user. ThermoPot also supports parsing of FHI-aims output files, phonopy output and NIST data tables.</p>
+<h2 id="related-software">Related software</h2>
+<p>There are other codes that can calculate thermodynamic potentials and phase diagrams. The best code depends on your use case:
+- <a href="https://github.com/symmy596/SurfinPy">Surfinpy</a> generates phase diagrams for bulk and surface systems. 
+- <a href="https://pycalphad.org/docs/latest/">pycalphad</a> uses the CALPHAD method to generate phase diagram and predict thermodynamic properties.
+- <a href="https://thermo.readthedocs.io/cubic_equations_of_state.html">thermo</a> uses cubic equations of state to generate phase diagrams for liquids and gases.</p>
 
               
             </article>
