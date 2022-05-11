@@ -309,13 +309,15 @@ class IdealGas(Material):
     Enthalpy has no P dependence as volume is not restricted / expansion step is defined as isothermal
     """
 
+    # TODO:script for calculating zpe values
+
     def __init__(
         self,
         name,
         stoichiometry,
+        thermo_file,
         calculation=False,
         energies=False,
-        thermo_file=False,
         zpe_pbesol=0,
         zpe_hse06=0,
         zpe_lit=0,
@@ -508,7 +510,7 @@ class IdealGas(Material):
         return self.mu_J(T, P, xc=xc) * 0.001
 
 
-class sulfur_model(object):
+class SulfurModel(object):
     """
     Class for calculated sulfur equilibria.
 
@@ -548,6 +550,8 @@ class sulfur_model(object):
 
     """
 
+    # TODO: generalise this for other nist data?
+
     def __init__(self, name, pbesol_energy_eV, mu_file, N=1, N_ref=8):
         self.name = name
         self.stoichiometry = {"S": 1}
@@ -573,20 +577,3 @@ class sulfur_model(object):
     def mu_eV(self, T, P):
         return self.mu_J(T, P) / eV2Jmol
 
-
-def volume_calc(filename):
-    """Calculate unit cell volume in cubic angstroms from FHI-aims geometry.in file"""
-    import numpy as np
-
-    lattice_vectors = []
-    with open(filename, "r") as f:
-        for line in f:
-            if line.split()[0] == "lattice_vector":
-                lattice_vectors.append(line.split()[1:4])
-
-    lattice_vectors = np.array(lattice_vectors).astype(float)
-    volume = np.dot(
-        lattice_vectors[0], np.cross(lattice_vectors[1], lattice_vectors[2])
-    )
-
-    return abs(volume)

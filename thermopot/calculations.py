@@ -1,6 +1,5 @@
 import re
 
-
 class Calculation(object):
     """Parent class for parsing and storing data from electronic structure calculations."""
 
