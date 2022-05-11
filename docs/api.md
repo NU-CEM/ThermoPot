@@ -1,3 +1,3 @@
 # API documentation
 
-::: thermopot.calculations.calculation
+::: thermopot.calculations.Calculation
