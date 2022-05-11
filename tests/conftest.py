@@ -1,6 +1,6 @@
 import pytest
 import os
-from thermopot installcalculations, materials
+from thermopot import calculations, materials
 
 @pytest.fixture()
 def BaS_hybrid_calculation():
