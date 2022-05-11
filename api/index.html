@@ -39,6 +39,8 @@
       
     
     
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
     <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -61,6 +63,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#api-documentation" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -265,10 +272,57 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          API
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         API
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#thermopot.calculations.Calculation" class="md-nav__link">
+    thermopot.calculations.Calculation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#thermopot.calculations.Calculation.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#thermopot.calculations.Calculation.check_attributes" class="md-nav__link">
+    check_attributes()
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -306,6 +360,37 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#thermopot.calculations.Calculation" class="md-nav__link">
+    thermopot.calculations.Calculation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#thermopot.calculations.Calculation.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#thermopot.calculations.Calculation.check_attributes" class="md-nav__link">
+    check_attributes()
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -323,9 +408,289 @@
 
 
 
-  <h1>API</h1>
+<h1 id="api-documentation">API documentation</h1>
 
-<p>Coming soon...ish 🐢</p>
+
+  <div class="doc doc-object doc-class">
+
+<a id="thermopot.calculations.Calculation"></a>
+    <div class="doc doc-contents first">
+        <p class="doc doc-class-bases">
+          Bases: <code>object</code></p>
+
+
+      <p>Parent class for parsing and storing data from electronic structure calculations.</p>
+
+
+          <details class="quote">
+            <summary>Source code in <code>thermopot/calculations.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Calculation</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parent class for parsing and storing data from electronic structure calculations.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;All attributes are None until set by derived classes.</span>
+
+<span class="sd">        Attributes:</span>
+<span class="sd">            volume (float): volume of the periodic unit cell</span>
+<span class="sd">            filepath (str): path to the calculation output files</span>
+<span class="sd">            energy (float): DFT total energy in eV</span>
+<span class="sd">            xc (str): XC functional used to calculate the total energy. Options are &quot;hse06&quot; or &quot;pbesol&quot;.</span>
+<span class="sd">            NAtoms (int): number of atoms in the periodice unit cell</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filepath</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">energy</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xc</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">NAtoms</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">check_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check that the Calculation class attributes make basic sense.&quot;&quot;&quot;</span>
+
+        <span class="k">assert</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">),</span> <span class="s2">&quot;filepath must be a string&quot;</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">energy</span><span class="p">)</span> <span class="o">==</span> <span class="nb">float</span><span class="p">),</span> <span class="s2">&quot;energy must be a float&quot;</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xc</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">),</span> <span class="s2">&quot;xc must be a string&quot;</span>
+        <span class="k">assert</span> <span class="p">((</span><span class="nb">type</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">NAtoms</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">NAtoms</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;NAtoms must be an integer &gt;= 1&quot;</span>
+        <span class="k">assert</span> <span class="p">((</span><span class="nb">type</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">volume</span><span class="p">)</span> <span class="o">==</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">volume</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="s2">&quot;volume must be a float &gt; 0&quot;</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="thermopot.calculations.Calculation.__init__" class="doc doc-heading">
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">()</span></code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+      <p>All attributes are None until set by derived classes.</p>
+
+  <p><strong>Attributes:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>volume</code></td>
+          <td>
+                <code>float</code>
+          </td>
+          <td><p>volume of the periodic unit cell</p></td>
+        </tr>
+        <tr>
+          <td><code>filepath</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>path to the calculation output files</p></td>
+        </tr>
+        <tr>
+          <td><code>energy</code></td>
+          <td>
+                <code>float</code>
+          </td>
+          <td><p>DFT total energy in eV</p></td>
+        </tr>
+        <tr>
+          <td><code>xc</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>XC functional used to calculate the total energy. Options are "hse06" or "pbesol".</p></td>
+        </tr>
+        <tr>
+          <td><code>NAtoms</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>number of atoms in the periodice unit cell</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+          </td>
+          <td><p>None.</p></td>
+        </tr>
+        <tr>
+          <td>
+          </td>
+          <td></td>
+        </tr>
+    </tbody>
+  </table>
+
+        <details class="quote">
+          <summary>Source code in <code>thermopot/calculations.py</code></summary>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;All attributes are None until set by derived classes.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        volume (float): volume of the periodic unit cell</span>
+<span class="sd">        filepath (str): path to the calculation output files</span>
+<span class="sd">        energy (float): DFT total energy in eV</span>
+<span class="sd">        xc (str): XC functional used to calculate the total energy. Options are &quot;hse06&quot; or &quot;pbesol&quot;.</span>
+<span class="sd">        NAtoms (int): number of atoms in the periodice unit cell</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">filepath</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">energy</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">xc</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">NAtoms</span> <span class="o">=</span> <span class="kc">None</span>
+</code></pre></div></td></tr></table></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="thermopot.calculations.Calculation.check_attributes" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">check_attributes</span><span class="p">()</span></code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+      <p>Check that the Calculation class attributes make basic sense.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>thermopot/calculations.py</code></summary>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">check_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check that the Calculation class attributes make basic sense.&quot;&quot;&quot;</span>
+
+    <span class="k">assert</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">),</span> <span class="s2">&quot;filepath must be a string&quot;</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">energy</span><span class="p">)</span> <span class="o">==</span> <span class="nb">float</span><span class="p">),</span> <span class="s2">&quot;energy must be a float&quot;</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xc</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">),</span> <span class="s2">&quot;xc must be a string&quot;</span>
+    <span class="k">assert</span> <span class="p">((</span><span class="nb">type</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">NAtoms</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">NAtoms</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;NAtoms must be an integer &gt;= 1&quot;</span>
+    <span class="k">assert</span> <span class="p">((</span><span class="nb">type</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">volume</span><span class="p">)</span> <span class="o">==</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">volume</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="s2">&quot;volume must be a float &gt; 0&quot;</span>
+</code></pre></div></td></tr></table></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
 
               
             </article>
