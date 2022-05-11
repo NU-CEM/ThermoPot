@@ -576,4 +576,3 @@ class SulfurModel(object):
 
     def mu_eV(self, T, P):
         return self.mu_J(T, P) / eV2Jmol
-
