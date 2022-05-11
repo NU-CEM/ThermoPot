@@ -1,0 +1,15 @@
+prune *
+exclude *
+
+# Core Package and Basic User Documentation
+graft ThermoPot
+include README.md
+include LICENCE
+
+# Development Files and Full Documentation
+graft .github
+graft docs
+graft tests
+
+# Project Metadata
+include pyproject.toml setup.cfg setup.py MANIFEST.in

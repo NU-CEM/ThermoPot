@@ -1,6 +1,6 @@
 import numpy as np
 from scipy import constants
-from thermopy import interpolate
+from thermopot import interpolate
 
 
 import os  # get correct path for datafiles when called from another directory
@@ -46,7 +46,9 @@ class solid(material):
 
     The material is assumed to be incompressible and without thermal expansion
     """
-    def __init__(self, name, stoichiometry, calculation=False, volume=False,  energies=False, NAtoms=1,  phonons=False):
+
+    def __init__(self, name, stoichiometry, phonon_filepath,
+                 calculation=False, volume=False,  energies=False, NAtoms=1):
 
         if calculation is not False:
             material.__init__(self, name, stoichiometry, {calculation.xc : calculation.energy})
@@ -60,7 +62,7 @@ class solid(material):
             self.volume = volume
 
         self.fu_cell = self.NAtoms / self.N
-        self.phonons = materials_directory + phonons
+        self.phonons = materials_directory + phonon_filepath
 
         # TODO: allow calculations without giving phonons
 
