@@ -13,7 +13,6 @@ See the LICENSE file for the full text.
 
 If you use this package for your research please [cite accordingly](https://github.com/NU-CEM/ThermoPot/blob/main/citation.cff).
 
-<mark> This project is a work-in-progress. Documentation and testing is on it's way </mark>
 
 
 
