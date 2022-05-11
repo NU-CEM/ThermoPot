@@ -1,4 +1,4 @@
-class Reaction():
+class Reaction:
     """
     Class for reaction data
 
@@ -13,7 +13,14 @@ class Reaction():
     reaction.DU_eV_pbesol(T,P), reaction.DU_kJ_pbesol(T,P), reaction.DU_eV_hse06(T,P), reaction.DU_kJ_hse06(T,P) : Internal energy change
     reaction.Dmu_eV_pbesol(T,P), reaction.Dmu_kJ_pbesol(T,P), reaction.Dmu_eV_hse06(T,P), reaction.Dmu_kJ_hse06(T,P) : Gibbs free energy of formation
     """
-    def __init__(self, reactants_dictionary, products_dictionary,temperature=298.15,pressure=1E5):
+
+    def __init__(
+        self,
+        reactants_dictionary,
+        products_dictionary,
+        temperature=298.15,
+        pressure=1e5,
+    ):
         """
         reactants_dictionary and products dictionary takes the form { class_instance : formula units }
         and can have an arbitrary number of key-value pairs. `Class instance` is an instance of the `materials.solid`
@@ -34,9 +41,9 @@ class Reaction():
 
         reactants_enthalpy, products_enthalpy = 0, 0
         for material, fu in self.reactants.items():
-            reactants_enthalpy += material.H_eV(T,P,xc="pbesol")*fu
+            reactants_enthalpy += material.H_eV(T, P, xc="pbesol") * fu
         for material, fu in self.products.items():
-            products_enthalpy += material.H_eV(T,P,xc="pbesol")*fu
+            products_enthalpy += material.H_eV(T, P, xc="pbesol") * fu
 
         return products_enthalpy - reactants_enthalpy
 
@@ -60,9 +67,9 @@ class Reaction():
 
         reactants_enthalpy, products_enthalpy = 0, 0
         for material, fu in self.reactants.items():
-            reactants_enthalpy += material.H_eV(T,P,xc="hse06")*fu
+            reactants_enthalpy += material.H_eV(T, P, xc="hse06") * fu
         for material, fu in self.products.items():
-            products_enthalpy += material.H_eV(T,P,xc="hse06")*fu
+            products_enthalpy += material.H_eV(T, P, xc="hse06") * fu
 
         return products_enthalpy - reactants_enthalpy
 
@@ -182,5 +189,3 @@ class Reaction():
             products_energy += material.mu_kJ(T, P, xc="hse06") * fu
 
         return products_energy - reactants_energy
-
-
