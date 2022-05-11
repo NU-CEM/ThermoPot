@@ -14,10 +14,10 @@ def BaS_pbesol_calculation():
 
 @pytest.fixture()
 def BaS_solid():
-    return materials.solid('BaS',{'Ba':1, 'S':1},os.path.join(os.path.dirname(
+    return materials.Solid('BaS', {'Ba':1, 'S':1}, os.path.join(os.path.dirname(
         __file__), 'data/BaS_phonons'), BaS_pbesol_calculation)
 
 @pytest.fixture()
 def BaS_BaS_reaction():
-    return reactions.reaction({BaS_solid: 1, BaS_solid : 1})
+    return reactions.Reaction({BaS_solid: 1, BaS_solid : 1})
 

@@ -1,4 +1,4 @@
-class reaction():
+class Reaction():
     """
     Class for reaction data
 

@@ -13,7 +13,7 @@ if materials_directory:
 # See https://phonopy.github.io/phonopy/setting-tags.html#tprop-tmin-tmax-and-tstep for notes on conversion
 eV2Jmol = constants.physical_constants['electron volt-joule relationship'][0] * constants.N_A
     
-class material(object):
+class Material(object):
 
     """Parent class for materials properties. See docstrings for derived classes solid, ideal_gas"""
     def __init__(self,name,stoichiometry,energies):
@@ -23,7 +23,7 @@ class material(object):
         self.energies = energies
         self.N = sum(self.stoichiometry.values())
 
-class solid(material):
+class Solid(Material):
     """
     Class for solid material data. 
 
@@ -51,12 +51,12 @@ class solid(material):
                  calculation=False, volume=False,  energies=False, NAtoms=1):
 
         if calculation is not False:
-            material.__init__(self, name, stoichiometry, {calculation.xc : calculation.energy})
+            Material.__init__(self, name, stoichiometry, {calculation.xc : calculation.energy})
             self.volume = calculation.volume
             self.NAtoms = calculation.NAtoms
 
         else:
-            material.__init__(self, name, stoichiometry, energies)
+            Material.__init__(self, name, stoichiometry, energies)
 
             self.NAtoms = NAtoms
             self.volume = volume
@@ -246,7 +246,7 @@ class solid(material):
 
 
    
-class ideal_gas(material):
+class IdealGas(Material):
     """
     Class for ideal gas properties. 
 
@@ -272,9 +272,9 @@ class ideal_gas(material):
     def __init__(self,name,stoichiometry, calculation = False, energies=False,thermo_file=False,zpe_pbesol=0,zpe_hse06=0,zpe_lit=0):
 
         if calculation is not False:
-            material.__init__(self, name, stoichiometry, {calculation.xc : calculation.energy})
+            Material.__init__(self, name, stoichiometry, {calculation.xc : calculation.energy})
         else:
-            material.__init__(self, name, stoichiometry, energies)
+            Material.__init__(self, name, stoichiometry, energies)
         self.thermo_file = materials_directory + thermo_file
         # Initialise ZPE to HSE06 value if provided. 
         # This looks redundant at the moment: the intent is to implement
