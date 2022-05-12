@@ -295,7 +295,7 @@ class IdealGas(Material):
     ideal_gas.name             (string)
     ideal_gas.stoichiometry    (Dict relating element to number of atoms in a single formula unit)
     ideal_gas.energies         (Dict relating xc functional with DFT total energy)
-    ideal_gas.thermo_data      (String containing path to aims.vibrations output data file)
+    ideal_gas.thermo_data      (String containing path to NIST data table)
     ideal_gas.N                (Number of atoms per formula unit)
 
     Sets methods:
@@ -510,69 +510,4 @@ class IdealGas(Material):
         return self.mu_J(T, P, xc=xc) * 0.001
 
 
-class SulfurModel(object):
-    """
-    Class for calculated sulfur equilibria.
 
-    Sets properties:
-    -------------------
-    sulfur_model.name             (string)
-    sulfur_model.pbesol_energy_eV (DFT total energy in eV with PBEsol XC functional for D4d S8 cluster)
-    sulfur_model.thermo_data      (String containing path to T/P effects data file)
-    sulfur_model.N                (Number of atoms per formula unit)
-    sulfur_model.N_ref            (Number of atoms per formula unit of reference state)
-
-    Sets methods:
-    -------------------
-    sulfur_model.mu_eV(T,P), sulfur_model.mu_J(T,P), sulfur_model.mu_kJ(T,P) : Chemical potential mu = U + PV - TS
-
-    Ideal gas law PV=nRT is applied: specifically (dH/dP) at const. T = 0 and int(mu)^P2_P1 dP = kTln(P2/P1)
-    Methods not yet implemented:
-    ----------------------------
-    sulfur_model.U_eV(T), sulfur_model.U_J(T), sulfur_model.U_kJ(T) : Internal energy
-    sulfur_model.H_eV(T), sulfur_model.H_J(T), sulfur_model.H_kJ(T) : Enthalpy H = U + PV
-
-    Thermo data file format:
-    ------------------------
-
-    CSV file containing header line:
-    # T/K, mu (x1 Pa) / J mol-1,mu (x2 Pa) / J mol-1...
-
-    followed by comma-separated data rows
-
-    t1,mu11,mu12 ...
-    t2,mu21,mu22 ...
-    ...
-
-    DEV NOTE:
-    ---------
-    Not currently a derived class of "material" due to substantially different operation.
-
-    """
-
-    # TODO: generalise this for other nist data?
-
-    def __init__(self, name, pbesol_energy_eV, mu_file, N=1, N_ref=8):
-        self.name = name
-        self.stoichiometry = {"S": 1}
-        self.pbesol_energy_eV = pbesol_energy_eV
-        self.mu_file = materials_directory + mu_file
-        self.N = 1
-        self.N_ref = N_ref
-
-        self._mu_tab = interpolate.get_potential_sulfur_table(self.mu_file)
-
-    def mu_J(self, T, P):
-        if type(T) == np.ndarray:
-            T = T.flatten()
-        if type(P) == np.ndarray:
-            P = P.flatten()
-
-        E0 = self.pbesol_energy_eV * eV2Jmol
-        return self._mu_tab(T, P) + E0 / self.N_ref
-
-    def mu_kJ(self, T, P):
-        return self.mu_J(T, P) * 1e-3
-
-    def mu_eV(self, T, P):
-        return self.mu_J(T, P) / eV2Jmol
