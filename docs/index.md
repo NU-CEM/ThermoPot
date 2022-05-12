@@ -1,7 +1,4 @@
-ThermoPot: An ab-initio thermodynamic modelling package
-============================
-
-Software for ab-initio thermodynamic modelling of material formation and decomposition.
+ThermoPot is used for ab-initio thermodynamic modelling of material formation and decomposition.
 
 - 📚 The documentation is [here](https://NU-CEM.github.io/ThermoPot). 
 - 🔄 This code is made available under the GNU General Public Licence (GPL) v3. See the LICENSE file for the full text.
@@ -17,12 +14,13 @@ ThermoPot calculates temperature and pressure dependent thermodynamic potentials
 - calculate the change in energy/enthalpy for a given reaction
 - work with solid or gases
 - plot potentials as a function of T and P
+- predict thermodynamic stability as a function of T and P
 - Parse DFT data from an FHI-aims output file and lattice dynamics data from Phonopy output
-- Parse experimental data from NIST
+- Parse experimental data from the NIST-JANAF thermochemical tables.
 
 ## Supported software
 
-ThermoPot is compatible with a range of materials modelling packages as DFT energies and thermal properties data can be provided by the user. ThermoPot also supports parsing of FHI-aims output files, phonopy output and NIST data tables.
+ThermoPot is compatible with a range of materials modelling packages as DFT energies and thermal properties data can be provided by the user. ThermoPot also supports parsing of FHI-aims output files, phonopy output and NIST-JANAF thermochemical data tables.
 
 ## Related software
 
