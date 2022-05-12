@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#contributing-to-thermopot" class="md-skip">
+        <a href="#contributions-workflow" class="md-skip">
           Skip to content
         </a>
       
@@ -311,13 +311,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#contributing-to-thermopot" class="md-nav__link">
-    Contributing to ThermoPot
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#contributions-workflow" class="md-nav__link">
     Contributions workflow
   </a>
@@ -392,13 +385,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#contributing-to-thermopot" class="md-nav__link">
-    Contributing to ThermoPot
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#contributions-workflow" class="md-nav__link">
     Contributions workflow
   </a>
@@ -460,12 +446,16 @@
 
   <h1>Contributing</h1>
 
-<h2 id="contributing-to-thermopot">Contributing to ThermoPot</h2>
 <p>Thanks for your interest in ThermoPot - we welcome your help in improving and extending this package. </p>
-<p>This project follows the <a href="https://allcontributors.org/">all-contributors</a> specification. Contributions of any kind are welcome! A full list of possible contribution types can be found <a href="https://allcontributors.org/docs/en/emoji-key">here</a>. <strong>You do not need to be an experienced programmer to help improve ChooChoo.</strong></p>
+<p>This project follows the <a href="https://allcontributors.org/">all-contributors</a> 
+specification. Contributions of any kind are welcome! A full list of 
+possible contribution types can be found <a href="https://allcontributors.
+org/docs/en/emoji-key">here</a>. <strong>You do not need to be an experienced programmer 
+to help improve ThermoPot.</strong></p>
 <p>All contributions will be recognised on the README.md.
 You are encouraged to log your own contribution using the <a href="https://allcontributors.org/docs/en/bot/usage">all-contributors bot</a>. The project lead(s) will also maintain this list.</p>
-<p>ChooChoo contributors are asked to follow the <a href="https://github.com/NU-CEM/ThermoPot/blob/main/CODE_OF_CONDUCT.md">Contributor Covenant Code of Conduct</a>.</p>
+<p>ThermoPot contributors are asked to follow the <a href="https://github.com/NU-CEM/ThermoPot/blob/main/CODE_OF_CONDUCT.md">Contributor Covenant Code of 
+Conduct</a>.</p>
 <h2 id="contributions-workflow">Contributions workflow</h2>
 <p>Code contributions are primarily managed through Github pull requests. For external contributions we prefer the “fork and pull” workflow:</p>
 <ol>
@@ -473,7 +463,7 @@ You are encouraged to log your own contribution using the <a href="https://allco
 <li>make your own project fork and implement the changes there</li>
 <li>open a pull requestion (PR) to merge the changes into the main project. Further discussion might also take place at this stage.</li>
 </ol>
-<p>Note: Please, where applicable and possible, write tests and documentation for your proposed code contributions (further details below). Support can be given to those who are writing tests and documentation for the first time :) </p>
+<p>Note: Please, where applicable and possible, write tests and documentation for your proposed code contributions (further details below). Support can be given to those who are writing tests and documentation for the first time 😊</p>
 <h2 id="communication">Communication</h2>
 <p>As a rule of thumb, the more public the information exchange, the better! With this in mind, we encourage you to <a href="https://github.com/NU-CEM/ThermoPot/issues/new/choose">raise an issue</a> on the ThermoPot repository.</p>
 <p>However we also understand that this public way of working is not suitable for everyone. As an alternative, you can get <a href="https://lucydot.github.io/about/">get in contact</a> with the project lead Lucy. </p>
@@ -484,7 +474,12 @@ You are encouraged to log your own contribution using the <a href="https://allco
 <p>If possible, please update the documentation when issuing a Pull Request. This includes both the web pages written in Markdown, and in-code docstrings. The latter are particularly important, and we request that these are written <a href="https://gist.github.com/redlotus/3bc387c2591e3e908c9b63b97b11d24e">Google-style</a>.</p>
 <p>All documentation source can be found in the <code>docs/</code> folder. MkDocs is configured with the <code>/.mkdocs.yml</code> folder in the project root.</p>
 <h2 id="linting">Linting</h2>
-<p><a href="https://github.com/psf/black">Black</a> is used to automatically <a href="https://github.com/NU-CEM/ThermoPot/actions/workflows/lint-code.yml">re-format all Python code</a> committed to the repository. The code will be formatted according to the PEP8 specification. As this is an automatic step you do not need lint/format your code to any specification before issuing a PR.</p>
+<p>Github Actions and <a href="https://github.com/psf/black">Black</a> are used to 
+automatically <a href="https://github.
+com/NU-CEM/ThermoPot/actions/workflows/lint-code.yml">re-format all Python code</a> committed to the 
+repository. The code 
+will be formatted according to the PEP8 
+specification. As this is an automatic step you do not need lint/format your code to any specification before issuing a PR.</p>
 <h2 id="publishing">Publishing</h2>
 <p>Github Actions (surprise, surprise!) is used to automatically <a href="https://github.com/NU-CEM/ThermoPot/actions/workflows/build-n-publish.yml">build and publish the ThermoPot package</a> after every tagged release. Before tagging the release, we need to remember to update the version number in <code>__init__.py</code>. It's so easy to forget!</p>
 
