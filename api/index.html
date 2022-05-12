@@ -252,7 +252,7 @@
   
     <li class="md-nav__item">
       <a href="../tutorial/" class="md-nav__link">
-        Tutorial
+        Tutorial - stability of BaZrS3
       </a>
     </li>
   
@@ -546,60 +546,6 @@
   <a href="#thermopot.materials.IdealGas.mu_kJ" class="md-nav__link">
     mu_kJ()
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#thermopot.materials.SulfurModel" class="md-nav__link">
-    thermopot.materials.SulfurModel
-  </a>
-  
-    <nav class="md-nav" aria-label="thermopot.materials.SulfurModel">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#thermopot.materials.SulfurModel--sets-properties" class="md-nav__link">
-    Sets properties:
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#thermopot.materials.SulfurModel--sets-methods" class="md-nav__link">
-    Sets methods:
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#thermopot.materials.SulfurModel--thermo-data-file-format" class="md-nav__link">
-    Thermo data file format:
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#thermopot.materials.SulfurModel--tk-mu-x1-pa-j-mol-1mu-x2-pa-j-mol-1" class="md-nav__link">
-    T/K, mu (x1 Pa) / J mol-1,mu (x2 Pa) / J mol-1...
-  </a>
-  
-    <nav class="md-nav" aria-label="T/K, mu (x1 Pa) / J mol-1,mu (x2 Pa) / J mol-1...">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#thermopot.materials.SulfurModel--dev-note" class="md-nav__link">
-    DEV NOTE:
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -961,60 +907,6 @@
   <a href="#thermopot.materials.IdealGas.mu_kJ" class="md-nav__link">
     mu_kJ()
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#thermopot.materials.SulfurModel" class="md-nav__link">
-    thermopot.materials.SulfurModel
-  </a>
-  
-    <nav class="md-nav" aria-label="thermopot.materials.SulfurModel">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#thermopot.materials.SulfurModel--sets-properties" class="md-nav__link">
-    Sets properties:
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#thermopot.materials.SulfurModel--sets-methods" class="md-nav__link">
-    Sets methods:
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#thermopot.materials.SulfurModel--thermo-data-file-format" class="md-nav__link">
-    Thermo data file format:
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#thermopot.materials.SulfurModel--tk-mu-x1-pa-j-mol-1mu-x2-pa-j-mol-1" class="md-nav__link">
-    T/K, mu (x1 Pa) / J mol-1,mu (x2 Pa) / J mol-1...
-  </a>
-  
-    <nav class="md-nav" aria-label="T/K, mu (x1 Pa) / J mol-1,mu (x2 Pa) / J mol-1...">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#thermopot.materials.SulfurModel--dev-note" class="md-nav__link">
-    DEV NOTE:
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -2977,7 +2869,7 @@ of H values corresponding to T,P pairs.</p>
 <p>ideal_gas.name             (string)
 ideal_gas.stoichiometry    (Dict relating element to number of atoms in a single formula unit)
 ideal_gas.energies         (Dict relating xc functional with DFT total energy)
-ideal_gas.thermo_data      (String containing path to aims.vibrations output data file)
+ideal_gas.thermo_data      (String containing path to NIST data table)
 ideal_gas.N                (Number of atoms per formula unit)</p>
 <h3 id="thermopot.materials.IdealGas--sets-methods">Sets methods:</h3>
 <p>ideal_gas.U_eV(T), ideal_gas.U_J(T), ideal_gas.U_kJ(T) : Internal energy
@@ -3219,7 +3111,7 @@ Enthalpy has no P dependence as volume is not restricted / expansion step is def
 <span class="sd">    ideal_gas.name             (string)</span>
 <span class="sd">    ideal_gas.stoichiometry    (Dict relating element to number of atoms in a single formula unit)</span>
 <span class="sd">    ideal_gas.energies         (Dict relating xc functional with DFT total energy)</span>
-<span class="sd">    ideal_gas.thermo_data      (String containing path to aims.vibrations output data file)</span>
+<span class="sd">    ideal_gas.thermo_data      (String containing path to NIST data table)</span>
 <span class="sd">    ideal_gas.N                (Number of atoms per formula unit)</span>
 
 <span class="sd">    Sets methods:</span>
@@ -4029,207 +3921,6 @@ of H values corresponding to T,P pairs.</p>
     </div>
 
   </div>
-
-
-
-
-
-  </div>
-
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-class">
-
-<a id="thermopot.materials.SulfurModel"></a>
-    <div class="doc doc-contents first">
-        <p class="doc doc-class-bases">
-          Bases: <code>object</code></p>
-
-
-      <p>Class for calculated sulfur equilibria.</p>
-<h3 id="thermopot.materials.SulfurModel--sets-properties">Sets properties:</h3>
-<p>sulfur_model.name             (string)
-sulfur_model.pbesol_energy_eV (DFT total energy in eV with PBEsol XC functional for D4d S8 cluster)
-sulfur_model.thermo_data      (String containing path to T/P effects data file)
-sulfur_model.N                (Number of atoms per formula unit)
-sulfur_model.N_ref            (Number of atoms per formula unit of reference state)</p>
-<h3 id="thermopot.materials.SulfurModel--sets-methods">Sets methods:</h3>
-<p>sulfur_model.mu_eV(T,P), sulfur_model.mu_J(T,P), sulfur_model.mu_kJ(T,P) : Chemical potential mu = U + PV - TS</p>
-<p>Ideal gas law PV=nRT is applied: specifically (dH/dP) at const. T = 0 and int(mu)^P2_P1 dP = kTln(P2/P1)
-Methods not yet implemented:</p>
-<hr />
-<p>sulfur_model.U_eV(T), sulfur_model.U_J(T), sulfur_model.U_kJ(T) : Internal energy
-sulfur_model.H_eV(T), sulfur_model.H_J(T), sulfur_model.H_kJ(T) : Enthalpy H = U + PV</p>
-<h3 id="thermopot.materials.SulfurModel--thermo-data-file-format">Thermo data file format:</h3>
-<p>CSV file containing header line:</p>
-<h2 id="thermopot.materials.SulfurModel--tk-mu-x1-pa-j-mol-1mu-x2-pa-j-mol-1">T/K, mu (x1 Pa) / J mol-1,mu (x2 Pa) / J mol-1...</h2>
-<p>followed by comma-separated data rows</p>
-<p>t1,mu11,mu12 ...
-t2,mu21,mu22 ...
-...</p>
-<h3 id="thermopot.materials.SulfurModel--dev-note">DEV NOTE:</h3>
-<p>Not currently a derived class of "material" due to substantially different operation.</p>
-
-
-          <details class="quote">
-            <summary>Source code in <code>thermopot/materials.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">513</span>
-<span class="normal">514</span>
-<span class="normal">515</span>
-<span class="normal">516</span>
-<span class="normal">517</span>
-<span class="normal">518</span>
-<span class="normal">519</span>
-<span class="normal">520</span>
-<span class="normal">521</span>
-<span class="normal">522</span>
-<span class="normal">523</span>
-<span class="normal">524</span>
-<span class="normal">525</span>
-<span class="normal">526</span>
-<span class="normal">527</span>
-<span class="normal">528</span>
-<span class="normal">529</span>
-<span class="normal">530</span>
-<span class="normal">531</span>
-<span class="normal">532</span>
-<span class="normal">533</span>
-<span class="normal">534</span>
-<span class="normal">535</span>
-<span class="normal">536</span>
-<span class="normal">537</span>
-<span class="normal">538</span>
-<span class="normal">539</span>
-<span class="normal">540</span>
-<span class="normal">541</span>
-<span class="normal">542</span>
-<span class="normal">543</span>
-<span class="normal">544</span>
-<span class="normal">545</span>
-<span class="normal">546</span>
-<span class="normal">547</span>
-<span class="normal">548</span>
-<span class="normal">549</span>
-<span class="normal">550</span>
-<span class="normal">551</span>
-<span class="normal">552</span>
-<span class="normal">553</span>
-<span class="normal">554</span>
-<span class="normal">555</span>
-<span class="normal">556</span>
-<span class="normal">557</span>
-<span class="normal">558</span>
-<span class="normal">559</span>
-<span class="normal">560</span>
-<span class="normal">561</span>
-<span class="normal">562</span>
-<span class="normal">563</span>
-<span class="normal">564</span>
-<span class="normal">565</span>
-<span class="normal">566</span>
-<span class="normal">567</span>
-<span class="normal">568</span>
-<span class="normal">569</span>
-<span class="normal">570</span>
-<span class="normal">571</span>
-<span class="normal">572</span>
-<span class="normal">573</span>
-<span class="normal">574</span>
-<span class="normal">575</span>
-<span class="normal">576</span>
-<span class="normal">577</span>
-<span class="normal">578</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">SulfurModel</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Class for calculated sulfur equilibria.</span>
-
-<span class="sd">    Sets properties:</span>
-<span class="sd">    -------------------</span>
-<span class="sd">    sulfur_model.name             (string)</span>
-<span class="sd">    sulfur_model.pbesol_energy_eV (DFT total energy in eV with PBEsol XC functional for D4d S8 cluster)</span>
-<span class="sd">    sulfur_model.thermo_data      (String containing path to T/P effects data file)</span>
-<span class="sd">    sulfur_model.N                (Number of atoms per formula unit)</span>
-<span class="sd">    sulfur_model.N_ref            (Number of atoms per formula unit of reference state)</span>
-
-<span class="sd">    Sets methods:</span>
-<span class="sd">    -------------------</span>
-<span class="sd">    sulfur_model.mu_eV(T,P), sulfur_model.mu_J(T,P), sulfur_model.mu_kJ(T,P) : Chemical potential mu = U + PV - TS</span>
-
-<span class="sd">    Ideal gas law PV=nRT is applied: specifically (dH/dP) at const. T = 0 and int(mu)^P2_P1 dP = kTln(P2/P1)</span>
-<span class="sd">    Methods not yet implemented:</span>
-<span class="sd">    ----------------------------</span>
-<span class="sd">    sulfur_model.U_eV(T), sulfur_model.U_J(T), sulfur_model.U_kJ(T) : Internal energy</span>
-<span class="sd">    sulfur_model.H_eV(T), sulfur_model.H_J(T), sulfur_model.H_kJ(T) : Enthalpy H = U + PV</span>
-
-<span class="sd">    Thermo data file format:</span>
-<span class="sd">    ------------------------</span>
-
-<span class="sd">    CSV file containing header line:</span>
-<span class="sd">    # T/K, mu (x1 Pa) / J mol-1,mu (x2 Pa) / J mol-1...</span>
-
-<span class="sd">    followed by comma-separated data rows</span>
-
-<span class="sd">    t1,mu11,mu12 ...</span>
-<span class="sd">    t2,mu21,mu22 ...</span>
-<span class="sd">    ...</span>
-
-<span class="sd">    DEV NOTE:</span>
-<span class="sd">    ---------</span>
-<span class="sd">    Not currently a derived class of &quot;material&quot; due to substantially different operation.</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="c1"># TODO: generalise this for other nist data?</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">pbesol_energy_eV</span><span class="p">,</span> <span class="n">mu_file</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">N_ref</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">stoichiometry</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;S&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pbesol_energy_eV</span> <span class="o">=</span> <span class="n">pbesol_energy_eV</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mu_file</span> <span class="o">=</span> <span class="n">materials_directory</span> <span class="o">+</span> <span class="n">mu_file</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">N_ref</span> <span class="o">=</span> <span class="n">N_ref</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_mu_tab</span> <span class="o">=</span> <span class="n">interpolate</span><span class="o">.</span><span class="n">get_potential_sulfur_table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu_file</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">mu_J</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-            <span class="n">T</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">P</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-            <span class="n">P</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-
-        <span class="n">E0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pbesol_energy_eV</span> <span class="o">*</span> <span class="n">eV2Jmol</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mu_tab</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span> <span class="o">+</span> <span class="n">E0</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">N_ref</span>
-
-    <span class="k">def</span> <span class="nf">mu_kJ</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu_J</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e-3</span>
-
-    <span class="k">def</span> <span class="nf">mu_eV</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu_J</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span> <span class="o">/</span> <span class="n">eV2Jmol</span>
-</code></pre></div></td></tr></table></div>
-          </details>
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -5114,7 +4805,7 @@ filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../tutorial/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Tutorial" rel="prev">
+        <a href="../tutorial/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Tutorial - stability of BaZrS3" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -5123,7 +4814,7 @@ filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided
               <span class="md-footer__direction">
                 Previous
               </span>
-              Tutorial
+              Tutorial - stability of BaZrS3
             </div>
           </div>
         </a>
