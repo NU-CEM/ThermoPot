@@ -10,8 +10,6 @@
 
 ::: thermopot.materials.IdealGas
 
-::: thermopot.materials.SulfurModel
-
 ::: thermopot.reactions.Reaction
 
 ::: thermopot.interpolate.get_potential_aims
