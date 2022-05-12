@@ -1,13 +1,16 @@
-## Contributing to ThermoPot
-
 Thanks for your interest in ThermoPot - we welcome your help in improving and extending this package. 
 
-This project follows the [all-contributors](https://allcontributors.org/) specification. Contributions of any kind are welcome! A full list of possible contribution types can be found [here](https://allcontributors.org/docs/en/emoji-key). **You do not need to be an experienced programmer to help improve ChooChoo.**
+This project follows the [all-contributors](https://allcontributors.org/) 
+specification. Contributions of any kind are welcome! A full list of 
+possible contribution types can be found [here](https://allcontributors.
+org/docs/en/emoji-key). **You do not need to be an experienced programmer 
+to help improve ThermoPot.**
 
 All contributions will be recognised on the README.md.
 You are encouraged to log your own contribution using the [all-contributors bot](https://allcontributors.org/docs/en/bot/usage). The project lead(s) will also maintain this list.
 
-ChooChoo contributors are asked to follow the [Contributor Covenant Code of Conduct](https://github.com/NU-CEM/ThermoPot/blob/main/CODE_OF_CONDUCT.md).
+ThermoPot contributors are asked to follow the [Contributor Covenant Code of 
+Conduct](https://github.com/NU-CEM/ThermoPot/blob/main/CODE_OF_CONDUCT.md).
 
 ## Contributions workflow
 
@@ -17,7 +20,7 @@ Code contributions are primarily managed through Github pull requests. For exter
 2. make your own project fork and implement the changes there
 3. open a pull requestion (PR) to merge the changes into the main project. Further discussion might also take place at this stage.
 
-Note: Please, where applicable and possible, write tests and documentation for your proposed code contributions (further details below). Support can be given to those who are writing tests and documentation for the first time :) 
+Note: Please, where applicable and possible, write tests and documentation for your proposed code contributions (further details below). Support can be given to those who are writing tests and documentation for the first time 😊
         
 ## Communication
 
@@ -39,7 +42,12 @@ All documentation source can be found in the `docs/` folder. MkDocs is configure
 
 ## Linting
 
-[Black](https://github.com/psf/black) is used to automatically [re-format all Python code](https://github.com/NU-CEM/ThermoPot/actions/workflows/lint-code.yml) committed to the repository. The code will be formatted according to the PEP8 specification. As this is an automatic step you do not need lint/format your code to any specification before issuing a PR.
+Github Actions and [Black](https://github.com/psf/black) are used to 
+automatically [re-format all Python code](https://github.
+com/NU-CEM/ThermoPot/actions/workflows/lint-code.yml) committed to the 
+repository. The code 
+will be formatted according to the PEP8 
+specification. As this is an automatic step you do not need lint/format your code to any specification before issuing a PR.
 
 ## Publishing
 
