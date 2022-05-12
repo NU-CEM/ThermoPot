@@ -18,10 +18,10 @@ theme:
   favicon: images/1FAD6_color.png
   
 plugins:
-- search
-- mkdocstrings
-- mkdocs-jupyter
-    include_source: True
+  - search
+  - mkdocstrings
+  - mkdocs-jupyter
+      include_source: True
   
 markdown_extensions:
   - def_list
