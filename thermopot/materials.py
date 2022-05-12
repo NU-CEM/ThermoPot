@@ -508,6 +508,3 @@ class IdealGas(Material):
         Other T, P arrays may result in undefined behaviour.
         """
         return self.mu_J(T, P, xc=xc) * 0.001
-
-
-
