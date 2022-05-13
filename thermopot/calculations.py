@@ -1,10 +1,10 @@
 import re
 
+
 class Calculation(object):
     """Parent class for parsing and storing data from electronic structure calculations."""
 
-    def __init__(self,energy=None,xc=None,NAtoms=None,volume=None,
-                 filepath=None):
+    def __init__(self, energy=None, xc=None, NAtoms=None, volume=None, filepath=None):
         """All attributes are None until set by derived classes.
 
         Attributes:

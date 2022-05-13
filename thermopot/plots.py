@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 from thermopot import stability
 
+
 def plot_TvsP(
     T,
     P,
@@ -58,8 +59,7 @@ def plot_TvsP(
 
     if len(potential) == 1:
         potential = potential[0]
-        a = plt.contour(x_values, y_values, potential, 10, linewidths=1,
-                        colors="k")
+        a = plt.contour(x_values, y_values, potential, 10, linewidths=1, colors="k")
         plt.pcolormesh(
             x_values,
             y_values,
@@ -76,15 +76,11 @@ def plot_TvsP(
 
     else:
         potential = stability.find_stable_materials(potential)
-        plt.pcolormesh(
-            x_values,
-            y_values,
-            potential,
-            cmap=colormap
+        plt.pcolormesh(x_values, y_values, potential, cmap=colormap)
+        plt.legend(
+            [mpl.patches.Patch(color=colormap(b)) for b in range(len(potential))],
+            material_labels,
         )
-        plt.legend([mpl.patches.Patch(color=colormap(b)) for b in range(len(
-            potential))],
-                   material_labels)
 
     plt.xlabel("Temperature / {0}".format(x_unitlabel))
     plt.ylabel("Pressure / {0}".format(P_units))
@@ -93,6 +89,3 @@ def plot_TvsP(
         plt.savefig(filename, dpi=200)
     else:
         plt.show()
-
-
-
