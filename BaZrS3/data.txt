@@ -58,19 +58,19 @@ Ba = solid(name='Ba',
 
 Zr = solid(name='Zr',
                 stoichiometry={'Zr':1},
-                pbesol_energy_eV=None,
-                hse06_energy_eV = None,
+                pbesol_energy_eV = -197453.101608662,
+                hse06_energy_eV =  -197567.044008012,
                 fu_cell=None,
-                volume=None,
+                volume = 0.448970E+02,
                 phonons=None
 )
 
 S = solid(name='S',
                  stoichiometry={'S':1},
-                 pbesol_energy_eV=None,
+                 pbesol_energy_eV = -347575.482257456,
                  hse06_energy_eV = None,
                  fu_cell=None,
-                 volume=None,
+                 volume = 0.869131E+03,
                  phonons=None
 )
 
