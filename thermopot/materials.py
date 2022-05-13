@@ -65,11 +65,16 @@ class Solid(Material):
     ):
 
         if calculation is not False:
-            Material.__init__(
-                self, name, stoichiometry, {calculation.xc: calculation.energy}
-            )
-            self.volume = calculation.volume
-            self.NAtoms = calculation.NAtoms
+            if type(calculation) is not list:
+                Material.__init__(
+                    self, name, stoichiometry, {calculation.xc: calculation.energy}
+                )
+                self.volume = calculation.volume
+                self.NAtoms = calculation.NAtoms
+            else:
+                pass
+                # TODO: allow pass multiple calculations as a list. Check
+                #  all the same (using math.isclose) except energy.
 
         else:
             Material.__init__(self, name, stoichiometry, energies)

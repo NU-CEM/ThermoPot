@@ -1,12 +1,13 @@
 import matplotlib.pyplot as plt
 import matplotlib as mpl
-
+from thermopot import stability
 
 def plot_TvsP(
     T,
     P,
     *potential,
     potential_label="$\Delta G_f$ / kJ mol$^{-1}$",
+    material_labels=None,
     scale_range=[-600, 0],
     filename=False,
     precision="%d",
@@ -51,39 +52,47 @@ def plot_TvsP(
     else:
         raise ValueError("Invalid pressure unit: {0}.".format(T_units))
 
-    if len(potential) == 1:
-        potential = potential
-
-    else:
-        find_potentials_minimum(potential)
-
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
-    a = plt.contour(x_values, y_values, potential, 10, linewidths=1, colors="k")
-    plt.pcolormesh(
-        x_values,
-        y_values,
-        potential,
-        cmap=plt.get_cmap("summer"),
-        vmin=scale_range[0],
-        vmax=scale_range[1],
-    )
-    colours = plt.colorbar()
+    colormap = plt.get_cmap("summer")
+
+    if len(potential) == 1:
+        potential = potential[0]
+        a = plt.contour(x_values, y_values, potential, 10, linewidths=1,
+                        colors="k")
+        plt.pcolormesh(
+            x_values,
+            y_values,
+            potential,
+            cmap=colormap,
+            vmin=scale_range[0],
+            vmax=scale_range[1],
+        )
+        colours = plt.colorbar()
+        colours.set_label(potential_label, labelpad=20)
+
+        ax.set_yscale("log")
+        plt.clabel(a, fmt=precision)
+
+    else:
+        potential = stability.find_stable_materials(potential)
+        plt.pcolormesh(
+            x_values,
+            y_values,
+            potential,
+            cmap=colormap
+        )
+        plt.legend([mpl.patches.Patch(color=colormap(b)) for b in range(len(
+            potential))],
+                   material_labels)
+
     plt.xlabel("Temperature / {0}".format(x_unitlabel))
     plt.ylabel("Pressure / {0}".format(P_units))
-    colours.set_label(potential_label, labelpad=20)
-    ax.set_yscale("log")
-    plt.clabel(a, fmt=precision)
+
     if filename:
         plt.savefig(filename, dpi=200)
     else:
         plt.show()
 
 
-def find_potentials_minimum(*potential):
 
-    assert (
-        len(set([array.shape() for array in potentials])) == 1
-    ), "potential arrays must have the same dimension"
-    pass
-    # need to think about this more. Need to label potentials for a key object.
