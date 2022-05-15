@@ -1,4 +1,4 @@
-
+from thermopot import potential
 
 class Reaction:
     """
@@ -47,7 +47,7 @@ class Reaction:
         for material, fu in self.products.items():
             products_enthalpy += material.H(T, P, xc=xc, units = units) * fu
 
-        return products_enthalpy - reactants_enthalpy
+        return product.Product(products_enthalpy - reactants_enthalpy)
 
     def DU(self, T=None, P=None, xc="pbesol", units="eV"):
 
