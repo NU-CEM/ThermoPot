@@ -87,7 +87,7 @@ class Solid(Material):
 
         # TODO: allow calculations without giving phonons
 
-    def U_eV(self, T, xc="pbesol"):
+    def U(self, T, xc="pbesol",units="eV"):
         """Internal energy of one formula unit of solid, expressed in eV.
         U = solid.U_eV(T)
 
@@ -97,33 +97,30 @@ class Solid(Material):
         """
         U_func = interpolate.get_potential_aims(self.phonons, "U")
         E_dft = self.energies[xc]
-        return (E_dft + U_func(T)) / self.fu_cell
 
-    def U_J(self, T, xc="pbesol"):
-        """Internal energy of one gram-mole of solid, expressed in J/mol
-        U = solid.U_J(T)
+        U_eV = (E_dft + U_func(T)) / self.fu_cell
 
-        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
-        If not specified, it defaults to `pbesol`.
-        Returns a matrix with the same dimensions as T
-        """
-        return (
-            self.U_eV(T, xc=xc)
-            * constants.physical_constants["electron volt-joule relationship"][0]
-            * constants.N_A
-        )
+        if units == "eV":
+            return U_eV
 
-    def U_kJ(self, T, xc="pbesol"):
-        """Internal energy of one gram-mole of solid, expressed in kJ/mol
-        U = solid.U_kJ(T)
+        elif units == "J":
+            return (
+                    U_eV(T, xc=xc)
+                    * constants.physical_constants[
+                        "electron volt-joule relationship"][0]
+                    * constants.N_A
+            )
 
-        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
-        If not specified, it defaults to `pbesol`.
-        Returns a matrix with the same dimensions as T
-        """
-        return self.U_J(T, xc=xc) / 1000.0
+        elif units == "kJ":
+            return (
+                    U_eV(T, xc=xc)
+                    * constants.physical_constants[
+                        "electron volt-joule relationship"][0]
+                    * constants.N_A / 1000
+            )
 
-    def H_eV(self, T, P, xc="pbesol"):
+
+    def H(self, T, P, xc="pbesol", units="eV"):
         """
         Enthalpy of one formula unit of solid, expressed in eV
         H = solid.H_eV(T,P)
@@ -148,47 +145,28 @@ class Solid(Material):
             / constants.N_A
         )
         E_dft = self.energies[xc]
-        return ((E_dft + U_func(T)) + PV) / self.fu_cell
+        H_eV =  ((E_dft + U_func(T)) + PV) / self.fu_cell
 
-    def H_J(self, T, P, xc="pbesol"):
-        """Enthalpy of one gram-mole of solid, expressed in J/mol
-        H = solid.H_J(T,P)
+        if units == "eV":
+            return H_eV
 
-        T, P may be orthogonal 2D arrays of length m and n, populated in one row/column:
-        in this case H is an m x n matrix.
+        elif units == "J":
+            return (
+                    H_eV(T, P, xc=xc)
+                    * constants.physical_constants[
+                        "electron volt-joule relationship"][0]
+                    * constants.N_A
+            )
 
-        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
-        If not specified, it defaults to `pbesol`.
+        elif units == "kJ":
+            return (
+                    H_eV(T, P, xc=xc)
+                    * constants.physical_constants[
+                        "electron volt-joule relationship"][0]
+                    * constants.N_A / 1000
+            )
 
-        T, P may instead be equal-length non-orthogonal 1D arrays, in which case H is a vector
-        of H values corresponding to T,P pairs.
-
-        Other T, P arrays may result in undefined behaviour.
-        """
-        return (
-            self.H_eV(T, P, xc=xc)
-            * constants.physical_constants["electron volt-joule relationship"][0]
-            * constants.N_A
-        )
-
-    def H_kJ(self, T, P, xc="pbesol"):
-        """Enthalpy of one gram-mole of solid, expressed in kJ/mol
-        H = solid.H_kJ(T,P)
-
-        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
-        If not specified, it defaults to `pbesol`.
-
-        T, P may be orthogonal 2D arrays of length m and n, populated in one row/column:
-        in this case H is an m x n matrix.
-
-        T, P may instead be equal-length non-orthogonal 1D arrays, in which case H is a vector
-        of H values corresponding to T,P pairs.
-
-        Other T, P arrays may result in undefined behaviour.
-        """
-        return self.H_J(T, P, xc=xc) * 0.001
-
-    def mu_eV(self, T, P, xc="pbesol"):
+    def mu(self, T, P, xc="pbesol", units="eV"):
         """
         Free energy of one formula unit of solid, expressed in eV
         mu = solid.mu_eV(T,P)
@@ -206,49 +184,28 @@ class Solid(Material):
         """
         TS_func = interpolate.get_potential_aims(self.phonons, "TS")
         H = self.H_eV(T, P, xc=xc)
-        return H - TS_func(T) / self.fu_cell
+        mu_eV = H - TS_func(T) / self.fu_cell
 
-    def mu_J(self, T, P, xc="pbesol"):
-        """
-        Free energy of one mol of solid, expressed in J/mol
-        mu = solid.mu_J(T,P)
+        if units == "eV":
+            return mu_eV
 
-        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
-        If not specified, it defaults to `pbesol`.
+        elif units == "J":
+            return (
+                    mu_eV(T, P, xc=xc)
+                    * constants.physical_constants[
+                        "electron volt-joule relationship"][0]
+                    * constants.N_A
+            )
 
-        T, P may be orthogonal 2D arrays of length m and n, populated in one row/column:
-        in this case H is an m x n matrix.
+        elif units == "kJ":
+            return (
+                    mu_eV(T, P, xc=xc)
+                    * constants.physical_constants[
+                        "electron volt-joule relationship"][0]
+                    * constants.N_A / 1000
+            )
 
-        T, P may instead be equal-length non-orthogonal 1D arrays, in which case H is a vector
-        of H values corresponding to T,P pairs.
-
-        Other T, P arrays may result in undefined behaviour.
-        """
-        return (
-            self.mu_eV(T, P, xc=xc)
-            * constants.physical_constants["electron volt-joule relationship"][0]
-            * constants.N_A
-        )
-
-    def mu_kJ(self, T, P, xc="pbesol"):
-        """
-        Free energy of one mol of solid, expressed in kJ/mol
-        mu = solid.mu_kJ(T,P)
-
-        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
-        If not specified, it defaults to `pbesol`.
-
-        T, P may be orthogonal 2D arrays of length m and n, populated in one row/column:
-        in this case H is an m x n matrix.
-
-        T, P may instead be equal-length non-orthogonal 1D arrays, in which case H is a vector
-        of H values corresponding to T,P pairs.
-
-        Other T, P arrays may result in undefined behaviour.
-        """
-        return self.mu_J(T, P, xc=xc) * 0.001
-
-    def Cv_kB(self, T):
+    def Cv(self, T, units="eV"):
         """
         Constant-volume heat capacity of one formula unit of solid, expressed in units
         of the Boltzmann constant kB:
@@ -256,40 +213,31 @@ class Solid(Material):
         T may be an array, in which case Cv will be an array of the same dimensions.
         """
         Cv_func = interpolate.get_potential_aims(self.phonons, "Cv")
-        return Cv_func(T) / self.fu_cell
+        Cv_kB =  Cv_func(T) / self.fu_cell
 
-    def Cv_eV(self, T):
-        """
-        Constant-volume heat capacity of one formula unit of solid, expressed in units
-        of the Boltzmann constant kB:
-        Cv = solid.Cv_eV(T)
-        T may be an array, in which case Cv will be an array of the same dimensions.
-        """
-        return (
-            self.Cv_kB(T)
-            * constants.physical_constants["Boltzmann constant in eV/K"][0]
-        )
+        if units == "kB":
+            return Cv_kB
 
-    def Cv_J(self, T):
-        """
-        Constant-volume heat capacity of solid, expressed in J/molK.
-        Cv = solid.Cv_J(T)
-        T may be an array, in which case Cv will be an array of the same dimensions.
-        """
-        return (
-            self.Cv_kB(T)
-            * constants.physical_constants["Boltzmann constant"][0]
-            * constants.N_A
-        )
+        elif units == "eV":
+            return (
+                    Cv_kB(T)
+                    *
+                    constants.physical_constants["Boltzmann constant in eV/K"][
+                        0]
+            )
+        elif units == "J":
+            return (
+                    Cv_kB(T)
+                    * constants.physical_constants["Boltzmann constant"][0]
+                    * constants.N_A
+            )
 
-    def Cv_kJ(self, T):
-        """
-        Constant-volume heat capacity of solid, expressed in kJ/molK.
-        Cv = solid.Cv_kJ(T)
-        T may be an array, in which case Cv will be an array of the same dimensions.
-        """
-        return self.Cv_J(T) * 0.001
-
+        elif units == "kJ":
+            return (
+                    Cv_kB(T)
+                    * constants.physical_constants["Boltzmann constant"][0]
+                    * constants.N_A / 1000
+            )
 
 class IdealGas(Material):
     """
@@ -347,7 +295,7 @@ class IdealGas(Material):
         else:
             self.zpe = 0
 
-    def U_eV(self, T, xc="pbesol"):
+    def U(self, T, xc="pbesol", units="eV"):
         """Internal energy of one formula unit of ideal gas, expressed in eV.
         U = ideal_gas.U_eV(T)
 
@@ -358,7 +306,7 @@ class IdealGas(Material):
         """
         U_func = interpolate.get_potential_nist_table(self.thermo_file, "U")
         E_dft = self.energies[xc]
-        return (
+        U_eV =  (
             E_dft
             + self.zpe
             + U_func(T)
@@ -366,33 +314,26 @@ class IdealGas(Material):
             / constants.N_A
         )
 
-    def U_J(self, T, xc="pbesol"):
-        """Internal energy of one gram-mole of ideal gas, expressed in J/mol
-        U = ideal_gas.U_J(T)
+        if units == "eV":
+            return U_eV
 
-        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
-        If not specified, it defaults to `pbesol`.
+        elif units == "J":
+            return (
+                    U_eV(T, xc=xc)
+                    * constants.physical_constants[
+                        "electron volt-joule relationship"][0]
+                    * constants.N_A
+            )
 
-        Returns a matrix with the same dimensions as T
-        """
-        return (
-            self.U_eV(T, xc=xc)
-            * constants.physical_constants["electron volt-joule relationship"][0]
-            * constants.N_A
-        )
+        elif units == "kJ":
+            return (
+                    U_eV(T, xc=xc)
+                    * constants.physical_constants[
+                        "electron volt-joule relationship"][0]
+                    * constants.N_A / 1000
+            )
 
-    def U_kJ(self, T, xc="pbesol"):
-        """Internal energy of one gram-mole of ideal gas, expressed in kJ/mol
-        U = ideal_gas.U_kJ(T)
-
-        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
-        If not specified, it defaults to `pbesol`.
-
-        Returns a matrix with the same dimensions as T
-        """
-        return self.U_J(T, xc=xc) * 0.001
-
-    def H_eV(self, T, *P, xc="pbesol"):
+    def H(self, T, *P, xc="pbesol",units="eV"):
         """Enthalpy of one formula unit of ideal gas, expressed in eV
         H = ideal_gas.H_eV(T)
 
@@ -405,7 +346,7 @@ class IdealGas(Material):
         """
         H_func = interpolate.get_potential_nist_table(self.thermo_file, "H")
         E_dft = self.energies[xc]
-        return (
+        H_eV = (
             E_dft
             + self.zpe
             + H_func(T, xc=xc)
@@ -413,37 +354,28 @@ class IdealGas(Material):
             / constants.N_A
         )
 
-    def H_J(self, T, *P, xc="pbesol"):
-        """Enthalpy of one gram-mole of ideal gas, expressed in J/mol
-        H = ideal_gas.H_J(T)
+        if units == "eV":
+            return  H_eV
 
-        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
-        If not specified, it defaults to `pbesol`.
+        elif units == "J":
 
-        Returns an array with the same dimensions as T
+            return (
+                    H_eV(T, xc=xc)
+                    * constants.physical_constants[
+                        "electron volt-joule relationship"][0]
+                    * constants.N_A
+            )
 
-        Accepts ideal_gas.H_eV(T,P): P is unused
-        """
-        return (
-            self.H_eV(T, xc=xc)
-            * constants.physical_constants["electron volt-joule relationship"][0]
-            * constants.N_A
-        )
+        elif units == "kJ":
 
-    def H_kJ(self, T, *P, xc="pbesol"):
-        """Enthalpy of one gram-mole of ideal gas, expressed in kJ/mol
-        H = ideal_gas.H_kJ(T,P)
+            return (
+                    H_eV(T, xc=xc)
+                    * constants.physical_constants[
+                        "electron volt-joule relationship"][0]
+                    * constants.N_A / 1000
+            )
 
-        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
-        If not specified, it defaults to `pbesol`.
-
-        Returns an array with the same dimensions as T
-
-        Accepts ideal_gas.H_eV(T,P): P is unused
-        """
-        return self.H_J(T, xc=xc) * 0.001
-
-    def mu_eV(self, T, P, xc="pbesol"):
+    def mu(self, T, P, xc="pbesol","eV"):
         """
         Free energy of one formula unit of ideal gas, expressed in eV
         mu = ideal_gas.mu_eV(T,P)
@@ -466,7 +398,7 @@ class IdealGas(Material):
             / constants.N_A
         )
         H = self.H_eV(T, xc=xc)
-        return (
+        mu_eV = (
             H
             - T * S
             + constants.physical_constants["Boltzmann constant in eV/K"][0]
@@ -474,42 +406,26 @@ class IdealGas(Material):
             * np.log(P / 1e5)
         )
 
-    def mu_J(self, T, P, xc="pbesol"):
-        """
-        Free energy of one mol of ideal gas, expressed in J/mol
-        mu = ideal_gas.mu_J(T,P)
+        if units == "eV":
 
-        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
-        If not specified, it defaults to `pbesol`.
+            return mu_eV
 
-        T, P may be orthogonal 2D arrays of length m and n, populated in one row/column:
-        in this case H is an m x n matrix.
+        elif units == "J":
 
-        T, P may instead be equal-length non-orthogonal 1D arrays, in which case H is a vector
-        of H values corresponding to T,P pairs.
+            return (
+                    mu_eV(T, P, xc=xc)
+                    * constants.physical_constants[
+                        "electron volt-joule relationship"][0]
+                    * constants.N_A
+            )
 
-        Other T, P arrays may result in undefined behaviour.
-        """
-        return (
-            self.mu_eV(T, P, xc=xc)
-            * constants.physical_constants["electron volt-joule relationship"][0]
-            * constants.N_A
-        )
+        elif units == "kJ":
 
-    def mu_kJ(self, T, P, xc="pbesol"):
-        """
-        Free energy of one mol of ideal gas, expressed in kJ/mol
-        mu = ideal_gas.mu_kJ(T,P)
+            return (
+                    mu_eV(T, P, xc=xc)
+                    * constants.physical_constants[
+                        "electron volt-joule relationship"][0]
+                    * constants.N_A / 1000
+            )
 
-        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
-        If not specified, it defaults to `pbesol`.
 
-        T, P may be orthogonal 2D arrays of length m and n, populated in one row/column:
-        in this case H is an m x n matrix.
-
-        T, P may instead be equal-length non-orthogonal 1D arrays, in which case H is a vector
-        of H values corresponding to T,P pairs.
-
-        Other T, P arrays may result in undefined behaviour.
-        """
-        return self.mu_J(T, P, xc=xc) * 0.001

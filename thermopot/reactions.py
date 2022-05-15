@@ -1,3 +1,5 @@
+
+
 class Reaction:
     """
     Class for reaction data
@@ -34,158 +36,42 @@ class Reaction:
         self.T = temperature
         self.P = pressure
 
-    def DH_eV_pbesol(self, T=None, P=None):
+    def DH(self, T=None, P=None, xc="pbesol", units="eV"):
 
         T = self.T if T is None else T
         P = self.P if P is None else P
 
         reactants_enthalpy, products_enthalpy = 0, 0
         for material, fu in self.reactants.items():
-            reactants_enthalpy += material.H_eV(T, P, xc="pbesol") * fu
+            reactants_enthalpy += material.H(T, P, xc=xc, units=units) * fu
         for material, fu in self.products.items():
-            products_enthalpy += material.H_eV(T, P, xc="pbesol") * fu
+            products_enthalpy += material.H(T, P, xc=xc, units = units) * fu
 
         return products_enthalpy - reactants_enthalpy
 
-    def DH_kJ_pbesol(self, T=None, P=None):
-
-        T = self.T if T is None else T
-        P = self.P if P is None else P
-
-        reactants_enthalpy, products_enthalpy = 0, 0
-        for material, fu in self.reactants.items():
-            reactants_enthalpy += material.H_kJ(T, P, xc="pbesol") * fu
-        for material, fu in self.products.items():
-            products_enthalpy += material.H_kJ(T, P, xc="pbesol") * fu
-
-        return products_enthalpy - reactants_enthalpy
-
-    def DH_eV_hse06(self, T=None, P=None):
-
-        T = self.T if T is None else T
-        P = self.P if P is None else P
-
-        reactants_enthalpy, products_enthalpy = 0, 0
-        for material, fu in self.reactants.items():
-            reactants_enthalpy += material.H_eV(T, P, xc="hse06") * fu
-        for material, fu in self.products.items():
-            products_enthalpy += material.H_eV(T, P, xc="hse06") * fu
-
-        return products_enthalpy - reactants_enthalpy
-
-    def DH_kJ_hse06(self, T=None, P=None):
-
-        T = self.T if T is None else T
-        P = self.P if P is None else P
-
-        reactants_enthalpy, products_enthalpy = 0, 0
-        for material, fu in self.reactants.items():
-            reactants_enthalpy += material.H_kJ(T, P, xc="hse06") * fu
-        for material, fu in self.products.items():
-            products_enthalpy += material.H_kJ(T, P, xc="hse06") * fu
-
-        return products_enthalpy - reactants_enthalpy
-
-    def DU_eV_pbesol(self, T=None, P=None):
+    def DU(self, T=None, P=None, xc="pbesol", units="eV"):
 
         T = self.T if T is None else T
         P = self.P if P is None else P
 
         reactants_energy, products_energy = 0, 0
         for material, fu in self.reactants.items():
-            reactants_energy += material.U_eV(T, P, xc="pbesol") * fu
+            reactants_energy += material.U(T, P, xc=xc, units=units) * fu
         for material, fu in self.products.items():
-            products_energy += material.U_eV(T, P, xc="pbesol") * fu
+            products_energy += material.U(T, P, xc=xc, units=units) * fu
 
         return products_energy - reactants_energy
 
-    def DU_kJ_pbesol(self, T=None, P=None):
+    def Dmu(self, T=None, P=None, xc="pbesol", units="eV"):
 
         T = self.T if T is None else T
         P = self.P if P is None else P
 
         reactants_energy, products_energy = 0, 0
         for material, fu in self.reactants.items():
-            reactants_energy += material.U_kJ(T, P, xc="pbesol") * fu
+            reactants_energy += material.mu(T, P, xc=xc, units=units) * fu
         for material, fu in self.products.items():
-            products_energy += material.U_kJ(T, P, xc="pbesol") * fu
+            products_energy += material.mu(T, P, xc=xc, units=units) * fu
 
         return products_energy - reactants_energy
 
-    def DU_eV_hse06(self, T=None, P=None):
-
-        T = self.T if T is None else T
-        P = self.P if P is None else P
-
-        reactants_energy, products_energy = 0, 0
-        for material, fu in self.reactants.items():
-            reactants_energy += material.U_eV(T, P, xc="hse06") * fu
-        for material, fu in self.products.items():
-            products_energy += material.U_eV(T, P, xc="hse06") * fu
-
-        return products_energy - reactants_energy
-
-    def DU_kJ_hse06(self, T=None, P=None):
-
-        T = self.T if T is None else T
-        P = self.P if P is None else P
-
-        reactants_energy, products_energy = 0, 0
-        for material, fu in self.reactants.items():
-            reactants_energy += material.U_kJ(T, P, xc="hse06") * fu
-        for material, fu in self.products.items():
-            products_energy += material.U_kJ(T, P, xc="hse06") * fu
-
-        return products_energy - reactants_energy
-
-    def Dmu_eV_pbesol(self, T=None, P=None):
-
-        T = self.T if T is None else T
-        P = self.P if P is None else P
-
-        reactants_energy, products_energy = 0, 0
-        for material, fu in self.reactants.items():
-            reactants_energy += material.mu_eV(T, P, xc="pbesol") * fu
-        for material, fu in self.products.items():
-            products_energy += material.mu_eV(T, P, xc="pbesol") * fu
-
-        return products_energy - reactants_energy
-
-    def Dmu_kJ_pbesol(self, T=None, P=None):
-
-        T = self.T if T is None else T
-        P = self.P if P is None else P
-
-        reactants_energy, products_energy = 0, 0
-        for material, fu in self.reactants.items():
-            reactants_energy += material.mu_kJ(T, P, xc="pbesol") * fu
-        for material, fu in self.products.items():
-            products_energy += material.mu_kJ(T, P, xc="pbesol") * fu
-
-        return products_energy - reactants_energy
-
-    def Dmu_eV_hse06(self, T=None, P=None):
-
-        T = self.T if T is None else T
-        P = self.P if P is None else P
-
-        reactants_energy, products_energy = 0, 0
-        for material, fu in self.reactants.items():
-            reactants_energy += material.mu_eV(T, P, xc="hse06") * fu
-        for material, fu in self.products.items():
-            products_energy += material.mu_eV(T, P, xc="hse06") * fu
-
-        return products_energy - reactants_energy
-
-    def Dmu_kJ_hse06(self, T=None, P=None):
-
-        T = self.T if T is None else T
-        P = self.P if P is None else P
-
-        reactants_energy, products_energy = 0, 0
-        for material, fu in self.reactants.items():
-            reactants_energy += material.mu_kJ(T, P, xc="hse06") * fu
-        for material, fu in self.products.items():
-            products_energy += material.mu_kJ(T, P, xc="hse06") * fu
-
-        return products_energy - reactants_energy
