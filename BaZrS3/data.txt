@@ -68,7 +68,7 @@ Zr = solid(name='Zr',
 S = solid(name='S',
                  stoichiometry={'S':1},
                  pbesol_energy_eV = -347575.482257456,
-                 hse06_energy_eV = None,
+                 hse06_energy_eV = -348162.250350118,
                  fu_cell=None,
                  volume = 0.869131E+03,
                  phonons=None
@@ -167,8 +167,8 @@ S8=ideal_gas(
 S2=ideal_gas(
     name='S2',
     stoichiometry={'S':2},
-    pbesol_energy_eV=None,
-    hse06_energy_eV=None,
+    pbesol_energy_eV = -86893.631040193,
+    hse06_energy_eV = -87040.584057111,
     thermo_file='nist_janaf/S2.dat',
     zpe_pbesol=None,
     N=2
