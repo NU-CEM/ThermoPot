@@ -43,11 +43,11 @@ class Reaction:
 
         reactants_enthalpy, products_enthalpy = 0, 0
         for material, fu in self.reactants.items():
-            reactants_enthalpy += material.H(T, P, xc=xc, units=units) * fu
+            reactants_enthalpy += (material.H(T, P, xc=xc, units=units) * fu)
         for material, fu in self.products.items():
-            products_enthalpy += material.H(T, P, xc=xc, units = units) * fu
+            products_enthalpy += (material.H(T, P, xc=xc, units = units) * fu)
 
-        return product.Product(products_enthalpy - reactants_enthalpy)
+        return potential.Potential(products_enthalpy - reactants_enthalpy,T,P)
 
     def DU(self, T=None, P=None, xc="pbesol", units="eV"):
 
@@ -56,11 +56,11 @@ class Reaction:
 
         reactants_energy, products_energy = 0, 0
         for material, fu in self.reactants.items():
-            reactants_energy += material.U(T, P, xc=xc, units=units) * fu
+            reactants_energy += (material.U(T, xc=xc, units=units) * fu)
         for material, fu in self.products.items():
-            products_energy += material.U(T, P, xc=xc, units=units) * fu
+            products_energy += (material.U(T, xc=xc, units=units) * fu)
 
-        return products_energy - reactants_energy
+        return potential.Potential(products_energy - reactants_energy,T,P)
 
     def Dmu(self, T=None, P=None, xc="pbesol", units="eV"):
 
@@ -69,9 +69,9 @@ class Reaction:
 
         reactants_energy, products_energy = 0, 0
         for material, fu in self.reactants.items():
-            reactants_energy += material.mu(T, P, xc=xc, units=units) * fu
+            reactants_energy += (material.mu(T, P, xc=xc, units=units) * fu)
         for material, fu in self.products.items():
-            products_energy += material.mu(T, P, xc=xc, units=units) * fu
+            products_energy += (material.mu(T, P, xc=xc, units=units) * fu)
 
-        return products_energy - reactants_energy
+        return potential.Potential(products_energy - reactants_energy,T,P)
 
