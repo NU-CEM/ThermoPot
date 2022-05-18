@@ -2,23 +2,24 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import numpy as np
 
-class Potentials():
 
-    def __init__(self,*potentials):
+class Potentials:
+    def __init__(self, *potentials):
 
         self.potentials = potentials
         self.minimum_potential = self.find_potential_minimum()
 
     # TODO: check that all the potentials are plottable over T/P range
 
-    def plot_TvsP(self,
-                T = None,
-                P = None,
-                material_labels=None,
-                filename=False,
-                T_units="K",
-                P_units="Pa"
-        ):
+    def plot_TvsP(
+        self,
+        T=None,
+        P=None,
+        material_labels=None,
+        filename=False,
+        T_units="K",
+        P_units="Pa",
+    ):
         """
         T is an array e.g. np.linspace(100, 1500, 100)  # K
         P is an array orthogonal to T. e.g. np.array(np.logspace(1, 7, 100), ndmin=2).transpose()  # Pa
@@ -42,8 +43,7 @@ class Potentials():
             x_values = T - 273.15
             x_unitlabel = "$^\circ$ C"
         else:
-            raise ValueError(
-                "Invalid temperature unit: {0}".format(T_units))
+            raise ValueError("Invalid temperature unit: {0}".format(T_units))
 
         if P_units == "Pa":
             y_values = P.flatten()
@@ -62,16 +62,11 @@ class Potentials():
         colormap = plt.get_cmap("summer")
 
         potential = self.find_potential_minimum()
-        plt.pcolormesh(
-            x_values,
-            y_values,
-            potential,
-            cmap=colormap
-        )
+        plt.pcolormesh(x_values, y_values, potential, cmap=colormap)
         plt.legend(
-            [mpl.patches.Patch(color=colormap(b)) for b in range(len(
-                potential))],
-            material_labels)
+            [mpl.patches.Patch(color=colormap(b)) for b in range(len(potential))],
+            material_labels,
+        )
 
         plt.xlabel("Temperature / {0}".format(x_unitlabel))
         plt.ylabel("Pressure / {0}".format(P_units))
@@ -81,17 +76,15 @@ class Potentials():
         else:
             plt.show()
 
-
     def find_potential_minimum(self):
 
         assert (
-                len(set([array.shape for array in self.potentials])) == 1
+            len(set([array.shape for array in self.potentials])) == 1
         ), "potential arrays must have the same dimension"
 
         minimum_potential = self.potentials[0]
         for i, potential in enumerate(self.potentials):
-            minimum_potential = np.minimum(minimum_potential,
-                                           self.potentials[i + 1])
+            minimum_potential = np.minimum(minimum_potential, self.potentials[i + 1])
             if i + 2 == len(self.potentials):
                 break
 
@@ -99,5 +92,3 @@ class Potentials():
             minimum_potential[potential == minimum_potential] = i
 
         return minimum_potential
-
-

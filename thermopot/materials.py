@@ -90,7 +90,7 @@ class Solid(Material):
 
         # TODO: allow calculations without giving phonons
 
-    def U(self, T, xc="pbesol",units="eV"):
+    def U(self, T, xc="pbesol", units="eV"):
         """Internal energy of one formula unit of solid, expressed in eV.
         U = solid.U_eV(T)
 
@@ -108,20 +108,18 @@ class Solid(Material):
 
         elif units == "J":
             return (
-                    U_eV(T, xc=xc)
-                    * constants.physical_constants[
-                        "electron volt-joule relationship"][0]
-                    * constants.N_A
+                U_eV(T, xc=xc)
+                * constants.physical_constants["electron volt-joule relationship"][0]
+                * constants.N_A
             )
 
         elif units == "kJ":
             return (
-                    U_eV(T, xc=xc)
-                    * constants.physical_constants[
-                        "electron volt-joule relationship"][0]
-                    * constants.N_A * 0.001
+                U_eV(T, xc=xc)
+                * constants.physical_constants["electron volt-joule relationship"][0]
+                * constants.N_A
+                * 0.001
             )
-
 
     def H(self, T, P, xc="pbesol", units="eV"):
         """
@@ -149,25 +147,24 @@ class Solid(Material):
         )
 
         E_dft = self.energies[xc]
-        H_eV =  ((E_dft + U_func(T)) + PV) / self.fu_cell
+        H_eV = ((E_dft + U_func(T)) + PV) / self.fu_cell
 
         if units == "eV":
             return H_eV
 
         elif units == "J":
             return (
-                    H_eV
-                    * constants.physical_constants[
-                        "electron volt-joule relationship"][0]
-                    * constants.N_A
+                H_eV
+                * constants.physical_constants["electron volt-joule relationship"][0]
+                * constants.N_A
             )
 
         elif units == "kJ":
             return (
-                    H_eV
-                    * constants.physical_constants[
-                        "electron volt-joule relationship"][0]
-                    * constants.N_A * 0.001
+                H_eV
+                * constants.physical_constants["electron volt-joule relationship"][0]
+                * constants.N_A
+                * 0.001
             )
 
     def mu(self, T, P, xc="pbesol", units="eV"):
@@ -195,18 +192,17 @@ class Solid(Material):
 
         elif units == "J":
             return (
-                    mu_eV
-                    * constants.physical_constants[
-                        "electron volt-joule relationship"][0]
-                    * constants.N_A
+                mu_eV
+                * constants.physical_constants["electron volt-joule relationship"][0]
+                * constants.N_A
             )
 
         elif units == "kJ":
             return (
-                    mu_eV
-                    * constants.physical_constants[
-                        "electron volt-joule relationship"][0]
-                    * constants.N_A * 0.001
+                mu_eV
+                * constants.physical_constants["electron volt-joule relationship"][0]
+                * constants.N_A
+                * 0.001
             )
 
     def Cv(self, T, units="eV"):
@@ -217,31 +213,28 @@ class Solid(Material):
         T may be an array, in which case Cv will be an array of the same dimensions.
         """
         Cv_func = interpolate.get_potential_aims(self.phonons, "Cv")
-        Cv_kB =  Cv_func(T) / self.fu_cell
+        Cv_kB = Cv_func(T) / self.fu_cell
 
         if units == "kB":
             return Cv_kB
 
         elif units == "eV":
-            return (
-                    Cv_kB
-                    *
-                    constants.physical_constants["Boltzmann constant in eV/K"][
-                        0]
-            )
+            return Cv_kB * constants.physical_constants["Boltzmann constant in eV/K"][0]
         elif units == "J":
             return (
-                    Cv_kB
-                    * constants.physical_constants["Boltzmann constant"][0]
-                    * constants.N_A
+                Cv_kB
+                * constants.physical_constants["Boltzmann constant"][0]
+                * constants.N_A
             )
 
         elif units == "kJ":
             return (
-                    Cv_kB
-                    * constants.physical_constants["Boltzmann constant"][0]
-                    * constants.N_A * 0.001
+                Cv_kB
+                * constants.physical_constants["Boltzmann constant"][0]
+                * constants.N_A
+                * 0.001
             )
+
 
 class IdealGas(Material):
     """
@@ -310,7 +303,7 @@ class IdealGas(Material):
         """
         U_func = interpolate.get_potential_nist_table(self.thermo_file, "U")
         E_dft = self.energies[xc]
-        U_eV =  (
+        U_eV = (
             E_dft
             + self.zpe
             + U_func(T)
@@ -323,21 +316,20 @@ class IdealGas(Material):
 
         elif units == "J":
             return (
-                    U_eV
-                    * constants.physical_constants[
-                        "electron volt-joule relationship"][0]
-                    * constants.N_A
+                U_eV
+                * constants.physical_constants["electron volt-joule relationship"][0]
+                * constants.N_A
             )
 
         elif units == "kJ":
             return (
-                    U_eV
-                    * constants.physical_constants[
-                        "electron volt-joule relationship"][0]
-                    * constants.N_A * 0.001
+                U_eV
+                * constants.physical_constants["electron volt-joule relationship"][0]
+                * constants.N_A
+                * 0.001
             )
 
-    def H(self, T, *P, xc="pbesol",units="eV"):
+    def H(self, T, *P, xc="pbesol", units="eV"):
         """Enthalpy of one formula unit of ideal gas, expressed in eV
         H = ideal_gas.H_eV(T)
 
@@ -359,24 +351,23 @@ class IdealGas(Material):
         )
 
         if units == "eV":
-            return  H_eV
+            return H_eV
 
         elif units == "J":
 
             return (
-                    H_eV
-                    * constants.physical_constants[
-                        "electron volt-joule relationship"][0]
-                    * constants.N_A
+                H_eV
+                * constants.physical_constants["electron volt-joule relationship"][0]
+                * constants.N_A
             )
 
         elif units == "kJ":
 
             return (
-                    H_eV
-                    * constants.physical_constants[
-                        "electron volt-joule relationship"][0]
-                    * constants.N_A * 0.001
+                H_eV
+                * constants.physical_constants["electron volt-joule relationship"][0]
+                * constants.N_A
+                * 0.001
             )
 
     def mu(self, T, P, xc="pbesol", units="eV"):
@@ -417,19 +408,16 @@ class IdealGas(Material):
         elif units == "J":
 
             return (
-                    mu_eV
-                    * constants.physical_constants[
-                        "electron volt-joule relationship"][0]
-                    * constants.N_A
+                mu_eV
+                * constants.physical_constants["electron volt-joule relationship"][0]
+                * constants.N_A
             )
 
         elif units == "kJ":
 
             return (
-                    mu_eV
-                    * constants.physical_constants[
-                        "electron volt-joule relationship"][0]
-                    * constants.N_A * 0.001
+                mu_eV
+                * constants.physical_constants["electron volt-joule relationship"][0]
+                * constants.N_A
+                * 0.001
             )
-
-

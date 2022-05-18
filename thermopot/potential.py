@@ -1,22 +1,23 @@
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 
-class Potential():
 
-    def __init__(self,potential, T, P):
+class Potential:
+    def __init__(self, potential, T, P):
 
         self.potential = potential
         self.T = T
         self.P = P
 
-    def plot_TvsP(self,
-                potential_label="$\Delta G_f$ / kJ mol$^{-1}$",
-                scale_range=[-600, 0],
-                filename=False,
-                precision="%d",
-                T_units="K",
-                P_units="Pa"
-        ):
+    def plot_TvsP(
+        self,
+        potential_label="$\Delta G_f$ / kJ mol$^{-1}$",
+        scale_range=[-600, 0],
+        filename=False,
+        precision="%d",
+        T_units="K",
+        P_units="Pa",
+    ):
         """
         T is an array e.g. np.linspace(100, 1500, 100)  # K
         P is an array orthogonal to T. e.g. np.array(np.logspace(1, 7, 100), ndmin=2).transpose()  # Pa
@@ -40,8 +41,7 @@ class Potential():
             x_values = self.T - 273.15
             x_unitlabel = "$^\circ$ C"
         else:
-            raise ValueError(
-                "Invalid temperature unit: {0}".format(T_units))
+            raise ValueError("Invalid temperature unit: {0}".format(T_units))
 
         if P_units == "Pa":
             y_values = self.P.flatten()
@@ -60,9 +60,9 @@ class Potential():
         ax = fig.add_subplot(1, 1, 1)
         colormap = plt.get_cmap("summer")
 
-        a = plt.contour(x_values, y_values, self.potential, 10,
-                        linewidths=1,
-                        colors="k")
+        a = plt.contour(
+            x_values, y_values, self.potential, 10, linewidths=1, colors="k"
+        )
         plt.pcolormesh(
             x_values,
             y_values,

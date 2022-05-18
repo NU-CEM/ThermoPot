@@ -21,6 +21,7 @@ from numpy import genfromtxt
 import re
 from thermopot import *
 
+
 def get_potential_aims(file, property):
     """Thermodynamic property interpolation function. Requires phonopy-FHI-aims output file.
     Reads data for S and Cv expressed in J/K/mol, F and U in kJ/mol.
