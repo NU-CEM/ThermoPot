@@ -6,7 +6,7 @@ BaZrS3_perovskite=solid(name='Perovskite BaZrS3',
                      hse06_energy_eV = -1426337.557532134,
                      fu_cell=4,
                      volume = 0.487976E+03,
-                     phonons = None,
+                     phonons = phonopy_ouput/Ba3Zr2S7_P4_2_mnm.dat,
                      N=None
                      )
 
@@ -14,7 +14,7 @@ BaZrS3 = BaZrS3_perovskite
 
 Ba2ZrS4_RP=solid(name='Ruddlesden-Popper Ba2ZrS4',
                      stoichiometry={'Ba':2,'Zr':1,'S':4},
-                     pbesol_energy_eV= -592308.418827245,
+                     pbesol_energy_eV = -592308.418827245,
                      hse06_energy_eV = -592619.518998020,
                      fu_cell=1,
                      volume = 0.188486E+03,
@@ -24,24 +24,24 @@ Ba2ZrS4_RP=solid(name='Ruddlesden-Popper Ba2ZrS4',
 
 Ba2ZrS4 = Ba2ZrS4_RP
 
-Ba3Zr2S7_RP=solid(name='Ruddlesden-Popper Ba3Zr2S7',
+Ba3Zr2S7_RP=solid(name='Ruddlesden-Popper Ba3Zr2S7', # I4_mmm
                      stoichiometry={'Ba':3,'Zr':2,'S':7},
-                     pbesol_energy_eV= None,
-                     hse06_energy_eV = None,
-                     fu_cell=None,
-                     volume=None,
+                     pbesol_energy_eV = -948680.255481593,
+                     hse06_energy_eV = -949192.443815267,
+                     fu_cell = 1,
+                     volume=0.374121E+03,
                      phonons=None,
                      N=None
                      )
 
 
-Ba3Zr2S7_Needle=solid(name='Needle-like Ba3Zr2S7',
+Ba3Zr2S7_Needle=solid(name='Needle-like Ba3Zr2S7', #P4_2_mnm
                      stoichiometry={'Ba':3,'Zr':2,'S':7},
-                     pbesol_energy_eV= None,
-                     hse06_energy_eV = None,
-                     fu_cell=None,
-                     volume=None,
-                     phonons=None,
+                     pbesol_energy_eV = -3794761.060664689,
+                     hse06_energy_eV = -3796814.466776592,
+                     fu_cell = 4,
+                     volume=0.124269E+04,
+                     phonons='phonopy_ouput/Ba3Zr2S7_P4_2_mnm.dat',
                      N=None
                      )
 
