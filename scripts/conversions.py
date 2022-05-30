@@ -4,6 +4,8 @@ Both the units and the column order have changed.
 Older version has data organised as: T(K) F(kJ/mol)  S(J/K/mol) Cv(J/Kmol)  U(kJ/mol).
 Newer version has data organised as: T(K) F(eV/cell) U(eV/cell) Cv(kB/cell) -TS(eV/cell)."""
 
+import pandas as pd
+import thermopot
 
 def convert_phonopy_filetypes(file_in, file_out):
 
