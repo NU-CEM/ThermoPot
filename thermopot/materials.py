@@ -185,7 +185,9 @@ class Solid(Material):
         """
         TS_func = interpolate.get_potential_aims(self.phonons, "TS")
         H = self.H(T, P, xc=xc)
-        mu_eV = H - TS_func(T) / self.fu_cell
+        mu_eV = H - (TS_func(T)) / self.fu_cell
+
+        print(TS_func(T))
 
         if units == "eV":
             return mu_eV
@@ -392,6 +394,7 @@ class IdealGas(Material):
             * constants.physical_constants["joule-electron volt relationship"][0]
             / constants.N_A
         )
+        print (T*S)
         H = self.H(T, xc=xc)
         mu_eV = (
             H

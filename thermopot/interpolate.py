@@ -39,7 +39,7 @@ def get_potential_aims(file, property):
     elif property in ("S", "Entropy", "entropy"):
         potential = data[:, 2] / kB2JKmol
     elif property in ("TS"):
-        potential = T * data[:, 2] / eV2Jmol
+        potential = (T * data[:, 2]) / eV2Jmol
     else:
         raise RuntimeError("Property not found")
     thefunction = interp1d(T, potential, kind="linear")
