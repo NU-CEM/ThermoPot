@@ -14,12 +14,6 @@ materials_directory = os.path.dirname(__file__)
 if materials_directory:
     materials_directory = materials_directory + "/"
 
-# See https://phonopy.github.io/phonopy/setting-tags.html#tprop-tmin-tmax-and-tstep for notes on conversion
-eV2Jmol = (
-    constants.physical_constants["electron volt-joule relationship"][0] * constants.N_A
-)
-
-
 class Material(object):
 
     """Parent class for materials properties. See docstrings for derived classes solid, ideal_gas"""
@@ -53,7 +47,9 @@ class Solid(Material):
     solid.H_eV(T,P), solid.H_J(T,P), solid.H_kJ(T,P) : Enthalpy H = U + PV
     solid.mu_eV(T,P), solid.mu_J(T,P), solid.mu_kJ(T,P) : Chemical potential mu = U + PV - TS
 
-    The material is assumed to be incompressible and without thermal expansion
+    The material is assumed to be incompressible and without thermal expansion.
+
+    Temperature is given in Kelvin, Pressure is given in Pa.
     """
 
     def __init__(
@@ -266,6 +262,8 @@ class IdealGas(Material):
 
     Ideal gas law PV=nRT is applied: specifically (dH/dP) at const. T = 0 and int(mu)^P2_P1 dP = kTln(P2/P1)
     Enthalpy has no P dependence as volume is not restricted / expansion step is defined as isothermal
+
+    Temperature is given in Kelvin, Pressure is given in Pa.
     """
 
     # TODO:script for calculating zpe values

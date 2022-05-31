@@ -17,7 +17,7 @@ def convert_phonopy_filetypes(file_in, file_out):
     df_out["F"] = df_in["F"] * thermopot.eV2kJmol
     df_out["U"] = df_in["U"] * thermopot.eV2kJmol
     df_out["Cv"] = df_in["Cv"] * thermopot.kB2JKmol
-    df_out["-TS"] = df_in["-TS"] * thermopot.kB2JKmol / (-1 * df_in["T"])
+    df_out["-TS"] = df_in["-TS"] * thermopot.eV2Jmol / (-1 * df_in["T"])
     df_out = df_out.rename({"-TS": "S"}, axis=1)
     df_out = df_out[["T", "F", "S", "Cv", "U"]]
     df_out = df_out.fillna(0)

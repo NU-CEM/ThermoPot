@@ -8,11 +8,11 @@ class Calculation:
         """All attributes are None until set by derived classes.
 
         Attributes:
-            volume (float): volume of the periodic unit cell
+            volume (float): volume of the periodic unit cell in Angstrom^3
             filepath (str): path to the calculation output files
             energy (float): DFT total energy in eV
             xc (str): XC functional used to calculate the total energy. Options are "hse06" or "pbesol".
-            NAtoms (int): number of atoms in the periodice unit cell
+            NAtoms (int): number of atoms in the periodic unit cell
 
         Returns:
             None.

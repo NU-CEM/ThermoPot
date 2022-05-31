@@ -12,9 +12,9 @@ class Reaction:
 
     Sets methods:
     -------------------
-    reaction.DH_eV_pbesol(T,P), reaction.DH_kJ_pbesol(T,P), reaction.DH_eV_hse06(T,P), reaction.DH_kJ_hse06(T,P) : Enthalpy of formation
-    reaction.DU_eV_pbesol(T,P), reaction.DU_kJ_pbesol(T,P), reaction.DU_eV_hse06(T,P), reaction.DU_kJ_hse06(T,P) : Internal energy change
-    reaction.Dmu_eV_pbesol(T,P), reaction.Dmu_kJ_pbesol(T,P), reaction.Dmu_eV_hse06(T,P), reaction.Dmu_kJ_hse06(T,P) : Gibbs free energy of formation
+    reaction.DH(T,P) : Enthalpy of formation
+    reaction.DU(T,P) : Internal energy change
+    reaction.Dmu(T,P) : Gibbs free energy of formation
     """
 
     def __init__(
@@ -23,6 +23,7 @@ class Reaction:
         products_dictionary,
         temperature=298.15,
         pressure=1e5,
+        fu = 1,
     ):
         """
         reactants_dictionary and products dictionary takes the form { class_instance : formula units }
@@ -31,11 +32,14 @@ class Reaction:
 
         temperature is provided in kelvin, pressure is provided in Pa.
 
+        fu is the number of formula units of the final reactant(s). It is used to scale the calculated changes in energy/enthalpy.
+
         """
         self.reactants = reactants_dictionary
         self.products = products_dictionary
         self.T = temperature
         self.P = pressure
+        self.fu = fu
 
     def DH(self, T=None, P=None, xc="pbesol", units="eV"):
 
@@ -48,7 +52,7 @@ class Reaction:
         for material, fu in self.products.items():
             products_enthalpy += material.H(T, P, xc=xc, units=units) * fu
 
-        return potential.Potential(products_enthalpy - reactants_enthalpy, T, P)
+        return potential.Potential((products_enthalpy - reactants_enthalpy)/self.fu, T, P)
 
     def DU(self, T=None, P=None, xc="pbesol", units="eV"):
 
@@ -61,7 +65,7 @@ class Reaction:
         for material, fu in self.products.items():
             products_energy += material.U(T, xc=xc, units=units) * fu
 
-        return potential.Potential(products_energy - reactants_energy, T, P)
+        return potential.Potential((products_energy - reactants_energy)/self.fu, T, P)
 
     def Dmu(self, T=None, P=None, xc="pbesol", units="eV"):
 
@@ -74,4 +78,4 @@ class Reaction:
         for material, fu in self.products.items():
             products_energy += material.mu(T, P, xc=xc, units=units) * fu
 
-        return potential.Potential(products_energy - reactants_energy, T, P)
+        return potential.Potential((products_energy - reactants_energy)/self.fu, T, P)
