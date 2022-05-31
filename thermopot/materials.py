@@ -146,7 +146,7 @@ class Solid(Material):
             / constants.N_A
         )
         E_dft = self.energies[xc]
-        print("U_func(T) is ",U_func(T))
+        print("U_func(T) is ", U_func(T))
         print("E_dft is ", E_dft)
         print("PV is ", PV)
         print("fu_cell is ", self.fu_cell)
