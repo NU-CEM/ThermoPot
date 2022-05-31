@@ -394,7 +394,7 @@ class IdealGas(Material):
             * constants.physical_constants["joule-electron volt relationship"][0]
             / constants.N_A
         )
-        print (T*S)
+        print(T * S)
         H = self.H(T, xc=xc)
         mu_eV = (
             H
