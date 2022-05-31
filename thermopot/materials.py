@@ -14,6 +14,7 @@ materials_directory = os.path.dirname(__file__)
 if materials_directory:
     materials_directory = materials_directory + "/"
 
+
 class Material(object):
 
     """Parent class for materials properties. See docstrings for derived classes solid, ideal_gas"""
