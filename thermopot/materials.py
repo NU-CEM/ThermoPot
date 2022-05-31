@@ -169,8 +169,12 @@ class Solid(Material):
 
     def mu(self, T, P, xc="pbesol", units="eV"):
         """
-        Free energy of one formula unit of solid, expressed in eV
-        mu = solid.mu_eV(T,P)
+        Free energy of one formula unit of solid.
+        mu = solid.mu(T,P)
+
+        The "xc" keyword specifies the units used.
+        It defaults to "eV per formular unit". Other options are "J" (J/mol) and "kJ" (kJ/mol)
+
 
         The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
         If not specified, it defaults to `pbesol`.
@@ -186,8 +190,6 @@ class Solid(Material):
         TS_func = interpolate.get_potential_aims(self.phonons, "TS")
         H = self.H(T, P, xc=xc)
         mu_eV = H - (TS_func(T)) / self.fu_cell
-
-        print(TS_func(T))
 
         if units == "eV":
             return mu_eV
@@ -207,11 +209,15 @@ class Solid(Material):
                 * 0.001
             )
 
-    def Cv(self, T, units="eV"):
+    def Cv(self, T, units="kB"):
         """
-        Constant-volume heat capacity of one formula unit of solid, expressed in units
-        of the Boltzmann constant kB:
-        Cv = solid.Cv_kB(T)
+        Constant-volume heat capacity of one formula unit of solid
+        Cv = solid.Cv(T)
+
+        The "units" keyword specifies the units used.
+        If unspecified, it defaults to units kB (Boltzmann constant).
+        The other options are "eV" (eV/K), "J" (J/molK) and "kJ" (kJ/molK).
+
         T may be an array, in which case Cv will be an array of the same dimensions.
         """
         Cv_func = interpolate.get_potential_aims(self.phonons, "Cv")
@@ -222,6 +228,7 @@ class Solid(Material):
 
         elif units == "eV":
             return Cv_kB * constants.physical_constants["Boltzmann constant in eV/K"][0]
+
         elif units == "J":
             return (
                 Cv_kB
@@ -252,9 +259,9 @@ class IdealGas(Material):
 
     Sets methods:
     -------------------
-    ideal_gas.U_eV(T), ideal_gas.U_J(T), ideal_gas.U_kJ(T) : Internal energy
-    ideal_gas.H_eV(T), ideal_gas.H_J(T), ideal_gas.H_kJ(T) : Enthalpy H = U + PV
-    ideal_gas.mu_eV(T,P), ideal_gas.mu_J(T,P), ideal_gas.mu_kJ(T,P) : Chemical potential mu = U + PV - TS
+    ideal_gas.U(T) : Internal energy
+    ideal_gas.H(T) : Enthalpy H = U + PV
+    ideal_gas.mu(T,P) : Chemical potential mu = U + PV - TS
 
 
     Ideal gas law PV=nRT is applied: specifically (dH/dP) at const. T = 0 and int(mu)^P2_P1 dP = kTln(P2/P1)
@@ -295,9 +302,12 @@ class IdealGas(Material):
             self.zpe = 0
 
     def U(self, T, xc="pbesol", units="eV"):
-        """Internal energy of one formula unit of ideal gas, expressed in eV.
+        """Internal energy of one formula unit of ideal gas.
         U = ideal_gas.U_eV(T)
 
+        The units keyword specifies the units used.
+        If not specified, it  defaults to  "eV".
+        Can also be specified as "J" for J/mol or "kJ" for kJ/mol"
         The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
         If not specified, it defaults to `pbesol`.
 
@@ -332,8 +342,10 @@ class IdealGas(Material):
             )
 
     def H(self, T, *P, xc="pbesol", units="eV"):
-        """Enthalpy of one formula unit of ideal gas, expressed in eV
-        H = ideal_gas.H_eV(T)
+        """Enthalpy of one formula unit of ideal gas
+        H = ideal_gas.H(T)
+
+        Default is expressed in eV. Can also be expressed in J/mol or kJ/mol.
 
         The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
         If not specified, it defaults to `pbesol`.
@@ -374,8 +386,11 @@ class IdealGas(Material):
 
     def mu(self, T, P, xc="pbesol", units="eV"):
         """
-        Free energy of one formula unit of ideal gas, expressed in eV
-        mu = ideal_gas.mu_eV(T,P)
+        Free energy of one formula unit of ideal gas.
+        mu = ideal_gas.mu(T,P)
+
+        Default is expressed in eV.
+        Can also been expressed in J/mol or kJ/mol.
 
         The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
         If not specified, it defaults to `pbesol`.
@@ -394,7 +409,6 @@ class IdealGas(Material):
             * constants.physical_constants["joule-electron volt relationship"][0]
             / constants.N_A
         )
-        print(T * S)
         H = self.H(T, xc=xc)
         mu_eV = (
             H
