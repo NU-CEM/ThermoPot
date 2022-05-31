@@ -119,8 +119,11 @@ class Solid(Material):
 
     def H(self, T, P, xc="pbesol", units="eV"):
         """
-        Enthalpy of one formula unit of solid, expressed in eV
-        H = solid.H_eV(T,P)
+        Enthalpy of solid
+        H = solid.H(T,P)
+
+        The units keyword specifies the units used.
+        It defaults to "eV per formula unit". Other options are "J" (J/mol) and "kJ" (kJ/mol)
 
         The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
         If not specified, it defaults to `pbesol`.
@@ -141,8 +144,11 @@ class Solid(Material):
             * constants.physical_constants["joule-electron volt relationship"][0]
             / constants.N_A
         )
-
         E_dft = self.energies[xc]
+        print("U_func(T) is ",U_func(T))
+        print("E_dft is ", E_dft)
+        print("PV is ", PV)
+        print("fu_cell is ", self.fu_cell)
         H_eV = ((E_dft + U_func(T)) + PV) / self.fu_cell
 
         if units == "eV":
@@ -168,7 +174,7 @@ class Solid(Material):
         Free energy of one formula unit of solid.
         mu = solid.mu(T,P)
 
-        The "xc" keyword specifies the units used.
+        The units keyword specifies the units used.
         It defaults to "eV per formular unit". Other options are "J" (J/mol) and "kJ" (kJ/mol)
 
 
