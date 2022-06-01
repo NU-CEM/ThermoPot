@@ -146,10 +146,6 @@ class Solid(Material):
             / constants.N_A
         )
         E_dft = self.energies[xc]
-        print("U_func(T) is ", U_func(T))
-        print("E_dft is ", E_dft)
-        print("PV is ", PV)
-        print("fu_cell is ", self.fu_cell)
         H_eV = ((E_dft + U_func(T)) + PV) / self.fu_cell
 
         if units == "eV":

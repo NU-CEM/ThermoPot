@@ -1,5 +1,6 @@
 from thermopot import potential
 
+#TODO: Write a function to ensure that the reaction is balanced.
 
 class Reaction:
     """
