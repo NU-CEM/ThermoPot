@@ -138,7 +138,7 @@ ZrS2_P_31m = solid(name='ZrS2',
     volume = 0.667493E+02,
     phonons = 'phonopy_output/ZrS2_P-3m1.dat',
     N=None,
-)
+)   # LW: I don't think this is correct...
 
 ZrS3 = solid(name='ZrS3',        
     stoichiometry={'Zr':1,'S':3},
