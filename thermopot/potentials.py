@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib as mpl
+import matplotlib.patches as mpatches
 import numpy as np
 
 
@@ -59,17 +60,21 @@ class Potentials:
             raise ValueError("Invalid pressure unit: {0}.".format(T_units))
 
         fig = plt.figure()
+        ax = fig.add_subplot(1, 1, 1)
         colormap = plt.get_cmap("summer")
 
         potential = self.find_potential_minimum()
-        plt.pcolormesh(x_values, y_values, potential, cmap=colormap)
-        plt.legend(
-            [mpl.patches.Patch(color=colormap(b)) for b in range(len(potential))],
-            material_labels,
-        )
+        plt.pcolormesh(x_values, y_values, potential/(len(material_labels)+1), cmap=colormap)
+        # TODO: sort the colour map out so consistent with grid.
+
+        # Set borders in the interval [0, 1]
+        bound = np.linspace(0, 1, len(material_labels)+1)
+
+        plt.legend([mpatches.Patch(color=colormap(i)) for i in bound[:-1]], ["{:s}".format(material_labels[i]) for i in range(len(material_labels))])
 
         plt.xlabel("Temperature / {0}".format(x_unitlabel))
         plt.ylabel("Pressure / {0}".format(P_units))
+        ax.set_yscale("log")
 
         if filename:
             plt.savefig(filename, dpi=200)
