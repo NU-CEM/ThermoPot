@@ -64,13 +64,18 @@ class Potentials:
         colormap = plt.get_cmap("summer")
 
         potential = self.find_potential_minimum()
-        plt.pcolormesh(x_values, y_values, potential/(len(material_labels)+1), cmap=colormap)
+        plt.pcolormesh(
+            x_values, y_values, potential / (len(material_labels) + 1), cmap=colormap
+        )
         # TODO: sort the colour map out so consistent with grid.
 
         # Set borders in the interval [0, 1]
-        bound = np.linspace(0, 1, len(material_labels)+1)
+        bound = np.linspace(0, 1, len(material_labels) + 1)
 
-        plt.legend([mpatches.Patch(color=colormap(i)) for i in bound[:-1]], ["{:s}".format(material_labels[i]) for i in range(len(material_labels))])
+        plt.legend(
+            [mpatches.Patch(color=colormap(i)) for i in bound[:-1]],
+            ["{:s}".format(material_labels[i]) for i in range(len(material_labels))],
+        )
 
         plt.xlabel("Temperature / {0}".format(x_unitlabel))
         plt.ylabel("Pressure / {0}".format(P_units))
