@@ -2,11 +2,11 @@
 
 BaZrS3_perovskite=solid(name='Perovskite BaZrS3',
                      stoichiometry={'Ba':1,'Zr':1,'S':3},
-                     pbesol_energy_eV = -1425525.405951922,
-                     hse06_energy_eV = -1426337.557532134,
+                     pbesol_energy_eV = -1425527.242293242,
+                     hse06_energy_eV = -1426337.508219081
                      fu_cell=4,
                      volume = 0.487976E+03,
-                     phonons = phonopy_ouput/BaZrS3_Pnma.dat,
+                     phonons = 'phonopy_ouput/BaZrS3_Pnma.dat',
                      N=None
                      )
 
@@ -18,7 +18,7 @@ Ba2ZrS4_RP=solid(name='Ruddlesden-Popper Ba2ZrS4',
                      hse06_energy_eV = -592619.518998020,
                      fu_cell=1,
                      volume = 0.188486E+03,
-                     phonons=None,
+                     phonons='phonopy_ouput/BaZrS3_Pnma.dat',
                      N=None
                      )
 
@@ -53,7 +53,7 @@ Ba = solid(name='Ba',
            hse06_energy_eV = -225150.274162429,
            fu_cell=None,
            volume = 0.564599E+02,
-           phonons=None
+           phonons='phonopy_output/Ba_Im-3m.dat'
 )
 
 Zr = solid(name='Zr',
@@ -62,7 +62,7 @@ Zr = solid(name='Zr',
                 hse06_energy_eV =  -197567.044008012,
                 fu_cell=None,
                 volume = 0.448970E+02,
-                phonons=None
+                phonons='phonopy_output/Zr_P63_mmc.dat'
 )
 
 S = solid(name='S',
@@ -71,7 +71,7 @@ S = solid(name='S',
                  hse06_energy_eV = -348162.250350118,
                  fu_cell=None,
                  volume = 0.869131E+03,
-                 phonons=None
+                 phonons='phonopy_output/S_P2_c.dat'
 )
 
 
