@@ -1,3 +1,6 @@
+
+<img src="https://user-images.githubusercontent.com/2452935/181300325-502f1791-51cf-4618-b00f-b90609d6e862.png" width="100">
+
 ThermoPot: An ab-initio thermodynamic modelling package
 ============================
 
