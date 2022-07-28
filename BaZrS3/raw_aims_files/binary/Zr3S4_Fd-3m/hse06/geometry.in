@@ -1,0 +1,31 @@
+# 
+# This is the geometry file that corresponds to the current relaxation step.
+# If you do not want this file to be written, set the "write_restart_geometry" flag to .false.
+#  aims_uuid : 02EB0C89-2F27-408F-A709-25EC468D9C14                                
+# 
+lattice_vector      0.00000000      5.32144380      5.32144380
+lattice_vector      5.32144380      0.00000000      5.32144380
+lattice_vector      5.32144380      5.32144380      0.00000000
+atom_frac       0.74383196      0.74383196      0.74383196 S
+atom_frac       0.74383196      0.74383196      0.26850412 S
+atom_frac       0.74383196      0.26850412      0.74383196 S
+atom_frac       0.26850412      0.74383196      0.74383196 S
+atom_frac       0.25616804      0.25616804      0.73149588 S
+atom_frac       0.25616804      0.25616804      0.25616804 S
+atom_frac       0.25616804      0.73149588      0.25616804 S
+atom_frac       0.73149588      0.25616804      0.25616804 S
+atom_frac       0.12500000      0.12500000      0.12500000 Zr
+atom_frac       0.87500000      0.87500000      0.87500000 Zr
+atom_frac       0.50000000      0.50000000      0.50000000 Zr
+atom_frac       0.50000000      0.50000000      1.00000000 Zr
+atom_frac       0.50000000      0.00000000      0.50000000 Zr
+atom_frac       0.00000000      0.50000000      0.50000000 Zr
+# 
+# What follows is the current estimated Hessian matrix constructed by the BFGS algorithm.
+# This is NOT the true Hessian matrix of the system.
+# If you do not want this information here, switch it off using the "hessian_to_restart_geometry" keyword.
+# 
+trust_radius             0.4000000060
+hessian_block                1       1        1166.977319           0.000000           0.000000           0.000000           0.000000           0.000000           0.000000           0.000000           0.000000
+hessian_block_lv             1       1          15.688310           0.000000           0.000000           0.000000           0.000000           0.000000           0.000000           0.000000           0.000000
+hessian_block_lv_atom        1       1           1.868408           0.000000           0.000000           0.000000           0.000000           0.000000           0.000000           0.000000           0.000000

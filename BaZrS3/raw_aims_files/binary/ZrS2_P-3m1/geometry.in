@@ -1,0 +1,14 @@
+lattice_vector      1.8455 -3.19649976537  0.0 
+lattice_vector      1.8455  3.19649976537  0.0
+lattice_vector      0.0    0.0     6.611
+atom_frac       0.0 0.0 0.0  Zr
+atom_frac       0.33333333 0.66666666 0.22  S
+atom_frac       0.66666666 0.33333333 -0.22  S
+symmetry_n_params 3 2 1
+symmetry_params a c z2
+symmetry_lv a*0.5, -0.86602540378*a, 0.0
+symmetry_lv a*0.5, 0.86602540378*a, 0.0 
+symmetry_lv 0.0, 0.0, c
+symmetry_frac  0.0,0.0,0.0
+symmetry_frac  0.33333333,0.66666666,z2
+symmetry_frac  0.66666666,0.33333333,-z2

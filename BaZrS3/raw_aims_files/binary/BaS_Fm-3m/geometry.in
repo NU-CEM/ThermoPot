@@ -1,0 +1,12 @@
+lattice_vector      0.0       3.16     3.16
+lattice_vector      3.16      0.0      3.16
+lattice_vector      3.16      3.16     0.0
+atom_frac       0.0 0.0 0.0  Ba
+atom_frac       0.5 0.5 0.5  S
+symmetry_n_params 1 1 0
+symmetry_params a
+symmetry_lv 0.0, a*0.5, a*0.5 
+symmetry_lv a*0.5, 0.0, a*0.5 
+symmetry_lv a*0.5, a*0.5, 0.0
+symmetry_frac  0.0, 0.0, 0.0 
+symmetry_frac  0.5, 0.5, 0.5 
