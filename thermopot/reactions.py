@@ -94,8 +94,8 @@ class Reaction:
         reactants_energy, products_energy = 0, 0
 
         for material, fu in self.reactants.items():
-            reactants_energy += (material.energies[xc]/material.fu_cell) * fu
+            reactants_energy += (material.energies[xc] / material.fu_cell) * fu
         for material, fu in self.products.items():
-            products_energy += (material.energies[xc]/material.fu_cell) * fu
+            products_energy += (material.energies[xc] / material.fu_cell) * fu
 
         return (products_energy - reactants_energy) / self.fu_scaling

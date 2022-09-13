@@ -45,7 +45,7 @@ class Calculation:
         self.xc = xc
         self.NAtoms = NAtoms
 
-        self.check_attributes()
+        # self.check_attributes()
 
     def check_attributes(self):
         """Check that the Calculation class attributes make basic sense."""
