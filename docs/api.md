@@ -1,22 +1,22 @@
 # API documentation
 
-::: thermopot.calculations.Calculation
+## thermopot.calculations
+::: thermopot.calculations
 
-::: thermopot.calculations.AimsCalculation
+## thermopot.materials
+::: thermopot.materials
 
-::: thermopot.materials.Material
+## thermopot.reactions
+::: thermopot.reactions
 
-::: thermopot.materials.Solid
+## thermopot.potential
+::: thermopot.potential
 
-::: thermopot.materials.IdealGas
+### thermopot.potentials
+::: thermopot.potentials
 
-::: thermopot.reactions.Reaction
-
-::: thermopot.interpolate.get_potential_aims
-
-::: thermopot.interpolate.get_potential_nist_table
-
-::: thermopot.interpolate.get_potential_sulfur_table
+### thermopot.interpolate
+::: thermopot.interpolate
 
 
 

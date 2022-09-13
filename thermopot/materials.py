@@ -1,3 +1,8 @@
+"""
+Module contains the classes Solid and IdealGas to store basic material data.
+Each class provides methods for calculating various thermodynamic properties.
+"""
+
 import numpy as np
 from scipy import constants
 from thermopot import interpolate
@@ -5,19 +10,21 @@ from thermopot import interpolate
 
 import os  # get correct path for datafiles when called from another directory
 
-# TODO: check that the filepath is correct when creating materials object
-# TODO: make the P array 2D and transposed if required
-
 materials_directory = os.path.dirname(__file__)
 # Append a trailing slash to make coherent directory name - this would select the
-#  root directory in the case of no prefix, so we need to check
+# root directory in the case of no prefix, so we need to check
 if materials_directory:
     materials_directory = materials_directory + "/"
 
 
 class Material(object):
+    """
+    Parent class for storing materials properties.
 
-    """Parent class for materials properties. See docstrings for derived classes solid, ideal_gas"""
+    Attributes:
+        name (str): Identifying string
+        stoichiometry (dict): relates element to the number of atoms in a single formula unit
+    """
 
     def __init__(self, name, stoichiometry, energies):
 
@@ -73,8 +80,6 @@ class Solid(Material):
                 self.NAtoms = calculation.NAtoms
             else:
                 pass
-                # TODO: allow pass multiple calculations as a list. Check
-                #  all the same (using math.isclose) except energy.
 
         else:
             Material.__init__(self, name, stoichiometry, energies)
@@ -84,8 +89,6 @@ class Solid(Material):
 
         self.fu_cell = self.NAtoms / self.N
         self.phonons = materials_directory + phonon_filepath
-
-        # TODO: allow calculations without giving phonons
 
     def U(self, T, xc="pbesol", units="eV"):
         """Internal energy of one formula unit of solid, expressed in eV.
