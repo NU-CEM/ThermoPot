@@ -22,8 +22,11 @@ class Material(object):
     Parent class for storing materials properties.
 
     Attributes:
+    
         name (str): Identifying string
         stoichiometry (dict): relates element to the number of atoms in a single formula unit
+        energies (dict): relates xc functional to DFT total energy in eV
+        N (int): number of atoms per formula unit
     """
 
     def __init__(self, name, stoichiometry, energies):
@@ -37,27 +40,25 @@ class Material(object):
 class Solid(Material):
     """
     Class for solid material data.
+    
+    Note:
+    
+        The material is assumed to be incompressible and without thermal expansion.
+    
+    Example:
+        
+        BaS = Solid('BaS',{'Ba':1,'S':1},"./phonon_data/Ba_S",calculation=BaS_calc)
 
-    Sets properties:
-    -------------------
-    solid.name             (Identifying string)
-    solid.stoichiometry    (Dict relating element to number of atoms in a single formula unit)
-    solid.energies         (Dict relating xc functional to DFT total energy in eV)
-    solid.fu_cell          (Number of formula units in periodic unit cell)
-    solid.volume           (Volume of unit cell in cubic angstroms (m3 * 10^30))
-    solid.phonons          (String containing path to phonopy-FHI-aims output data file)
-    solid.N                (Number of atoms per formula unit)
-    solid.NAtoms           (Number of atoms in periodic unit cell)
-
-    Sets methods:
-    -------------------
-    solid.U_eV(T), solid.U_J(T), solid.U_kJ(T) : Internal energy
-    solid.H_eV(T,P), solid.H_J(T,P), solid.H_kJ(T,P) : Enthalpy H = U + PV
-    solid.mu_eV(T,P), solid.mu_J(T,P), solid.mu_kJ(T,P) : Chemical potential mu = U + PV - TS
-
-    The material is assumed to be incompressible and without thermal expansion.
-
-    Temperature is given in Kelvin, Pressure is given in Pa.
+    Attributes:
+    
+        name (str): Identifying string
+        stoichiometry (dict): relates element to the number of atoms in a single formula unit
+        energies (dict): relates xc functional to DFT total energy in eV
+        N (int): number of atoms per formula unit
+        fu_cell (int): number of formula units in periodic unit cell
+        volume (float): volume of unit cell in Angstroms^3
+        phonon_filepath (str): path to the phonon output data
+        NAtoms (int): number of atoms in periodic unit cell
     """
 
     def __init__(
@@ -70,6 +71,17 @@ class Solid(Material):
         energies=False,
         NAtoms=1,
     ):
+    """
+    Args:
+        
+       name (str): Identifying string
+       stoichiometry (dict): relates element to the number of atoms in a single formula unit
+       phonon_filepath (str): path to the phonon output data
+       calculation (thermopot.calculation.Calculation, optional): instance of the thermopot.calculation.Calculation class
+       volume (float, optional): volume of unit cell in Angstroms^3
+       energies (dict, optional): relates xc functional to DFT total energy in eV
+       NAtoms (int): number of atoms in periodic unit cell
+    """
 
         if calculation is not False:
             if type(calculation) is not list:
@@ -88,17 +100,28 @@ class Solid(Material):
             self.volume = volume
 
         self.fu_cell = self.NAtoms / self.N
-        self.phonons = materials_directory + phonon_filepath
+        self.phonon_filepath = materials_directory + phonon_filepath
 
     def U(self, T, xc="pbesol", units="eV"):
-        """Internal energy of one formula unit of solid, expressed in eV.
-        U = solid.U_eV(T)
-
-        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
-        If not specified, it defaults to `pbesol`.
-        Returns a matrix with the same dimensions as T
         """
-        U_func = interpolate.get_potential_aims(self.phonons, "U")
+        Calculates the internal energy of one formular unit of solid.
+        
+        Example:
+        
+            U = BaS.U(300,xc="pbesol",units="eV")
+            
+        Args:
+        
+            T (float/ndarray): 1D Numpy array containing temperature data (in Kelvin) as a float, or a single temperature as a float.
+            xc (str, optional): DFT XC functional used to calculate the ground state energy
+            units (str, optional):  specifies the units as "eV", "J" or "kJ"
+        
+        Returns:
+        
+            U (float/ndarray): 1D Numpy array (with the same dimensions as T) containing the internal energies of one formula unit of solid 
+        
+        """
+        U_func = interpolate.get_potential_aims(self.phonon_filepath, "U")
         E_dft = self.energies[xc]
 
         U_eV = (E_dft + U_func(T)) / self.fu_cell
@@ -123,9 +146,10 @@ class Solid(Material):
 
     def H(self, T, P, xc="pbesol", units="eV"):
         """
-        Enthalpy of solid
+        Enthalpy of solid, H = U + PV.
         H = solid.H(T,P)
 
+         Pressure is given in Pa.
         The units keyword specifies the units used.
         It defaults to "eV per formula unit". Other options are "J" (J/mol) and "kJ" (kJ/mol)
 
@@ -140,7 +164,7 @@ class Solid(Material):
 
         Other T, P arrays may result in undefined behaviour.
         """
-        U_func = interpolate.get_potential_aims(self.phonons, "U")
+        U_func = interpolate.get_potential_aims(self.phonon_filepath, "U")
         PV = (
             P
             * self.volume
@@ -171,7 +195,7 @@ class Solid(Material):
 
     def mu(self, T, P, xc="pbesol", units="eV"):
         """
-        Free energy of one formula unit of solid.
+        Free energy of one formula unit of solid, mu = U + PV - TS
         mu = solid.mu(T,P)
 
         The units keyword specifies the units used.
@@ -189,7 +213,7 @@ class Solid(Material):
 
         Other T, P arrays may result in undefined behaviour.
         """
-        TS_func = interpolate.get_potential_aims(self.phonons, "TS")
+        TS_func = interpolate.get_potential_aims(self.phonon_filepath, "TS")
         H = self.H(T, P, xc=xc)
         mu_eV = H - (TS_func(T)) / self.fu_cell
 
@@ -222,7 +246,7 @@ class Solid(Material):
 
         T may be an array, in which case Cv will be an array of the same dimensions.
         """
-        Cv_func = interpolate.get_potential_aims(self.phonons, "Cv")
+        Cv_func = interpolate.get_potential_aims(self.phonon_filepath, "Cv")
         Cv_kB = Cv_func(T) / self.fu_cell
 
         if units == "kB":
