@@ -110,7 +110,7 @@ class AimsCalculation(Calculation):
         """
         Returns:
             (str): XC functional used to calculate the total energy
-        """"
+        """
         with open(self.filepath) as contents:
             return re.findall("xc\s+(\S+)", contents.read())[-1]
 
