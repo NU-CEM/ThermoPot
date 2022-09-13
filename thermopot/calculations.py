@@ -13,7 +13,7 @@ class Calculation:
 
     Example:
 
-        Calculation(volume=63.2552, energy=-235926.586148547, xc='pbesol', NAtoms=2)
+        BaS_calc = Calculation(volume=63.2552, energy=-235926.586148547, xc='pbesol', NAtoms=2)
 
     Attributes:
 
@@ -68,7 +68,7 @@ class AimsCalculation(Calculation):
 
     Example:
 
-        AimsCalculation("./aims_output/output.aims")
+       BaS_calc = AimsCalculation("./aims_output/output.aims")
 
     Attributes:
 
