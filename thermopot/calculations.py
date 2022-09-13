@@ -1,9 +1,3 @@
-"""
-Module to parse and store data from electronic structure calculations.
-Contains the parent class Calculation to store data from a variety of sources.
-Contains the child class AimsCalculation to read and store data from a FHI-aims calculation.
-"""
-
 import re
 
 class Calculation:
