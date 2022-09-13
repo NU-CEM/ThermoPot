@@ -87,3 +87,15 @@ class Reaction:
         return potential.Potential(
             (products_energy - reactants_energy) / self.fu_scaling, T, P
         )
+
+    def DE(self, xc="pbesol"):
+        # units here are whatever is specified when creating material...
+
+        reactants_energy, products_energy = 0, 0
+
+        for material, fu in self.reactants.items():
+            reactants_energy += (material.energies[xc]/material.fu_cell) * fu
+        for material, fu in self.products.items():
+            products_energy += (material.energies[xc]/material.fu_cell) * fu
+
+        return (products_energy - reactants_energy) / self.fu_scaling
