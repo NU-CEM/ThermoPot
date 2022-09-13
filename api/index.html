@@ -1040,8 +1040,8 @@
   </a>
 
 
-<h1 id="api-documentation">API documentation</h1>
-<h2 id="thermopotcalculations">thermopot.calculations</h2>
+<h1 id="api-documentation">API documentation<a class="headerlink" href="#api-documentation" title="Permanent link"></a></h1>
+<h2 id="thermopotcalculations">thermopot.calculations<a class="headerlink" href="#thermopotcalculations" title="Permanent link"></a></h2>
 
 
 <div class="doc doc-object doc-module">
@@ -1069,7 +1069,7 @@
         <code>AimsCalculation</code>
 
 
-</h2>
+<a href="#thermopot.calculations.AimsCalculation" class="headerlink" title="Permanent link"></a></h2>
 
 
   <div class="doc doc-contents ">
@@ -1179,7 +1179,7 @@
 <h3 id="thermopot.calculations.AimsCalculation.__init__" class="doc doc-heading">
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="s1">&#39;./calculation.out&#39;</span><span class="p">)</span></code>
 
-</h3>
+<a href="#thermopot.calculations.AimsCalculation.__init__" class="headerlink" title="Permanent link"></a></h3>
 
 
   <div class="doc doc-contents ">
@@ -1253,7 +1253,7 @@
         <code>Calculation</code>
 
 
-</h2>
+<a href="#thermopot.calculations.Calculation" class="headerlink" title="Permanent link"></a></h2>
 
 
   <div class="doc doc-contents ">
@@ -1355,7 +1355,7 @@
 <h3 id="thermopot.calculations.Calculation.__init__" class="doc doc-heading">
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">energy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">NAtoms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">volume</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filepath</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
-</h3>
+<a href="#thermopot.calculations.Calculation.__init__" class="headerlink" title="Permanent link"></a></h3>
 
 
   <div class="doc doc-contents ">
@@ -1479,7 +1479,7 @@
 <h3 id="thermopot.calculations.Calculation.check_attributes" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">check_attributes</span><span class="p">()</span></code>
 
-</h3>
+<a href="#thermopot.calculations.Calculation.check_attributes" class="headerlink" title="Permanent link"></a></h3>
 
 
   <div class="doc doc-contents ">
@@ -1532,7 +1532,7 @@
 
   </div>
 
-</div><h2 id="thermopotmaterials">thermopot.materials</h2>
+</div><h2 id="thermopotmaterials">thermopot.materials<a class="headerlink" href="#thermopotmaterials" title="Permanent link"></a></h2>
 
 
 <div class="doc doc-object doc-module">
@@ -1560,7 +1560,7 @@
         <code>IdealGas</code>
 
 
-</h2>
+<a href="#thermopot.materials.IdealGas" class="headerlink" title="Permanent link"></a></h2>
 
 
   <div class="doc doc-contents ">
@@ -1569,13 +1569,13 @@
 
   
       <p>Class for ideal gas properties.</p>
-<h4 id="thermopot.materials.IdealGas--sets-properties">Sets properties:</h4>
+<h4 id="thermopot.materials.IdealGas--sets-properties">Sets properties:<a class="headerlink" href="#thermopot.materials.IdealGas--sets-properties" title="Permanent link"></a></h4>
 <p>ideal_gas.name             (string)
 ideal_gas.stoichiometry    (Dict relating element to number of atoms in a single formula unit)
 ideal_gas.energies         (Dict relating xc functional with DFT total energy)
 ideal_gas.thermo_data      (String containing path to NIST data table)
 ideal_gas.N                (Number of atoms per formula unit)</p>
-<h4 id="thermopot.materials.IdealGas--sets-methods">Sets methods:</h4>
+<h4 id="thermopot.materials.IdealGas--sets-methods">Sets methods:<a class="headerlink" href="#thermopot.materials.IdealGas--sets-methods" title="Permanent link"></a></h4>
 <p>ideal_gas.U(T) : Internal energy
 ideal_gas.H(T) : Enthalpy H = U + PV
 ideal_gas.mu(T,P) : Chemical potential mu = U + PV - TS</p>
@@ -1997,7 +1997,7 @@ Enthalpy has no P dependence as volume is not restricted / expansion step is def
 <h3 id="thermopot.materials.IdealGas.H" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">H</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="o">*</span><span class="n">P</span><span class="p">,</span> <span class="n">xc</span><span class="o">=</span><span class="s1">&#39;pbesol&#39;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;eV&#39;</span><span class="p">)</span></code>
 
-</h3>
+<a href="#thermopot.materials.IdealGas.H" class="headerlink" title="Permanent link"></a></h3>
 
 
   <div class="doc doc-contents ">
@@ -2108,7 +2108,7 @@ If not specified, it defaults to <code>pbesol</code>.</p>
 <h3 id="thermopot.materials.IdealGas.U" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">U</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">xc</span><span class="o">=</span><span class="s1">&#39;pbesol&#39;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;eV&#39;</span><span class="p">)</span></code>
 
-</h3>
+<a href="#thermopot.materials.IdealGas.U" class="headerlink" title="Permanent link"></a></h3>
 
 
   <div class="doc doc-contents ">
@@ -2214,7 +2214,7 @@ If not specified, it defaults to <code>pbesol</code>.</p>
 <h3 id="thermopot.materials.IdealGas.mu" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">mu</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">xc</span><span class="o">=</span><span class="s1">&#39;pbesol&#39;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;eV&#39;</span><span class="p">)</span></code>
 
-</h3>
+<a href="#thermopot.materials.IdealGas.mu" class="headerlink" title="Permanent link"></a></h3>
 
 
   <div class="doc doc-contents ">
@@ -2362,7 +2362,7 @@ of H values corresponding to T,P pairs.</p>
         <code>Material</code>
 
 
-</h2>
+<a href="#thermopot.materials.Material" class="headerlink" title="Permanent link"></a></h2>
 
 
   <div class="doc doc-contents ">
@@ -2425,7 +2425,7 @@ of H values corresponding to T,P pairs.</p>
         <code>Solid</code>
 
 
-</h2>
+<a href="#thermopot.materials.Solid" class="headerlink" title="Permanent link"></a></h2>
 
 
   <div class="doc doc-contents ">
@@ -2434,7 +2434,7 @@ of H values corresponding to T,P pairs.</p>
 
   
       <p>Class for solid material data.</p>
-<h4 id="thermopot.materials.Solid--sets-properties">Sets properties:</h4>
+<h4 id="thermopot.materials.Solid--sets-properties">Sets properties:<a class="headerlink" href="#thermopot.materials.Solid--sets-properties" title="Permanent link"></a></h4>
 <p>solid.name             (Identifying string)
 solid.stoichiometry    (Dict relating element to number of atoms in a single formula unit)
 solid.energies         (Dict relating xc functional to DFT total energy in eV)
@@ -2443,7 +2443,7 @@ solid.volume           (Volume of unit cell in cubic angstroms (m3 * 10^30))
 solid.phonons          (String containing path to phonopy-FHI-aims output data file)
 solid.N                (Number of atoms per formula unit)
 solid.NAtoms           (Number of atoms in periodic unit cell)</p>
-<h4 id="thermopot.materials.Solid--sets-methods">Sets methods:</h4>
+<h4 id="thermopot.materials.Solid--sets-methods">Sets methods:<a class="headerlink" href="#thermopot.materials.Solid--sets-methods" title="Permanent link"></a></h4>
 <p>solid.U_eV(T), solid.U_J(T), solid.U_kJ(T) : Internal energy
 solid.H_eV(T,P), solid.H_J(T,P), solid.H_kJ(T,P) : Enthalpy H = U + PV
 solid.mu_eV(T,P), solid.mu_J(T,P), solid.mu_kJ(T,P) : Chemical potential mu = U + PV - TS</p>
@@ -2904,7 +2904,7 @@ solid.mu_eV(T,P), solid.mu_J(T,P), solid.mu_kJ(T,P) : Chemical potential mu = U 
 <h3 id="thermopot.materials.Solid.Cv" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">Cv</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;kB&#39;</span><span class="p">)</span></code>
 
-</h3>
+<a href="#thermopot.materials.Solid.Cv" class="headerlink" title="Permanent link"></a></h3>
 
 
   <div class="doc doc-contents ">
@@ -2998,7 +2998,7 @@ The other options are "eV" (eV/K), "J" (J/molK) and "kJ" (kJ/molK).</p>
 <h3 id="thermopot.materials.Solid.H" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">H</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">xc</span><span class="o">=</span><span class="s1">&#39;pbesol&#39;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;eV&#39;</span><span class="p">)</span></code>
 
-</h3>
+<a href="#thermopot.materials.Solid.H" class="headerlink" title="Permanent link"></a></h3>
 
 
   <div class="doc doc-contents ">
@@ -3123,7 +3123,7 @@ of H values corresponding to T,P pairs.</p>
 <h3 id="thermopot.materials.Solid.U" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">U</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">xc</span><span class="o">=</span><span class="s1">&#39;pbesol&#39;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;eV&#39;</span><span class="p">)</span></code>
 
-</h3>
+<a href="#thermopot.materials.Solid.U" class="headerlink" title="Permanent link"></a></h3>
 
 
   <div class="doc doc-contents ">
@@ -3208,7 +3208,7 @@ Returns a matrix with the same dimensions as T</p>
 <h3 id="thermopot.materials.Solid.mu" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">mu</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">xc</span><span class="o">=</span><span class="s1">&#39;pbesol&#39;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;eV&#39;</span><span class="p">)</span></code>
 
-</h3>
+<a href="#thermopot.materials.Solid.mu" class="headerlink" title="Permanent link"></a></h3>
 
 
   <div class="doc doc-contents ">
@@ -3329,7 +3329,7 @@ of H values corresponding to T,P pairs.</p>
 
   </div>
 
-</div><h2 id="thermopotreactions">thermopot.reactions</h2>
+</div><h2 id="thermopotreactions">thermopot.reactions<a class="headerlink" href="#thermopotreactions" title="Permanent link"></a></h2>
 
 
 <div class="doc doc-object doc-module">
@@ -3357,17 +3357,17 @@ of H values corresponding to T,P pairs.</p>
         <code>Reaction</code>
 
 
-</h2>
+<a href="#thermopot.reactions.Reaction" class="headerlink" title="Permanent link"></a></h2>
 
 
   <div class="doc doc-contents ">
 
   
       <p>Class for reaction data</p>
-<h4 id="thermopot.reactions.Reaction--sets-properties">Sets properties:</h4>
+<h4 id="thermopot.reactions.Reaction--sets-properties">Sets properties:<a class="headerlink" href="#thermopot.reactions.Reaction--sets-properties" title="Permanent link"></a></h4>
 <p>reaction.reactants     (Dict relating reactant materials to a number of formula units)
 reaction.products      (Dict relating product materials to a number of formular units)</p>
-<h4 id="thermopot.reactions.Reaction--sets-methods">Sets methods:</h4>
+<h4 id="thermopot.reactions.Reaction--sets-methods">Sets methods:<a class="headerlink" href="#thermopot.reactions.Reaction--sets-methods" title="Permanent link"></a></h4>
 <p>reaction.DH(T,P) : Enthalpy of formation
 reaction.DU(T,P) : Internal energy change
 reaction.Dmu(T,P) : Gibbs free energy of formation</p>
@@ -3564,7 +3564,7 @@ reaction.Dmu(T,P) : Gibbs free energy of formation</p>
 <h3 id="thermopot.reactions.Reaction.__init__" class="doc doc-heading">
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">reactants_dictionary</span><span class="p">,</span> <span class="n">products_dictionary</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">298.15</span><span class="p">,</span> <span class="n">pressure</span><span class="o">=</span><span class="mf">100000.0</span><span class="p">,</span> <span class="n">fu</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
 
-</h3>
+<a href="#thermopot.reactions.Reaction.__init__" class="headerlink" title="Permanent link"></a></h3>
 
 
   <div class="doc doc-contents ">
@@ -3643,7 +3643,7 @@ or <code>materials.ideal_gas</code> classes.</p>
 
   </div>
 
-</div><h2 id="thermopotpotential">thermopot.potential</h2>
+</div><h2 id="thermopotpotential">thermopot.potential<a class="headerlink" href="#thermopotpotential" title="Permanent link"></a></h2>
 
 
 <div class="doc doc-object doc-module">
@@ -3671,7 +3671,7 @@ or <code>materials.ideal_gas</code> classes.</p>
         <code>Potential</code>
 
 
-</h2>
+<a href="#thermopot.potential.Potential" class="headerlink" title="Permanent link"></a></h2>
 
 
   <div class="doc doc-contents ">
@@ -3865,7 +3865,7 @@ or <code>materials.ideal_gas</code> classes.</p>
 <h3 id="thermopot.potential.Potential.plot_TvsP" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">plot_TvsP</span><span class="p">(</span><span class="n">potential_label</span><span class="o">=</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">Delta G_f$ / kJ mol$^{-1}$&#39;</span><span class="p">,</span> <span class="n">scale_range</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">600</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">filename</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">T_units</span><span class="o">=</span><span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="n">P_units</span><span class="o">=</span><span class="s1">&#39;Pa&#39;</span><span class="p">)</span></code>
 
-</h3>
+<a href="#thermopot.potential.Potential.plot_TvsP" class="headerlink" title="Permanent link"></a></h3>
 
 
   <div class="doc doc-contents ">
@@ -4051,7 +4051,7 @@ filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided
 
   </div>
 
-</div><h3 id="thermopotpotentials">thermopot.potentials</h3>
+</div><h3 id="thermopotpotentials">thermopot.potentials<a class="headerlink" href="#thermopotpotentials" title="Permanent link"></a></h3>
 
 
 <div class="doc doc-object doc-module">
@@ -4079,7 +4079,7 @@ filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided
         <code>Potentials</code>
 
 
-</h2>
+<a href="#thermopot.potentials.Potentials" class="headerlink" title="Permanent link"></a></h2>
 
 
   <div class="doc doc-contents ">
@@ -4305,7 +4305,7 @@ filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided
 <h3 id="thermopot.potentials.Potentials.plot_TvsP" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">plot_TvsP</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">material_labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">T_units</span><span class="o">=</span><span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="n">P_units</span><span class="o">=</span><span class="s1">&#39;Pa&#39;</span><span class="p">)</span></code>
 
-</h3>
+<a href="#thermopot.potentials.Potentials.plot_TvsP" class="headerlink" title="Permanent link"></a></h3>
 
 
   <div class="doc doc-contents ">
@@ -4487,7 +4487,7 @@ filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided
 
   </div>
 
-</div><h3 id="thermopotinterpolate">thermopot.interpolate</h3>
+</div><h3 id="thermopotinterpolate">thermopot.interpolate<a class="headerlink" href="#thermopotinterpolate" title="Permanent link"></a></h3>
 
 
 <div class="doc doc-object doc-module">
@@ -4515,7 +4515,7 @@ filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided
 <h2 id="thermopot.interpolate.get_potential_aims" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">get_potential_aims</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="nb">property</span><span class="p">)</span></code>
 
-</h2>
+<a href="#thermopot.interpolate.get_potential_aims" class="headerlink" title="Permanent link"></a></h2>
 
 
   <div class="doc doc-contents ">
@@ -4585,7 +4585,7 @@ Outputs data for S and Cv in kB/cell, U, F and TS in eV/cell.</p>
 <h2 id="thermopot.interpolate.get_potential_nist_table" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">get_potential_nist_table</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="nb">property</span><span class="p">)</span></code>
 
-</h2>
+<a href="#thermopot.interpolate.get_potential_nist_table" class="headerlink" title="Permanent link"></a></h2>
 
 
   <div class="doc doc-contents ">
@@ -4650,7 +4650,7 @@ Outputs data for S and Cv in kB/cell, U, F and TS in eV/cell.</p>
 <h2 id="thermopot.interpolate.get_potential_sulfur_table" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">get_potential_sulfur_table</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></code>
 
-</h2>
+<a href="#thermopot.interpolate.get_potential_sulfur_table" class="headerlink" title="Permanent link"></a></h2>
 
 
   <div class="doc doc-contents ">
