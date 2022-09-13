@@ -9,11 +9,13 @@ def BaS_hybrid_calculation():
         os.path.join(os.path.dirname(__file__), "data/BaS_hse06_outfile")
     )
 
+
 @pytest.fixture()
 def BaS_pbesol_calculation():
     return calculations.AimsCalculation(
         os.path.join(os.path.dirname(__file__), "data/BaS_pbesol_relax_outfile")
     )
+
 
 @pytest.fixture()
 def BaS_solid():
@@ -23,6 +25,7 @@ def BaS_solid():
         os.path.join(os.path.dirname(__file__), "data/BaS_phonons"),
         BaS_pbesol_calculation,
     )
+
 
 @pytest.fixture()
 def BaS_BaS_reaction():
