@@ -16,7 +16,7 @@ class Calculation:
         Calculation(volume=63.2552, energy=-235926.586148547, xc='pbesol', NAtoms=2)
 
     Attributes:
-    
+
         volume (float): volume of the periodic unit cell in Angstrom^3
         filepath (str): path to the calculation output files
         energy (float): DFT total energy in eV
@@ -27,11 +27,11 @@ class Calculation:
     def __init__(self, energy=None, xc=None, NAtoms=None, volume=None, filepath=None):
         """
         Note:
-        
+
             All attributes are None until set by derived classes or specified by user.
 
         Args:
-        
+
             volume (float): volume of the periodic unit cell in Angstrom^3
             filepath (str, optional): path to the calculation output files
             energy (float): DFT total energy in eV
@@ -71,7 +71,7 @@ class AimsCalculation(Calculation):
         AimsCalculation("./aims_output/output.aims")
 
     Attributes:
-    
+
         volume (float): volume of the periodic unit cell in Angstrom^3
         filepath (str): path to the calculation output files
         energy (float): DFT total energy in eV
@@ -82,7 +82,7 @@ class AimsCalculation(Calculation):
     def __init__(self, filepath="./calculation.out"):
         """
         Args:
-        
+
             filepath (str): path to the calculation output files
         """
         super().__init__()
@@ -95,7 +95,7 @@ class AimsCalculation(Calculation):
     def get_volume(self):
         """
         Returns:
-        
+
             (float): volume of the periodic unit cell in Angstrom^3
         """
         with open(self.filepath) as contents:
@@ -106,7 +106,7 @@ class AimsCalculation(Calculation):
     def get_energy(self):
         """
         Returns:
-        
+
             (float): DFT total energy in eV
         """
         with open(self.filepath) as contents:
@@ -119,7 +119,7 @@ class AimsCalculation(Calculation):
     def get_xc(self):
         """
         Returns:
-        
+
             (str): XC functional used to calculate the total energy
         """
         with open(self.filepath) as contents:
@@ -128,7 +128,7 @@ class AimsCalculation(Calculation):
     def get_NAtoms(self):
         """
         Returns:
-        
+
             (int): number of atoms in the periodic unit cell
         """
         with open(self.filepath) as contents:
