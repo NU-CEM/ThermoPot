@@ -10,6 +10,11 @@ class Calculation:
     """
     Parent class for parsing and storing data from electronic structure calculations.
     
+    Example:
+        ::
+    
+        Calculation(volume=63.2552, energy=-235926.586148547, xc='pbesol', NAtoms=2)
+    
     Attributes:
         volume (float): volume of the periodic unit cell in Angstrom^3
         filepath (str): path to the calculation output files
@@ -53,6 +58,11 @@ class Calculation:
 
 class AimsCalculation(Calculation):
     """Class for parsing and storing data from a FHI-AIMS total energy calculation.
+    
+    Example:
+        ::
+    
+        AimsCalculation("./aims_output/output.aims")
     
     Attributes:
         volume (float): volume of the periodic unit cell in Angstrom^3
