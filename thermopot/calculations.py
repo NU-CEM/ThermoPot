@@ -6,14 +6,15 @@ Contains the child class AimsCalculation to read and store data from a FHI-aims 
 
 import re
 
+
 class Calculation:
     """
     Parent class for parsing and storing data from electronic structure calculations.
-    
+
     Example:
-    
+
         Calculation(volume=63.2552, energy=-235926.586148547, xc='pbesol', NAtoms=2)
-    
+
     Attributes:
         volume (float): volume of the periodic unit cell in Angstrom^3
         filepath (str): path to the calculation output files
@@ -24,7 +25,7 @@ class Calculation:
 
     def __init__(self, energy=None, xc=None, NAtoms=None, volume=None, filepath=None):
         """All attributes are None until set by derived classes or specified by user.
-        
+
         Args:
             volume (float): volume of the periodic unit cell in Angstrom^3
             filepath (str, optional): path to the calculation output files
@@ -38,13 +39,15 @@ class Calculation:
         self.energy = energy
         self.xc = xc
         self.NAtoms = NAtoms
-        
+
         self.check_attributes()
 
     def check_attributes(self):
         """Check that the Calculation class attributes make basic sense."""
 
-        assert type(self.filepath) == str or self.filepath is None, "filepath must be a string"
+        assert (
+            type(self.filepath) == str or self.filepath is None
+        ), "filepath must be a string"
         assert type(self.energy) == float, "energy must be a float"
         assert type(self.xc) == str, "xc must be a string"
         assert (
@@ -57,18 +60,18 @@ class Calculation:
 
 class AimsCalculation(Calculation):
     """Class for parsing and storing data from a FHI-AIMS total energy calculation.
-    
+
     Example:
-    
+
         AimsCalculation("./aims_output/output.aims")
-    
+
     Attributes:
         volume (float): volume of the periodic unit cell in Angstrom^3
         filepath (str): path to the calculation output files
         energy (float): DFT total energy in eV
         xc (str): XC functional used to calculate the total energy
         NAtoms (int): number of atoms in the periodic unit cell
-        """
+    """
 
     def __init__(self, filepath="./calculation.out"):
         """

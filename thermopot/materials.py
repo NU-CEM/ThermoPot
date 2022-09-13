@@ -16,10 +16,11 @@ materials_directory = os.path.dirname(__file__)
 if materials_directory:
     materials_directory = materials_directory + "/"
 
+
 class Material(object):
     """
-    Parent class for storing materials properties. 
-    
+    Parent class for storing materials properties.
+
     Attributes:
         name (str): Identifying string
         stoichiometry (dict): relates element to the number of atoms in a single formula unit
@@ -31,6 +32,7 @@ class Material(object):
         self.stoichiometry = stoichiometry
         self.energies = energies
         self.N = sum(self.stoichiometry.values())
+
 
 class Solid(Material):
     """
