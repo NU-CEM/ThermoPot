@@ -18,6 +18,5 @@
 
 ::: thermopot.interpolate.get_potential_sulfur_table
 
-::: thermopot.plots.plot_TvsP
 
 
