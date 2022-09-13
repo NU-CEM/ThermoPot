@@ -1825,7 +1825,7 @@ Contains the child class AimsCalculation to read and store data from a FHI-aims 
         <span class="bp">self</span><span class="o">.</span><span class="n">xc</span> <span class="o">=</span> <span class="n">xc</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">NAtoms</span> <span class="o">=</span> <span class="n">NAtoms</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_attributes</span><span class="p">()</span>
+        <span class="c1">#self.check_attributes()</span>
 
     <span class="k">def</span> <span class="nf">check_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check that the Calculation class attributes make basic sense.&quot;&quot;&quot;</span>
@@ -1958,9 +1958,7 @@ Contains the child class AimsCalculation to read and store data from a FHI-aims 
 <span class="normal">43</span>
 <span class="normal">44</span>
 <span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">energy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">NAtoms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">volume</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filepath</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="normal">46</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">energy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">NAtoms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">volume</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filepath</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Note:</span>
 
@@ -1980,8 +1978,6 @@ Contains the child class AimsCalculation to read and store data from a FHI-aims 
     <span class="bp">self</span><span class="o">.</span><span class="n">energy</span> <span class="o">=</span> <span class="n">energy</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">xc</span> <span class="o">=</span> <span class="n">xc</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">NAtoms</span> <span class="o">=</span> <span class="n">NAtoms</span>
-
-    <span class="bp">self</span><span class="o">.</span><span class="n">check_attributes</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -4113,9 +4109,9 @@ reaction.Dmu(T,P) : Gibbs free energy of formation</p>
         <span class="n">reactants_energy</span><span class="p">,</span> <span class="n">products_energy</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
 
         <span class="k">for</span> <span class="n">material</span><span class="p">,</span> <span class="n">fu</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">reactants</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">reactants_energy</span> <span class="o">+=</span> <span class="p">(</span><span class="n">material</span><span class="o">.</span><span class="n">energies</span><span class="p">[</span><span class="n">xc</span><span class="p">]</span><span class="o">/</span><span class="n">material</span><span class="o">.</span><span class="n">fu_cell</span><span class="p">)</span> <span class="o">*</span> <span class="n">fu</span>
+            <span class="n">reactants_energy</span> <span class="o">+=</span> <span class="p">(</span><span class="n">material</span><span class="o">.</span><span class="n">energies</span><span class="p">[</span><span class="n">xc</span><span class="p">]</span> <span class="o">/</span> <span class="n">material</span><span class="o">.</span><span class="n">fu_cell</span><span class="p">)</span> <span class="o">*</span> <span class="n">fu</span>
         <span class="k">for</span> <span class="n">material</span><span class="p">,</span> <span class="n">fu</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">products_energy</span> <span class="o">+=</span> <span class="p">(</span><span class="n">material</span><span class="o">.</span><span class="n">energies</span><span class="p">[</span><span class="n">xc</span><span class="p">]</span><span class="o">/</span><span class="n">material</span><span class="o">.</span><span class="n">fu_cell</span><span class="p">)</span> <span class="o">*</span> <span class="n">fu</span>
+            <span class="n">products_energy</span> <span class="o">+=</span> <span class="p">(</span><span class="n">material</span><span class="o">.</span><span class="n">energies</span><span class="p">[</span><span class="n">xc</span><span class="p">]</span> <span class="o">/</span> <span class="n">material</span><span class="o">.</span><span class="n">fu_cell</span><span class="p">)</span> <span class="o">*</span> <span class="n">fu</span>
 
         <span class="k">return</span> <span class="p">(</span><span class="n">products_energy</span> <span class="o">-</span> <span class="n">reactants_energy</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">fu_scaling</span>
 </code></pre></div></td></tr></table></div>
