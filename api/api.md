@@ -1,8 +1,5 @@
 # API documentation
 
-## thermopot.calculations
-::: thermopot.calculations
-
 ## thermopot.materials
 ::: thermopot.materials
 
