@@ -22,7 +22,7 @@ class Material(object):
     Parent class for storing materials properties.
 
     Attributes:
-    
+
         name (str): Identifying string
         stoichiometry (dict): relates element to the number of atoms in a single formula unit
         energies (dict): relates xc functional to DFT total energy in eV
@@ -40,17 +40,17 @@ class Material(object):
 class Solid(Material):
     """
     Class for solid material data.
-    
+
     Note:
-    
+
         The material is assumed to be incompressible and without thermal expansion.
-    
+
     Example:
-        
+
         BaS = Solid('BaS',{'Ba':1,'S':1},"./phonon_data/Ba_S",calculation=BaS_calc)
 
     Attributes:
-    
+
         name (str): Identifying string
         stoichiometry (dict): relates element to the number of atoms in a single formula unit
         energies (dict): relates xc functional to DFT total energy in eV
@@ -105,21 +105,21 @@ class Solid(Material):
     def U(self, T, xc="pbesol", units="eV"):
         """
         Calculates the internal energy of one formular unit of solid.
-        
+
         Example:
-        
+
             U = BaS.U(300,xc="pbesol",units="eV")
-            
+
         Args:
-        
+
             T (float/ndarray): 1D Numpy array containing temperature data (in Kelvin) as a float, or a single temperature as a float.
             xc (str, optional): DFT XC functional used to calculate the ground state energy
             units (str, optional):  specifies the units as "eV", "J" or "kJ"
-        
+
         Returns:
-        
-            U (float/ndarray): 1D Numpy array (with the same dimensions as T) containing the internal energies of one formula unit of solid 
-        
+
+            U (float/ndarray): 1D Numpy array (with the same dimensions as T) containing the internal energies of one formula unit of solid
+
         """
         U_func = interpolate.get_potential_aims(self.phonon_filepath, "U")
         E_dft = self.energies[xc]
