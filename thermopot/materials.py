@@ -71,17 +71,17 @@ class Solid(Material):
         energies=False,
         NAtoms=1,
     ):
-    """
-    Args:
-        
-       name (str): Identifying string
-       stoichiometry (dict): relates element to the number of atoms in a single formula unit
-       phonon_filepath (str): path to the phonon output data
-       calculation (thermopot.calculation.Calculation, optional): instance of the thermopot.calculation.Calculation class
-       volume (float, optional): volume of unit cell in Angstroms^3
-       energies (dict, optional): relates xc functional to DFT total energy in eV
-       NAtoms (int): number of atoms in periodic unit cell
-    """
+        """
+        Args:
+
+           name (str): Identifying string
+           stoichiometry (dict): relates element to the number of atoms in a single formula unit
+           phonon_filepath (str): path to the phonon output data
+           calculation (thermopot.calculation.Calculation, optional): instance of the thermopot.calculation.Calculation class
+           volume (float, optional): volume of unit cell in Angstroms^3
+           energies (dict, optional): relates xc functional to DFT total energy in eV
+           NAtoms (int): number of atoms in periodic unit cell
+        """
 
         if calculation is not False:
             if type(calculation) is not list:
