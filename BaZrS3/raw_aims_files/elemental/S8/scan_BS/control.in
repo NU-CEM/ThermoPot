@@ -1,0 +1,95 @@
+xc               scan
+charge           0.
+spin             none
+relativistic atomic_zora scalar
+sc_accuracy_rho       1E-7
+################################################################################
+#
+#  FHI-aims code project
+#  Volker Blum, Fritz Haber Institute Berlin, 2009
+#
+#  Suggested "tight" defaults for S atom (to be pasted into control.in file)
+#
+#  Revised Jan 04, 2011, following tests (SiC) done by Lydia Nemec: 
+#     d and g functions of tier 2 now enabled by default.
+#
+################################################################################
+  species        S
+#     global species definitions
+    nucleus             16
+    mass                32.065
+#
+    l_hartree           6
+#
+    cut_pot             4.0          2.0  1.0
+    basis_dep_cutoff    1e-4
+#
+    radial_base         44 7.0
+    radial_multiplier   2
+    angular_grids       specified
+      division   0.4665  110
+      division   0.5810  194
+      division   0.7139  302
+      division   0.8274  434
+#      division   0.9105  590
+#      division   1.0975  770
+#      division   1.2028  974
+#      outer_grid  974
+      outer_grid  434
+################################################################################
+#
+#  Definition of "minimal" basis
+#
+################################################################################
+#     valence basis states
+    valence      3  s   2.
+    valence      3  p   4.
+#     ion occupancy
+    ion_occ      3  s   1.
+    ion_occ      3  p   3.
+################################################################################
+#
+#  Suggested additional basis functions. For production calculations, 
+#  uncomment them one after another (the most important basis functions are
+#  listed first).
+#
+#  Constructed for dimers: 1.6 A, 1.9 A, 2.5 A, 3.25 A, 4.0 A
+#
+################################################################################
+#  "First tier" - improvements: -652.81 meV to -45.53 meV
+     ionic 3 d auto
+     hydro 2 p 1.8
+     hydro 4 f 7
+     ionic 3 s auto
+#  "Second tier" - improvements: -30.20 meV to -1.74 meV
+     hydro 4 d 6.2
+     hydro 5 g 10.8
+#     hydro 4 p 4.9
+#     hydro 5 f 10
+#     hydro 1 s 0.8
+#  "Third tier" - improvements: -1.04 meV to -0.20 meV
+#     hydro 3 d 3.9
+#     hydro 3 d 2.7
+#     hydro 5 g 12
+#     hydro 4 p 10.4
+#     hydro 5 f 12.4
+#     hydro 2 s 1.9
+#  "Fourth tier" - improvements: -0.35 meV to -0.06 meV
+#     hydro 4 d 10.4
+#     hydro 4 p 7.2
+#     hydro 4 d 10
+#     hydro 5 g 19.2
+#     hydro 4 s 12
+
+################################################################################
+#
+# For methods that use the localized form of the "resolution of identity" for
+# the two-electron Coulomb operator (RI_method LVL), particularly Hartree-Fock and
+# hybrid density functional calculations, the highest accuracy can be obtained by
+# uncommenting the line beginning with "for_aux"  below, thus adding an extra g radial
+# function to the construction of the product basis set for the expansion.
+# See Ref. New J. Phys. 17, 093020 (2015) for more information, particularly Figs. 1 and 6.
+#
+################################################################################
+#
+# for_aux hydro 5 g 6.0
