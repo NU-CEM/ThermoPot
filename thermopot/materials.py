@@ -104,7 +104,7 @@ class Solid(Material):
 
     def U(self, T, xc="pbesol", units="eV"):
         """
-        Calculates the internal energy of one formular unit of solid.
+        Calculates the internal energy of one formula unit of solid.
 
         Example:
 
@@ -112,14 +112,14 @@ class Solid(Material):
 
         Args:
 
-            T (float/ndarray): 1D Numpy array containing temperature data (in Kelvin) as a float, or a single temperature as a float.
+            T (float/ndarray): 1D Numpy array containing temperature data (in Kelvin) as floats, or a single temperature as a float.
             xc (str, optional): DFT XC functional used to calculate the ground state energy
-            units (str, optional):  specifies the units as "eV", "J" or "kJ"
+            units (str, optional):  specifies the units as "eV", "J" (J/mol) or "kJ" (kJ/mol)
 
         Returns:
 
-            U (float/ndarray): 1D Numpy array (with the same dimensions as T) containing the internal energies of one formula unit of solid
-
+            U (float/ndarray): 1D Numpy array (with the same dimensions as T) containing the internal energies of one formula unit of solid, or a single internal energy float when a single temperature is passed as an argument.
+            
         """
         U_func = interpolate.get_potential_aims(self.phonon_filepath, "U")
         E_dft = self.energies[xc]
@@ -146,23 +146,28 @@ class Solid(Material):
 
     def H(self, T, P, xc="pbesol", units="eV"):
         """
-        Enthalpy of solid, H = U + PV.
-        H = solid.H(T,P)
+        Calculates the Enthalpy (H = U + PV) of one formula unit of solid.
+        
+        Examples:
+        
+            H = BaS.H(300,1E3,xc="pbesol",units="eV")
+            H = BaS.H(np.linspace(100,700,1000),np.array(np.logspace(1, 7, 100),ndmin=2).transpose())
 
-         Pressure is given in Pa.
-        The units keyword specifies the units used.
-        It defaults to "eV per formula unit". Other options are "J" (J/mol) and "kJ" (kJ/mol)
+        Args:
 
-        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
-        If not specified, it defaults to `pbesol`.
+            T (float/ndarray): 1D Numpy array containing temperature data (in Kelvin) as floats, or a single temperature as a float.
+            P (float/ndarray): 2D Numpy array with a single row containing pressure data (in Pa) as floats, or a single pressure as a float. 
+            xc (str, optional): DFT XC functional used to calculate the ground state energy
+            units (str, optional):  specifies the units as "eV", "J" (J/mol) or "kJ" (kJ/mol)
+            
+        Note:
+            
+            T, P are orthogonal 2D arrays of length m and n, populated in one row/column: in this case H is an m x n matrix.
+            Other T, P arrays will result in undefined behaviour.
+            
+        Returns:
 
-        T, P may be orthogonal 2D arrays of length m and n, populated in one row/column:
-        in this case H is an m x n matrix.
-
-        T, P may instead be equal-length non-orthogonal 1D arrays, in which case H is a vector
-        of H values corresponding to T,P pairs.
-
-        Other T, P arrays may result in undefined behaviour.
+            H (float/ndarray): Enthalpy of one formula unit of solid expressed as floats in a m x n Numpy array where T, P are orthogonal 2D arrays of length m and n
         """
         U_func = interpolate.get_potential_aims(self.phonon_filepath, "U")
         PV = (
@@ -195,23 +200,28 @@ class Solid(Material):
 
     def mu(self, T, P, xc="pbesol", units="eV"):
         """
-        Free energy of one formula unit of solid, mu = U + PV - TS
-        mu = solid.mu(T,P)
+        Calculates the Gibbs Free Energy (mu = U + PV - TS) of one formula unit of solid.
+        
+        Examples:
+        
+            mu = BaS.mu(300,1E3,xc="pbesol",units="eV")
+            mu = BaS.mu(np.linspace(100,700,1000),np.array(np.logspace(1, 7, 100),ndmin=2).transpose())
 
-        The units keyword specifies the units used.
-        It defaults to "eV per formular unit". Other options are "J" (J/mol) and "kJ" (kJ/mol)
+        Args:
 
+            T (float/ndarray): 1D Numpy array containing temperature data (in Kelvin) as floats, or a single temperature as a float.
+            P (float/ndarray): 2D Numpy array with a single row containing pressure data (in Pa) as floats, or a single pressure as a float. 
+            xc (str, optional): DFT XC functional used to calculate the ground state energy
+            units (str, optional):  specifies the units as "eV", "J" (J/mol) or "kJ" (kJ/mol)
+            
+        Note:
+            
+            T, P are orthogonal 2D arrays of length m and n, populated in one row/column: in this case mu is an m x n matrix.
+            Other T, P arrays will result in undefined behaviour.
+            
+        Returns:
 
-        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
-        If not specified, it defaults to `pbesol`.
-
-        T, P may be orthogonal 2D arrays of length m and n, populated in one row/column:
-        in this case H is an m x n matrix.
-
-        T, P may instead be equal-length non-orthogonal 1D arrays, in which case H is a vector
-        of H values corresponding to T,P pairs.
-
-        Other T, P arrays may result in undefined behaviour.
+            mu (float/ndarray): Gibbs Free Energy of one formula unit of solid expressed as floats in a m x n Numpy array where T, P are orthogonal 2D arrays of length m and n
         """
         TS_func = interpolate.get_potential_aims(self.phonon_filepath, "TS")
         H = self.H(T, P, xc=xc)
@@ -237,15 +247,23 @@ class Solid(Material):
 
     def Cv(self, T, units="kB"):
         """
-        Constant-volume heat capacity of one formula unit of solid
-        Cv = solid.Cv(T)
+        Calculates the Constant-volume heat capacity of one formula unit of solid.
+        
+        Examples:
+        
+            Cv = BaS.mu(300,xc="pbesol",units="eV")
+            Cv = BaS.mu(np.linspace(100,700,1000),xc="pbesol",units="kJ")
 
-        The "units" keyword specifies the units used.
-        If unspecified, it defaults to units kB (Boltzmann constant).
-        The other options are "eV" (eV/K), "J" (J/molK) and "kJ" (kJ/molK).
+        Args:
 
-        T may be an array, in which case Cv will be an array of the same dimensions.
-        """
+            T (float/ndarray): 1D Numpy array containing temperature data (in Kelvin) as floats, or a single temperature as a float.
+            xc (str, optional): DFT XC functional used to calculate the ground state energy
+            units (str, optional):  specifies the units as "eV", "J" (J/mol) or "kJ" (kJ/mol)
+            
+        Returns:
+
+            Cv (float/ndarray): 1D Numpy array (with the same dimensions as T) containing the Constant-volume heat capacity of one formula unit of solid, or a single heat capacity float when a single temperature is passed as an argument.
+        """        
         Cv_func = interpolate.get_potential_aims(self.phonon_filepath, "Cv")
         Cv_kB = Cv_func(T) / self.fu_cell
 
@@ -274,30 +292,28 @@ class Solid(Material):
 class IdealGas(Material):
     """
     Class for ideal gas properties.
+    
+    Example:
+    
+        S2_gas = materials.IdealGas("S2", {"S":2}, "./thermo_data/S2",calculation=S2_gas_calc)
+    
+    Attributes:
+    
+       name (str): Identifying string
+       stoichiometry (dict): relates element to the number of atoms in a single formula unit
+       thermo_dile (str): path to the thermodynamics data
+       calculation (thermopot.calculation.Calculation, optional): instance of the thermopot.calculation.Calculation class
+       energies (dict, optional): relates xc functional to DFT total energy in eV
+       zpe_pbesol (float, optional): zero point energy calculated using the pbesol XC-functional
+       zpe_hse06 (float, optional): zero point energy calculated using the hse06 XC-functional
+       zpe_lit (float, optional): zero point energy calculated using literature values
 
-    Sets properties:
-    -------------------
-    ideal_gas.name             (string)
-    ideal_gas.stoichiometry    (Dict relating element to number of atoms in a single formula unit)
-    ideal_gas.energies         (Dict relating xc functional with DFT total energy)
-    ideal_gas.thermo_data      (String containing path to NIST data table)
-    ideal_gas.N                (Number of atoms per formula unit)
-
-    Sets methods:
-    -------------------
-    ideal_gas.U(T) : Internal energy
-    ideal_gas.H(T) : Enthalpy H = U + PV
-    ideal_gas.mu(T,P) : Chemical potential mu = U + PV - TS
-
-
-    Ideal gas law PV=nRT is applied: specifically (dH/dP) at const. T = 0 and int(mu)^P2_P1 dP = kTln(P2/P1)
-    Enthalpy has no P dependence as volume is not restricted / expansion step is defined as isothermal
-
-    Temperature is given in Kelvin, Pressure is given in Pa.
+    Note:
+    
+        Ideal gas law PV=nRT is applied: specifically (dH/dP) at const. T = 0 and int(mu)^P2_P1 dP = kTln(P2/P1).
+        Enthalpy has no P dependence as volume is not restricted / expansion step is defined as isothermal
     """
-
-    # TODO:script for calculating zpe values
-
+    
     def __init__(
         self,
         name,
@@ -309,7 +325,18 @@ class IdealGas(Material):
         zpe_hse06=0,
         zpe_lit=0,
     ):
-
+        """
+        Args:
+        
+        name (str): Identifying string
+        stoichiometry (dict): relates element to the number of atoms in a single formula unit
+        thermo_dile (str): path to the thermodynamics data
+        calculation (thermopot.calculation.Calculation, optional): instance of the thermopot.calculation.Calculation class
+        energies (dict, optional): relates xc functional to DFT total energy in eV
+        zpe_pbesol (float, optional): zero point energy calculated using the pbesol XC-functional
+        zpe_hse06 (float, optional): zero point energy calculated using the hse06 XC-functional
+        zpe_lit (float, optional): zero point energy calculated using literature values
+        """
         if calculation is not False:
             Material.__init__(
                 self, name, stoichiometry, {calculation.xc: calculation.energy}
@@ -317,9 +344,7 @@ class IdealGas(Material):
         else:
             Material.__init__(self, name, stoichiometry, energies)
         self.thermo_file = materials_directory + thermo_file
-        # Initialise ZPE to HSE06 value if provided.
-        # This looks redundant at the moment: the intent is to implement
-        # some kind of switch or heirarchy of methods further down the line.
+
         if zpe_hse06 > 0:
             self.zpe = zpe_pbesol
         elif zpe_pbesol > 0:
@@ -330,16 +355,23 @@ class IdealGas(Material):
             self.zpe = 0
 
     def U(self, T, xc="pbesol", units="eV"):
-        """Internal energy of one formula unit of ideal gas.
-        U = ideal_gas.U_eV(T)
+        """
+        Calculates the internal energy of one formula unit of ideal gas.
 
-        The units keyword specifies the units used.
-        If not specified, it  defaults to  "eV".
-        Can also be specified as "J" for J/mol or "kJ" for kJ/mol"
-        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
-        If not specified, it defaults to `pbesol`.
+        Example:
 
-        Returns a matrix with the same dimensions as T
+            U = S2_gas.U(300,xc="pbesol",units="eV")
+
+        Args:
+
+            T (float/ndarray): 1D Numpy array containing temperature data (in Kelvin) as floats, or a single temperature as a float.
+            xc (str, optional): DFT XC functional used to calculate the ground state energy
+            units (str, optional):  specifies the units as "eV", "J" (J/mol) or "kJ" (kJ/mol)
+
+        Returns:
+
+            U (float/ndarray): 1D Numpy array (with the same dimensions as T) containing the internal energies of one formula unit of gas, or a single internal energy float when a single temperature is passed as an argument.
+            
         """
         U_func = interpolate.get_potential_nist_table(self.thermo_file, "U")
         E_dft = self.energies[xc]
@@ -369,18 +401,24 @@ class IdealGas(Material):
                 * 0.001
             )
 
-    def H(self, T, *P, xc="pbesol", units="eV"):
-        """Enthalpy of one formula unit of ideal gas
-        H = ideal_gas.H(T)
+    def H(self, T, xc="pbesol", units="eV"): 
+        """
+        Calculates the Enthalpy of one formula unit of ideal gas.
+        
+        Examples:
+        
+            H = S2_gas.H(300,xc="pbesol",units="eV")
+            H = S2_gas.H(np.linspace(100,700,1000))
 
-        Default is expressed in eV. Can also be expressed in J/mol or kJ/mol.
+        Args:
 
-        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
-        If not specified, it defaults to `pbesol`.
+            T (float/ndarray): 1D Numpy array containing temperature data (in Kelvin) as floats, or a single temperature as a float.
+            xc (str, optional): DFT XC functional used to calculate the ground state energy
+            units (str, optional):  specifies the units as "eV", "J" (J/mol) or "kJ" (kJ/mol)
+            
+        Returns:
 
-        Returns an array with the same dimensions as T
-
-        Accepts ideal_gas.H_eV(T,P): P is unused
+            H (float/ndarray):  1D Numpy array (with the same dimensions as T) containing the enthalpy of one formula unit of gas, or a single enthalpy float when a single temperature is passed as an argument.
         """
         H_func = interpolate.get_potential_nist_table(self.thermo_file, "H")
         E_dft = self.energies[xc]
@@ -414,23 +452,30 @@ class IdealGas(Material):
 
     def mu(self, T, P, xc="pbesol", units="eV"):
         """
-        Free energy of one formula unit of ideal gas.
-        mu = ideal_gas.mu(T,P)
+        Calculates the Gibbs Free Energy of one formula unit of ideal gas.
+        
+        Examples:
+        
+            mu = S2_gas.mu(300,xc="pbesol",units="eV")
+            mu = S2_gas.mu(np.linspace(100,700,1000))
 
-        Default is expressed in eV.
-        Can also been expressed in J/mol or kJ/mol.
+        Args:
 
-        The xc keyword specifies the DFT XC functional used to calculate the ground state energy.
-        If not specified, it defaults to `pbesol`.
+            T (float/ndarray): 1D Numpy array containing temperature data (in Kelvin) as floats, or a single temperature as a float.
+            P (float/ndarray): 2D Numpy array with a single row containing pressure data (in Pa) as floats, or a single pressure as a float. 
+            xc (str, optional): DFT XC functional used to calculate the ground state energy
+            units (str, optional):  specifies the units as "eV", "J" (J/mol) or "kJ" (kJ/mol)
+            
+        Note:
+            
+            T, P are orthogonal 2D arrays of length m and n, populated in one row/column: in this case mu is an m x n matrix.
+            Other T, P arrays will result in undefined behaviour.
+            
+        Returns:
 
-        T, P may be orthogonal 2D arrays of length m and n, populated in one row/column:
-        in this case H is an m x n matrix.
-
-        T, P may instead be equal-length non-orthogonal 1D arrays, in which case H is a vector
-        of H values corresponding to T,P pairs.
-
-        Other T, P arrays may result in undefined behaviour.
+            mu (float/ndarray): Gibbs Free Energy of one formula unit of ideal gas expressed as floats in a m x n Numpy array where T, P are orthogonal 2D arrays of length m and n
         """
+        
         S_func = interpolate.get_potential_nist_table(self.thermo_file, "S")
         S = (
             S_func(T)
