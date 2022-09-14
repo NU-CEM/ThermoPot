@@ -28,7 +28,9 @@ class Calculation:
         If gas is True then no volume attribute is required.
     """
 
-    def __init__(self, energy=None, xc=None, NAtoms=None, volume=None, filepath=None, gas=False):
+    def __init__(
+        self, energy=None, xc=None, NAtoms=None, volume=None, filepath=None, gas=False
+    ):
         """
         Note:
 
@@ -88,7 +90,7 @@ class AimsCalculation(Calculation):
         NAtoms (int): number of atoms in the periodic unit cell
     """
 
-    def __init__(self, filepath="./calculation.out",gas=False):
+    def __init__(self, filepath="./calculation.out", gas=False):
         """
         Args:
 
