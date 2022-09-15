@@ -17,6 +17,7 @@ class Potential:
         precision="%d",
         T_units="K",
         P_units="Pa",
+        log_scale=True
     ):
         """
         T is an array e.g. np.linspace(100, 1500, 100)  # K
@@ -27,6 +28,7 @@ class Potential:
         potential_label is the label of the contour colorbar e.g. '$\Delta G_f$ / kJ mol$^{-1}$'
         scale_range is the scale of the colorbar e.g. [-380, -240]
         filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided `plt.show()` is called.
+        logscale determines if the y-axis Pressure is logarithmic
         """
 
         mpl.rcParams["font.family"] = "serif"
@@ -70,11 +72,13 @@ class Potential:
             cmap=colormap,
             vmin=scale_range[0],
             vmax=scale_range[1],
+            shading='auto'
         )
         colours = plt.colorbar()
         colours.set_label(potential_label, labelpad=20)
-
-        ax.set_yscale("log")
+        
+        if log_scale:
+            ax.set_yscale("log")
         plt.clabel(a, fmt=precision)
 
         plt.xlabel("Temperature / {0}".format(x_unitlabel))
@@ -83,4 +87,4 @@ class Potential:
         if filename:
             plt.savefig(filename, dpi=200)
         else:
-            plt.show()
+            return plt

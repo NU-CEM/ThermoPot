@@ -140,7 +140,7 @@ class AimsCalculation(Calculation):
             (str): XC functional used to calculate the total energy
         """
         with open(self.filepath) as contents:
-            return re.findall("xc               (.*)", contents.read())[0]
+            return re.findall("xc               (\S+)", contents.read())[0]
 
     def get_NAtoms(self):
         """
