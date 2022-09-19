@@ -1,5 +1,7 @@
 ![example workflow](https://github.com/NU-CEM/ThermoPot/actions/workflows/build-docs.yml/badge.svg) ![example workflow](https://github.com/NU-CEM/ThermoPot/actions/workflows/run-tests.yml/badge.svg) ![example workflow](https://github.com/NU-CEM/ThermoPot/actions/workflows/lint-code.yml/badge.svg)
 
+⚠️⚠️⚠️ This repository is still in development, and some functionality is untested. Use with caution, or wait until we fully test it! ⚠️⚠️⚠️
+
 ThermoPot is used for ab-initio thermodynamic modelling of material formation and decomposition.
 
 - 📚 The documentation is [here](https://NU-CEM.github.io/ThermoPot). 
