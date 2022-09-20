@@ -22,9 +22,15 @@ class Calculation:
         energy (float): DFT total energy in eV
         xc (str): XC functional used to calculate the total energy
         NAtoms (int): number of atoms in the periodic unit cell
+
+    Note:
+
+        If gas is True then no volume attribute is required.
     """
 
-    def __init__(self, energy=None, xc=None, NAtoms=None, volume=None, filepath=None):
+    def __init__(
+        self, energy=None, xc=None, NAtoms=None, volume=None, filepath=None, gas=False
+    ):
         """
         Note:
 
@@ -37,9 +43,14 @@ class Calculation:
             energy (float): DFT total energy in eV
             xc (str): XC functional used to calculate the total energy
             NAtoms (int): number of atoms in the periodic unit cell
-        """
+            gas (bool): True if gas species, False otherwise
 
-        self.volume = volume
+        Note:
+
+            If gas is True then volume is None
+        """
+        if not gas:
+            self.volume = volume
         self.filepath = filepath
         self.energy = energy
         self.xc = xc
@@ -79,15 +90,21 @@ class AimsCalculation(Calculation):
         NAtoms (int): number of atoms in the periodic unit cell
     """
 
-    def __init__(self, filepath="./calculation.out"):
+    def __init__(self, filepath="./calculation.out", gas=False):
         """
         Args:
 
             filepath (str): path to the calculation output files
+            gas (bool): True if gas species, False otherwise
+
+        Note:
+
+            If gas is True then volume is None
         """
         super().__init__()
         self.filepath = filepath
-        self.volume = self.get_volume()
+        if not gas:
+            self.volume = self.get_volume()
         self.energy = self.get_energy()
         self.xc = self.get_xc()
         self.NAtoms = self.get_NAtoms()
