@@ -20,7 +20,7 @@ class Potentials:
         filename=False,
         T_units="K",
         P_units="Pa",
-        log_scale=True
+        log_scale=True,
     ):
         """
         T is an array e.g. np.linspace(100, 1500, 100)  # K
@@ -39,7 +39,7 @@ class Potentials:
         mpl.rcParams["font.size"] = 16
 
         # Unit conversions (all calculations are in SI units, conversion needed for plots)
-        
+
         if T_units == "K":
             x_values = self.T
             x_unitlabel = "K"
@@ -68,7 +68,11 @@ class Potentials:
 
         potential = self.find_potential_minimum()
         plt.pcolormesh(
-            x_values, y_values, potential / (len(material_labels) - 1), cmap=colormap, shading='auto'
+            x_values,
+            y_values,
+            potential / (len(material_labels) - 1),
+            cmap=colormap,
+            shading="auto",
         )
         # TODO: sort the colour map out so consistent with grid. Now ranges from 0 to 1
 
@@ -76,10 +80,10 @@ class Potentials:
         bound = np.linspace(0, 1, len(material_labels))
 
         # AT THE MOMENT THIS IS BROKEN!!!!
-        #plt.legend(
+        # plt.legend(
         #    [mpatches.Patch(color=colormap(i)) for i in bound],
         #    ["{:s}".format(material_labels[i]) for i in range(len(material_labels))],
-        #)
+        # )
 
         plt.xlabel("Temperature / {0}".format(x_unitlabel))
         plt.ylabel("Pressure / {0}".format(P_units))
@@ -99,7 +103,9 @@ class Potentials:
 
         minimum_potential = self.potentials[0].potential
         for i, potential in enumerate(self.potentials):
-            minimum_potential = np.minimum(minimum_potential, self.potentials[i + 1].potential)
+            minimum_potential = np.minimum(
+                minimum_potential, self.potentials[i + 1].potential
+            )
             if i + 2 == len(self.potentials):
                 break
 
