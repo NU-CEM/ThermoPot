@@ -5452,7 +5452,7 @@ or <code>materials.ideal_gas</code> classes.</p>
         <span class="n">precision</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="n">T_units</span><span class="o">=</span><span class="s2">&quot;K&quot;</span><span class="p">,</span>
         <span class="n">P_units</span><span class="o">=</span><span class="s2">&quot;Pa&quot;</span><span class="p">,</span>
-        <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span>
+        <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        T is an array e.g. np.linspace(100, 1500, 100)  # K</span>
@@ -5507,7 +5507,7 @@ or <code>materials.ideal_gas</code> classes.</p>
             <span class="n">cmap</span><span class="o">=</span><span class="n">colormap</span><span class="p">,</span>
             <span class="n">vmin</span><span class="o">=</span><span class="n">scale_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
             <span class="n">vmax</span><span class="o">=</span><span class="n">scale_range</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-            <span class="n">shading</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span>
+            <span class="n">shading</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">colours</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
         <span class="n">colours</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">potential_label</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
@@ -5648,7 +5648,7 @@ logscale determines if the y-axis Pressure is logarithmic</p>
     <span class="n">precision</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span>
     <span class="n">T_units</span><span class="o">=</span><span class="s2">&quot;K&quot;</span><span class="p">,</span>
     <span class="n">P_units</span><span class="o">=</span><span class="s2">&quot;Pa&quot;</span><span class="p">,</span>
-    <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span>
+    <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    T is an array e.g. np.linspace(100, 1500, 100)  # K</span>
@@ -5703,7 +5703,7 @@ logscale determines if the y-axis Pressure is logarithmic</p>
         <span class="n">cmap</span><span class="o">=</span><span class="n">colormap</span><span class="p">,</span>
         <span class="n">vmin</span><span class="o">=</span><span class="n">scale_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
         <span class="n">vmax</span><span class="o">=</span><span class="n">scale_range</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-        <span class="n">shading</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span>
+        <span class="n">shading</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">colours</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
     <span class="n">colours</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">potential_label</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
@@ -5878,7 +5878,13 @@ logscale determines if the y-axis Pressure is logarithmic</p>
 <span class="normal">106</span>
 <span class="normal">107</span>
 <span class="normal">108</span>
-<span class="normal">109</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Potentials</span><span class="p">:</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Potentials</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">potentials</span><span class="p">):</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">potentials</span> <span class="o">=</span> <span class="n">potentials</span>
@@ -5894,7 +5900,7 @@ logscale determines if the y-axis Pressure is logarithmic</p>
         <span class="n">filename</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="n">T_units</span><span class="o">=</span><span class="s2">&quot;K&quot;</span><span class="p">,</span>
         <span class="n">P_units</span><span class="o">=</span><span class="s2">&quot;Pa&quot;</span><span class="p">,</span>
-        <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span>
+        <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        T is an array e.g. np.linspace(100, 1500, 100)  # K</span>
@@ -5942,7 +5948,11 @@ logscale determines if the y-axis Pressure is logarithmic</p>
 
         <span class="n">potential</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_potential_minimum</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span>
-            <span class="n">x_values</span><span class="p">,</span> <span class="n">y_values</span><span class="p">,</span> <span class="n">potential</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">material_labels</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">colormap</span><span class="p">,</span> <span class="n">shading</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span>
+            <span class="n">x_values</span><span class="p">,</span>
+            <span class="n">y_values</span><span class="p">,</span>
+            <span class="n">potential</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">material_labels</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="n">cmap</span><span class="o">=</span><span class="n">colormap</span><span class="p">,</span>
+            <span class="n">shading</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="c1"># TODO: sort the colour map out so consistent with grid. Now ranges from 0 to 1</span>
 
@@ -5950,10 +5960,10 @@ logscale determines if the y-axis Pressure is logarithmic</p>
         <span class="n">bound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">material_labels</span><span class="p">))</span>
 
         <span class="c1"># AT THE MOMENT THIS IS BROKEN!!!!</span>
-        <span class="c1">#plt.legend(</span>
+        <span class="c1"># plt.legend(</span>
         <span class="c1">#    [mpatches.Patch(color=colormap(i)) for i in bound],</span>
         <span class="c1">#    [&quot;{:s}&quot;.format(material_labels[i]) for i in range(len(material_labels))],</span>
-        <span class="c1">#)</span>
+        <span class="c1"># )</span>
 
         <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Temperature / </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x_unitlabel</span><span class="p">))</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Pressure / </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">P_units</span><span class="p">))</span>
@@ -5973,7 +5983,9 @@ logscale determines if the y-axis Pressure is logarithmic</p>
 
         <span class="n">minimum_potential</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">potentials</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">potential</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">potential</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">potentials</span><span class="p">):</span>
-            <span class="n">minimum_potential</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">minimum_potential</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">potentials</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">potential</span><span class="p">)</span>
+            <span class="n">minimum_potential</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span>
+                <span class="n">minimum_potential</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">potentials</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">potential</span>
+            <span class="p">)</span>
             <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">potentials</span><span class="p">):</span>
                 <span class="k">break</span>
 
@@ -6095,13 +6107,17 @@ log_scale determines if the Pressure y-axis is logarithmic</p>
 <span class="normal">89</span>
 <span class="normal">90</span>
 <span class="normal">91</span>
-<span class="normal">92</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">plot_TvsP</span><span class="p">(</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span>
+<span class="normal">96</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">plot_TvsP</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">material_labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">filename</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">T_units</span><span class="o">=</span><span class="s2">&quot;K&quot;</span><span class="p">,</span>
     <span class="n">P_units</span><span class="o">=</span><span class="s2">&quot;Pa&quot;</span><span class="p">,</span>
-    <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span>
+    <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    T is an array e.g. np.linspace(100, 1500, 100)  # K</span>
@@ -6149,7 +6165,11 @@ log_scale determines if the Pressure y-axis is logarithmic</p>
 
     <span class="n">potential</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_potential_minimum</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span>
-        <span class="n">x_values</span><span class="p">,</span> <span class="n">y_values</span><span class="p">,</span> <span class="n">potential</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">material_labels</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">colormap</span><span class="p">,</span> <span class="n">shading</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span>
+        <span class="n">x_values</span><span class="p">,</span>
+        <span class="n">y_values</span><span class="p">,</span>
+        <span class="n">potential</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">material_labels</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="n">cmap</span><span class="o">=</span><span class="n">colormap</span><span class="p">,</span>
+        <span class="n">shading</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="c1"># TODO: sort the colour map out so consistent with grid. Now ranges from 0 to 1</span>
 
@@ -6157,10 +6177,10 @@ log_scale determines if the Pressure y-axis is logarithmic</p>
     <span class="n">bound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">material_labels</span><span class="p">))</span>
 
     <span class="c1"># AT THE MOMENT THIS IS BROKEN!!!!</span>
-    <span class="c1">#plt.legend(</span>
+    <span class="c1"># plt.legend(</span>
     <span class="c1">#    [mpatches.Patch(color=colormap(i)) for i in bound],</span>
     <span class="c1">#    [&quot;{:s}&quot;.format(material_labels[i]) for i in range(len(material_labels))],</span>
-    <span class="c1">#)</span>
+    <span class="c1"># )</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Temperature / </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x_unitlabel</span><span class="p">))</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Pressure / </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">P_units</span><span class="p">))</span>
