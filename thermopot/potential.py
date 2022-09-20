@@ -17,7 +17,7 @@ class Potential:
         precision="%d",
         T_units="K",
         P_units="Pa",
-        log_scale=True
+        log_scale=True,
     ):
         """
         T is an array e.g. np.linspace(100, 1500, 100)  # K
@@ -72,11 +72,11 @@ class Potential:
             cmap=colormap,
             vmin=scale_range[0],
             vmax=scale_range[1],
-            shading='auto'
+            shading="auto",
         )
         colours = plt.colorbar()
         colours.set_label(potential_label, labelpad=20)
-        
+
         if log_scale:
             ax.set_yscale("log")
         plt.clabel(a, fmt=precision)
