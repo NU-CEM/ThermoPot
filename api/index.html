@@ -13,7 +13,7 @@
       
       
       <link rel="icon" href="../images/1FAD6_color.png">
-      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.2">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
     
     
       
@@ -21,7 +21,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.9f9400aa.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.7a952b86.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
@@ -1227,7 +1227,7 @@ Contains the child class AimsCalculation to read and store data from a FHI-aims 
 <span class="sd">            (str): XC functional used to calculate the total energy</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">)</span> <span class="k">as</span> <span class="n">contents</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;xc               (.*)&quot;</span><span class="p">,</span> <span class="n">contents</span><span class="o">.</span><span class="n">read</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;xc               (\S+)&quot;</span><span class="p">,</span> <span class="n">contents</span><span class="o">.</span><span class="n">read</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">get_NAtoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1573,7 +1573,7 @@ Contains the child class AimsCalculation to read and store data from a FHI-aims 
 <span class="sd">        (str): XC functional used to calculate the total energy</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">)</span> <span class="k">as</span> <span class="n">contents</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;xc               (.*)&quot;</span><span class="p">,</span> <span class="n">contents</span><span class="o">.</span><span class="n">read</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;xc               (\S+)&quot;</span><span class="p">,</span> <span class="n">contents</span><span class="o">.</span><span class="n">read</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -5433,7 +5433,11 @@ or <code>materials.ideal_gas</code> classes.</p>
 <span class="normal">83</span>
 <span class="normal">84</span>
 <span class="normal">85</span>
-<span class="normal">86</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Potential</span><span class="p">:</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Potential</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">potential</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="p">):</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">potential</span> <span class="o">=</span> <span class="n">potential</span>
@@ -5448,6 +5452,7 @@ or <code>materials.ideal_gas</code> classes.</p>
         <span class="n">precision</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="n">T_units</span><span class="o">=</span><span class="s2">&quot;K&quot;</span><span class="p">,</span>
         <span class="n">P_units</span><span class="o">=</span><span class="s2">&quot;Pa&quot;</span><span class="p">,</span>
+        <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        T is an array e.g. np.linspace(100, 1500, 100)  # K</span>
@@ -5458,6 +5463,7 @@ or <code>materials.ideal_gas</code> classes.</p>
 <span class="sd">        potential_label is the label of the contour colorbar e.g. &#39;$\Delta G_f$ / kJ mol$^{-1}$&#39;</span>
 <span class="sd">        scale_range is the scale of the colorbar e.g. [-380, -240]</span>
 <span class="sd">        filename is the output filename e.g. &#39;plots/Dmu-BaS2-Ba-S2.png&#39;. If not provided `plt.show()` is called.</span>
+<span class="sd">        logscale determines if the y-axis Pressure is logarithmic</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;font.family&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;serif&quot;</span>
@@ -5501,11 +5507,13 @@ or <code>materials.ideal_gas</code> classes.</p>
             <span class="n">cmap</span><span class="o">=</span><span class="n">colormap</span><span class="p">,</span>
             <span class="n">vmin</span><span class="o">=</span><span class="n">scale_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
             <span class="n">vmax</span><span class="o">=</span><span class="n">scale_range</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">shading</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span>
         <span class="p">)</span>
         <span class="n">colours</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
         <span class="n">colours</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">potential_label</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">log_scale</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">clabel</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="n">precision</span><span class="p">)</span>
 
         <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Temperature / </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x_unitlabel</span><span class="p">))</span>
@@ -5514,7 +5522,7 @@ or <code>materials.ideal_gas</code> classes.</p>
         <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">plt</span>
 </code></pre></div></td></tr></table></div>
         </details>
 
@@ -5535,7 +5543,7 @@ or <code>materials.ideal_gas</code> classes.</p>
 
 
 <h3 id="thermopot.potential.Potential.plot_TvsP" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">plot_TvsP</span><span class="p">(</span><span class="n">potential_label</span><span class="o">=</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">Delta G_f$ / kJ mol$^{-1}$&#39;</span><span class="p">,</span> <span class="n">scale_range</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">600</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">filename</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">T_units</span><span class="o">=</span><span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="n">P_units</span><span class="o">=</span><span class="s1">&#39;Pa&#39;</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">plot_TvsP</span><span class="p">(</span><span class="n">potential_label</span><span class="o">=</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">Delta G_f$ / kJ mol$^{-1}$&#39;</span><span class="p">,</span> <span class="n">scale_range</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">600</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">filename</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">T_units</span><span class="o">=</span><span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="n">P_units</span><span class="o">=</span><span class="s1">&#39;Pa&#39;</span><span class="p">,</span> <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
 
 <a href="#thermopot.potential.Potential.plot_TvsP" class="headerlink" title="Permanent link"></a></h3>
 
@@ -5549,7 +5557,8 @@ If T has length m and P has length n, P will be a 2D array with dimensions m x n
 e.g. reactions.reaction({Ba:1,S:2}, {BaS2:1}},temperature=T,pressure=P).Dmu_eV_pbesol()
 potential_label is the label of the contour colorbar e.g. '$\Delta G_f$ / kJ mol$^{-1}$'
 scale_range is the scale of the colorbar e.g. [-380, -240]
-filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided <code>plt.show()</code> is called.</p>
+filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided <code>plt.show()</code> is called.
+logscale determines if the y-axis Pressure is logarithmic</p>
 
       <details class="quote">
         <summary>Source code in <code>thermopot/potential.py</code></summary>
@@ -5627,7 +5636,11 @@ filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided
 <span class="normal">83</span>
 <span class="normal">84</span>
 <span class="normal">85</span>
-<span class="normal">86</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">plot_TvsP</span><span class="p">(</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">plot_TvsP</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">potential_label</span><span class="o">=</span><span class="s2">&quot;$\Delta G_f$ / kJ mol$^{-1}$&quot;</span><span class="p">,</span>
     <span class="n">scale_range</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">600</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
@@ -5635,6 +5648,7 @@ filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided
     <span class="n">precision</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span>
     <span class="n">T_units</span><span class="o">=</span><span class="s2">&quot;K&quot;</span><span class="p">,</span>
     <span class="n">P_units</span><span class="o">=</span><span class="s2">&quot;Pa&quot;</span><span class="p">,</span>
+    <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    T is an array e.g. np.linspace(100, 1500, 100)  # K</span>
@@ -5645,6 +5659,7 @@ filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided
 <span class="sd">    potential_label is the label of the contour colorbar e.g. &#39;$\Delta G_f$ / kJ mol$^{-1}$&#39;</span>
 <span class="sd">    scale_range is the scale of the colorbar e.g. [-380, -240]</span>
 <span class="sd">    filename is the output filename e.g. &#39;plots/Dmu-BaS2-Ba-S2.png&#39;. If not provided `plt.show()` is called.</span>
+<span class="sd">    logscale determines if the y-axis Pressure is logarithmic</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;font.family&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;serif&quot;</span>
@@ -5688,11 +5703,13 @@ filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided
         <span class="n">cmap</span><span class="o">=</span><span class="n">colormap</span><span class="p">,</span>
         <span class="n">vmin</span><span class="o">=</span><span class="n">scale_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
         <span class="n">vmax</span><span class="o">=</span><span class="n">scale_range</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">shading</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span>
     <span class="p">)</span>
     <span class="n">colours</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
     <span class="n">colours</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">potential_label</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">log_scale</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">clabel</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="n">precision</span><span class="p">)</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Temperature / </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x_unitlabel</span><span class="p">))</span>
@@ -5701,7 +5718,7 @@ filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided
     <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">plt</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -5856,22 +5873,28 @@ filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided
 <span class="normal">101</span>
 <span class="normal">102</span>
 <span class="normal">103</span>
-<span class="normal">104</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Potentials</span><span class="p">:</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Potentials</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">potentials</span><span class="p">):</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">potentials</span> <span class="o">=</span> <span class="n">potentials</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">minimum_potential</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_potential_minimum</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">potentials</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">P</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">potentials</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">P</span>
 
     <span class="c1"># TODO: check that all the potentials are plottable over T/P range</span>
 
     <span class="k">def</span> <span class="nf">plot_TvsP</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">T</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">P</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">material_labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">filename</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="n">T_units</span><span class="o">=</span><span class="s2">&quot;K&quot;</span><span class="p">,</span>
         <span class="n">P_units</span><span class="o">=</span><span class="s2">&quot;Pa&quot;</span><span class="p">,</span>
+        <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        T is an array e.g. np.linspace(100, 1500, 100)  # K</span>
@@ -5882,6 +5905,7 @@ filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided
 <span class="sd">        potential_label is the label of the contour colorbar e.g. &#39;$\Delta G_f$ / kJ mol$^{-1}$&#39;</span>
 <span class="sd">        scale_range is the scale of the colorbar e.g. [-380, -240]</span>
 <span class="sd">        filename is the output filename e.g. &#39;plots/Dmu-BaS2-Ba-S2.png&#39;. If not provided `plt.show()` is called.</span>
+<span class="sd">        log_scale determines if the Pressure y-axis is logarithmic</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;font.family&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;serif&quot;</span>
@@ -5889,25 +5913,26 @@ filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided
         <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;font.size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">16</span>
 
         <span class="c1"># Unit conversions (all calculations are in SI units, conversion needed for plots)</span>
+
         <span class="k">if</span> <span class="n">T_units</span> <span class="o">==</span> <span class="s2">&quot;K&quot;</span><span class="p">:</span>
-            <span class="n">x_values</span> <span class="o">=</span> <span class="n">T</span>
+            <span class="n">x_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span>
             <span class="n">x_unitlabel</span> <span class="o">=</span> <span class="s2">&quot;K&quot;</span>
         <span class="k">elif</span> <span class="n">T_units</span> <span class="o">==</span> <span class="s2">&quot;C&quot;</span><span class="p">:</span>
-            <span class="n">x_values</span> <span class="o">=</span> <span class="n">T</span> <span class="o">-</span> <span class="mf">273.15</span>
+            <span class="n">x_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="mf">273.15</span>
             <span class="n">x_unitlabel</span> <span class="o">=</span> <span class="s2">&quot;$^\circ$ C&quot;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid temperature unit: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">T_units</span><span class="p">))</span>
 
         <span class="k">if</span> <span class="n">P_units</span> <span class="o">==</span> <span class="s2">&quot;Pa&quot;</span><span class="p">:</span>
-            <span class="n">y_values</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+            <span class="n">y_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">P</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
         <span class="k">elif</span> <span class="n">P_units</span> <span class="o">==</span> <span class="s2">&quot;Bar&quot;</span> <span class="ow">or</span> <span class="n">P_units</span> <span class="o">==</span> <span class="s2">&quot;bar&quot;</span><span class="p">:</span>
-            <span class="n">y_values</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1e-5</span>
+            <span class="n">y_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">P</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1e-5</span>
         <span class="k">elif</span> <span class="n">P_units</span> <span class="o">==</span> <span class="s2">&quot;mbar&quot;</span><span class="p">:</span>
-            <span class="n">y_values</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1e-5</span> <span class="o">*</span> <span class="mf">1e3</span>
+            <span class="n">y_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">P</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1e-5</span> <span class="o">*</span> <span class="mf">1e3</span>
         <span class="k">elif</span> <span class="n">P_units</span> <span class="o">==</span> <span class="s2">&quot;kPa&quot;</span><span class="p">:</span>
-            <span class="n">y_values</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1e-3</span>
+            <span class="n">y_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">P</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1e-3</span>
         <span class="k">elif</span> <span class="n">P_units</span> <span class="o">==</span> <span class="s2">&quot;mmHg&quot;</span> <span class="ow">or</span> <span class="n">P_units</span> <span class="o">==</span> <span class="s2">&quot;torr&quot;</span><span class="p">:</span>
-            <span class="n">y_values</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">*</span> <span class="mi">760</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.01325e5</span><span class="p">)</span>
+            <span class="n">y_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">P</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">*</span> <span class="mi">760</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.01325e5</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid pressure unit: </span><span class="si">{0}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">T_units</span><span class="p">))</span>
 
@@ -5917,41 +5942,43 @@ filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided
 
         <span class="n">potential</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_potential_minimum</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span>
-            <span class="n">x_values</span><span class="p">,</span> <span class="n">y_values</span><span class="p">,</span> <span class="n">potential</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">material_labels</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">colormap</span>
+            <span class="n">x_values</span><span class="p">,</span> <span class="n">y_values</span><span class="p">,</span> <span class="n">potential</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">material_labels</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">colormap</span><span class="p">,</span> <span class="n">shading</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span>
         <span class="p">)</span>
-        <span class="c1"># TODO: sort the colour map out so consistent with grid.</span>
+        <span class="c1"># TODO: sort the colour map out so consistent with grid. Now ranges from 0 to 1</span>
 
         <span class="c1"># Set borders in the interval [0, 1]</span>
-        <span class="n">bound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">material_labels</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">bound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">material_labels</span><span class="p">))</span>
 
-        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
-            <span class="p">[</span><span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">colormap</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">bound</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span>
-            <span class="p">[</span><span class="s2">&quot;</span><span class="si">{:s}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">material_labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">material_labels</span><span class="p">))],</span>
-        <span class="p">)</span>
+        <span class="c1"># AT THE MOMENT THIS IS BROKEN!!!!</span>
+        <span class="c1">#plt.legend(</span>
+        <span class="c1">#    [mpatches.Patch(color=colormap(i)) for i in bound],</span>
+        <span class="c1">#    [&quot;{:s}&quot;.format(material_labels[i]) for i in range(len(material_labels))],</span>
+        <span class="c1">#)</span>
 
         <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Temperature / </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x_unitlabel</span><span class="p">))</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Pressure / </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">P_units</span><span class="p">))</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">log_scale</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">plt</span>
 
     <span class="k">def</span> <span class="nf">find_potential_minimum</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
         <span class="k">assert</span> <span class="p">(</span>
-            <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span> <span class="k">for</span> <span class="n">array</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">potentials</span><span class="p">]))</span> <span class="o">==</span> <span class="mi">1</span>
+            <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">potential</span><span class="o">.</span><span class="n">potential</span><span class="o">.</span><span class="n">shape</span> <span class="k">for</span> <span class="n">potential</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">potentials</span><span class="p">]))</span> <span class="o">==</span> <span class="mi">1</span>
         <span class="p">),</span> <span class="s2">&quot;potential arrays must have the same dimension&quot;</span>
 
-        <span class="n">minimum_potential</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">potentials</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">minimum_potential</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">potentials</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">potential</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">potential</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">potentials</span><span class="p">):</span>
-            <span class="n">minimum_potential</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">minimum_potential</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">potentials</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="n">minimum_potential</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">minimum_potential</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">potentials</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">potential</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">potentials</span><span class="p">):</span>
                 <span class="k">break</span>
 
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">potential</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">potentials</span><span class="p">):</span>
-            <span class="n">minimum_potential</span><span class="p">[</span><span class="n">potential</span> <span class="o">==</span> <span class="n">minimum_potential</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+            <span class="n">minimum_potential</span><span class="p">[</span><span class="n">potential</span><span class="o">.</span><span class="n">potential</span> <span class="o">==</span> <span class="n">minimum_potential</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
 
         <span class="k">return</span> <span class="n">minimum_potential</span>
 </code></pre></div></td></tr></table></div>
@@ -5974,7 +6001,7 @@ filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided
 
 
 <h3 id="thermopot.potentials.Potentials.plot_TvsP" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">plot_TvsP</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">material_labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">T_units</span><span class="o">=</span><span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="n">P_units</span><span class="o">=</span><span class="s1">&#39;Pa&#39;</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">plot_TvsP</span><span class="p">(</span><span class="n">material_labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">T_units</span><span class="o">=</span><span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="n">P_units</span><span class="o">=</span><span class="s1">&#39;Pa&#39;</span><span class="p">,</span> <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
 
 <a href="#thermopot.potentials.Potentials.plot_TvsP" class="headerlink" title="Permanent link"></a></h3>
 
@@ -5988,13 +6015,12 @@ If T has length m and P has length n, P will be a 2D array with dimensions m x n
 e.g. reactions.reaction({Ba:1,S:2}, {BaS2:1}},temperature=T,pressure=P).Dmu_eV_pbesol()
 potential_label is the label of the contour colorbar e.g. '$\Delta G_f$ / kJ mol$^{-1}$'
 scale_range is the scale of the colorbar e.g. [-380, -240]
-filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided <code>plt.show()</code> is called.</p>
+filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided <code>plt.show()</code> is called.
+log_scale determines if the Pressure y-axis is logarithmic</p>
 
       <details class="quote">
         <summary>Source code in <code>thermopot/potentials.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">17</span>
 <span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span>
@@ -6064,14 +6090,18 @@ filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided
 <span class="normal">84</span>
 <span class="normal">85</span>
 <span class="normal">86</span>
-<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">plot_TvsP</span><span class="p">(</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">plot_TvsP</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">T</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">P</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">material_labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">filename</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">T_units</span><span class="o">=</span><span class="s2">&quot;K&quot;</span><span class="p">,</span>
     <span class="n">P_units</span><span class="o">=</span><span class="s2">&quot;Pa&quot;</span><span class="p">,</span>
+    <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    T is an array e.g. np.linspace(100, 1500, 100)  # K</span>
@@ -6082,6 +6112,7 @@ filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided
 <span class="sd">    potential_label is the label of the contour colorbar e.g. &#39;$\Delta G_f$ / kJ mol$^{-1}$&#39;</span>
 <span class="sd">    scale_range is the scale of the colorbar e.g. [-380, -240]</span>
 <span class="sd">    filename is the output filename e.g. &#39;plots/Dmu-BaS2-Ba-S2.png&#39;. If not provided `plt.show()` is called.</span>
+<span class="sd">    log_scale determines if the Pressure y-axis is logarithmic</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;font.family&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;serif&quot;</span>
@@ -6089,25 +6120,26 @@ filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided
     <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;font.size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">16</span>
 
     <span class="c1"># Unit conversions (all calculations are in SI units, conversion needed for plots)</span>
+
     <span class="k">if</span> <span class="n">T_units</span> <span class="o">==</span> <span class="s2">&quot;K&quot;</span><span class="p">:</span>
-        <span class="n">x_values</span> <span class="o">=</span> <span class="n">T</span>
+        <span class="n">x_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span>
         <span class="n">x_unitlabel</span> <span class="o">=</span> <span class="s2">&quot;K&quot;</span>
     <span class="k">elif</span> <span class="n">T_units</span> <span class="o">==</span> <span class="s2">&quot;C&quot;</span><span class="p">:</span>
-        <span class="n">x_values</span> <span class="o">=</span> <span class="n">T</span> <span class="o">-</span> <span class="mf">273.15</span>
+        <span class="n">x_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="mf">273.15</span>
         <span class="n">x_unitlabel</span> <span class="o">=</span> <span class="s2">&quot;$^\circ$ C&quot;</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid temperature unit: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">T_units</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="n">P_units</span> <span class="o">==</span> <span class="s2">&quot;Pa&quot;</span><span class="p">:</span>
-        <span class="n">y_values</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="n">y_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">P</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
     <span class="k">elif</span> <span class="n">P_units</span> <span class="o">==</span> <span class="s2">&quot;Bar&quot;</span> <span class="ow">or</span> <span class="n">P_units</span> <span class="o">==</span> <span class="s2">&quot;bar&quot;</span><span class="p">:</span>
-        <span class="n">y_values</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1e-5</span>
+        <span class="n">y_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">P</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1e-5</span>
     <span class="k">elif</span> <span class="n">P_units</span> <span class="o">==</span> <span class="s2">&quot;mbar&quot;</span><span class="p">:</span>
-        <span class="n">y_values</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1e-5</span> <span class="o">*</span> <span class="mf">1e3</span>
+        <span class="n">y_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">P</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1e-5</span> <span class="o">*</span> <span class="mf">1e3</span>
     <span class="k">elif</span> <span class="n">P_units</span> <span class="o">==</span> <span class="s2">&quot;kPa&quot;</span><span class="p">:</span>
-        <span class="n">y_values</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1e-3</span>
+        <span class="n">y_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">P</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1e-3</span>
     <span class="k">elif</span> <span class="n">P_units</span> <span class="o">==</span> <span class="s2">&quot;mmHg&quot;</span> <span class="ow">or</span> <span class="n">P_units</span> <span class="o">==</span> <span class="s2">&quot;torr&quot;</span><span class="p">:</span>
-        <span class="n">y_values</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">*</span> <span class="mi">760</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.01325e5</span><span class="p">)</span>
+        <span class="n">y_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">P</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">*</span> <span class="mi">760</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.01325e5</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid pressure unit: </span><span class="si">{0}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">T_units</span><span class="p">))</span>
 
@@ -6117,26 +6149,28 @@ filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided
 
     <span class="n">potential</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_potential_minimum</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span>
-        <span class="n">x_values</span><span class="p">,</span> <span class="n">y_values</span><span class="p">,</span> <span class="n">potential</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">material_labels</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">colormap</span>
+        <span class="n">x_values</span><span class="p">,</span> <span class="n">y_values</span><span class="p">,</span> <span class="n">potential</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">material_labels</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">colormap</span><span class="p">,</span> <span class="n">shading</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span>
     <span class="p">)</span>
-    <span class="c1"># TODO: sort the colour map out so consistent with grid.</span>
+    <span class="c1"># TODO: sort the colour map out so consistent with grid. Now ranges from 0 to 1</span>
 
     <span class="c1"># Set borders in the interval [0, 1]</span>
-    <span class="n">bound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">material_labels</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">bound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">material_labels</span><span class="p">))</span>
 
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
-        <span class="p">[</span><span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">colormap</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">bound</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span>
-        <span class="p">[</span><span class="s2">&quot;</span><span class="si">{:s}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">material_labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">material_labels</span><span class="p">))],</span>
-    <span class="p">)</span>
+    <span class="c1"># AT THE MOMENT THIS IS BROKEN!!!!</span>
+    <span class="c1">#plt.legend(</span>
+    <span class="c1">#    [mpatches.Patch(color=colormap(i)) for i in bound],</span>
+    <span class="c1">#    [&quot;{:s}&quot;.format(material_labels[i]) for i in range(len(material_labels))],</span>
+    <span class="c1">#)</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Temperature / </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x_unitlabel</span><span class="p">))</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Pressure / </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">P_units</span><span class="p">))</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">log_scale</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">plt</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -6456,10 +6490,10 @@ or follow the same format</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.39f04ddb.min.js"></script>
+      <script src="../assets/javascripts/bundle.37e9125f.min.js"></script>
       
         <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
       
