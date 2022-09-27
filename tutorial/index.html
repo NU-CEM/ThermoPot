@@ -1512,7 +1512,7 @@ will also identify at which temperatures and pressures (if any) the
 perovskite decomposes into it's competing binary (BaS, BaS2, ZrS, ZrS$_2$) or
 elemental (Ba, Zr, S) phases.</p>
 <p>To do these calculations we need the total ground-state energy of each
-material, calculated using DFT or elsewise. For predictions and finite
+material, calculated using DFT or else-wise. For predictions and finite
 temperature and pressure we need, in addition, vibrational data for each
 material. For solid materials this can also be calculated from
 first-principles using harmonic lattice dynamical theory. For gaseous
@@ -1537,9 +1537,9 @@ example BaZrS$_3$, with energies calculated at
 various levels of theory.</p>
 <p>3) Reaction to store data  and make predictions for a single chemical
 reaction. For example BaZrS$_3$ -&gt; BaS$_2$ + ZrS</p>
-<p>The structure is hierachial; one or more <code>Calculation</code> instances are used to
-build a <code>Material</code>, and three or more <code>Material</code> instances are used to
-calculate a <code>Reaction</code>. In addition to this there is the
+<p>The structure is hierachial; one more <code>Calculation</code> instances are used to
+build a <code>Material</code> instance, and three or more <code>Material</code> objects are used to
+calculate a <code>Reaction</code> instance. In addition to this there are is the
 <code>Potential</code> class to store and plot a single  thermodynamic potential, and
 the <code>Potentials</code> class to store and plot multiple thermodynamic potentials.</p>
 
@@ -1596,16 +1596,13 @@ the <code>Potentials</code> class to store and plot multiple thermodynamic poten
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="step-2-create-calculations">Step 2 - create <code>calculations</code><a class="anchor-link" href="#step-2-create-calculations">&#182;</a></h2><p>There are currently two ways to create a <code>Calculations</code> instance:</p>
-<p>1) Manually input the attributes (calculated energy, xc-functional type,
+<h2 id="step-2-create-calculations">Step 2 - create <code>calculations</code><a class="anchor-link" href="#step-2-create-calculations">&#182;</a></h2><p>There are two ways to create a <code>Calculations</code> object:
+1) Manually input the attributes (calculated energy, xc-functional type,
    volume, number of atoms).</p>
 <p>2) Parse a FHI-aims output file to read this data
    automatically. Provide the path for an <code>aims.out</code> file.</p>
 <p>We will provide an example for each which uses the <code>vars</code>
 function to show that the class attributes are equal.</p>
-<p>We plan to extend the code so that it can parse more electronic structure
-codes. Please <a href="https://github.com/NU-CEM/ThermoPot/issues">raise an issue on the Github repo</a> if you would like us to
-support a particular code.</p>
 
 </div>
 </div>
@@ -1683,7 +1680,7 @@ vars(BaS_calc)</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1720,7 +1717,7 @@ vars(BaS_calc)</div>
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
 
 
 
@@ -1747,19 +1744,18 @@ vars(BaS_calc)</div>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>To access in-notebook help for each module, function or class, docstrings can
- be printed by appending <code>?</code>. Alternatively, the Python <code>help()</code> function can be used.</p>
+<p>For in-notebook help with functions, docstrings can be accessed with a <code>?</code> to trigger the docstring for the class. Alternatively, a Python <code>help()</code> function can be used. Feel free to use this for any object to fimilarise yourself with the internal workings of the code.</p>
 
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1775,15 +1771,103 @@ vars(BaS_calc)</div>
             </clipboard-copy>
         </div>
             <div class="highlight-ipynb hl-python"><pre><span></span><span class="n">calculations</span><span class="o">.</span><span class="n">AimsCalculation</span><span class="err">?</span>
-<span class="c1">#help(calculations.AimsCalculation)</span>
+<span class="n">help</span><span class="p">(</span><span class="n">calculations</span><span class="o">.</span><span class="n">AimsCalculation</span><span class="p">)</span>
 </pre></div>
 <div id="cell-4" class="clipboard-copy-txt">calculations.AimsCalculation?
-#help(calculations.AimsCalculation)</div>
+help(calculations.AimsCalculation)</div>
     
         </div>
     </div>
 
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Help on class AimsCalculation in module thermopot.calculations:
+
+class AimsCalculation(Calculation)
+ |  AimsCalculation(filepath=&#39;./calculation.out&#39;)
+ |  
+ |  Class for parsing and storing data from a FHI-AIMS total energy calculation.
+ |  
+ |  Example:
+ |  
+ |      AimsCalculation(&#34;./aims_output/output.aims&#34;)
+ |  
+ |  Attributes:
+ |  
+ |      volume (float): volume of the periodic unit cell in Angstrom^3
+ |      filepath (str): path to the calculation output files
+ |      energy (float): DFT total energy in eV
+ |      xc (str): XC functional used to calculate the total energy
+ |      NAtoms (int): number of atoms in the periodic unit cell
+ |  
+ |  Method resolution order:
+ |      AimsCalculation
+ |      Calculation
+ |      builtins.object
+ |  
+ |  Methods defined here:
+ |  
+ |  __init__(self, filepath=&#39;./calculation.out&#39;)
+ |      Args:
+ |      
+ |          filepath (str): path to the calculation output files
+ |  
+ |  get_NAtoms(self)
+ |      Returns:
+ |      
+ |          (int): number of atoms in the periodic unit cell
+ |  
+ |  get_energy(self)
+ |      Returns:
+ |      
+ |          (float): DFT total energy in eV
+ |  
+ |  get_volume(self)
+ |      Returns:
+ |      
+ |          (float): volume of the periodic unit cell in Angstrom^3
+ |  
+ |  get_xc(self)
+ |      Returns:
+ |      
+ |          (str): XC functional used to calculate the total energy
+ |  
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from Calculation:
+ |  
+ |  check_attributes(self)
+ |      Check that the Calculation class attributes make basic sense.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors inherited from Calculation:
+ |  
+ |  __dict__
+ |      dictionary for instance variables (if defined)
+ |  
+ |  __weakref__
+ |      list of weak references to the object (if defined)
+
+</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -1805,7 +1889,7 @@ vars(BaS_calc)</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1851,7 +1935,19 @@ ZrS2_calc =  calculations.AimsCalculation("../BaZrS3/raw_aims_files/binary/ZrS2_
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The attributes (name, stoichiometry, filepath) of a <code>materials.Solid</code> has to be stored in a variable.</p>
+<p>For in-notebook help with functions, docstrings can be accessed with a <code>?</code> to trigger the docstring for the class. Alternatively, a Python <code>help()</code> function can be used.</p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The attributes (name, stoichiometry, filepath of ) of a <code>materials.Solid</code> has to be stored in a variable.</p>
 
 </div>
 </div>
@@ -1862,7 +1958,7 @@ ZrS2_calc =  calculations.AimsCalculation("../BaZrS3/raw_aims_files/binary/ZrS2_
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1902,7 +1998,7 @@ ZrS2 = materials.Solid('ZrS2',{"Zr":1,"S":2},"../BaZrS3/phonopy_output/ZrS2_P-3m
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1937,7 +2033,7 @@ ZrS2 = materials.Solid('ZrS2',{"Zr":1,"S":2},"../BaZrS3/phonopy_output/ZrS2_P-3m
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
 
 
 
@@ -1950,7 +2046,7 @@ ZrS2 = materials.Solid('ZrS2',{"Zr":1,"S":2},"../BaZrS3/phonopy_output/ZrS2_P-3m
  &#39;volume&#39;: 484.624,
  &#39;NAtoms&#39;: 20,
  &#39;fu_cell&#39;: 4.0,
- &#39;phonons&#39;: &#39;/Users/lucy/PycharmProjects/ThermoPot/thermopot/../BaZrS3/phonopy_output/BaZrS3_Pnma.dat&#39;}</pre>
+ &#39;phonons&#39;: &#39;/Users/prakriti/development/ThermoPot/thermopot/../BaZrS3/phonopy_output/BaZrS3_Pnma.dat&#39;}</pre>
 </div>
 
 </div>
@@ -1978,10 +2074,7 @@ ZrS2 = materials.Solid('ZrS2',{"Zr":1,"S":2},"../BaZrS3/phonopy_output/ZrS2_P-3m
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>We model the composition or decomposition of our <code>materials</code> with the
-<code>reaction</code> class. The first argument is a Python dictionary containing the
-reactants and number of formula units for each the second argument is  a
-Python dictionary containing the propducs and number of formula units for each.</p>
+<p>We model the combination or decomposition of <code>materials</code> with the <code>reaction</code> class where the formula unit of reactants and products are defined.</p>
 
 </div>
 </div>
@@ -1992,7 +2085,7 @@ Python dictionary containing the propducs and number of formula units for each.<
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -2024,7 +2117,7 @@ Python dictionary containing the propducs and number of formula units for each.<
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -2059,15 +2152,15 @@ Python dictionary containing the propducs and number of formula units for each.<
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[14]:</div>
 
 
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>{&#39;reactants&#39;: {&lt;thermopot.materials.Solid at 0x7f90746a1700&gt;: 1},
- &#39;products&#39;: {&lt;thermopot.materials.Solid at 0x7f90746a1070&gt;: 1,
-  &lt;thermopot.materials.Solid at 0x7f90746a1610&gt;: 1},
+<pre>{&#39;reactants&#39;: {&lt;thermopot.materials.Solid at 0x1298b7310&gt;: 1},
+ &#39;products&#39;: {&lt;thermopot.materials.Solid at 0x1298b7ca0&gt;: 1,
+  &lt;thermopot.materials.Solid at 0x1298b6530&gt;: 1},
  &#39;T&#39;: 298.15,
  &#39;P&#39;: 100000.0,
  &#39;fu_scaling&#39;: 1}</pre>
@@ -2086,7 +2179,7 @@ Python dictionary containing the propducs and number of formula units for each.<
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -2131,13 +2224,13 @@ reaction_one.Dmu(T,P)</div>
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[26]:</div>
 
 
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;thermopot.potential.Potential at 0x7f90730e1d30&gt;</pre>
+<pre>&lt;thermopot.potential.Potential at 0x129b9a980&gt;</pre>
 </div>
 
 </div>
@@ -2153,7 +2246,7 @@ reaction_one.Dmu(T,P)</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -2185,7 +2278,7 @@ reaction_one.Dmu(T,P)</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[28]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -2237,12 +2330,12 @@ GFE = GFE_reaction_one.Dmu(T,P) / 1000</div>
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">AttributeError</span>                            Traceback (most recent call last)
-Input <span class="ansi-green-fg">In [12]</span>, in <span class="ansi-cyan-fg">&lt;cell line: 6&gt;</span><span class="ansi-blue-fg">()</span>
+Cell <span class="ansi-green-fg">In [28], line 6</span>
 <span class="ansi-green-intense-fg ansi-bold">      3</span> T <span style="color: rgb(98,98,98)">=</span> np<span style="color: rgb(98,98,98)">.</span>linspace(<span style="color: rgb(98,98,98)">100</span>, <span style="color: rgb(98,98,98)">1000</span>, <span style="color: rgb(98,98,98)">100</span>)
 <span class="ansi-green-intense-fg ansi-bold">      4</span> P <span style="color: rgb(98,98,98)">=</span> np<span style="color: rgb(98,98,98)">.</span>array(np<span style="color: rgb(98,98,98)">.</span>logspace(<span style="color: rgb(98,98,98)">1</span>, <span style="color: rgb(98,98,98)">7</span>, <span style="color: rgb(98,98,98)">100</span>), ndmin<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">2</span>)<span style="color: rgb(98,98,98)">.</span>transpose()
 <span class="ansi-green-fg">----&gt; 6</span> GFE <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">GFE_reaction_one</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">Dmu</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">T</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg">P</span><span class="ansi-yellow-bg">)</span> <span style="color: rgb(98,98,98)">/</span> <span style="color: rgb(98,98,98)">1000</span>
 
-File <span class="ansi-green-fg">~/PycharmProjects/ThermoPot/thermopot/reactions.py:79</span>, in <span class="ansi-cyan-fg">Reaction.Dmu</span><span class="ansi-blue-fg">(self, T, P, xc, units)</span>
+File <span class="ansi-green-fg">~/development/ThermoPot/thermopot/reactions.py:79</span>, in <span class="ansi-cyan-fg">Reaction.Dmu</span><span class="ansi-blue-fg">(self, T, P, xc, units)</span>
 <span class="ansi-green-intense-fg ansi-bold">     76</span> <span class="ansi-bold" style="color: rgb(0,135,0)">def</span> <span style="color: rgb(0,0,255)">Dmu</span>(<span style="color: rgb(0,135,0)">self</span>, T<span style="color: rgb(98,98,98)">=</span><span class="ansi-bold" style="color: rgb(0,135,0)">None</span>, P<span style="color: rgb(98,98,98)">=</span><span class="ansi-bold" style="color: rgb(0,135,0)">None</span>, xc<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">pbesol</span><span style="color: rgb(175,0,0)">&#34;</span>, units<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">eV</span><span style="color: rgb(175,0,0)">&#34;</span>):
 <span class="ansi-green-intense-fg ansi-bold">     78</span>     T <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>T <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> T <span class="ansi-bold" style="color: rgb(175,0,255)">is</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span> <span class="ansi-bold" style="color: rgb(0,135,0)">else</span> T
 <span class="ansi-green-fg">---&gt; 79</span>     P <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">P</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> P <span class="ansi-bold" style="color: rgb(175,0,255)">is</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span> <span class="ansi-bold" style="color: rgb(0,135,0)">else</span> P
@@ -2258,13 +2351,13 @@ File <span class="ansi-green-fg">~/PycharmProjects/ThermoPot/thermopot/reactions
 </div>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -2287,6 +2380,34 @@ File <span class="ansi-green-fg">~/PycharmProjects/ThermoPot/thermopot/reactions
     </div>
 
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In [22], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">plots</span><span style="color: rgb(98,98,98)">.</span>plot_TvsP(T,P,GFE)
+
+<span class="ansi-red-fg">NameError</span>: name &#39;plots&#39; is not defined</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -2326,8 +2447,8 @@ pot_2 = np.array([[0,0,2],[0,4,5],[0,4,5]])</div>
 </div>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -2352,6 +2473,127 @@ pot_2 = np.array([[0,0,2],[0,4,5],[0,4,5]])</div>
 </pre></div>
 <div id="cell-15" class="clipboard-copy-txt">plots.plot_TvsP(np.array([0,10,20]),np.array([0,10,20]).transpose(),pot_1,
                 pot_2,material_labels=["A","B"])</div>
+    
+        </div>
+    </div>
+
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+
+
+<div class="jp-RenderedImage jp-OutputArea-output ">
+<img src="data:image/png;base64,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"
+class="
+jp-needs-light-background
+"
+>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[34]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+        
+        
+        <div class="CodeMirror cm-s-jupyter">
+        <div class="zeroclipboard-container">
+            <clipboard-copy for="cell-16">
+            <div>
+                <span class="notice" hidden>Copied!</span>
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
+                    <path fill="currentColor" fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill="currentColor" fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                </div>
+            </clipboard-copy>
+        </div>
+            <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">thermopot</span> <span class="kn">import</span> <span class="n">stability</span>
+</pre></div>
+<div id="cell-16" class="clipboard-copy-txt">from thermopot import stability</div>
+    
+        </div>
+    </div>
+
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ImportError</span>                               Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In [34], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">thermopot</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> stability
+
+<span class="ansi-red-fg">ImportError</span>: cannot import name &#39;stability&#39; from &#39;thermopot&#39; (/Users/prakriti/development/ThermoPot/thermopot/__init__.py)</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+        
+        
+        <div class="CodeMirror cm-s-jupyter">
+        <div class="zeroclipboard-container">
+            <clipboard-copy for="cell-17">
+            <div>
+                <span class="notice" hidden>Copied!</span>
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
+                    <path fill="currentColor" fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill="currentColor" fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                </div>
+            </clipboard-copy>
+        </div>
+            <div class="highlight-ipynb hl-python"><pre><span></span>
+</pre></div>
+<div id="cell-17" class="clipboard-copy-txt"></div>
     
         </div>
     </div>
