@@ -9,17 +9,18 @@ class Potentials:
 
         self.potentials = potentials
         self.minimum_potential = self.find_potential_minimum()
+        self.T = self.potentials[0].T
+        self.P = self.potentials[0].P
 
     # TODO: check that all the potentials are plottable over T/P range
 
     def plot_TvsP(
         self,
-        T=None,
-        P=None,
         material_labels=None,
         filename=False,
         T_units="K",
         P_units="Pa",
+        log_scale=True,
     ):
         """
         T is an array e.g. np.linspace(100, 1500, 100)  # K
@@ -30,6 +31,7 @@ class Potentials:
         potential_label is the label of the contour colorbar e.g. '$\Delta G_f$ / kJ mol$^{-1}$'
         scale_range is the scale of the colorbar e.g. [-380, -240]
         filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided `plt.show()` is called.
+        log_scale determines if the Pressure y-axis is logarithmic
         """
 
         mpl.rcParams["font.family"] = "serif"
@@ -37,25 +39,26 @@ class Potentials:
         mpl.rcParams["font.size"] = 16
 
         # Unit conversions (all calculations are in SI units, conversion needed for plots)
+
         if T_units == "K":
-            x_values = T
+            x_values = self.T
             x_unitlabel = "K"
         elif T_units == "C":
-            x_values = T - 273.15
+            x_values = self.T - 273.15
             x_unitlabel = "$^\circ$ C"
         else:
             raise ValueError("Invalid temperature unit: {0}".format(T_units))
 
         if P_units == "Pa":
-            y_values = P.flatten()
+            y_values = self.P.flatten()
         elif P_units == "Bar" or P_units == "bar":
-            y_values = P.flatten() * 1e-5
+            y_values = self.P.flatten() * 1e-5
         elif P_units == "mbar":
-            y_values = P.flatten() * 1e-5 * 1e3
+            y_values = self.P.flatten() * 1e-5 * 1e3
         elif P_units == "kPa":
-            y_values = P.flatten() * 1e-3
+            y_values = self.P.flatten() * 1e-3
         elif P_units == "mmHg" or P_units == "torr":
-            y_values = P.flatten() * 760 / (1.01325e5)
+            y_values = self.P.flatten() * 760 / (1.01325e5)
         else:
             raise ValueError("Invalid pressure unit: {0}.".format(T_units))
 
@@ -65,40 +68,48 @@ class Potentials:
 
         potential = self.find_potential_minimum()
         plt.pcolormesh(
-            x_values, y_values, potential / (len(material_labels) + 1), cmap=colormap
+            x_values,
+            y_values,
+            potential / (len(material_labels) - 1),
+            cmap=colormap,
+            shading="auto",
         )
-        # TODO: sort the colour map out so consistent with grid.
+        # TODO: sort the colour map out so consistent with grid. Now ranges from 0 to 1
 
         # Set borders in the interval [0, 1]
-        bound = np.linspace(0, 1, len(material_labels) + 1)
+        bound = np.linspace(0, 1, len(material_labels))
 
-        plt.legend(
-            [mpatches.Patch(color=colormap(i)) for i in bound[:-1]],
-            ["{:s}".format(material_labels[i]) for i in range(len(material_labels))],
-        )
+        # AT THE MOMENT THIS IS BROKEN!!!!
+        # plt.legend(
+        #    [mpatches.Patch(color=colormap(i)) for i in bound],
+        #    ["{:s}".format(material_labels[i]) for i in range(len(material_labels))],
+        # )
 
         plt.xlabel("Temperature / {0}".format(x_unitlabel))
         plt.ylabel("Pressure / {0}".format(P_units))
-        ax.set_yscale("log")
+        if log_scale:
+            ax.set_yscale("log")
 
         if filename:
             plt.savefig(filename, dpi=200)
         else:
-            plt.show()
+            return plt
 
     def find_potential_minimum(self):
 
         assert (
-            len(set([array.shape for array in self.potentials])) == 1
+            len(set([potential.potential.shape for potential in self.potentials])) == 1
         ), "potential arrays must have the same dimension"
 
-        minimum_potential = self.potentials[0]
+        minimum_potential = self.potentials[0].potential
         for i, potential in enumerate(self.potentials):
-            minimum_potential = np.minimum(minimum_potential, self.potentials[i + 1])
+            minimum_potential = np.minimum(
+                minimum_potential, self.potentials[i + 1].potential
+            )
             if i + 2 == len(self.potentials):
                 break
 
         for i, potential in enumerate(self.potentials):
-            minimum_potential[potential == minimum_potential] = i
+            minimum_potential[potential.potential == minimum_potential] = i
 
         return minimum_potential
