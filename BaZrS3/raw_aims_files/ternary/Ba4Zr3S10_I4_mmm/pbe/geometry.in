@@ -1,0 +1,37 @@
+# 
+# This is the geometry file that corresponds to the current relaxation step.
+# If you do not want this file to be written, set the "write_restart_geometry" flag to .false.
+#  aims_uuid : 5FC98825-6734-4BE9-A362-6C0DBC9A7B7E                                
+# 
+lattice_vector     -2.48105213      2.48105213     17.62475482
+lattice_vector      2.48105213     -2.48105213     17.62475482
+lattice_vector      2.48105213      2.48105213    -17.62475482
+atom_frac       0.43255747      0.43255747      0.00000000 Ba
+atom_frac       0.56744253      0.56744253      0.00000000 Ba
+atom_frac       0.30051574      0.30051574      0.00000000 Ba
+atom_frac       0.69948426      0.69948426      0.00000000 Ba
+atom_frac       0.50000000      0.00000000      0.50000000 S
+atom_frac       1.00000000      0.50000000      0.50000000 S
+atom_frac       0.92932555      0.92932555      0.00000000 S
+atom_frac       0.07067445      0.07067445      0.00000000 S
+atom_frac       0.78624821      0.78624821      0.00000000 S
+atom_frac       0.21375179      0.21375179      0.00000000 S
+atom_frac       0.86079726      0.36079726      0.50000000 S
+atom_frac       0.36079726      0.86079726      0.50000000 S
+atom_frac       0.13920274      0.63920274      0.50000000 S
+atom_frac       0.63920274      0.13920274      0.50000000 S
+atom_frac       0.00000000      0.00000000      0.00000000 Zr
+atom_frac       0.85662999      0.85662999      0.00000000 Zr
+atom_frac       0.14337001      0.14337001      0.00000000 Zr
+# 
+# What follows is the current estimated Hessian matrix constructed by the BFGS algorithm.
+# This is NOT the true Hessian matrix of the system.
+# If you do not want this information here, switch it off using the "hessian_to_restart_geometry" keyword.
+# 
+trust_radius             0.0393308813
+hessian_block                1       1         131.943012         -32.438120        -112.533541         -32.438120         234.197613           8.317187        -112.533541           8.317187         755.079734
+hessian_block                1       2          -3.546407         -69.802173         -32.359453          60.507649         119.650369        -201.304318         -15.525587         -91.698626         -44.835828
+hessian_block                2       2         697.414894        -433.632458          19.311792        -433.632458         685.218172        -146.719740          19.311792        -146.719740         323.607459
+hessian_block_lv             1       1          34.788311           1.149061           0.000000           1.149061           0.357237           0.000000           0.000000           0.000000           0.000000
+hessian_block_lv_atom        1       1           0.802400          -0.258929           0.000000          -7.349471           1.496018           0.000000          -3.148404          -1.156416           0.000000
+hessian_block_lv_atom        1       2         -21.861165          -6.822515           0.000000           7.230975           3.299994           0.000000           7.670572           0.648285           0.000000
