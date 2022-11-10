@@ -1,0 +1,1593 @@
+------------------------------------------------------------
+          Invoking FHI-aims ...
+
+          When using FHI-aims, please cite the following reference:
+
+            Volker Blum, Ralf Gehrke, Felix Hanke, Paula Havu,
+            Ville Havu, Xinguo Ren, Karsten Reuter, and Matthias Scheffler,
+            'Ab Initio Molecular Simulations with Numeric Atom-Centered Orbitals',
+            Computer Physics Communications 180, 2175-2196 (2009)
+
+          In addition, many other developments in FHI-aims are likely important for
+          your particular application. A partial list of references is given at the end of
+          this file. Thank you for giving credit to the authors of these developments.
+
+          For any questions about FHI-aims, please visit our slack channel at
+
+            https://fhi-aims.slack.com
+
+          and our main development and support site at
+
+            https://aims-git.rz-berlin.mpg.de .
+
+          The latter site, in particular, has a wiki to collect information, as well
+          as an issue tracker to log discussions, suggest improvements, and report issues
+          or bugs. https://aims-git.rz-berlin.mpg.de is also the main development site
+          of the project and all new and updated code versions can be obtained there.
+          Please send an email to aims-coordinators@fhi-berlin.mpg.de and we will add
+          you to these sites. They are for you and everyone is welcome there.
+
+------------------------------------------------------------
+
+
+
+  Date     :  20221030, Time     :  111307.198
+  Time zero on CPU 1             :   0.268385700000000E+01  s.
+  Internal wall clock time zero  :           436360387.198  s.
+
+  FHI-aims created a unique identifier for this run for later identification
+  aims_uuid : 0445AD98-A84F-4AE5-A5BC-CBF394F064A3
+
+  Build configuration of the current instance of FHI-aims
+  -------------------------------------------------------
+  FHI-aims version      : 220619
+  Commit number         : 375d76c9a
+  CMake host system     : Linux-4.12.14-197.78_9.1.64-cray_shasta_c
+  CMake version         : 3.22.1
+  Fortran compiler      : /opt/cray/pe/craype/2.7.6/bin/ftn (GNU) version 10.2.0
+  Fortran compiler flags: -O2 -fallow-argument-mismatch -ffree-line-length-none
+  C compiler            : /opt/cray/pe/craype/2.7.6/bin/cc (GNU) version 10.2.0
+  C compiler flags      : -O2
+  Using MPI
+  Using ScaLAPACK
+  Using LibXC
+  Using i-PI
+  Using RLSY
+  Linking against:
+
+  Using     1152 parallel tasks.
+  Task        0 on host nid001917 reporting.
+  Task        1 on host nid001917 reporting.
+  Task        2 on host nid001917 reporting.
+  Task        3 on host nid001917 reporting.
+  Task        4 on host nid001917 reporting.
+  Task        5 on host nid001917 reporting.
+  Task        6 on host nid001917 reporting.
+  Task        7 on host nid001917 reporting.
+  Task        8 on host nid001917 reporting.
+  Task        9 on host nid001917 reporting.
+  Task       10 on host nid001917 reporting.
+  Task       11 on host nid001917 reporting.
+  Task       12 on host nid001917 reporting.
+  Task       13 on host nid001917 reporting.
+  Task       14 on host nid001917 reporting.
+  Task       15 on host nid001917 reporting.
+  Task       16 on host nid001917 reporting.
+  Task       17 on host nid001917 reporting.
+  Task       18 on host nid001917 reporting.
+  Task       19 on host nid001917 reporting.
+  Task       20 on host nid001917 reporting.
+  Task       21 on host nid001917 reporting.
+  Task       22 on host nid001917 reporting.
+  Task       23 on host nid001917 reporting.
+  Task       24 on host nid001917 reporting.
+  Task       25 on host nid001917 reporting.
+  Task       26 on host nid001917 reporting.
+  Task       27 on host nid001917 reporting.
+  Task       28 on host nid001917 reporting.
+  Task       29 on host nid001917 reporting.
+  Task       30 on host nid001917 reporting.
+  Task       31 on host nid001917 reporting.
+  Task       32 on host nid001917 reporting.
+  Task       33 on host nid001917 reporting.
+  Task       34 on host nid001917 reporting.
+  Task       35 on host nid001917 reporting.
+  Task       36 on host nid001917 reporting.
+  Task       37 on host nid001917 reporting.
+  Task       38 on host nid001917 reporting.
+  Task       39 on host nid001917 reporting.
+  Task       40 on host nid001917 reporting.
+  Task       41 on host nid001917 reporting.
+  Task       42 on host nid001917 reporting.
+  Task       43 on host nid001917 reporting.
+  Task       44 on host nid001917 reporting.
+  Task       45 on host nid001917 reporting.
+  Task       46 on host nid001917 reporting.
+  Task       47 on host nid001917 reporting.
+  Task       48 on host nid001917 reporting.
+  Task       49 on host nid001917 reporting.
+  Task       50 on host nid001917 reporting.
+  Task       51 on host nid001917 reporting.
+  Task       52 on host nid001917 reporting.
+  Task       53 on host nid001917 reporting.
+  Task       54 on host nid001917 reporting.
+  Task       55 on host nid001917 reporting.
+  Task       56 on host nid001917 reporting.
+  Task       57 on host nid001917 reporting.
+  Task       58 on host nid001917 reporting.
+  Task       59 on host nid001917 reporting.
+  Task       60 on host nid001917 reporting.
+  Task       61 on host nid001917 reporting.
+  Task       62 on host nid001917 reporting.
+  Task       63 on host nid001917 reporting.
+  Task       64 on host nid001917 reporting.
+  Task       65 on host nid001917 reporting.
+  Task       66 on host nid001917 reporting.
+  Task       67 on host nid001917 reporting.
+  Task       68 on host nid001917 reporting.
+  Task       69 on host nid001917 reporting.
+  Task       70 on host nid001917 reporting.
+  Task       71 on host nid001917 reporting.
+  Task       72 on host nid001919 reporting.
+  Task       73 on host nid001919 reporting.
+  Task       74 on host nid001919 reporting.
+  Task       75 on host nid001919 reporting.
+  Task       76 on host nid001919 reporting.
+  Task       77 on host nid001919 reporting.
+  Task       78 on host nid001919 reporting.
+  Task       79 on host nid001919 reporting.
+  Task       80 on host nid001919 reporting.
+  Task       81 on host nid001919 reporting.
+  Task       82 on host nid001919 reporting.
+  Task       83 on host nid001919 reporting.
+  Task       84 on host nid001919 reporting.
+  Task       85 on host nid001919 reporting.
+  Task       86 on host nid001919 reporting.
+  Task       87 on host nid001919 reporting.
+  Task       88 on host nid001919 reporting.
+  Task       89 on host nid001919 reporting.
+  Task       90 on host nid001919 reporting.
+  Task       91 on host nid001919 reporting.
+  Task       92 on host nid001919 reporting.
+  Task       93 on host nid001919 reporting.
+  Task       94 on host nid001919 reporting.
+  Task       95 on host nid001919 reporting.
+  Task       96 on host nid001919 reporting.
+  Task       97 on host nid001919 reporting.
+  Task       98 on host nid001919 reporting.
+  Task       99 on host nid001919 reporting.
+  Task      100 on host nid001919 reporting.
+  Task      101 on host nid001919 reporting.
+  Task      102 on host nid001919 reporting.
+  Task      103 on host nid001919 reporting.
+  Task      104 on host nid001919 reporting.
+  Task      105 on host nid001919 reporting.
+  Task      106 on host nid001919 reporting.
+  Task      107 on host nid001919 reporting.
+  Task      108 on host nid001919 reporting.
+  Task      109 on host nid001919 reporting.
+  Task      110 on host nid001919 reporting.
+  Task      111 on host nid001919 reporting.
+  Task      112 on host nid001919 reporting.
+  Task      113 on host nid001919 reporting.
+  Task      114 on host nid001919 reporting.
+  Task      115 on host nid001919 reporting.
+  Task      116 on host nid001919 reporting.
+  Task      117 on host nid001919 reporting.
+  Task      118 on host nid001919 reporting.
+  Task      119 on host nid001919 reporting.
+  Task      120 on host nid001919 reporting.
+  Task      121 on host nid001919 reporting.
+  Task      122 on host nid001919 reporting.
+  Task      123 on host nid001919 reporting.
+  Task      124 on host nid001919 reporting.
+  Task      125 on host nid001919 reporting.
+  Task      126 on host nid001919 reporting.
+  Task      127 on host nid001919 reporting.
+  Task      128 on host nid001919 reporting.
+  Task      129 on host nid001919 reporting.
+  Task      130 on host nid001919 reporting.
+  Task      131 on host nid001919 reporting.
+  Task      132 on host nid001919 reporting.
+  Task      133 on host nid001919 reporting.
+  Task      134 on host nid001919 reporting.
+  Task      135 on host nid001919 reporting.
+  Task      136 on host nid001919 reporting.
+  Task      137 on host nid001919 reporting.
+  Task      138 on host nid001919 reporting.
+  Task      139 on host nid001919 reporting.
+  Task      140 on host nid001919 reporting.
+  Task      141 on host nid001919 reporting.
+  Task      142 on host nid001919 reporting.
+  Task      143 on host nid001919 reporting.
+  Task      144 on host nid001920 reporting.
+  Task      145 on host nid001920 reporting.
+  Task      146 on host nid001920 reporting.
+  Task      147 on host nid001920 reporting.
+  Task      148 on host nid001920 reporting.
+  Task      149 on host nid001920 reporting.
+  Task      150 on host nid001920 reporting.
+  Task      151 on host nid001920 reporting.
+  Task      152 on host nid001920 reporting.
+  Task      153 on host nid001920 reporting.
+  Task      154 on host nid001920 reporting.
+  Task      155 on host nid001920 reporting.
+  Task      156 on host nid001920 reporting.
+  Task      157 on host nid001920 reporting.
+  Task      158 on host nid001920 reporting.
+  Task      159 on host nid001920 reporting.
+  Task      160 on host nid001920 reporting.
+  Task      161 on host nid001920 reporting.
+  Task      162 on host nid001920 reporting.
+  Task      163 on host nid001920 reporting.
+  Task      164 on host nid001920 reporting.
+  Task      165 on host nid001920 reporting.
+  Task      166 on host nid001920 reporting.
+  Task      167 on host nid001920 reporting.
+  Task      168 on host nid001920 reporting.
+  Task      169 on host nid001920 reporting.
+  Task      170 on host nid001920 reporting.
+  Task      171 on host nid001920 reporting.
+  Task      172 on host nid001920 reporting.
+  Task      173 on host nid001920 reporting.
+  Task      174 on host nid001920 reporting.
+  Task      175 on host nid001920 reporting.
+  Task      176 on host nid001920 reporting.
+  Task      177 on host nid001920 reporting.
+  Task      178 on host nid001920 reporting.
+  Task      179 on host nid001920 reporting.
+  Task      180 on host nid001920 reporting.
+  Task      181 on host nid001920 reporting.
+  Task      182 on host nid001920 reporting.
+  Task      183 on host nid001920 reporting.
+  Task      184 on host nid001920 reporting.
+  Task      185 on host nid001920 reporting.
+  Task      186 on host nid001920 reporting.
+  Task      187 on host nid001920 reporting.
+  Task      188 on host nid001920 reporting.
+  Task      189 on host nid001920 reporting.
+  Task      190 on host nid001920 reporting.
+  Task      191 on host nid001920 reporting.
+  Task      192 on host nid001920 reporting.
+  Task      193 on host nid001920 reporting.
+  Task      194 on host nid001920 reporting.
+  Task      195 on host nid001920 reporting.
+  Task      196 on host nid001920 reporting.
+  Task      197 on host nid001920 reporting.
+  Task      198 on host nid001920 reporting.
+  Task      199 on host nid001920 reporting.
+  Task      200 on host nid001920 reporting.
+  Task      201 on host nid001920 reporting.
+  Task      202 on host nid001920 reporting.
+  Task      203 on host nid001920 reporting.
+  Task      204 on host nid001920 reporting.
+  Task      205 on host nid001920 reporting.
+  Task      206 on host nid001920 reporting.
+  Task      207 on host nid001920 reporting.
+  Task      208 on host nid001920 reporting.
+  Task      209 on host nid001920 reporting.
+  Task      210 on host nid001920 reporting.
+  Task      211 on host nid001920 reporting.
+  Task      212 on host nid001920 reporting.
+  Task      213 on host nid001920 reporting.
+  Task      214 on host nid001920 reporting.
+  Task      215 on host nid001920 reporting.
+  Task      216 on host nid001921 reporting.
+  Task      217 on host nid001921 reporting.
+  Task      218 on host nid001921 reporting.
+  Task      219 on host nid001921 reporting.
+  Task      220 on host nid001921 reporting.
+  Task      221 on host nid001921 reporting.
+  Task      222 on host nid001921 reporting.
+  Task      223 on host nid001921 reporting.
+  Task      224 on host nid001921 reporting.
+  Task      225 on host nid001921 reporting.
+  Task      226 on host nid001921 reporting.
+  Task      227 on host nid001921 reporting.
+  Task      228 on host nid001921 reporting.
+  Task      229 on host nid001921 reporting.
+  Task      230 on host nid001921 reporting.
+  Task      231 on host nid001921 reporting.
+  Task      232 on host nid001921 reporting.
+  Task      233 on host nid001921 reporting.
+  Task      234 on host nid001921 reporting.
+  Task      235 on host nid001921 reporting.
+  Task      236 on host nid001921 reporting.
+  Task      237 on host nid001921 reporting.
+  Task      238 on host nid001921 reporting.
+  Task      239 on host nid001921 reporting.
+  Task      240 on host nid001921 reporting.
+  Task      241 on host nid001921 reporting.
+  Task      242 on host nid001921 reporting.
+  Task      243 on host nid001921 reporting.
+  Task      244 on host nid001921 reporting.
+  Task      245 on host nid001921 reporting.
+  Task      246 on host nid001921 reporting.
+  Task      247 on host nid001921 reporting.
+  Task      248 on host nid001921 reporting.
+  Task      249 on host nid001921 reporting.
+  Task      250 on host nid001921 reporting.
+  Task      251 on host nid001921 reporting.
+  Task      252 on host nid001921 reporting.
+  Task      253 on host nid001921 reporting.
+  Task      254 on host nid001921 reporting.
+  Task      255 on host nid001921 reporting.
+  Task      256 on host nid001921 reporting.
+  Task      257 on host nid001921 reporting.
+  Task      258 on host nid001921 reporting.
+  Task      259 on host nid001921 reporting.
+  Task      260 on host nid001921 reporting.
+  Task      261 on host nid001921 reporting.
+  Task      262 on host nid001921 reporting.
+  Task      263 on host nid001921 reporting.
+  Task      264 on host nid001921 reporting.
+  Task      265 on host nid001921 reporting.
+  Task      266 on host nid001921 reporting.
+  Task      267 on host nid001921 reporting.
+  Task      268 on host nid001921 reporting.
+  Task      269 on host nid001921 reporting.
+  Task      270 on host nid001921 reporting.
+  Task      271 on host nid001921 reporting.
+  Task      272 on host nid001921 reporting.
+  Task      273 on host nid001921 reporting.
+  Task      274 on host nid001921 reporting.
+  Task      275 on host nid001921 reporting.
+  Task      276 on host nid001921 reporting.
+  Task      277 on host nid001921 reporting.
+  Task      278 on host nid001921 reporting.
+  Task      279 on host nid001921 reporting.
+  Task      280 on host nid001921 reporting.
+  Task      281 on host nid001921 reporting.
+  Task      282 on host nid001921 reporting.
+  Task      283 on host nid001921 reporting.
+  Task      284 on host nid001921 reporting.
+  Task      285 on host nid001921 reporting.
+  Task      286 on host nid001921 reporting.
+  Task      287 on host nid001921 reporting.
+  Task      288 on host nid001922 reporting.
+  Task      289 on host nid001922 reporting.
+  Task      290 on host nid001922 reporting.
+  Task      291 on host nid001922 reporting.
+  Task      292 on host nid001922 reporting.
+  Task      293 on host nid001922 reporting.
+  Task      294 on host nid001922 reporting.
+  Task      295 on host nid001922 reporting.
+  Task      296 on host nid001922 reporting.
+  Task      297 on host nid001922 reporting.
+  Task      298 on host nid001922 reporting.
+  Task      299 on host nid001922 reporting.
+  Task      300 on host nid001922 reporting.
+  Task      301 on host nid001922 reporting.
+  Task      302 on host nid001922 reporting.
+  Task      303 on host nid001922 reporting.
+  Task      304 on host nid001922 reporting.
+  Task      305 on host nid001922 reporting.
+  Task      306 on host nid001922 reporting.
+  Task      307 on host nid001922 reporting.
+  Task      308 on host nid001922 reporting.
+  Task      309 on host nid001922 reporting.
+  Task      310 on host nid001922 reporting.
+  Task      311 on host nid001922 reporting.
+  Task      312 on host nid001922 reporting.
+  Task      313 on host nid001922 reporting.
+  Task      314 on host nid001922 reporting.
+  Task      315 on host nid001922 reporting.
+  Task      316 on host nid001922 reporting.
+  Task      317 on host nid001922 reporting.
+  Task      318 on host nid001922 reporting.
+  Task      319 on host nid001922 reporting.
+  Task      320 on host nid001922 reporting.
+  Task      321 on host nid001922 reporting.
+  Task      322 on host nid001922 reporting.
+  Task      323 on host nid001922 reporting.
+  Task      324 on host nid001922 reporting.
+  Task      325 on host nid001922 reporting.
+  Task      326 on host nid001922 reporting.
+  Task      327 on host nid001922 reporting.
+  Task      328 on host nid001922 reporting.
+  Task      329 on host nid001922 reporting.
+  Task      330 on host nid001922 reporting.
+  Task      331 on host nid001922 reporting.
+  Task      332 on host nid001922 reporting.
+  Task      333 on host nid001922 reporting.
+  Task      334 on host nid001922 reporting.
+  Task      335 on host nid001922 reporting.
+  Task      336 on host nid001922 reporting.
+  Task      337 on host nid001922 reporting.
+  Task      338 on host nid001922 reporting.
+  Task      339 on host nid001922 reporting.
+  Task      340 on host nid001922 reporting.
+  Task      341 on host nid001922 reporting.
+  Task      342 on host nid001922 reporting.
+  Task      343 on host nid001922 reporting.
+  Task      344 on host nid001922 reporting.
+  Task      345 on host nid001922 reporting.
+  Task      346 on host nid001922 reporting.
+  Task      347 on host nid001922 reporting.
+  Task      348 on host nid001922 reporting.
+  Task      349 on host nid001922 reporting.
+  Task      350 on host nid001922 reporting.
+  Task      351 on host nid001922 reporting.
+  Task      352 on host nid001922 reporting.
+  Task      353 on host nid001922 reporting.
+  Task      354 on host nid001922 reporting.
+  Task      355 on host nid001922 reporting.
+  Task      356 on host nid001922 reporting.
+  Task      357 on host nid001922 reporting.
+  Task      358 on host nid001922 reporting.
+  Task      359 on host nid001922 reporting.
+  Task      360 on host nid001923 reporting.
+  Task      361 on host nid001923 reporting.
+  Task      362 on host nid001923 reporting.
+  Task      363 on host nid001923 reporting.
+  Task      364 on host nid001923 reporting.
+  Task      365 on host nid001923 reporting.
+  Task      366 on host nid001923 reporting.
+  Task      367 on host nid001923 reporting.
+  Task      368 on host nid001923 reporting.
+  Task      369 on host nid001923 reporting.
+  Task      370 on host nid001923 reporting.
+  Task      371 on host nid001923 reporting.
+  Task      372 on host nid001923 reporting.
+  Task      373 on host nid001923 reporting.
+  Task      374 on host nid001923 reporting.
+  Task      375 on host nid001923 reporting.
+  Task      376 on host nid001923 reporting.
+  Task      377 on host nid001923 reporting.
+  Task      378 on host nid001923 reporting.
+  Task      379 on host nid001923 reporting.
+  Task      380 on host nid001923 reporting.
+  Task      381 on host nid001923 reporting.
+  Task      382 on host nid001923 reporting.
+  Task      383 on host nid001923 reporting.
+  Task      384 on host nid001923 reporting.
+  Task      385 on host nid001923 reporting.
+  Task      386 on host nid001923 reporting.
+  Task      387 on host nid001923 reporting.
+  Task      388 on host nid001923 reporting.
+  Task      389 on host nid001923 reporting.
+  Task      390 on host nid001923 reporting.
+  Task      391 on host nid001923 reporting.
+  Task      392 on host nid001923 reporting.
+  Task      393 on host nid001923 reporting.
+  Task      394 on host nid001923 reporting.
+  Task      395 on host nid001923 reporting.
+  Task      396 on host nid001923 reporting.
+  Task      397 on host nid001923 reporting.
+  Task      398 on host nid001923 reporting.
+  Task      399 on host nid001923 reporting.
+  Task      400 on host nid001923 reporting.
+  Task      401 on host nid001923 reporting.
+  Task      402 on host nid001923 reporting.
+  Task      403 on host nid001923 reporting.
+  Task      404 on host nid001923 reporting.
+  Task      405 on host nid001923 reporting.
+  Task      406 on host nid001923 reporting.
+  Task      407 on host nid001923 reporting.
+  Task      408 on host nid001923 reporting.
+  Task      409 on host nid001923 reporting.
+  Task      410 on host nid001923 reporting.
+  Task      411 on host nid001923 reporting.
+  Task      412 on host nid001923 reporting.
+  Task      413 on host nid001923 reporting.
+  Task      414 on host nid001923 reporting.
+  Task      415 on host nid001923 reporting.
+  Task      416 on host nid001923 reporting.
+  Task      417 on host nid001923 reporting.
+  Task      418 on host nid001923 reporting.
+  Task      419 on host nid001923 reporting.
+  Task      420 on host nid001923 reporting.
+  Task      421 on host nid001923 reporting.
+  Task      422 on host nid001923 reporting.
+  Task      423 on host nid001923 reporting.
+  Task      424 on host nid001923 reporting.
+  Task      425 on host nid001923 reporting.
+  Task      426 on host nid001923 reporting.
+  Task      427 on host nid001923 reporting.
+  Task      428 on host nid001923 reporting.
+  Task      429 on host nid001923 reporting.
+  Task      430 on host nid001923 reporting.
+  Task      431 on host nid001923 reporting.
+  Task      432 on host nid001924 reporting.
+  Task      433 on host nid001924 reporting.
+  Task      434 on host nid001924 reporting.
+  Task      435 on host nid001924 reporting.
+  Task      436 on host nid001924 reporting.
+  Task      437 on host nid001924 reporting.
+  Task      438 on host nid001924 reporting.
+  Task      439 on host nid001924 reporting.
+  Task      440 on host nid001924 reporting.
+  Task      441 on host nid001924 reporting.
+  Task      442 on host nid001924 reporting.
+  Task      443 on host nid001924 reporting.
+  Task      444 on host nid001924 reporting.
+  Task      445 on host nid001924 reporting.
+  Task      446 on host nid001924 reporting.
+  Task      447 on host nid001924 reporting.
+  Task      448 on host nid001924 reporting.
+  Task      449 on host nid001924 reporting.
+  Task      450 on host nid001924 reporting.
+  Task      451 on host nid001924 reporting.
+  Task      452 on host nid001924 reporting.
+  Task      453 on host nid001924 reporting.
+  Task      454 on host nid001924 reporting.
+  Task      455 on host nid001924 reporting.
+  Task      456 on host nid001924 reporting.
+  Task      457 on host nid001924 reporting.
+  Task      458 on host nid001924 reporting.
+  Task      459 on host nid001924 reporting.
+  Task      460 on host nid001924 reporting.
+  Task      461 on host nid001924 reporting.
+  Task      462 on host nid001924 reporting.
+  Task      463 on host nid001924 reporting.
+  Task      464 on host nid001924 reporting.
+  Task      465 on host nid001924 reporting.
+  Task      466 on host nid001924 reporting.
+  Task      467 on host nid001924 reporting.
+  Task      468 on host nid001924 reporting.
+  Task      469 on host nid001924 reporting.
+  Task      470 on host nid001924 reporting.
+  Task      471 on host nid001924 reporting.
+  Task      472 on host nid001924 reporting.
+  Task      473 on host nid001924 reporting.
+  Task      474 on host nid001924 reporting.
+  Task      475 on host nid001924 reporting.
+  Task      476 on host nid001924 reporting.
+  Task      477 on host nid001924 reporting.
+  Task      478 on host nid001924 reporting.
+  Task      479 on host nid001924 reporting.
+  Task      480 on host nid001924 reporting.
+  Task      481 on host nid001924 reporting.
+  Task      482 on host nid001924 reporting.
+  Task      483 on host nid001924 reporting.
+  Task      484 on host nid001924 reporting.
+  Task      485 on host nid001924 reporting.
+  Task      486 on host nid001924 reporting.
+  Task      487 on host nid001924 reporting.
+  Task      488 on host nid001924 reporting.
+  Task      489 on host nid001924 reporting.
+  Task      490 on host nid001924 reporting.
+  Task      491 on host nid001924 reporting.
+  Task      492 on host nid001924 reporting.
+  Task      493 on host nid001924 reporting.
+  Task      494 on host nid001924 reporting.
+  Task      495 on host nid001924 reporting.
+  Task      496 on host nid001924 reporting.
+  Task      497 on host nid001924 reporting.
+  Task      498 on host nid001924 reporting.
+  Task      499 on host nid001924 reporting.
+  Task      500 on host nid001924 reporting.
+  Task      501 on host nid001924 reporting.
+  Task      502 on host nid001924 reporting.
+  Task      503 on host nid001924 reporting.
+  Task      504 on host nid001925 reporting.
+  Task      505 on host nid001925 reporting.
+  Task      506 on host nid001925 reporting.
+  Task      507 on host nid001925 reporting.
+  Task      508 on host nid001925 reporting.
+  Task      509 on host nid001925 reporting.
+  Task      510 on host nid001925 reporting.
+  Task      511 on host nid001925 reporting.
+  Task      512 on host nid001925 reporting.
+  Task      513 on host nid001925 reporting.
+  Task      514 on host nid001925 reporting.
+  Task      515 on host nid001925 reporting.
+  Task      516 on host nid001925 reporting.
+  Task      517 on host nid001925 reporting.
+  Task      518 on host nid001925 reporting.
+  Task      519 on host nid001925 reporting.
+  Task      520 on host nid001925 reporting.
+  Task      521 on host nid001925 reporting.
+  Task      522 on host nid001925 reporting.
+  Task      523 on host nid001925 reporting.
+  Task      524 on host nid001925 reporting.
+  Task      525 on host nid001925 reporting.
+  Task      526 on host nid001925 reporting.
+  Task      527 on host nid001925 reporting.
+  Task      528 on host nid001925 reporting.
+  Task      529 on host nid001925 reporting.
+  Task      530 on host nid001925 reporting.
+  Task      531 on host nid001925 reporting.
+  Task      532 on host nid001925 reporting.
+  Task      533 on host nid001925 reporting.
+  Task      534 on host nid001925 reporting.
+  Task      535 on host nid001925 reporting.
+  Task      536 on host nid001925 reporting.
+  Task      537 on host nid001925 reporting.
+  Task      538 on host nid001925 reporting.
+  Task      539 on host nid001925 reporting.
+  Task      540 on host nid001925 reporting.
+  Task      541 on host nid001925 reporting.
+  Task      542 on host nid001925 reporting.
+  Task      543 on host nid001925 reporting.
+  Task      544 on host nid001925 reporting.
+  Task      545 on host nid001925 reporting.
+  Task      546 on host nid001925 reporting.
+  Task      547 on host nid001925 reporting.
+  Task      548 on host nid001925 reporting.
+  Task      549 on host nid001925 reporting.
+  Task      550 on host nid001925 reporting.
+  Task      551 on host nid001925 reporting.
+  Task      552 on host nid001925 reporting.
+  Task      553 on host nid001925 reporting.
+  Task      554 on host nid001925 reporting.
+  Task      555 on host nid001925 reporting.
+  Task      556 on host nid001925 reporting.
+  Task      557 on host nid001925 reporting.
+  Task      558 on host nid001925 reporting.
+  Task      559 on host nid001925 reporting.
+  Task      560 on host nid001925 reporting.
+  Task      561 on host nid001925 reporting.
+  Task      562 on host nid001925 reporting.
+  Task      563 on host nid001925 reporting.
+  Task      564 on host nid001925 reporting.
+  Task      565 on host nid001925 reporting.
+  Task      566 on host nid001925 reporting.
+  Task      567 on host nid001925 reporting.
+  Task      568 on host nid001925 reporting.
+  Task      569 on host nid001925 reporting.
+  Task      570 on host nid001925 reporting.
+  Task      571 on host nid001925 reporting.
+  Task      572 on host nid001925 reporting.
+  Task      573 on host nid001925 reporting.
+  Task      574 on host nid001925 reporting.
+  Task      575 on host nid001925 reporting.
+  Task      576 on host nid001926 reporting.
+  Task      577 on host nid001926 reporting.
+  Task      578 on host nid001926 reporting.
+  Task      579 on host nid001926 reporting.
+  Task      580 on host nid001926 reporting.
+  Task      581 on host nid001926 reporting.
+  Task      582 on host nid001926 reporting.
+  Task      583 on host nid001926 reporting.
+  Task      584 on host nid001926 reporting.
+  Task      585 on host nid001926 reporting.
+  Task      586 on host nid001926 reporting.
+  Task      587 on host nid001926 reporting.
+  Task      588 on host nid001926 reporting.
+  Task      589 on host nid001926 reporting.
+  Task      590 on host nid001926 reporting.
+  Task      591 on host nid001926 reporting.
+  Task      592 on host nid001926 reporting.
+  Task      593 on host nid001926 reporting.
+  Task      594 on host nid001926 reporting.
+  Task      595 on host nid001926 reporting.
+  Task      596 on host nid001926 reporting.
+  Task      597 on host nid001926 reporting.
+  Task      598 on host nid001926 reporting.
+  Task      599 on host nid001926 reporting.
+  Task      600 on host nid001926 reporting.
+  Task      601 on host nid001926 reporting.
+  Task      602 on host nid001926 reporting.
+  Task      603 on host nid001926 reporting.
+  Task      604 on host nid001926 reporting.
+  Task      605 on host nid001926 reporting.
+  Task      606 on host nid001926 reporting.
+  Task      607 on host nid001926 reporting.
+  Task      608 on host nid001926 reporting.
+  Task      609 on host nid001926 reporting.
+  Task      610 on host nid001926 reporting.
+  Task      611 on host nid001926 reporting.
+  Task      612 on host nid001926 reporting.
+  Task      613 on host nid001926 reporting.
+  Task      614 on host nid001926 reporting.
+  Task      615 on host nid001926 reporting.
+  Task      616 on host nid001926 reporting.
+  Task      617 on host nid001926 reporting.
+  Task      618 on host nid001926 reporting.
+  Task      619 on host nid001926 reporting.
+  Task      620 on host nid001926 reporting.
+  Task      621 on host nid001926 reporting.
+  Task      622 on host nid001926 reporting.
+  Task      623 on host nid001926 reporting.
+  Task      624 on host nid001926 reporting.
+  Task      625 on host nid001926 reporting.
+  Task      626 on host nid001926 reporting.
+  Task      627 on host nid001926 reporting.
+  Task      628 on host nid001926 reporting.
+  Task      629 on host nid001926 reporting.
+  Task      630 on host nid001926 reporting.
+  Task      631 on host nid001926 reporting.
+  Task      632 on host nid001926 reporting.
+  Task      633 on host nid001926 reporting.
+  Task      634 on host nid001926 reporting.
+  Task      635 on host nid001926 reporting.
+  Task      636 on host nid001926 reporting.
+  Task      637 on host nid001926 reporting.
+  Task      638 on host nid001926 reporting.
+  Task      639 on host nid001926 reporting.
+  Task      640 on host nid001926 reporting.
+  Task      641 on host nid001926 reporting.
+  Task      642 on host nid001926 reporting.
+  Task      643 on host nid001926 reporting.
+  Task      644 on host nid001926 reporting.
+  Task      645 on host nid001926 reporting.
+  Task      646 on host nid001926 reporting.
+  Task      647 on host nid001926 reporting.
+  Task      648 on host nid001927 reporting.
+  Task      649 on host nid001927 reporting.
+  Task      650 on host nid001927 reporting.
+  Task      651 on host nid001927 reporting.
+  Task      652 on host nid001927 reporting.
+  Task      653 on host nid001927 reporting.
+  Task      654 on host nid001927 reporting.
+  Task      655 on host nid001927 reporting.
+  Task      656 on host nid001927 reporting.
+  Task      657 on host nid001927 reporting.
+  Task      658 on host nid001927 reporting.
+  Task      659 on host nid001927 reporting.
+  Task      660 on host nid001927 reporting.
+  Task      661 on host nid001927 reporting.
+  Task      662 on host nid001927 reporting.
+  Task      663 on host nid001927 reporting.
+  Task      664 on host nid001927 reporting.
+  Task      665 on host nid001927 reporting.
+  Task      666 on host nid001927 reporting.
+  Task      667 on host nid001927 reporting.
+  Task      668 on host nid001927 reporting.
+  Task      669 on host nid001927 reporting.
+  Task      670 on host nid001927 reporting.
+  Task      671 on host nid001927 reporting.
+  Task      672 on host nid001927 reporting.
+  Task      673 on host nid001927 reporting.
+  Task      674 on host nid001927 reporting.
+  Task      675 on host nid001927 reporting.
+  Task      676 on host nid001927 reporting.
+  Task      677 on host nid001927 reporting.
+  Task      678 on host nid001927 reporting.
+  Task      679 on host nid001927 reporting.
+  Task      680 on host nid001927 reporting.
+  Task      681 on host nid001927 reporting.
+  Task      682 on host nid001927 reporting.
+  Task      683 on host nid001927 reporting.
+  Task      684 on host nid001927 reporting.
+  Task      685 on host nid001927 reporting.
+  Task      686 on host nid001927 reporting.
+  Task      687 on host nid001927 reporting.
+  Task      688 on host nid001927 reporting.
+  Task      689 on host nid001927 reporting.
+  Task      690 on host nid001927 reporting.
+  Task      691 on host nid001927 reporting.
+  Task      692 on host nid001927 reporting.
+  Task      693 on host nid001927 reporting.
+  Task      694 on host nid001927 reporting.
+  Task      695 on host nid001927 reporting.
+  Task      696 on host nid001927 reporting.
+  Task      697 on host nid001927 reporting.
+  Task      698 on host nid001927 reporting.
+  Task      699 on host nid001927 reporting.
+  Task      700 on host nid001927 reporting.
+  Task      701 on host nid001927 reporting.
+  Task      702 on host nid001927 reporting.
+  Task      703 on host nid001927 reporting.
+  Task      704 on host nid001927 reporting.
+  Task      705 on host nid001927 reporting.
+  Task      706 on host nid001927 reporting.
+  Task      707 on host nid001927 reporting.
+  Task      708 on host nid001927 reporting.
+  Task      709 on host nid001927 reporting.
+  Task      710 on host nid001927 reporting.
+  Task      711 on host nid001927 reporting.
+  Task      712 on host nid001927 reporting.
+  Task      713 on host nid001927 reporting.
+  Task      714 on host nid001927 reporting.
+  Task      715 on host nid001927 reporting.
+  Task      716 on host nid001927 reporting.
+  Task      717 on host nid001927 reporting.
+  Task      718 on host nid001927 reporting.
+  Task      719 on host nid001927 reporting.
+  Task      720 on host nid001928 reporting.
+  Task      721 on host nid001928 reporting.
+  Task      722 on host nid001928 reporting.
+  Task      723 on host nid001928 reporting.
+  Task      724 on host nid001928 reporting.
+  Task      725 on host nid001928 reporting.
+  Task      726 on host nid001928 reporting.
+  Task      727 on host nid001928 reporting.
+  Task      728 on host nid001928 reporting.
+  Task      729 on host nid001928 reporting.
+  Task      730 on host nid001928 reporting.
+  Task      731 on host nid001928 reporting.
+  Task      732 on host nid001928 reporting.
+  Task      733 on host nid001928 reporting.
+  Task      734 on host nid001928 reporting.
+  Task      735 on host nid001928 reporting.
+  Task      736 on host nid001928 reporting.
+  Task      737 on host nid001928 reporting.
+  Task      738 on host nid001928 reporting.
+  Task      739 on host nid001928 reporting.
+  Task      740 on host nid001928 reporting.
+  Task      741 on host nid001928 reporting.
+  Task      742 on host nid001928 reporting.
+  Task      743 on host nid001928 reporting.
+  Task      744 on host nid001928 reporting.
+  Task      745 on host nid001928 reporting.
+  Task      746 on host nid001928 reporting.
+  Task      747 on host nid001928 reporting.
+  Task      748 on host nid001928 reporting.
+  Task      749 on host nid001928 reporting.
+  Task      750 on host nid001928 reporting.
+  Task      751 on host nid001928 reporting.
+  Task      752 on host nid001928 reporting.
+  Task      753 on host nid001928 reporting.
+  Task      754 on host nid001928 reporting.
+  Task      755 on host nid001928 reporting.
+  Task      756 on host nid001928 reporting.
+  Task      757 on host nid001928 reporting.
+  Task      758 on host nid001928 reporting.
+  Task      759 on host nid001928 reporting.
+  Task      760 on host nid001928 reporting.
+  Task      761 on host nid001928 reporting.
+  Task      762 on host nid001928 reporting.
+  Task      763 on host nid001928 reporting.
+  Task      764 on host nid001928 reporting.
+  Task      765 on host nid001928 reporting.
+  Task      766 on host nid001928 reporting.
+  Task      767 on host nid001928 reporting.
+  Task      768 on host nid001928 reporting.
+  Task      769 on host nid001928 reporting.
+  Task      770 on host nid001928 reporting.
+  Task      771 on host nid001928 reporting.
+  Task      772 on host nid001928 reporting.
+  Task      773 on host nid001928 reporting.
+  Task      774 on host nid001928 reporting.
+  Task      775 on host nid001928 reporting.
+  Task      776 on host nid001928 reporting.
+  Task      777 on host nid001928 reporting.
+  Task      778 on host nid001928 reporting.
+  Task      779 on host nid001928 reporting.
+  Task      780 on host nid001928 reporting.
+  Task      781 on host nid001928 reporting.
+  Task      782 on host nid001928 reporting.
+  Task      783 on host nid001928 reporting.
+  Task      784 on host nid001928 reporting.
+  Task      785 on host nid001928 reporting.
+  Task      786 on host nid001928 reporting.
+  Task      787 on host nid001928 reporting.
+  Task      788 on host nid001928 reporting.
+  Task      789 on host nid001928 reporting.
+  Task      790 on host nid001928 reporting.
+  Task      791 on host nid001928 reporting.
+  Task      792 on host nid001929 reporting.
+  Task      793 on host nid001929 reporting.
+  Task      794 on host nid001929 reporting.
+  Task      795 on host nid001929 reporting.
+  Task      796 on host nid001929 reporting.
+  Task      797 on host nid001929 reporting.
+  Task      798 on host nid001929 reporting.
+  Task      799 on host nid001929 reporting.
+  Task      800 on host nid001929 reporting.
+  Task      801 on host nid001929 reporting.
+  Task      802 on host nid001929 reporting.
+  Task      803 on host nid001929 reporting.
+  Task      804 on host nid001929 reporting.
+  Task      805 on host nid001929 reporting.
+  Task      806 on host nid001929 reporting.
+  Task      807 on host nid001929 reporting.
+  Task      808 on host nid001929 reporting.
+  Task      809 on host nid001929 reporting.
+  Task      810 on host nid001929 reporting.
+  Task      811 on host nid001929 reporting.
+  Task      812 on host nid001929 reporting.
+  Task      813 on host nid001929 reporting.
+  Task      814 on host nid001929 reporting.
+  Task      815 on host nid001929 reporting.
+  Task      816 on host nid001929 reporting.
+  Task      817 on host nid001929 reporting.
+  Task      818 on host nid001929 reporting.
+  Task      819 on host nid001929 reporting.
+  Task      820 on host nid001929 reporting.
+  Task      821 on host nid001929 reporting.
+  Task      822 on host nid001929 reporting.
+  Task      823 on host nid001929 reporting.
+  Task      824 on host nid001929 reporting.
+  Task      825 on host nid001929 reporting.
+  Task      826 on host nid001929 reporting.
+  Task      827 on host nid001929 reporting.
+  Task      828 on host nid001929 reporting.
+  Task      829 on host nid001929 reporting.
+  Task      830 on host nid001929 reporting.
+  Task      831 on host nid001929 reporting.
+  Task      832 on host nid001929 reporting.
+  Task      833 on host nid001929 reporting.
+  Task      834 on host nid001929 reporting.
+  Task      835 on host nid001929 reporting.
+  Task      836 on host nid001929 reporting.
+  Task      837 on host nid001929 reporting.
+  Task      838 on host nid001929 reporting.
+  Task      839 on host nid001929 reporting.
+  Task      840 on host nid001929 reporting.
+  Task      841 on host nid001929 reporting.
+  Task      842 on host nid001929 reporting.
+  Task      843 on host nid001929 reporting.
+  Task      844 on host nid001929 reporting.
+  Task      845 on host nid001929 reporting.
+  Task      846 on host nid001929 reporting.
+  Task      847 on host nid001929 reporting.
+  Task      848 on host nid001929 reporting.
+  Task      849 on host nid001929 reporting.
+  Task      850 on host nid001929 reporting.
+  Task      851 on host nid001929 reporting.
+  Task      852 on host nid001929 reporting.
+  Task      853 on host nid001929 reporting.
+  Task      854 on host nid001929 reporting.
+  Task      855 on host nid001929 reporting.
+  Task      856 on host nid001929 reporting.
+  Task      857 on host nid001929 reporting.
+  Task      858 on host nid001929 reporting.
+  Task      859 on host nid001929 reporting.
+  Task      860 on host nid001929 reporting.
+  Task      861 on host nid001929 reporting.
+  Task      862 on host nid001929 reporting.
+  Task      863 on host nid001929 reporting.
+  Task      864 on host nid001931 reporting.
+  Task      865 on host nid001931 reporting.
+  Task      866 on host nid001931 reporting.
+  Task      867 on host nid001931 reporting.
+  Task      868 on host nid001931 reporting.
+  Task      869 on host nid001931 reporting.
+  Task      870 on host nid001931 reporting.
+  Task      871 on host nid001931 reporting.
+  Task      872 on host nid001931 reporting.
+  Task      873 on host nid001931 reporting.
+  Task      874 on host nid001931 reporting.
+  Task      875 on host nid001931 reporting.
+  Task      876 on host nid001931 reporting.
+  Task      877 on host nid001931 reporting.
+  Task      878 on host nid001931 reporting.
+  Task      879 on host nid001931 reporting.
+  Task      880 on host nid001931 reporting.
+  Task      881 on host nid001931 reporting.
+  Task      882 on host nid001931 reporting.
+  Task      883 on host nid001931 reporting.
+  Task      884 on host nid001931 reporting.
+  Task      885 on host nid001931 reporting.
+  Task      886 on host nid001931 reporting.
+  Task      887 on host nid001931 reporting.
+  Task      888 on host nid001931 reporting.
+  Task      889 on host nid001931 reporting.
+  Task      890 on host nid001931 reporting.
+  Task      891 on host nid001931 reporting.
+  Task      892 on host nid001931 reporting.
+  Task      893 on host nid001931 reporting.
+  Task      894 on host nid001931 reporting.
+  Task      895 on host nid001931 reporting.
+  Task      896 on host nid001931 reporting.
+  Task      897 on host nid001931 reporting.
+  Task      898 on host nid001931 reporting.
+  Task      899 on host nid001931 reporting.
+  Task      900 on host nid001931 reporting.
+  Task      901 on host nid001931 reporting.
+  Task      902 on host nid001931 reporting.
+  Task      903 on host nid001931 reporting.
+  Task      904 on host nid001931 reporting.
+  Task      905 on host nid001931 reporting.
+  Task      906 on host nid001931 reporting.
+  Task      907 on host nid001931 reporting.
+  Task      908 on host nid001931 reporting.
+  Task      909 on host nid001931 reporting.
+  Task      910 on host nid001931 reporting.
+  Task      911 on host nid001931 reporting.
+  Task      912 on host nid001931 reporting.
+  Task      913 on host nid001931 reporting.
+  Task      914 on host nid001931 reporting.
+  Task      915 on host nid001931 reporting.
+  Task      916 on host nid001931 reporting.
+  Task      917 on host nid001931 reporting.
+  Task      918 on host nid001931 reporting.
+  Task      919 on host nid001931 reporting.
+  Task      920 on host nid001931 reporting.
+  Task      921 on host nid001931 reporting.
+  Task      922 on host nid001931 reporting.
+  Task      923 on host nid001931 reporting.
+  Task      924 on host nid001931 reporting.
+  Task      925 on host nid001931 reporting.
+  Task      926 on host nid001931 reporting.
+  Task      927 on host nid001931 reporting.
+  Task      928 on host nid001931 reporting.
+  Task      929 on host nid001931 reporting.
+  Task      930 on host nid001931 reporting.
+  Task      931 on host nid001931 reporting.
+  Task      932 on host nid001931 reporting.
+  Task      933 on host nid001931 reporting.
+  Task      934 on host nid001931 reporting.
+  Task      935 on host nid001931 reporting.
+  Task      936 on host nid001932 reporting.
+  Task      937 on host nid001932 reporting.
+  Task      938 on host nid001932 reporting.
+  Task      939 on host nid001932 reporting.
+  Task      940 on host nid001932 reporting.
+  Task      941 on host nid001932 reporting.
+  Task      942 on host nid001932 reporting.
+  Task      943 on host nid001932 reporting.
+  Task      944 on host nid001932 reporting.
+  Task      945 on host nid001932 reporting.
+  Task      946 on host nid001932 reporting.
+  Task      947 on host nid001932 reporting.
+  Task      948 on host nid001932 reporting.
+  Task      949 on host nid001932 reporting.
+  Task      950 on host nid001932 reporting.
+  Task      951 on host nid001932 reporting.
+  Task      952 on host nid001932 reporting.
+  Task      953 on host nid001932 reporting.
+  Task      954 on host nid001932 reporting.
+  Task      955 on host nid001932 reporting.
+  Task      956 on host nid001932 reporting.
+  Task      957 on host nid001932 reporting.
+  Task      958 on host nid001932 reporting.
+  Task      959 on host nid001932 reporting.
+  Task      960 on host nid001932 reporting.
+  Task      961 on host nid001932 reporting.
+  Task      962 on host nid001932 reporting.
+  Task      963 on host nid001932 reporting.
+  Task      964 on host nid001932 reporting.
+  Task      965 on host nid001932 reporting.
+  Task      966 on host nid001932 reporting.
+  Task      967 on host nid001932 reporting.
+  Task      968 on host nid001932 reporting.
+  Task      969 on host nid001932 reporting.
+  Task      970 on host nid001932 reporting.
+  Task      971 on host nid001932 reporting.
+  Task      972 on host nid001932 reporting.
+  Task      973 on host nid001932 reporting.
+  Task      974 on host nid001932 reporting.
+  Task      975 on host nid001932 reporting.
+  Task      976 on host nid001932 reporting.
+  Task      977 on host nid001932 reporting.
+  Task      978 on host nid001932 reporting.
+  Task      979 on host nid001932 reporting.
+  Task      980 on host nid001932 reporting.
+  Task      981 on host nid001932 reporting.
+  Task      982 on host nid001932 reporting.
+  Task      983 on host nid001932 reporting.
+  Task      984 on host nid001932 reporting.
+  Task      985 on host nid001932 reporting.
+  Task      986 on host nid001932 reporting.
+  Task      987 on host nid001932 reporting.
+  Task      988 on host nid001932 reporting.
+  Task      989 on host nid001932 reporting.
+  Task      990 on host nid001932 reporting.
+  Task      991 on host nid001932 reporting.
+  Task      992 on host nid001932 reporting.
+  Task      993 on host nid001932 reporting.
+  Task      994 on host nid001932 reporting.
+  Task      995 on host nid001932 reporting.
+  Task      996 on host nid001932 reporting.
+  Task      997 on host nid001932 reporting.
+  Task      998 on host nid001932 reporting.
+  Task      999 on host nid001932 reporting.
+  Task     1000 on host nid001932 reporting.
+  Task     1001 on host nid001932 reporting.
+  Task     1002 on host nid001932 reporting.
+  Task     1003 on host nid001932 reporting.
+  Task     1004 on host nid001932 reporting.
+  Task     1005 on host nid001932 reporting.
+  Task     1006 on host nid001932 reporting.
+  Task     1007 on host nid001932 reporting.
+  Task     1008 on host nid001933 reporting.
+  Task     1009 on host nid001933 reporting.
+  Task     1010 on host nid001933 reporting.
+  Task     1011 on host nid001933 reporting.
+  Task     1012 on host nid001933 reporting.
+  Task     1013 on host nid001933 reporting.
+  Task     1014 on host nid001933 reporting.
+  Task     1015 on host nid001933 reporting.
+  Task     1016 on host nid001933 reporting.
+  Task     1017 on host nid001933 reporting.
+  Task     1018 on host nid001933 reporting.
+  Task     1019 on host nid001933 reporting.
+  Task     1020 on host nid001933 reporting.
+  Task     1021 on host nid001933 reporting.
+  Task     1022 on host nid001933 reporting.
+  Task     1023 on host nid001933 reporting.
+  Task     1024 on host nid001933 reporting.
+  Task     1025 on host nid001933 reporting.
+  Task     1026 on host nid001933 reporting.
+  Task     1027 on host nid001933 reporting.
+  Task     1028 on host nid001933 reporting.
+  Task     1029 on host nid001933 reporting.
+  Task     1030 on host nid001933 reporting.
+  Task     1031 on host nid001933 reporting.
+  Task     1032 on host nid001933 reporting.
+  Task     1033 on host nid001933 reporting.
+  Task     1034 on host nid001933 reporting.
+  Task     1035 on host nid001933 reporting.
+  Task     1036 on host nid001933 reporting.
+  Task     1037 on host nid001933 reporting.
+  Task     1038 on host nid001933 reporting.
+  Task     1039 on host nid001933 reporting.
+  Task     1040 on host nid001933 reporting.
+  Task     1041 on host nid001933 reporting.
+  Task     1042 on host nid001933 reporting.
+  Task     1043 on host nid001933 reporting.
+  Task     1044 on host nid001933 reporting.
+  Task     1045 on host nid001933 reporting.
+  Task     1046 on host nid001933 reporting.
+  Task     1047 on host nid001933 reporting.
+  Task     1048 on host nid001933 reporting.
+  Task     1049 on host nid001933 reporting.
+  Task     1050 on host nid001933 reporting.
+  Task     1051 on host nid001933 reporting.
+  Task     1052 on host nid001933 reporting.
+  Task     1053 on host nid001933 reporting.
+  Task     1054 on host nid001933 reporting.
+  Task     1055 on host nid001933 reporting.
+  Task     1056 on host nid001933 reporting.
+  Task     1057 on host nid001933 reporting.
+  Task     1058 on host nid001933 reporting.
+  Task     1059 on host nid001933 reporting.
+  Task     1060 on host nid001933 reporting.
+  Task     1061 on host nid001933 reporting.
+  Task     1062 on host nid001933 reporting.
+  Task     1063 on host nid001933 reporting.
+  Task     1064 on host nid001933 reporting.
+  Task     1065 on host nid001933 reporting.
+  Task     1066 on host nid001933 reporting.
+  Task     1067 on host nid001933 reporting.
+  Task     1068 on host nid001933 reporting.
+  Task     1069 on host nid001933 reporting.
+  Task     1070 on host nid001933 reporting.
+  Task     1071 on host nid001933 reporting.
+  Task     1072 on host nid001933 reporting.
+  Task     1073 on host nid001933 reporting.
+  Task     1074 on host nid001933 reporting.
+  Task     1075 on host nid001933 reporting.
+  Task     1076 on host nid001933 reporting.
+  Task     1077 on host nid001933 reporting.
+  Task     1078 on host nid001933 reporting.
+  Task     1079 on host nid001933 reporting.
+  Task     1080 on host nid001934 reporting.
+  Task     1081 on host nid001934 reporting.
+  Task     1082 on host nid001934 reporting.
+  Task     1083 on host nid001934 reporting.
+  Task     1084 on host nid001934 reporting.
+  Task     1085 on host nid001934 reporting.
+  Task     1086 on host nid001934 reporting.
+  Task     1087 on host nid001934 reporting.
+  Task     1088 on host nid001934 reporting.
+  Task     1089 on host nid001934 reporting.
+  Task     1090 on host nid001934 reporting.
+  Task     1091 on host nid001934 reporting.
+  Task     1092 on host nid001934 reporting.
+  Task     1093 on host nid001934 reporting.
+  Task     1094 on host nid001934 reporting.
+  Task     1095 on host nid001934 reporting.
+  Task     1096 on host nid001934 reporting.
+  Task     1097 on host nid001934 reporting.
+  Task     1098 on host nid001934 reporting.
+  Task     1099 on host nid001934 reporting.
+  Task     1100 on host nid001934 reporting.
+  Task     1101 on host nid001934 reporting.
+  Task     1102 on host nid001934 reporting.
+  Task     1103 on host nid001934 reporting.
+  Task     1104 on host nid001934 reporting.
+  Task     1105 on host nid001934 reporting.
+  Task     1106 on host nid001934 reporting.
+  Task     1107 on host nid001934 reporting.
+  Task     1108 on host nid001934 reporting.
+  Task     1109 on host nid001934 reporting.
+  Task     1110 on host nid001934 reporting.
+  Task     1111 on host nid001934 reporting.
+  Task     1112 on host nid001934 reporting.
+  Task     1113 on host nid001934 reporting.
+  Task     1114 on host nid001934 reporting.
+  Task     1115 on host nid001934 reporting.
+  Task     1116 on host nid001934 reporting.
+  Task     1117 on host nid001934 reporting.
+  Task     1118 on host nid001934 reporting.
+  Task     1119 on host nid001934 reporting.
+  Task     1120 on host nid001934 reporting.
+  Task     1121 on host nid001934 reporting.
+  Task     1122 on host nid001934 reporting.
+  Task     1123 on host nid001934 reporting.
+  Task     1124 on host nid001934 reporting.
+  Task     1125 on host nid001934 reporting.
+  Task     1126 on host nid001934 reporting.
+  Task     1127 on host nid001934 reporting.
+  Task     1128 on host nid001934 reporting.
+  Task     1129 on host nid001934 reporting.
+  Task     1130 on host nid001934 reporting.
+  Task     1131 on host nid001934 reporting.
+  Task     1132 on host nid001934 reporting.
+  Task     1133 on host nid001934 reporting.
+  Task     1134 on host nid001934 reporting.
+  Task     1135 on host nid001934 reporting.
+  Task     1136 on host nid001934 reporting.
+  Task     1137 on host nid001934 reporting.
+  Task     1138 on host nid001934 reporting.
+  Task     1139 on host nid001934 reporting.
+  Task     1140 on host nid001934 reporting.
+  Task     1141 on host nid001934 reporting.
+  Task     1142 on host nid001934 reporting.
+  Task     1143 on host nid001934 reporting.
+  Task     1144 on host nid001934 reporting.
+  Task     1145 on host nid001934 reporting.
+  Task     1146 on host nid001934 reporting.
+  Task     1147 on host nid001934 reporting.
+  Task     1148 on host nid001934 reporting.
+  Task     1149 on host nid001934 reporting.
+  Task     1150 on host nid001934 reporting.
+  Task     1151 on host nid001934 reporting.
+
+  Performing system and environment tests:
+  | Environment variable OMP_NUM_THREADS correctly set to 1.
+  | Checking for ScaLAPACK...
+  | Testing pdtran()...
+  | All pdtran() tests passed.
+
+  Obtaining array dimensions for all initial allocations:
+  
+  -----------------------------------------------------------------------
+  Parsing control.in (first pass over file, find array dimensions only).
+  The contents of control.in will be repeated verbatim below
+  unless switched off by setting 'verbatim_writeout .false.' .
+  in the first line of control.in .
+  -----------------------------------------------------------------------
+  
+  xc               pbe
+  charge           0.
+  spin             none
+  relativistic atomic_zora scalar
+  k_grid                12 12 4
+  sc_accuracy_rho       1E-7
+  include_spin_orbit
+  output                             band   0.00000  0.00000  0.00000  -0.50000  0.50000  0.00000   46 G  X
+   output                             band  -0.50000  0.50000  0.00000  -0.50000  0.50000 -0.00991    1 X  Y
+   output                             band  -0.50000  0.50000 -0.00991  -0.25495  0.25495 -0.25495   32 Y  S
+   output                             band  -0.25495  0.25495 -0.25495   0.00000  0.00000  0.00000   33 S  G
+   output                             band   0.00000  0.00000  0.00000   0.50000  0.50000 -0.50000    9 G  Z
+   output                             band   0.50000  0.50000 -0.50000   0.25495  0.74505 -0.74505   32 Z  S1
+   output                             band   0.25495  0.74505 -0.74505   0.00000  0.50000 -0.50000    5 S1 N
+   output                             band   0.00000  0.50000 -0.50000  -0.25000  0.75000 -0.25000   32 N  P
+   output                             band  -0.25000  0.75000 -0.25000   0.00991  0.99009 -0.50000    5 P  Y1
+   output                             band   0.00991  0.99009 -0.50000   0.50000  0.50000 -0.50000   45 Y1 Z
+   output                             band  -0.50000  0.50000  0.00000  -0.25000  0.75000 -0.25000    5 X  P
+  
+  ################################################################################
+  #
+  #  FHI-aims code project
+  #  Volker Blum, Fritz Haber Institute Berlin, 2009
+  #
+  #  Suggested "tight" defaults for Ba atom (to be pasted into control.in file)
+  #
+  #  The onset of the cutoff pot'l WAS set to 8 A by default, because the neutral
+  #  Ba atom is a large atom. However, this is very expensive. The radius should be
+  #  much smaller in real-world situations, where Ba will be ionic. Please check
+  #  and reduce the cutoff radius explicitly.
+  #
+  #  2015/11/12 : f and g functions from tier2 added to default basis set choice.
+  #               These functions make a difference in the "delta test".
+  #               Reduced the default cutoff radius to 6AA. The free-atom 6s function
+  #               requires more. However, 6AA is already VERY expensive for
+  #               any production calculations. In fact, revisit this choice for
+  #               ionic systems to see if a smaller cutoff radius will do.
+  #
+  ################################################################################
+    species          Ba
+  #     global species definitions
+      nucleus        56
+      mass           137.327
+  #
+      l_hartree      6
+  #
+      cut_pot        6.0  2.0  1.0
+      basis_dep_cutoff    1e-4
+  #
+      radial_base    65  7.0
+      radial_multiplier  2
+      angular_grids specified
+        division   0.6752  110
+        division   0.9746  194
+        division   1.2241  302
+        division   1.3850  434
+  #      division   1.4734  590
+  #      division   1.6010  770
+  #      division   4.8366  974
+  #      outer_grid  974
+        outer_grid  434
+  ################################################################################
+  #
+  #  Definition of "minimal" basis
+  #
+  ################################################################################
+  #     valence basis states
+      valence      6  s   2.
+      valence      5  p   6.
+      valence      4  d  10.
+  #     ion occupancy
+      ion_occ      6  s   1.
+      ion_occ      5  p   6.
+      ion_occ      4  d  10.
+  ################################################################################
+  #
+  #  Suggested additional basis functions. For production calculations,
+  #  uncomment them one after another (the most important basis functions are
+  #  listed first).
+  #
+  #  Constructed for dimers: 2.65, 3.00, 3.50, 4.40, 5.50 Ang
+  #
+  ################################################################################
+  #  "First tier" - improvements: -1277.43 meV to -9.16 meV
+       ionic 5 d auto
+       ionic 4 f auto
+       hydro 3 p 2.7
+       hydro 4 s 3.3
+  #  "Second tier" - improvements: -64.04 (!) meV to -0.25 meV
+       hydro 4 f 5.8
+       hydro 5 g 7.4
+  #     hydro 4 d 4.5
+  #     hydro 6 h 11.2
+  #     hydro 5 p 6.6
+  #     hydro 2 s 3.2
+  #  "Third tier" - max. impr. -1.16 meV, min. impr. -0.08 meV
+  #     hydro 5 f 7.4
+  #     hydro 5 g 10.8
+  #     hydro 4 d 2.3
+  #     hydro 4 p 3.7
+  #     hydro 5 s 4.0
+  #  Further functions - impr. -0.35 meV and below
+  #     hydro 5 d 3.5
+  #     hydro 6 d 0.4
+  #     hydro 2 p 2.5
+  #     hydro 5 f 12
+  #     hydro 6 d 8.8
+  ################################################################################
+  #
+  #  FHI-aims code project
+  #  Volker Blum, Fritz Haber Institute Berlin, 2009
+  #
+  #  Suggested "tight" defaults for Zr atom (to be pasted into control.in file)
+  #
+  ################################################################################
+    species          Zr
+  #     global species definitions
+      nucleus        40
+      mass           91.224
+  #
+      l_hartree      6
+  #
+      cut_pot        4.0  2.0  1.0
+      basis_dep_cutoff    1e-4
+  #
+      radial_base    58  7.0
+      radial_multiplier  2
+      angular_grids specified
+        division   0.3653   50
+        division   0.8035  110
+        division   1.2273  194
+        division   1.4586  302
+        division   1.6764  434
+  #      division   1.9671  590
+  #      division   2.1961  770
+  #      division   2.3240  974
+  #      division   3.4772 1202
+  #      outer_grid  974
+        outer_grid  434
+  ################################################################################
+  #
+  #  Definition of "minimal" basis
+  #
+  ################################################################################
+  #     valence basis states
+      valence      5  s   2.
+      valence      4  p   6.
+      valence      4  d   2.
+  #     ion occupancy
+      ion_occ      5  s   1.
+      ion_occ      4  p   6.
+      ion_occ      4  d   1.
+  ################################################################################
+  #
+  #  Suggested additional basis functions. For production calculations,
+  #  uncomment them one after another (the most important basis functions are
+  #  listed first).
+  #
+  #  Constructed for dimers: 1.9, 2.25, 3.00, 4.00 Ang
+  #
+  ################################################################################
+  #  "First tier" - improvements: -605.96 meV to -18.06 meV
+       hydro 4 f 7.2
+       ionic 4 d auto
+       ionic 5 p auto
+       hydro 5 g 10.4
+       ionic 5 s auto
+  #  "Second tier" - improvements: -32.47 meV to -1.41 meV
+  #     hydro 4 f 10.4
+  #     hydro 6 h 14.8
+  #     hydro 4 d 6.2
+  #     hydro 4 p 4.4
+  #     hydro 4 f 20
+  #     hydro 5 s 6
+  #  "Third tier" - improvements: -1.99 meV and lower.
+  #     hydro 4 f 5.8
+  #     hydro 5 g 10.8
+  #     hydro 2 p 1
+  #     hydro 3 d 8
+  #     hydro 6 h 14.4
+  #     hydro 1 s 0.9
+  #  Further functions (approx -0.40 meV and below possible)
+  ################################################################################
+  #
+  #  FHI-aims code project
+  #  Volker Blum, Fritz Haber Institute Berlin, 2009
+  #
+  #  Suggested "tight" defaults for S atom (to be pasted into control.in file)
+  #
+  #  Revised Jan 04, 2011, following tests (SiC) done by Lydia Nemec:
+  #     d and g functions of tier 2 now enabled by default.
+  #
+  ################################################################################
+    species        S
+  #     global species definitions
+      nucleus             16
+      mass                32.065
+  #
+      l_hartree           6
+  #
+      cut_pot             4.0          2.0  1.0
+      basis_dep_cutoff    1e-4
+  #
+      radial_base         44 7.0
+      radial_multiplier   2
+      angular_grids       specified
+        division   0.4665  110
+        division   0.5810  194
+        division   0.7139  302
+        division   0.8274  434
+  #      division   0.9105  590
+  #      division   1.0975  770
+  #      division   1.2028  974
+  #      outer_grid  974
+        outer_grid  434
+  ################################################################################
+  #
+  #  Definition of "minimal" basis
+  #
+  ################################################################################
+  #     valence basis states
+      valence      3  s   2.
+      valence      3  p   4.
+  #     ion occupancy
+      ion_occ      3  s   1.
+      ion_occ      3  p   3.
+  ################################################################################
+  #
+  #  Suggested additional basis functions. For production calculations,
+  #  uncomment them one after another (the most important basis functions are
+  #  listed first).
+  #
+  #  Constructed for dimers: 1.6 A, 1.9 A, 2.5 A, 3.25 A, 4.0 A
+  #
+  ################################################################################
+  #  "First tier" - improvements: -652.81 meV to -45.53 meV
+       ionic 3 d auto
+       hydro 2 p 1.8
+       hydro 4 f 7
+       ionic 3 s auto
+  #  "Second tier" - improvements: -30.20 meV to -1.74 meV
+       hydro 4 d 6.2
+       hydro 5 g 10.8
+  #     hydro 4 p 4.9
+  #     hydro 5 f 10
+  #     hydro 1 s 0.8
+  #  "Third tier" - improvements: -1.04 meV to -0.20 meV
+  #     hydro 3 d 3.9
+  #     hydro 3 d 2.7
+  #     hydro 5 g 12
+  #     hydro 4 p 10.4
+  #     hydro 5 f 12.4
+  #     hydro 2 s 1.9
+  #  "Fourth tier" - improvements: -0.35 meV to -0.06 meV
+  #     hydro 4 d 10.4
+  #     hydro 4 p 7.2
+  #     hydro 4 d 10
+  #     hydro 5 g 19.2
+  #     hydro 4 s 12
+  
+  ################################################################################
+  #
+  # For methods that use the localized form of the "resolution of identity" for
+  # the two-electron Coulomb operator (RI_method LVL), particularly Hartree-Fock and
+  # hybrid density functional calculations, the highest accuracy can be obtained by
+  # uncommenting the line beginning with "for_aux"  below, thus adding an extra g radial
+  # function to the construction of the product basis set for the expansion.
+  # See Ref. New J. Phys. 17, 093020 (2015) for more information, particularly Figs. 1 and 6.
+  #
+  ################################################################################
+  #
+  # for_aux hydro 5 g 6.0
+  
+  -----------------------------------------------------------------------
+  Completed first pass over input file control.in .
+  -----------------------------------------------------------------------
+  
+  
+  -----------------------------------------------------------------------
+  Parsing geometry.in (first pass over file, find array dimensions only).
+  The contents of geometry.in will be repeated verbatim below
+  unless switched off by setting 'verbatim_writeout .false.' .
+  in the first line of geometry.in .
+  -----------------------------------------------------------------------
+  
+  #
+  # This is the geometry file that corresponds to the current relaxation step.
+  # If you do not want this file to be written, set the "write_restart_geometry" flag to .false.
+  #  aims_uuid : 5FC98825-6734-4BE9-A362-6C0DBC9A7B7E
+  #
+  lattice_vector     -2.48105213      2.48105213     17.62475482
+  lattice_vector      2.48105213     -2.48105213     17.62475482
+  lattice_vector      2.48105213      2.48105213    -17.62475482
+  atom_frac       0.43255747      0.43255747      0.00000000 Ba
+  atom_frac       0.56744253      0.56744253      0.00000000 Ba
+  atom_frac       0.30051574      0.30051574      0.00000000 Ba
+  atom_frac       0.69948426      0.69948426      0.00000000 Ba
+  atom_frac       0.50000000      0.00000000      0.50000000 S
+  atom_frac       1.00000000      0.50000000      0.50000000 S
+  atom_frac       0.92932555      0.92932555      0.00000000 S
+  atom_frac       0.07067445      0.07067445      0.00000000 S
+  atom_frac       0.78624821      0.78624821      0.00000000 S
+  atom_frac       0.21375179      0.21375179      0.00000000 S
+  atom_frac       0.86079726      0.36079726      0.50000000 S
+  atom_frac       0.36079726      0.86079726      0.50000000 S
+  atom_frac       0.13920274      0.63920274      0.50000000 S
+  atom_frac       0.63920274      0.13920274      0.50000000 S
+  atom_frac       0.00000000      0.00000000      0.00000000 Zr
+  atom_frac       0.85662999      0.85662999      0.00000000 Zr
+  atom_frac       0.14337001      0.14337001      0.00000000 Zr
+  #
+  # What follows is the current estimated Hessian matrix constructed by the BFGS algorithm.
+  # This is NOT the true Hessian matrix of the system.
+  # If you do not want this information here, switch it off using the "hessian_to_restart_geometry" keyword.
+  #
+  trust_radius             0.0393308813
+  hessian_block                1       1         131.943012         -32.438120        -112.533541         -32.438120         234.19761
+  hessian_block                1       2          -3.546407         -69.802173         -32.359453          60.507649         119.65036
+  hessian_block                2       2         697.414894        -433.632458          19.311792        -433.632458         685.21817
+  hessian_block_lv             1       1          34.788311           1.149061           0.000000           1.149061           0.35723
+  hessian_block_lv_atom        1       1           0.802400          -0.258929           0.000000          -7.349471           1.49601
+  hessian_block_lv_atom        1       2         -21.861165          -6.822515           0.000000           7.230975           3.29999
+  
+  -----------------------------------------------------------------------
+  Completed first pass over input file geometry.in .
+  -----------------------------------------------------------------------
+  
+
+  Basic array size parameters:
+  | Number of species                 :        3
+  | Number of atoms                   :       17
+  | Number of lattice vectors         :        3
+  | Max. basis fn. angular momentum   :        4
+  | Max. atomic/ionic basis occupied n:        6
+  | Max. number of basis fn. types    :        3
+  | Max. radial fns per species/type  :       12
+  | Max. logarithmic grid size        :     1460
+  | Max. radial integration grid size :      131
+  | Max. angular integration grid size:      434
+  | Max. angular grid division number :        8
+  | Radial grid for Hartree potential :     1460
+  | Number of spin channels           :        1
+
+------------------------------------------------------------
+          Reading file control.in.
+------------------------------------------------------------
+  XC: Using PBE gradient-corrected functionals.
+  Charge =   0.000000E+00: Neutral system requested explicitly.
+  Spin treatment: No spin polarisation.
+  Scalar relativistic treatment of kinetic energy: on-site free-atom approximation to ZORA.
+  Found k-point grid:        12        12         4
+  Convergence accuracy of self-consistent charge density:  0.1000E-06
+  Calculating non-self-consistent second-variational spin-orbit coupling after scf-cycle
+
+  Plot band    1
+  | begin  0.000000  0.000000  0.000000
+  | end   -0.500000  0.500000  0.000000
+  | number of points:   46
+
+  Plot band    2
+  | begin -0.500000  0.500000  0.000000
+  | end   -0.500000  0.500000 -0.009910
+  | number of points:    1
+ * Warning:
+ * In band number    2   you have requested less than two k-points.
+ * Since every band has at least a starting and an end point,
+ * Please request two or more points to be calculated.
