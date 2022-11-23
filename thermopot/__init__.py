@@ -1,4 +1,4 @@
-__version__ = "0.1.2"
+__version__ = "1.0.0-beta.1"
 
 from scipy import constants
 
