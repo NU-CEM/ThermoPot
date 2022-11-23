@@ -1,7 +1,7 @@
 
 <img src="https://user-images.githubusercontent.com/2452935/181300325-502f1791-51cf-4618-b00f-b90609d6e862.png" width="100">
 
-ThermoPot: An ab-initio thermodynamic modelling package
+ThermoPot: An ab-initio thermodynamic modelling package [![DOI](https://zenodo.org/badge/490745937.svg)](https://zenodo.org/badge/latestdoi/490745937)
 ============================
 
 ⚠️⚠️⚠️ This repository is still in development, and some functionality is untested. Use with caution, or wait until we fully test it! ⚠️⚠️⚠️
