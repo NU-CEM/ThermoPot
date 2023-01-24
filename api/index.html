@@ -1162,7 +1162,7 @@ Contains the child class AimsCalculation to read and store data from a FHI-aims 
 <span class="normal">152</span>
 <span class="normal">153</span>
 <span class="normal">154</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">AimsCalculation</span><span class="p">(</span><span class="n">Calculation</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Class for parsing and storing data from a FHI-AIMS total energy calculation.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for parsing and storing data from a FHI-AIMS total energy calculation.</span>
 
 <span class="sd">    Example:</span>
 
@@ -1178,7 +1178,7 @@ Contains the child class AimsCalculation to read and store data from a FHI-aims 
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="o">=</span><span class="s2">&quot;./calculation.out&quot;</span><span class="p">,</span> <span class="n">gas</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
 
 <span class="sd">            filepath (str): path to the calculation output files</span>
@@ -1197,7 +1197,7 @@ Contains the child class AimsCalculation to read and store data from a FHI-aims 
         <span class="bp">self</span><span class="o">.</span><span class="n">NAtoms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_NAtoms</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">get_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns:</span>
 
 <span class="sd">            (float): volume of the periodic unit cell in Angstrom^3</span>
@@ -1208,7 +1208,7 @@ Contains the child class AimsCalculation to read and store data from a FHI-aims 
             <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns:</span>
 
 <span class="sd">            (float): DFT total energy in eV</span>
@@ -1221,7 +1221,7 @@ Contains the child class AimsCalculation to read and store data from a FHI-aims 
             <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_xc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns:</span>
 
 <span class="sd">            (str): XC functional used to calculate the total energy</span>
@@ -1230,7 +1230,7 @@ Contains the child class AimsCalculation to read and store data from a FHI-aims 
             <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;xc               (\S+)&quot;</span><span class="p">,</span> <span class="n">contents</span><span class="o">.</span><span class="n">read</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">get_NAtoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns:</span>
 
 <span class="sd">            (int): number of atoms in the periodic unit cell</span>
@@ -1325,7 +1325,7 @@ Contains the child class AimsCalculation to read and store data from a FHI-aims 
 <span class="normal">108</span>
 <span class="normal">109</span>
 <span class="normal">110</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="o">=</span><span class="s2">&quot;./calculation.out&quot;</span><span class="p">,</span> <span class="n">gas</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Args:</span>
 
 <span class="sd">        filepath (str): path to the calculation output files</span>
@@ -1391,7 +1391,7 @@ Contains the child class AimsCalculation to read and store data from a FHI-aims 
 <span class="normal">152</span>
 <span class="normal">153</span>
 <span class="normal">154</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_NAtoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns:</span>
 
 <span class="sd">        (int): number of atoms in the periodic unit cell</span>
@@ -1451,7 +1451,7 @@ Contains the child class AimsCalculation to read and store data from a FHI-aims 
 <span class="normal">132</span>
 <span class="normal">133</span>
 <span class="normal">134</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns:</span>
 
 <span class="sd">        (float): DFT total energy in eV</span>
@@ -1511,7 +1511,7 @@ Contains the child class AimsCalculation to read and store data from a FHI-aims 
 <span class="normal">119</span>
 <span class="normal">120</span>
 <span class="normal">121</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns:</span>
 
 <span class="sd">        (float): volume of the periodic unit cell in Angstrom^3</span>
@@ -1567,7 +1567,7 @@ Contains the child class AimsCalculation to read and store data from a FHI-aims 
 <span class="normal">141</span>
 <span class="normal">142</span>
 <span class="normal">143</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_xc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns:</span>
 
 <span class="sd">        (str): XC functional used to calculate the total energy</span>
@@ -1728,7 +1728,7 @@ Contains the child class AimsCalculation to read and store data from a FHI-aims 
 <span class="normal">72</span>
 <span class="normal">73</span>
 <span class="normal">74</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Calculation</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parent class for parsing and storing data from electronic structure calculations.</span>
 
 <span class="sd">    Example:</span>
@@ -1751,7 +1751,7 @@ Contains the child class AimsCalculation to read and store data from a FHI-aims 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">energy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">NAtoms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">volume</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filepath</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gas</span><span class="o">=</span><span class="kc">False</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Note:</span>
 
 <span class="sd">            All attributes are None until set by derived classes or specified by user.</span>
@@ -1779,7 +1779,7 @@ Contains the child class AimsCalculation to read and store data from a FHI-aims 
         <span class="c1"># self.check_attributes()</span>
 
     <span class="k">def</span> <span class="nf">check_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Check that the Calculation class attributes make basic sense.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check that the Calculation class attributes make basic sense.&quot;&quot;&quot;</span>
 
         <span class="k">assert</span> <span class="p">(</span>
             <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">filepath</span> <span class="ow">is</span> <span class="kc">None</span>
@@ -1933,7 +1933,7 @@ Contains the child class AimsCalculation to read and store data from a FHI-aims 
 <span class="normal">57</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">energy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">NAtoms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">volume</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filepath</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gas</span><span class="o">=</span><span class="kc">False</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Note:</span>
 
 <span class="sd">        All attributes are None until set by derived classes or specified by user.</span>
@@ -1993,7 +1993,7 @@ Contains the child class AimsCalculation to read and store data from a FHI-aims 
 <span class="normal">72</span>
 <span class="normal">73</span>
 <span class="normal">74</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">check_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Check that the Calculation class attributes make basic sense.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check that the Calculation class attributes make basic sense.&quot;&quot;&quot;</span>
 
     <span class="k">assert</span> <span class="p">(</span>
         <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">filepath</span> <span class="ow">is</span> <span class="kc">None</span>
@@ -2370,7 +2370,7 @@ Enthalpy has no P dependence as volume is not restricted / expansion step is def
 <span class="normal">511</span>
 <span class="normal">512</span>
 <span class="normal">513</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">IdealGas</span><span class="p">(</span><span class="n">Material</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class for ideal gas properties.</span>
 
 <span class="sd">    Example:</span>
@@ -2405,7 +2405,7 @@ Enthalpy has no P dependence as volume is not restricted / expansion step is def
         <span class="n">zpe_hse06</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
         <span class="n">zpe_lit</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
 
 <span class="sd">        name (str): Identifying string</span>
@@ -2435,7 +2435,7 @@ Enthalpy has no P dependence as volume is not restricted / expansion step is def
             <span class="bp">self</span><span class="o">.</span><span class="n">zpe</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">def</span> <span class="nf">U</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">xc</span><span class="o">=</span><span class="s2">&quot;pbesol&quot;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s2">&quot;eV&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculates the internal energy of one formula unit of ideal gas.</span>
 
 <span class="sd">        Example:</span>
@@ -2482,7 +2482,7 @@ Enthalpy has no P dependence as volume is not restricted / expansion step is def
             <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">H</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">xc</span><span class="o">=</span><span class="s2">&quot;pbesol&quot;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s2">&quot;eV&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculates the Enthalpy of one formula unit of ideal gas.</span>
 
 <span class="sd">        Examples:</span>
@@ -2531,7 +2531,7 @@ Enthalpy has no P dependence as volume is not restricted / expansion step is def
             <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">mu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">xc</span><span class="o">=</span><span class="s2">&quot;pbesol&quot;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s2">&quot;eV&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculates the Gibbs Free Energy of one formula unit of ideal gas.</span>
 
 <span class="sd">        Examples:</span>
@@ -2736,7 +2736,7 @@ H = S2_gas.H(np.linspace(100,700,1000))</p>
 <span class="normal">449</span>
 <span class="normal">450</span>
 <span class="normal">451</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">H</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">xc</span><span class="o">=</span><span class="s2">&quot;pbesol&quot;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s2">&quot;eV&quot;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculates the Enthalpy of one formula unit of ideal gas.</span>
 
 <span class="sd">    Examples:</span>
@@ -2917,7 +2917,7 @@ H = S2_gas.H(np.linspace(100,700,1000))</p>
 <span class="normal">400</span>
 <span class="normal">401</span>
 <span class="normal">402</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">U</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">xc</span><span class="o">=</span><span class="s2">&quot;pbesol&quot;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s2">&quot;eV&quot;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculates the internal energy of one formula unit of ideal gas.</span>
 
 <span class="sd">    Example:</span>
@@ -3040,7 +3040,7 @@ zpe_lit (float, optional): zero point energy calculated using literature values<
     <span class="n">zpe_hse06</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
     <span class="n">zpe_lit</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Args:</span>
 
 <span class="sd">    name (str): Identifying string</span>
@@ -3232,7 +3232,7 @@ Other T, P arrays will result in undefined behaviour.</p>
 <span class="normal">511</span>
 <span class="normal">512</span>
 <span class="normal">513</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">mu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">xc</span><span class="o">=</span><span class="s2">&quot;pbesol&quot;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s2">&quot;eV&quot;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculates the Gibbs Free Energy of one formula unit of ideal gas.</span>
 
 <span class="sd">    Examples:</span>
@@ -3386,7 +3386,7 @@ Other T, P arrays will result in undefined behaviour.</p>
 <span class="normal">35</span>
 <span class="normal">36</span>
 <span class="normal">37</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Material</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parent class for storing materials properties.</span>
 
 <span class="sd">    Attributes:</span>
@@ -3774,7 +3774,7 @@ Other T, P arrays will result in undefined behaviour.</p>
 <span class="normal">287</span>
 <span class="normal">288</span>
 <span class="normal">289</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Solid</span><span class="p">(</span><span class="n">Material</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class for solid material data.</span>
 
 <span class="sd">    Note:</span>
@@ -3807,7 +3807,7 @@ Other T, P arrays will result in undefined behaviour.</p>
         <span class="n">energies</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="n">NAtoms</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
 
 <span class="sd">           name (str): Identifying string</span>
@@ -3839,7 +3839,7 @@ Other T, P arrays will result in undefined behaviour.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">phonon_filepath</span> <span class="o">=</span> <span class="n">materials_directory</span> <span class="o">+</span> <span class="n">phonon_filepath</span>
 
     <span class="k">def</span> <span class="nf">U</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">xc</span><span class="o">=</span><span class="s2">&quot;pbesol&quot;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s2">&quot;eV&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculates the internal energy of one formula unit of solid.</span>
 
 <span class="sd">        Example:</span>
@@ -3881,7 +3881,7 @@ Other T, P arrays will result in undefined behaviour.</p>
             <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">H</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">xc</span><span class="o">=</span><span class="s2">&quot;pbesol&quot;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s2">&quot;eV&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculates the Enthalpy (H = U + PV) of one formula unit of solid.</span>
 
 <span class="sd">        Examples:</span>
@@ -3935,7 +3935,7 @@ Other T, P arrays will result in undefined behaviour.</p>
             <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">mu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">xc</span><span class="o">=</span><span class="s2">&quot;pbesol&quot;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s2">&quot;eV&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculates the Gibbs Free Energy (mu = U + PV - TS) of one formula unit of solid.</span>
 
 <span class="sd">        Examples:</span>
@@ -3982,7 +3982,7 @@ Other T, P arrays will result in undefined behaviour.</p>
             <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">Cv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s2">&quot;kB&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculates the Constant-volume heat capacity of one formula unit of solid.</span>
 
 <span class="sd">        Examples:</span>
@@ -4162,7 +4162,7 @@ Cv = BaS.mu(np.linspace(100,700,1000),xc="pbesol",units="kJ")</p>
 <span class="normal">287</span>
 <span class="normal">288</span>
 <span class="normal">289</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">Cv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s2">&quot;kB&quot;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculates the Constant-volume heat capacity of one formula unit of solid.</span>
 
 <span class="sd">    Examples:</span>
@@ -4359,7 +4359,7 @@ Other T, P arrays will result in undefined behaviour.</p>
 <span class="normal">197</span>
 <span class="normal">198</span>
 <span class="normal">199</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">H</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">xc</span><span class="o">=</span><span class="s2">&quot;pbesol&quot;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s2">&quot;eV&quot;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculates the Enthalpy (H = U + PV) of one formula unit of solid.</span>
 
 <span class="sd">    Examples:</span>
@@ -4540,7 +4540,7 @@ Other T, P arrays will result in undefined behaviour.</p>
 <span class="normal">143</span>
 <span class="normal">144</span>
 <span class="normal">145</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">U</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">xc</span><span class="o">=</span><span class="s2">&quot;pbesol&quot;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s2">&quot;eV&quot;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculates the internal energy of one formula unit of solid.</span>
 
 <span class="sd">    Example:</span>
@@ -4734,7 +4734,7 @@ Other T, P arrays will result in undefined behaviour.</p>
     <span class="n">energies</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">NAtoms</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Args:</span>
 
 <span class="sd">       name (str): Identifying string</span>
@@ -4913,7 +4913,7 @@ Other T, P arrays will result in undefined behaviour.</p>
 <span class="normal">244</span>
 <span class="normal">245</span>
 <span class="normal">246</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">mu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">xc</span><span class="o">=</span><span class="s2">&quot;pbesol&quot;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s2">&quot;eV&quot;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculates the Gibbs Free Energy (mu = U + PV - TS) of one formula unit of solid.</span>
 
 <span class="sd">    Examples:</span>
@@ -5120,7 +5120,7 @@ reaction.Dmu(T,P) : Gibbs free energy of formation</p>
 <span class="normal"> 99</span>
 <span class="normal">100</span>
 <span class="normal">101</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Reaction</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class for reaction data</span>
 
 <span class="sd">    Sets properties:</span>
@@ -5143,7 +5143,7 @@ reaction.Dmu(T,P) : Gibbs free energy of formation</p>
         <span class="n">pressure</span><span class="o">=</span><span class="mf">1e5</span><span class="p">,</span>
         <span class="n">fu</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        reactants_dictionary and products dictionary takes the form { class_instance : formula units }</span>
 <span class="sd">        and can have an arbitrary number of key-value pairs. `Class instance` is an instance of the `materials.solid`</span>
 <span class="sd">        or `materials.ideal_gas` classes.</span>
@@ -5280,7 +5280,7 @@ or <code>materials.ideal_gas</code> classes.</p>
     <span class="n">pressure</span><span class="o">=</span><span class="mf">1e5</span><span class="p">,</span>
     <span class="n">fu</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    reactants_dictionary and products dictionary takes the form { class_instance : formula units }</span>
 <span class="sd">    and can have an arbitrary number of key-value pairs. `Class instance` is an instance of the `materials.solid`</span>
 <span class="sd">    or `materials.ideal_gas` classes.</span>
@@ -5454,7 +5454,7 @@ or <code>materials.ideal_gas</code> classes.</p>
         <span class="n">P_units</span><span class="o">=</span><span class="s2">&quot;Pa&quot;</span><span class="p">,</span>
         <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        T is an array e.g. np.linspace(100, 1500, 100)  # K</span>
 <span class="sd">        P is an array orthogonal to T. e.g. np.array(np.logspace(1, 7, 100), ndmin=2).transpose()  # Pa</span>
 <span class="sd">        potential is returned from a reactions.reaction method called for an instance with attributes T,P.</span>
@@ -5650,7 +5650,7 @@ logscale determines if the y-axis Pressure is logarithmic</p>
     <span class="n">P_units</span><span class="o">=</span><span class="s2">&quot;Pa&quot;</span><span class="p">,</span>
     <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    T is an array e.g. np.linspace(100, 1500, 100)  # K</span>
 <span class="sd">    P is an array orthogonal to T. e.g. np.array(np.logspace(1, 7, 100), ndmin=2).transpose()  # Pa</span>
 <span class="sd">    potential is returned from a reactions.reaction method called for an instance with attributes T,P.</span>
@@ -5902,7 +5902,7 @@ logscale determines if the y-axis Pressure is logarithmic</p>
         <span class="n">P_units</span><span class="o">=</span><span class="s2">&quot;Pa&quot;</span><span class="p">,</span>
         <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        T is an array e.g. np.linspace(100, 1500, 100)  # K</span>
 <span class="sd">        P is an array orthogonal to T. e.g. np.array(np.logspace(1, 7, 100), ndmin=2).transpose()  # Pa</span>
 <span class="sd">        potential is returned from a reactions.reaction method called for an instance with attributes T,P.</span>
@@ -6119,7 +6119,7 @@ log_scale determines if the Pressure y-axis is logarithmic</p>
     <span class="n">P_units</span><span class="o">=</span><span class="s2">&quot;Pa&quot;</span><span class="p">,</span>
     <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    T is an array e.g. np.linspace(100, 1500, 100)  # K</span>
 <span class="sd">    P is an array orthogonal to T. e.g. np.array(np.logspace(1, 7, 100), ndmin=2).transpose()  # Pa</span>
 <span class="sd">    potential is returned from a reactions.reaction method called for an instance with attributes T,P.</span>
@@ -6274,7 +6274,7 @@ Outputs data for S and Cv in kB/cell, U, F and TS in eV/cell.</p>
 <span class="normal">45</span>
 <span class="normal">46</span>
 <span class="normal">47</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_potential_aims</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="nb">property</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Thermodynamic property interpolation function. Requires phonopy-FHI-aims output file.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Thermodynamic property interpolation function. Requires phonopy-FHI-aims output file.</span>
 <span class="sd">    Reads data for S and Cv expressed in J/K/mol, F and U in kJ/mol,</span>
 <span class="sd">    TS in J/mol.</span>
 <span class="sd">    Outputs data for S and Cv in kB/cell, U, F and TS in eV/cell.</span>
@@ -6340,7 +6340,7 @@ Outputs data for S and Cv in kB/cell, U, F and TS in eV/cell.</p>
 <span class="normal">69</span>
 <span class="normal">70</span>
 <span class="normal">71</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_potential_nist_table</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="nb">property</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Thermodynamic property interpolation function. Requires NIST-JANAF table. All properties in J, mol and K&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Thermodynamic property interpolation function. Requires NIST-JANAF table. All properties in J, mol and K&quot;&quot;&quot;</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">genfromtxt</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">skip_header</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">T</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
     <span class="k">if</span> <span class="nb">property</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;Cp&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;heat_capacity&quot;</span><span class="p">):</span>
@@ -6405,7 +6405,7 @@ or follow the same format</p>
 <span class="normal">91</span>
 <span class="normal">92</span>
 <span class="normal">93</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_potential_sulfur_table</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Read thermodynamic property as function of T, P from datafile.</span>
 
 <span class="sd">    Datafile should be generated by the code at http://github.com/WMD-bath/sulfur-model</span>
