@@ -9,7 +9,6 @@ import thermopot
 
 
 def convert_phonopy_filetypes(file_in, file_out):
-
     df_in = pd.read_csv(
         file_in, comment="#", delim_whitespace=True, names=["T", "F", "U", "Cv", "-TS"]
     )

@@ -4,7 +4,6 @@ import matplotlib as mpl
 
 class Potential:
     def __init__(self, potential, T, P):
-
         self.potential = potential
         self.T = T
         self.P = P

@@ -6,7 +6,6 @@ import numpy as np
 
 class Potentials:
     def __init__(self, *potentials):
-
         self.potentials = potentials
         self.minimum_potential = self.find_potential_minimum()
         self.T = self.potentials[0].T
@@ -96,7 +95,6 @@ class Potentials:
             return plt
 
     def find_potential_minimum(self):
-
         assert (
             len(set([potential.potential.shape for potential in self.potentials])) == 1
         ), "potential arrays must have the same dimension"

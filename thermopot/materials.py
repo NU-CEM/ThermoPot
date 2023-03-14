@@ -30,7 +30,6 @@ class Material(object):
     """
 
     def __init__(self, name, stoichiometry, energies):
-
         self.name = name
         self.stoichiometry = stoichiometry
         self.energies = energies
@@ -434,7 +433,6 @@ class IdealGas(Material):
             return H_eV
 
         elif units == "J":
-
             return (
                 H_eV
                 * constants.physical_constants["electron volt-joule relationship"][0]
@@ -442,7 +440,6 @@ class IdealGas(Material):
             )
 
         elif units == "kJ":
-
             return (
                 H_eV
                 * constants.physical_constants["electron volt-joule relationship"][0]
@@ -492,11 +489,9 @@ class IdealGas(Material):
         )
 
         if units == "eV":
-
             return mu_eV
 
         elif units == "J":
-
             return (
                 mu_eV
                 * constants.physical_constants["electron volt-joule relationship"][0]
@@ -504,7 +499,6 @@ class IdealGas(Material):
             )
 
         elif units == "kJ":
-
             return (
                 mu_eV
                 * constants.physical_constants["electron volt-joule relationship"][0]

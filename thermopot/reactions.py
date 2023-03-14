@@ -44,7 +44,6 @@ class Reaction:
         self.fu_scaling = fu
 
     def DH(self, T=None, P=None, xc="pbesol", units="eV"):
-
         T = self.T if T is None else T
         P = self.P if P is None else P
 
@@ -59,7 +58,6 @@ class Reaction:
         )
 
     def DU(self, T=None, P=None, xc="pbesol", units="eV"):
-
         T = self.T if T is None else T
         P = self.P if P is None else P
 
@@ -74,7 +72,6 @@ class Reaction:
         )
 
     def Dmu(self, T=None, P=None, xc="pbesol", units="eV"):
-
         T = self.T if T is None else T
         P = self.P if P is None else P
 
