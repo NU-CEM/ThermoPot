@@ -155,7 +155,7 @@ class AimsCalculation(Calculation):
 
 
 class QHACalculation:
-    def __init__(self, ev_filepath,filepath):
+    def __init__(self, ev_filepath, filepath):
         self.ev_filepath = ev_filepath
         self.filepath = filepath
         self.volumes = self.get_volumes()
@@ -169,7 +169,7 @@ class QHACalculation:
             for line in contents:
                 line = line.split()
                 volumes.append(float(line[0]))
-        return(volumes)
+        return volumes
 
     def get_energies(self):
         energies = []
@@ -177,7 +177,7 @@ class QHACalculation:
             for line in contents:
                 line = line.split()
                 energies.append(float(line[1]))
-        return(energies)
+        return energies
 
     def get_xc(self):
         """

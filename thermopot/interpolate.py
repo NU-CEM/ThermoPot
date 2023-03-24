@@ -41,8 +41,8 @@ def get_potential_aims(file, property):
     elif property in ("TS"):
         potential = (T * data[:, 2]) / eV2Jmol
     elif property in ("V", "Volume"):
-        data_volume = genfromtxt('volume-temperature.dat')
-        potential = data_volume[:,1]
+        data_volume = genfromtxt("volume-temperature.dat")
+        potential = data_volume[:, 1]
     else:
         raise RuntimeError("Property not found")
     thefunction = interp1d(T, potential, kind="linear")

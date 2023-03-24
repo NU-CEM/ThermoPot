@@ -66,7 +66,7 @@ class Solid(Material):
         stoichiometry,
         phonon_filepath,
         calculation=False,
-        QHACalculation = False,
+        QHACalculation=False,
         volume=False,
         energies=False,
         NAtoms=1,
@@ -83,10 +83,11 @@ class Solid(Material):
            NAtoms (int): number of atoms in periodic unit cell
         """
         if QHACalculation is not False:
-            Material.__init__(self, name, stoichiometry, {QHACalculation.xc: QHACalculation.energies})
+            Material.__init__(
+                self, name, stoichiometry, {QHACalculation.xc: QHACalculation.energies}
+            )
             self.volume = QHACalculation.volumes
             self.NAtoms = QHACalculation.NAtoms
-            
 
         elif calculation is not False:
             if type(calculation) is not list:
@@ -106,8 +107,8 @@ class Solid(Material):
 
         self.fu_cell = self.NAtoms / self.N
         self.phonon_filepath = materials_directory + phonon_filepath
-    def V(self, T, xc="pbesol", units="eV"):
 
+    def V(self, T, xc="pbesol", units="eV"):
         V_func = interpolate.get_potential_aims(self.phonon_filepath, "V")
         return V_func
 
@@ -296,7 +297,7 @@ class Solid(Material):
                 * constants.N_A
                 * 0.001
             )
-        
+
 
 class IdealGas(Material):
     """
