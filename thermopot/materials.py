@@ -66,6 +66,7 @@ class Solid(Material):
         stoichiometry,
         phonon_filepath,
         calculation=False,
+        QHACalculation = False,
         volume=False,
         energies=False,
         NAtoms=1,
@@ -81,8 +82,13 @@ class Solid(Material):
            energies (dict, optional): relates xc functional to DFT total energy in eV
            NAtoms (int): number of atoms in periodic unit cell
         """
+        if QHACalculation is not False:
+            Material.__init__(self, name, stoichiometry, {QHACalculation.xc: QHACalculation.energies})
+            self.volume = QHACalculation.volumes
+            self.NAtoms = QHACalculation.NAtoms
+            
 
-        if calculation is not False:
+        elif calculation is not False:
             if type(calculation) is not list:
                 Material.__init__(
                     self, name, stoichiometry, {calculation.xc: calculation.energy}
@@ -100,6 +106,10 @@ class Solid(Material):
 
         self.fu_cell = self.NAtoms / self.N
         self.phonon_filepath = materials_directory + phonon_filepath
+    def V(self, T, xc="pbesol", units="eV"):
+
+        V_func = interpolate.get_potential_aims(self.phonon_filepath, "V")
+        return V_func
 
     def U(self, T, xc="pbesol", units="eV"):
         """
@@ -286,7 +296,7 @@ class Solid(Material):
                 * constants.N_A
                 * 0.001
             )
-
+        
 
 class IdealGas(Material):
     """

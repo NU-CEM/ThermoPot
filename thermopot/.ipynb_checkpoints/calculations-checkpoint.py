@@ -155,46 +155,14 @@ class AimsCalculation(Calculation):
 
 
 class QHACalculation:
-    def __init__(self, ev_filepath,filepath):
-        self.ev_filepath = ev_filepath
-        self.filepath = filepath
-        self.volumes = self.get_volumes()
-        self.energies = self.get_energies()
-        self.xc = self.get_xc()
-        self.NAtoms = self.get_NAtoms()
-
-    def get_volumes(self):
+    def __init__(self, ev_filepath):
         volumes = []
-        with open(self.ev_filepath) as contents:
-            for line in contents:
-                line = line.split()
-                volumes.append(float(line[0]))
-        return(volumes)
-
-    def get_energies(self):
         energies = []
-        with open(self.ev_filepath) as contents:
+        with open(ev_filepath) as contents:
             for line in contents:
                 line = line.split()
-                energies.append(float(line[1]))
-        return(energies)
+                volumes = float(line[0])
+                energies = flost(line[1])
+        print(volumes,energies)
 
-    def get_xc(self):
-        """
-        Returns:
 
-            (str): XC functional used to calculate the total energy
-        """
-        with open(self.filepath) as contents:
-            return re.findall("xc               (\S+)", contents.read())[0]
-
-    def get_NAtoms(self):
-        """
-        Returns:
-
-            (int): number of atoms in the periodic unit cell
-        """
-        with open(self.filepath) as contents:
-            return int(
-                re.findall("Number of atoms\s +:\s + (\S+)", contents.read())[-1]
-            )
