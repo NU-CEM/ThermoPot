@@ -29,7 +29,13 @@ class Calculation:
     """
 
     def __init__(
-        self, energy=None, xc=None, num_atoms=None, volume=None, filepath=None, gas=False
+        self,
+        energy=None,
+        xc=None,
+        num_atoms=None,
+        volume=None,
+        filepath=None,
+        gas=False,
     ):
         """
         Note:
