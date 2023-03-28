@@ -13,7 +13,7 @@ class Calculation:
 
     Example:
 
-        BaS_calc = Calculation(volume=63.2552, energy=-235926.586148547, xc='pbesol', NAtoms=2)
+        BaS_calc = Calculation(volume=63.2552, energy=-235926.586148547, xc='pbesol', num_atoms=2)
 
     Attributes:
 
@@ -21,7 +21,7 @@ class Calculation:
         filepath (str): path to the calculation output files
         energy (float): DFT total energy in eV
         xc (str): XC functional used to calculate the total energy
-        NAtoms (int): number of atoms in the periodic unit cell
+        num_atoms (int): number of atoms in the periodic unit cell
 
     Note:
 
@@ -29,7 +29,7 @@ class Calculation:
     """
 
     def __init__(
-        self, energy=None, xc=None, NAtoms=None, volume=None, filepath=None, gas=False
+        self, energy=None, xc=None, num_atoms=None, volume=None, filepath=None, gas=False
     ):
         """
         Note:
@@ -42,7 +42,7 @@ class Calculation:
             filepath (str, optional): path to the calculation output files
             energy (float): DFT total energy in eV
             xc (str): XC functional used to calculate the total energy
-            NAtoms (int): number of atoms in the periodic unit cell
+            num_atoms (int): number of atoms in the periodic unit cell
             gas (bool): True if gas species, False otherwise
 
         Note:
@@ -54,7 +54,7 @@ class Calculation:
         self.filepath = filepath
         self.energy = energy
         self.xc = xc
-        self.NAtoms = NAtoms
+        self.num_atoms = num_atoms
 
         # self.check_attributes()
 
@@ -67,8 +67,8 @@ class Calculation:
         assert type(self.energy) == float, "energy must be a float"
         assert type(self.xc) == str, "xc must be a string"
         assert (
-            type(self.NAtoms) == int
-        ) and self.NAtoms >= 1, "NAtoms must be an integer >= 1"
+            type(self.num_atoms) == int
+        ) and self.num_atoms >= 1, "num_atoms must be an integer >= 1"
         assert (
             type(self.volume) == float
         ) and self.volume > 0, "volume must be a float > 0"
@@ -87,7 +87,7 @@ class AimsCalculation(Calculation):
         filepath (str): path to the calculation output files
         energy (float): DFT total energy in eV
         xc (str): XC functional used to calculate the total energy
-        NAtoms (int): number of atoms in the periodic unit cell
+        num_atoms (int): number of atoms in the periodic unit cell
     """
 
     def __init__(self, filepath="./calculation.out", gas=False):
@@ -107,7 +107,7 @@ class AimsCalculation(Calculation):
             self.volume = self.get_volume()
         self.energy = self.get_energy()
         self.xc = self.get_xc()
-        self.NAtoms = self.get_NAtoms()
+        self.num_atoms = self.get_num_atoms()
 
     def get_volume(self):
         """
@@ -142,7 +142,7 @@ class AimsCalculation(Calculation):
         with open(self.filepath) as contents:
             return re.findall("xc               (\S+)", contents.read())[0]
 
-    def get_NAtoms(self):
+    def get_num_atoms(self):
         """
         Returns:
 
@@ -161,7 +161,7 @@ class QHACalculation:
         self.volumes = self.get_volumes()
         self.energies = self.get_energies()
         self.xc = self.get_xc()
-        self.NAtoms = self.get_NAtoms()
+        self.num_atoms = self.get_num_atoms()
 
     def get_volumes(self):
         volumes = []
@@ -188,7 +188,7 @@ class QHACalculation:
         with open(self.filepath) as contents:
             return re.findall("xc               (\S+)", contents.read())[0]
 
-    def get_NAtoms(self):
+    def get_num_atoms(self):
         """
         Returns:
 

@@ -57,7 +57,7 @@ class Solid(Material):
         fu_cell (int): number of formula units in periodic unit cell
         volume (float): volume of unit cell in Angstroms^3
         phonon_filepath (str): path to the phonon output data
-        NAtoms (int): number of atoms in periodic unit cell
+        num_atoms (int): number of atoms in periodic unit cell
     """
 
     def __init__(
@@ -66,10 +66,10 @@ class Solid(Material):
         stoichiometry,
         phonon_filepath,
         calculation=False,
-        QHACalculation=False,
+        qha_calculation=False,
         volume=False,
         energies=False,
-        NAtoms=1,
+        num_atoms=1,
     ):
         """
         Args:
@@ -80,14 +80,14 @@ class Solid(Material):
            calculation (thermopot.calculation.Calculation, optional): instance of the thermopot.calculation.Calculation class
            volume (float, optional): volume of unit cell in Angstroms^3
            energies (dict, optional): relates xc functional to DFT total energy in eV
-           NAtoms (int): number of atoms in periodic unit cell
+           num_atoms (int): number of atoms in periodic unit cell
         """
-        if QHACalculation is not False:
+        if qha_calculation is not False:
             Material.__init__(
                 self, name, stoichiometry, {QHACalculation.xc: QHACalculation.energies}
             )
             self.volume = QHACalculation.volumes
-            self.NAtoms = QHACalculation.NAtoms
+            self.num_atoms = QHACalculation.num_atoms
 
         elif calculation is not False:
             if type(calculation) is not list:
@@ -95,22 +95,18 @@ class Solid(Material):
                     self, name, stoichiometry, {calculation.xc: calculation.energy}
                 )
                 self.volume = calculation.volume
-                self.NAtoms = calculation.NAtoms
+                self.num_atoms = calculation.num_atoms
             else:
                 pass
 
         else:
             Material.__init__(self, name, stoichiometry, energies)
 
-            self.NAtoms = NAtoms
+            self.num_atoms = num_atoms
             self.volume = volume
 
-        self.fu_cell = self.NAtoms / self.N
+        self.fu_cell = self.num_atoms / self.N
         self.phonon_filepath = materials_directory + phonon_filepath
-
-    def V(self, T, xc="pbesol", units="eV"):
-        V_func = interpolate.get_potential_aims(self.phonon_filepath, "V")
-        return V_func
 
     def U(self, T, xc="pbesol", units="eV"):
         """
