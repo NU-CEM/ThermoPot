@@ -49,6 +49,16 @@ def get_potential_aims(file, property):
 
     return thefunction
 
+def get_potential_F_V(volumes,helmholtz_free_energies):
+    thefunction = interp1d(volumes, helmholtz_free_energies, kind='linear') 
+    return thefunction
+
+def get_potential_V_T(filepath):
+    data = genfromtxt(filepath)
+    temperatures = data[:, 0]
+    volumes = data[:, 1]
+    thefunction = interp1d(temperatures, volumes, kind='linear')
+    return thefunction
 
 def get_potential_nist_table(file, property):
     """Thermodynamic property interpolation function. Requires NIST-JANAF table. All properties in J, mol and K"""
