@@ -46,16 +46,19 @@ def get_potential_aims(file, property):
 
     return thefunction
 
-def get_potential_F_V(volumes,helmholtz_free_energies):
-    thefunction = interp1d(volumes, helmholtz_free_energies, kind='linear') 
+
+def get_potential_F_V(volumes, helmholtz_free_energies):
+    thefunction = interp1d(volumes, helmholtz_free_energies, kind="linear")
     return thefunction
+
 
 def get_potential_V_T(filepath):
     data = genfromtxt(filepath)
     temperatures = data[:, 0]
     volumes = data[:, 1]
-    thefunction = interp1d(temperatures, volumes, kind='linear')
+    thefunction = interp1d(temperatures, volumes, kind="linear")
     return thefunction
+
 
 def get_potential_nist_table(file, property):
     """Thermodynamic property interpolation function. Requires NIST-JANAF table. All properties in J, mol and K"""
@@ -70,6 +73,7 @@ def get_potential_nist_table(file, property):
     elif property in ("U", "internal_energy"):
         # U = H - PV; for ideal gas molar PV = RT so U = H - RT
         from scipy.constants import R as R
+
         potential = (data[:, 4] - data[0, 4]) * 1e3 - R * data[:, 0]
     elif property in ("DH", "Delta_H", "standard_enthalpy_change"):
         potential = data[:, 4] * 1e3
