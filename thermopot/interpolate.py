@@ -40,9 +40,6 @@ def get_potential_aims(file, property):
         potential = data[:, 2] / kB2JKmol
     elif property in ("TS"):
         potential = (T * data[:, 2]) / eV2Jmol
-    elif property in ("V", "Volume"):
-        data_volume = genfromtxt("volume-temperature.dat")
-        potential = data_volume[:, 1]
     else:
         raise RuntimeError("Property not found")
     thefunction = interp1d(T, potential, kind="linear")
@@ -73,7 +70,6 @@ def get_potential_nist_table(file, property):
     elif property in ("U", "internal_energy"):
         # U = H - PV; for ideal gas molar PV = RT so U = H - RT
         from scipy.constants import R as R
-
         potential = (data[:, 4] - data[0, 4]) * 1e3 - R * data[:, 0]
     elif property in ("DH", "Delta_H", "standard_enthalpy_change"):
         potential = data[:, 4] * 1e3

@@ -65,8 +65,8 @@ class Solid(Material):
         name,
         stoichiometry,
         phonon_filepath,
-        calculation=False,
         qha_calculation=False,
+        calculation=False,
         volume=False,
         energy=False,
         num_atoms=1,
@@ -82,9 +82,11 @@ class Solid(Material):
            energies (dict, optional): relates xc functional to DFT total energy in eV
            num_atoms (int): number of atoms in periodic unit cell
         """
+        self._qha_calculation = qha_calculation
+
         if qha_calculation is not False:
             Material.__init__(
-                self, name, stoichiometry, {qha_calculation.xc: qha_calculation.energy}
+                self, name, stoichiometry, {qha_calculation.xc: qha_calculation.energies}
             )
             self.volume = qha_calculation.volumes
             self.num_atoms = qha_calculation.num_atoms
@@ -127,9 +129,11 @@ class Solid(Material):
             U (float/ndarray): 1D Numpy array (with the same dimensions as T) containing the internal energies of one formula unit of solid, or a single internal energy float when a single temperature is passed as an argument.
 
         """
+        #if self._qha_calculation is not False: 
+        #    print("this function works here")
+        #else:
         U_func = interpolate.get_potential_aims(self.phonon_filepath, "U")
         E_dft = self.energies[xc]
-
         U_eV = (E_dft + U_func(T)) / self.fu_cell
 
         if units == "eV":
@@ -229,10 +233,10 @@ class Solid(Material):
 
             mu (float/ndarray): Gibbs Free Energy of one formula unit of solid expressed as floats in a m x n Numpy array where T, P are orthogonal 2D arrays of length m and n
         """
-        if self.qha_calculation is not False:
+        if self._qha_calculation is not False:
             F_eV = interpolate.get_potential_F_V(self.volume,self.energies)
             V_func = interpolate.get_potential_V_T(V_T_filepath)
-            mu_eV = (F_eV + P*V_func(T)) /self.fu_cell
+            mu_eV = (F_eV + P*V_func(T)) / self.fu_cell
 
         else:    
             TS_func = interpolate.get_potential_aims(self.phonon_filepath, "TS")
