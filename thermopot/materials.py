@@ -6,7 +6,7 @@ Each class provides methods for calculating various thermodynamic properties.
 import numpy as np
 from scipy import constants
 from thermopot import interpolate
-
+from phonopy import PhonopyQHA
 
 import os  # get correct path for datafiles when called from another directory
 
@@ -94,6 +94,14 @@ class Solid(Material):
             self.volume = qha_calculation.volumes
             self.num_atoms = qha_calculation.num_atoms
 
+
+
+            qha = PhonopyQHA(volumes = qha_calculation.volumes, electronic_energies = qha_calculation.energies, 
+                temperatures=qha_calculation.temperatures, free_energy = qha_calculation.fe, cv=qha_calculation.cv,
+                entropy=qha_calculation.entropy, t_max=1500, verbose=False)
+            
+        
+
         elif calculation is not False:
             if type(calculation) is not list:
                 Material.__init__(
@@ -112,6 +120,7 @@ class Solid(Material):
 
         self.fu_cell = self.num_atoms / self.N
         self.phonon_filepath = materials_directory + phonon_filepath
+        self.qha_vars = qha
 
     def U(self, T, xc="pbesol", units="eV"):
         """
@@ -237,9 +246,10 @@ class Solid(Material):
             mu (float/ndarray): Gibbs Free Energy of one formula unit of solid expressed as floats in a m x n Numpy array where T, P are orthogonal 2D arrays of length m and n
         """
         if self._qha_calculation is not False:
-            F_eV = interpolate.get_potential_F_V(self.volume, self.energies)
-            V_func = interpolate.get_potential_V_T(V_T_filepath)
-            mu_eV = (F_eV + P * V_func(T)) / self.fu_cell
+            print(qha._qha._temperatures)
+            #print(qha._qha._equiv_energies)
+            #print(len(qha._qha._temperatures))
+            #print(len(qha._qha._equiv_energies))
 
         else:
             TS_func = interpolate.get_potential_aims(self.phonon_filepath, "TS")

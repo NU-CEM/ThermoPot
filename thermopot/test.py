@@ -1,4 +1,5 @@
 import materials, calculations, interpolate
+from phonopy import qha
 
 BaZrS3_calc = calculations.QHACalculation(
     filepath="/Users/w21013885/QHA_code/ThermoPot/BaZrS3/raw_aims_files/ternary/BaZrS3_Pnma/hse06/aims.out",
@@ -32,3 +33,4 @@ print(
         units="eV",
     )
 )
+#BaZrS3_qha = qha.core.QHA()
