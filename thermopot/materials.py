@@ -238,16 +238,28 @@ class Solid(Material):
             mu (float/ndarray): Gibbs Free Energy of one formula unit of solid expressed as floats in a m x n Numpy array where T, P are orthogonal 2D arrays of length m and n
         """
         if self._qha_calculation is not False:
-            qha = PhonopyQHA(volumes = self._qha_calculation.volumes, electronic_energies = self._qha_calculation.energies, 
-                temperatures=self._qha_calculation.temperatures, free_energy = self._qha_calculation.fe, cv=self._qha_calculation.cv,
-                entropy=self._qha_calculation.entropy, pressure = P, t_max=None, verbose=False)
-            mu_eV_func = interp1d(self._qha_calculation.temperatures,qha._qha._equiv_energies, kind="linear")
+            qha = PhonopyQHA(
+                volumes=self._qha_calculation.volumes,
+                electronic_energies=self._qha_calculation.energies,
+                temperatures=self._qha_calculation.temperatures,
+                free_energy=self._qha_calculation.fe,
+                cv=self._qha_calculation.cv,
+                entropy=self._qha_calculation.entropy,
+                pressure=P,
+                t_max=None,
+                verbose=False,
+            )
+            mu_eV_func = interp1d(
+                self._qha_calculation.temperatures,
+                qha._qha._equiv_energies,
+                kind="linear",
+            )
             mu_eV = mu_eV_func(T)
             print("this is temperature qha")
             print(self._qha_calculation.temperatures)
             print("this is potential qha")
             print(qha._qha._equiv_energies)
-            #if T in self._qha_calculation.temperatures:
+            # if T in self._qha_calculation.temperatures:
             #    index = self._qha_calculation.temperatures.index(T)
             #    mu_eV = qha._qha._equiv_energies[index] / self.fu_cell
             #    print(mu_eV)
@@ -259,7 +271,7 @@ class Solid(Material):
             H = self.H(T, P, xc=xc)
             mu_eV = H - (TS_func(T)) / self.fu_cell
             print(mu_eV)
-            #print(mu_eV.shape)
+            # print(mu_eV.shape)
             print("harmonic block")
 
         if units == "eV":

@@ -53,11 +53,11 @@ print(
         units="eV",
     )
 )
-#T = np.linspace(100,1300,10) # K
-#P = np.array( np.logspace(-3,6,100),ndmin=2).transpose() # Pa
-#print(T.shape)
-#reaction_214 = reactions.Reaction({BaZrS3:2},{Ba2ZrS4:1,ZrS2:1}, temperature=T, pressure=P, fu=2)
-#print(vars(reaction_214))
-#GFE_214 = reaction_214.Dmu(units="kJ",xc='hse06')
-#GFE_214.plot_TvsP(scale_range=[17,15])
-#GFE_214.potential[0][-1]
+# T = np.linspace(100,1300,10) # K
+# P = np.array( np.logspace(-3,6,100),ndmin=2).transpose() # Pa
+# print(T.shape)
+# reaction_214 = reactions.Reaction({BaZrS3:2},{Ba2ZrS4:1,ZrS2:1}, temperature=T, pressure=P, fu=2)
+# print(vars(reaction_214))
+# GFE_214 = reaction_214.Dmu(units="kJ",xc='hse06')
+# GFE_214.plot_TvsP(scale_range=[17,15])
+# GFE_214.potential[0][-1]
