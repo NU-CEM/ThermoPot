@@ -7,6 +7,7 @@ import numpy as np
 from scipy import constants
 from thermopot import interpolate
 from phonopy import PhonopyQHA
+from scipy.interpolate import interp1d
 
 import os  # get correct path for datafiles when called from another directory
 
@@ -94,14 +95,6 @@ class Solid(Material):
             self.volume = qha_calculation.volumes
             self.num_atoms = qha_calculation.num_atoms
 
-
-
-            qha = PhonopyQHA(volumes = qha_calculation.volumes, electronic_energies = qha_calculation.energies, 
-                temperatures=qha_calculation.temperatures, free_energy = qha_calculation.fe, cv=qha_calculation.cv,
-                entropy=qha_calculation.entropy, t_max=1500, verbose=False)
-            
-        
-
         elif calculation is not False:
             if type(calculation) is not list:
                 Material.__init__(
@@ -120,7 +113,6 @@ class Solid(Material):
 
         self.fu_cell = self.num_atoms / self.N
         self.phonon_filepath = materials_directory + phonon_filepath
-        self.qha_vars = qha
 
     def U(self, T, xc="pbesol", units="eV"):
         """
@@ -220,7 +212,7 @@ class Solid(Material):
                 * 0.001
             )
 
-    def mu(self, T, P, V_T_filepath, xc="pbesol", units="eV"):
+    def mu(self, T, P, xc="pbesol", units="eV"):
         """
         Calculates the Gibbs Free Energy (mu = U + PV - TS) of one formula unit of solid.
 
@@ -246,15 +238,29 @@ class Solid(Material):
             mu (float/ndarray): Gibbs Free Energy of one formula unit of solid expressed as floats in a m x n Numpy array where T, P are orthogonal 2D arrays of length m and n
         """
         if self._qha_calculation is not False:
-            print(qha._qha._temperatures)
-            #print(qha._qha._equiv_energies)
-            #print(len(qha._qha._temperatures))
-            #print(len(qha._qha._equiv_energies))
+            qha = PhonopyQHA(volumes = self._qha_calculation.volumes, electronic_energies = self._qha_calculation.energies, 
+                temperatures=self._qha_calculation.temperatures, free_energy = self._qha_calculation.fe, cv=self._qha_calculation.cv,
+                entropy=self._qha_calculation.entropy, pressure = P, t_max=None, verbose=False)
+            mu_eV_func = interp1d(self._qha_calculation.temperatures,qha._qha._equiv_energies, kind="linear")
+            mu_eV = mu_eV_func(T)
+            print("this is temperature qha")
+            print(self._qha_calculation.temperatures)
+            print("this is potential qha")
+            print(qha._qha._equiv_energies)
+            #if T in self._qha_calculation.temperatures:
+            #    index = self._qha_calculation.temperatures.index(T)
+            #    mu_eV = qha._qha._equiv_energies[index] / self.fu_cell
+            #    print(mu_eV)
+            #    print("first block")
 
         else:
             TS_func = interpolate.get_potential_aims(self.phonon_filepath, "TS")
+            print(TS_func)
             H = self.H(T, P, xc=xc)
             mu_eV = H - (TS_func(T)) / self.fu_cell
+            print(mu_eV)
+            #print(mu_eV.shape)
+            print("harmonic block")
 
         if units == "eV":
             return mu_eV

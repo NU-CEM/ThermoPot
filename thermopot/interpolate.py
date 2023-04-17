@@ -43,20 +43,10 @@ def get_potential_aims(file, property):
     else:
         raise RuntimeError("Property not found")
     thefunction = interp1d(T, potential, kind="linear")
-
-    return thefunction
-
-
-def get_potential_F_V(volumes, helmholtz_free_energies):
-    thefunction = interp1d(volumes, helmholtz_free_energies, kind="linear")
-    return thefunction
-
-
-def get_potential_V_T(filepath):
-    data = genfromtxt(filepath)
-    temperatures = data[:, 0]
-    volumes = data[:, 1]
-    thefunction = interp1d(temperatures, volumes, kind="linear")
+    print("this is temperature")
+    print(T)
+    print("this is potential")
+    print(potential)
     return thefunction
 
 

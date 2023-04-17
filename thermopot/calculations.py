@@ -213,8 +213,9 @@ class QHACalculation:
 
     def read_entropy(self):
         entropy = []
-
-        for index in range(1,112):
+        with open(self.ev_filepath) as ev_file:
+            self.num_thermal_files = len(ev_file.readlines())
+        for index in range(1,self.num_thermal_files+1):
             filename = "../BaZrS3/qha_output/BaZrS3_Pnma/thermal_properties_%d.yaml" % index
             thermal_properties = yaml.load(open(filename), Loader=Loader)["thermal_properties"]
             entropy.append([v["entropy"] for v in thermal_properties])
@@ -223,8 +224,9 @@ class QHACalculation:
 
     def read_heat_capacity(self):
         cv = []
-
-        for index in range(1,112):
+        with open(self.ev_filepath) as ev_file:
+            self.num_thermal_files = len(ev_file.readlines())
+        for index in range(1,self.num_thermal_files+1):
             filename = "../BaZrS3/qha_output/BaZrS3_Pnma/thermal_properties_%d.yaml" % index
             thermal_properties = yaml.load(open(filename), Loader=Loader)["thermal_properties"]
             cv.append([v["heat_capacity"] for v in thermal_properties])
@@ -233,8 +235,9 @@ class QHACalculation:
         
     def read_free_energy(self):
         fe = []
-
-        for index in range(1,112):
+        with open(self.ev_filepath) as ev_file:
+            self.num_thermal_files = len(ev_file.readlines())
+        for index in range(1,self.num_thermal_files+1):
             filename = "../BaZrS3/qha_output/BaZrS3_Pnma/thermal_properties_%d.yaml" % index
             thermal_properties = yaml.load(open(filename), Loader=Loader)["thermal_properties"]
             fe.append([v["free_energy"] for v in thermal_properties])
@@ -243,8 +246,9 @@ class QHACalculation:
 
     def read_temperature(self):
         temperatures = []
-
-        for index in range(1,112):
+        with open(self.ev_filepath) as ev_file:
+            self.num_thermal_files = len(ev_file.readlines())
+        for index in range(1,self.num_thermal_files+1):
             filename = "../BaZrS3/qha_output/BaZrS3_Pnma/thermal_properties_%d.yaml" % index
             thermal_properties = yaml.load(open(filename), Loader=Loader)["thermal_properties"]
             temperatures = [v["temperature"] for v in thermal_properties]
