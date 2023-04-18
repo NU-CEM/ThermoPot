@@ -77,6 +77,9 @@ class Reaction:
 
         reactants_energy, products_energy = 0, 0
         for material, fu in self.reactants.items():
+            print(material)
+            print(fu)
+            print(material.mu(T, P, xc=xc, units=units))
             reactants_energy += material.mu(T, P, xc=xc, units=units) * fu
         for material, fu in self.products.items():
             products_energy += material.mu(T, P, xc=xc, units=units) * fu

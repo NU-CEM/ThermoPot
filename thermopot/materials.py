@@ -254,25 +254,13 @@ class Solid(Material):
                 qha._qha._equiv_energies,
                 kind="linear",
             )
-            mu_eV = mu_eV_func(T)
-            print("this is temperature qha")
-            print(self._qha_calculation.temperatures)
-            print("this is potential qha")
-            print(qha._qha._equiv_energies)
-            # if T in self._qha_calculation.temperatures:
-            #    index = self._qha_calculation.temperatures.index(T)
-            #    mu_eV = qha._qha._equiv_energies[index] / self.fu_cell
-            #    print(mu_eV)
-            #    print("first block")
+            mu_eV = mu_eV_func(T) / self.fu_cell
 
         else:
             TS_func = interpolate.get_potential_aims(self.phonon_filepath, "TS")
             print(TS_func)
             H = self.H(T, P, xc=xc)
             mu_eV = H - (TS_func(T)) / self.fu_cell
-            print(mu_eV)
-            # print(mu_eV.shape)
-            print("harmonic block")
 
         if units == "eV":
             return mu_eV

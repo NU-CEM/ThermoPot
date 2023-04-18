@@ -2,18 +2,18 @@ from thermopot import materials, calculations, reactions
 import numpy as np
 
 BaZrS3_calc = calculations.QHACalculation(
-    filepath="/Users/w21013885/QHA_code/ThermoPot/BaZrS3/raw_aims_files/ternary/BaZrS3_Pnma/hse06/aims.out",
-    ev_filepath="/Users/w21013885/QHA_code/ThermoPot/BaZrS3/qha_output/BaZrS3_Pnma/e-v.dat",
+    filepath="../BaZrS3/raw_aims_files/ternary/BaZrS3_Pnma/hse06/aims.out",
+    ev_filepath="../BaZrS3/qha_output/BaZrS3_Pnma/e-v.dat",
 )
 
 Ba2ZrS4_calc = calculations.QHACalculation(
-    filepath="/Users/w21013885/QHA_code/ThermoPot/BaZrS3/raw_aims_files/ternary/Ba2ZrS4_I4_mmm/hse06/aims.out",
-    ev_filepath="/Users/w21013885/QHA_code/ThermoPot/BaZrS3/qha_output/Ba2ZrS4_I4_mmm/e-v.dat",
+    filepath="../BaZrS3/raw_aims_files/ternary/Ba2ZrS4_I4_mmm/hse06/aims.out",
+    ev_filepath="../BaZrS3/qha_output/Ba2ZrS4_I4_mmm/e-v.dat",
 )
 
 ZrS2_calc = calculations.QHACalculation(
-    filepath="/Users/w21013885/QHA_code/ThermoPot/BaZrS3/raw_aims_files/binary/ZrS2_P-3m1/hse06/aims.out",
-    ev_filepath="/Users/w21013885/QHA_code/ThermoPot/BaZrS3/qha_output/ZrS2_P-3m1/e-v.dat",
+    filepath="../BaZrS3/raw_aims_files/binary/ZrS2_P-3m1/hse06/aims.out",
+    ev_filepath="../BaZrS3/qha_output/ZrS2_P-3m1/e-v.dat",
 )
 
 BaZrS3 = materials.Solid(
@@ -37,27 +37,28 @@ ZrS2 = materials.Solid(
     qha_calculation=ZrS2_calc,
 )
 
-print(
-    BaZrS3.mu(
-        P=1,
-        T=300,
-        xc="hse06",
-        units="eV",
-    )
-)
+#print(
+#    BaZrS3.mu(
+#        P=1,
+#        T=300,
+#        xc="hse06",
+#        units="eV",
+#    )
+#)
+T = np.linspace(100,1300,10) # K
+P = np.array( np.logspace(-3,6,100),ndmin=2).transpose() # Pa
 print(
     Ba2ZrS4.mu(
-        P=1,
-        T=300,
+        P=P,
+        T=T,
         xc="hse06",
         units="eV",
     )
 )
-# T = np.linspace(100,1300,10) # K
-# P = np.array( np.logspace(-3,6,100),ndmin=2).transpose() # Pa
-# print(T.shape)
-# reaction_214 = reactions.Reaction({BaZrS3:2},{Ba2ZrS4:1,ZrS2:1}, temperature=T, pressure=P, fu=2)
+
+#print(T.shape)
+#reaction_214 = reactions.Reaction({BaZrS3:2},{Ba2ZrS4:1,ZrS2:1}, temperature=T, pressure=P, fu=2)
 # print(vars(reaction_214))
-# GFE_214 = reaction_214.Dmu(units="kJ",xc='hse06')
+#GFE_214 = reaction_214.Dmu(units="kJ",xc='hse06')
 # GFE_214.plot_TvsP(scale_range=[17,15])
 # GFE_214.potential[0][-1]

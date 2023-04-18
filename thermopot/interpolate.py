@@ -43,10 +43,6 @@ def get_potential_aims(file, property):
     else:
         raise RuntimeError("Property not found")
     thefunction = interp1d(T, potential, kind="linear")
-    print("this is temperature")
-    print(T)
-    print("this is potential")
-    print(potential)
     return thefunction
 
 
