@@ -22,7 +22,7 @@ class Potentials:
         log_scale=True,
         sulphur_gas=False,
         gas_phase="S2",
-        melting_point=False
+        melting_point=False,
     ):
         """
         T is an array e.g. np.linspace(100, 1500, 100)  # K
@@ -75,62 +75,91 @@ class Potentials:
             potential / (len(material_labels) - 1),
             cmap=colormap,
             shading="auto",
-            zorder=1
+            zorder=1,
         )
-        
 
         if sulphur_gas:
-            T_tr_poly = [8.492e-01, 2.662e+00, 3.849e+01, 5.336e+02]
-            #print(self.T)
+            T_tr_poly = [8.492e-01, 2.662e00, 3.849e01, 5.336e02]
+            # print(self.T)
             pressure = self.P
 
             def T_tr(P):
                 return np.polyval(T_tr_poly, np.log10(P))
-            
+
             x = T_tr(pressure).flatten()
-            
-            plt.plot(x,y_values,'k--', linewidth=3)
-            plt.xlim(min(x_values),max(x_values))
+
+            plt.plot(x, y_values, "k--", linewidth=3)
+            plt.xlim(min(x_values), max(x_values))
             if gas_phase == "S2":
-                plt.fill_between(x,y_values,10000000, facecolor="w",alpha=1,zorder=4,hatch="///",linewidth=0,edgecolor="0.8")
-                x1 = [1,419.1596]
-                y1= [9999900,9999900]
-                y2 = [0.0001,0.0001]
-                plt.fill_between(x1, y1, y2, facecolor="w",alpha=1,zorder=4,hatch="///",linewidth=0,edgecolor="0.8")
-                #plt.fill_between(x1, y1, y2, facecolor="none",edgecolor='k',hatch='/',zorder=5)
-            if gas_phase == "S8": 
-                plt.fill_between(x,y_values,0.001, facecolor="w",alpha=1,zorder=4,hatch="///",linewidth=0,edgecolor="0.8")
+                plt.fill_between(
+                    x,
+                    y_values,
+                    10000000,
+                    facecolor="w",
+                    alpha=1,
+                    zorder=4,
+                    hatch="///",
+                    linewidth=0,
+                    edgecolor="0.8",
+                )
+                x1 = [1, 419.1596]
+                y1 = [9999900, 9999900]
+                y2 = [0.0001, 0.0001]
+                plt.fill_between(
+                    x1,
+                    y1,
+                    y2,
+                    facecolor="w",
+                    alpha=1,
+                    zorder=4,
+                    hatch="///",
+                    linewidth=0,
+                    edgecolor="0.8",
+                )
+                # plt.fill_between(x1, y1, y2, facecolor="none",edgecolor='k',hatch='/',zorder=5)
+            if gas_phase == "S8":
+                plt.fill_between(
+                    x,
+                    y_values,
+                    0.001,
+                    facecolor="w",
+                    alpha=1,
+                    zorder=4,
+                    hatch="///",
+                    linewidth=0,
+                    edgecolor="0.8",
+                )
 
-            #resolution = 1000
-            #temp = np.linspace(self.T[0], self.T[-1], resolution)
-            #plt.plot(T_tr(y_values),(y_values),'k--', linewidth=3)
+            # resolution = 1000
+            # temp = np.linspace(self.T[0], self.T[-1], resolution)
+            # plt.plot(T_tr(y_values),(y_values),'k--', linewidth=3)
 
-#        if sulphur_gas:
-#            T_tr_poly = [8.492e-01, 2.662e+00, 3.849e+01, 5.336e+02]
-#
-#            def T_tr(P):
-#                return np.polyval(T_tr_poly, np.log10(self.P.flatten()))
-#
-#            resolution = 1000
-#            temp = np.linspace(self.T[0], self.T[-1], resolution)
-#            plt.plot(T_tr(y_values),(y_values),'k--', linewidth=3)
-#        # TODO: sort the colour map out so consistent with grid. Now ranges from 0 to 1
+        #        if sulphur_gas:
+        #            T_tr_poly = [8.492e-01, 2.662e+00, 3.849e+01, 5.336e+02]
+        #
+        #            def T_tr(P):
+        #                return np.polyval(T_tr_poly, np.log10(self.P.flatten()))
+        #
+        #            resolution = 1000
+        #            temp = np.linspace(self.T[0], self.T[-1], resolution)
+        #            plt.plot(T_tr(y_values),(y_values),'k--', linewidth=3)
+        #        # TODO: sort the colour map out so consistent with grid. Now ranges from 0 to 1
 
         # Set borders in the interval [0, 1]
-        #bound = np.linspace(0, 1, len(material_labels))
+        # bound = np.linspace(0, 1, len(material_labels))
 
         # AT THE MOMENT THIS IS BROKEN!!!!
-        #plt.legend([mpatches.Patch(color=colormap(i)) for i in bound],
+        # plt.legend([mpatches.Patch(color=colormap(i)) for i in bound],
         #    ["{:s}".format(material_labels[i]) for i in range(len(material_labels))],
-        #)
+        # )
 
         plt.xlabel("Temperature ({0})".format(x_unitlabel))
         plt.ylabel("Pressure ({0})".format(P_units))
-        plt.ylim([0.001,10000000])
-        plt.xlim([0,1000])
+        plt.ylim([0.001, 10000000])
+        plt.xlim([0, 1000])
         if melting_point == True:
-            plt.axvline(x=554,zorder=20,color='k')
-        
+            plt.axvline(x=554, zorder=20, color="k")
+
         if log_scale:
             ax.set_yscale("log")
 
