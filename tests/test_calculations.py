@@ -11,3 +11,6 @@ def test_get_energy(BaS_hybrid_calculation):
 
 def test_get_xc(BaS_hybrid_calculation):
     assert math.isclose(BaS_hybrid_calculation.xc, "hse06")
+
+def test_get_num_atoms(BaS_hybrid_calculation):
+    assert math.isclose(BaS_hybrid_calculation.num_atoms, 2)

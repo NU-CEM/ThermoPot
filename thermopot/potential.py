@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib as mpl
-
+import numpy as np
 
 class Potential:
     def __init__(self, potential, T, P):
@@ -12,11 +12,13 @@ class Potential:
         self,
         potential_label="$\Delta G_f$ / kJ mol$^{-1}$",
         scale_range=[-600, 0],
-        filename=False,
+        filename='test.png',
         precision="%d",
         T_units="K",
         P_units="Pa",
         log_scale=True,
+        sulphur_gas=False,
+        gas_phase="S2"
     ):
         """
         T is an array e.g. np.linspace(100, 1500, 100)  # K
@@ -40,7 +42,7 @@ class Potential:
             x_unitlabel = "K"
         elif T_units == "C":
             x_values = self.T - 273.15
-            x_unitlabel = "$^\circ$ C"
+            x_unitlabel = "$\degree$C"
         else:
             raise ValueError("Invalid temperature unit: {0}".format(T_units))
 
@@ -61,9 +63,6 @@ class Potential:
         ax = fig.add_subplot(1, 1, 1)
         colormap = plt.get_cmap("summer")
 
-        a = plt.contour(
-            x_values, y_values, self.potential, 10, linewidths=1, colors="k"
-        )
         plt.pcolormesh(
             x_values,
             y_values,
@@ -72,16 +71,43 @@ class Potential:
             vmin=scale_range[0],
             vmax=scale_range[1],
             shading="auto",
+            zorder=1
         )
         colours = plt.colorbar()
         colours.set_label(potential_label, labelpad=20)
 
         if log_scale:
             ax.set_yscale("log")
-        plt.clabel(a, fmt=precision)
+        
 
-        plt.xlabel("Temperature / {0}".format(x_unitlabel))
-        plt.ylabel("Pressure / {0}".format(P_units))
+        plt.xlabel("Temperature ({0})".format(x_unitlabel))
+        plt.ylabel("Pressure ({0})".format(P_units))
+
+        if sulphur_gas:
+            T_tr_poly = [8.492e-01, 2.662e+00, 3.849e+01, 5.336e+02]
+            #print(self.T)
+            pressure = self.P
+
+            def T_tr(P):
+                return np.polyval(T_tr_poly, np.log10(P))
+            
+            x = T_tr(pressure).flatten()
+            
+            plt.plot(x,y_values,'k--', linewidth=3)
+            plt.xlim(min(x_values),max(x_values))
+            if gas_phase == "S2":
+                plt.fill_between(x,y_values,10000000, facecolor="w",alpha=1,zorder=4,hatch="///",linewidth=0,edgecolor="0.8")
+                x1 = [1,419.1596]
+                y1= [10000000,10000000]
+                y2 = [0.001,0.001]
+                plt.fill_between(x1, y1, y2, facecolor="w",alpha=1,zorder=4,hatch="///",linewidth=0,edgecolor="0.8")
+                #plt.fill_between(x1, y1, y2, facecolor="none",edgecolor='k',hatch='/',zorder=5)
+            if gas_phase == "S8": 
+                plt.fill_between(x,y_values,0.001, facecolor="w",alpha=1,zorder=4,hatch="///",linewidth=0,edgecolor="0.8")
+
+        a = plt.contour(
+            x_values, (y_values), self.potential, 10, linewidths=1, colors="k",zorder=2)
+        plt.clabel(a, fmt=precision,zorder=3)
 
         if filename:
             plt.savefig(filename, dpi=200)

@@ -258,7 +258,6 @@ class Solid(Material):
 
         else:
             TS_func = interpolate.get_potential_aims(self.phonon_filepath, "TS")
-            print(TS_func)
             H = self.H(T, P, xc=xc)
             mu_eV = H - (TS_func(T)) / self.fu_cell
 
