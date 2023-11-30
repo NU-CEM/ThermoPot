@@ -93,6 +93,9 @@ class Potential:
 
             x = T_tr(pressure).flatten()
 
+            if T_units == "C":
+                x = self.x - 273.15
+
             plt.plot(x, y_values, "k--", linewidth=3)
             plt.xlim(min(x_values), max(x_values))
             if gas_phase == "S2":
