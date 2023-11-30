@@ -110,7 +110,10 @@ class Potential:
                     linewidth=0,
                     edgecolor="0.8",
                 )
-                x1 = [1, 419.1596- 273.15]  # LW: I have shifted this without fully understanding the logic of x1,y1,y2...
+                x1 = [
+                    1,
+                    419.1596 - 273.15,
+                ]  # LW: I have shifted this without fully understanding the logic of x1,y1,y2...
                 y1 = [10000000, 10000000]
                 y2 = [0.001, 0.001]
                 plt.fill_between(
