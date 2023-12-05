@@ -13,7 +13,7 @@ class Potential:
         self,
         potential_label="$\Delta G_f$ / kJ mol$^{-1}$",
         scale_range=[-600, 0],
-        filename="test.png",
+        filename=None,
         precision="%d",
         T_units="K",
         P_units="Pa",
