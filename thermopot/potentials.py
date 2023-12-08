@@ -38,7 +38,7 @@ class Potentials:
 
         mpl.rcParams["font.family"] = "serif"
         mpl.rcParams["font.serif"] = "Times New Roman"
-        mpl.rcParams["font.size"] = 16
+        mpl.rcParams["font.size"] = 20
 
         # Unit conversions (all calculations are in SI units, conversion needed for plots)
 
@@ -66,7 +66,7 @@ class Potentials:
 
         fig = plt.figure()
         ax = fig.add_subplot(1, 1, 1)
-        colormap = plt.get_cmap("summer")
+        colormap = plt.get_cmap("GnBu")
 
         potential = self.find_potential_minimum()
         plt.pcolormesh(
@@ -82,19 +82,22 @@ class Potentials:
             T_tr_poly = [8.492e-01, 2.662e00, 3.849e01, 5.336e02]
             # print(self.T)
             pressure = self.P
+            
 
             def T_tr(P):
                 return np.polyval(T_tr_poly, np.log10(P))
 
             x = T_tr(pressure).flatten()
+            if T_units == "C":
+                x = x - 273.15
 
-            plt.plot(x, y_values, "k--", linewidth=3)
+            plt.plot(x, y_values, "k--", linewidth=3,)
             plt.xlim(min(x_values), max(x_values))
             if gas_phase == "S2":
                 plt.fill_between(
                     x,
                     y_values,
-                    10000000,
+                    9500000,
                     facecolor="w",
                     alpha=1,
                     zorder=4,
@@ -102,8 +105,8 @@ class Potentials:
                     linewidth=0,
                     edgecolor="0.8",
                 )
-                x1 = [1, 419.1596]
-                y1 = [9999900, 9999900]
+                x1 = [3, 419.1596- 273.15]
+                y1 = [9500000, 9500000]
                 y2 = [0.0001, 0.0001]
                 plt.fill_between(
                     x1,
@@ -129,6 +132,26 @@ class Potentials:
                     linewidth=0,
                     edgecolor="0.8",
                 )
+                x1 = [
+                    950,
+                    1000,
+                ]  # LW: I have shifted this without fully understanding the logic of x1,y1,y2...
+                y1 = [9500000, 9500000]
+                y2 = [0.001, 0.001]
+                plt.fill_between(
+                    x1,
+                    y1,
+                    y2,
+                    facecolor="w",
+                    alpha=1,
+                    zorder=3,
+                    hatch='///',
+                    linewidth=0,
+                    edgecolor="0.8",
+                )
+                plt.plot(x, y_values, "k--", linewidth=3)
+                plt.xlim(min(x_values), max(x_values))
+                plt.ylim(min(y_values), max(y_values))
 
             # resolution = 1000
             # temp = np.linspace(self.T[0], self.T[-1], resolution)
@@ -155,8 +178,8 @@ class Potentials:
 
         plt.xlabel("Temperature ({0})".format(x_unitlabel))
         plt.ylabel("Pressure ({0})".format(P_units))
-        plt.ylim([0.001, 10000000])
-        plt.xlim([0, 1000])
+        #plt.ylim([0.001, 10000000])
+        #plt.xlim([0, 1000])
         if melting_point == True:
             plt.axvline(x=554, zorder=20, color="k")
 

@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib as mpl
+import matplotlib
 import numpy as np
 
 
@@ -11,9 +12,9 @@ class Potential:
 
     def plot_TvsP(
         self,
-        potential_label="$\Delta G_f$ / kJ mol$^{-1}$",
+        potential_label="$\Delta G_f$ (kJ mol$^{-1})$",
         scale_range=[-600, 0],
-        filename="test.png",
+        filename=None,
         precision="%d",
         T_units="K",
         P_units="Pa",
@@ -35,7 +36,7 @@ class Potential:
 
         mpl.rcParams["font.family"] = "serif"
         mpl.rcParams["font.serif"] = "Times New Roman"
-        mpl.rcParams["font.size"] = 16
+        mpl.rcParams["font.size"] = 20
 
         # Unit conversions (all calculations are in SI units, conversion needed for plots)
         if T_units == "K":
@@ -62,13 +63,13 @@ class Potential:
 
         fig = plt.figure()
         ax = fig.add_subplot(1, 1, 1)
-        colormap = plt.get_cmap("summer")
+        colormap = plt.get_cmap("GnBu")
 
         plt.pcolormesh(
             x_values,
             y_values,
             self.potential,
-            cmap=colormap,
+            cmap=colormap.reversed(),
             vmin=scale_range[0],
             vmax=scale_range[1],
             shading="auto",
@@ -96,13 +97,12 @@ class Potential:
             if T_units == "C":
                 x = x - 273.15
 
-            plt.plot(x, y_values, "k--", linewidth=3)
-            plt.xlim(min(x_values), max(x_values))
+            
             if gas_phase == "S2":
                 plt.fill_between(
                     x,
                     y_values,
-                    10000000,
+                    9500000,
                     facecolor="w",
                     alpha=1,
                     zorder=4,
@@ -111,10 +111,10 @@ class Potential:
                     edgecolor="0.8",
                 )
                 x1 = [
-                    1,
-                    419.1596 - 273.15,
+                    3,
+                    419.15 - 265.15,
                 ]  # LW: I have shifted this without fully understanding the logic of x1,y1,y2...
-                y1 = [10000000, 10000000]
+                y1 = [9500000, 9500000]
                 y2 = [0.001, 0.001]
                 plt.fill_between(
                     x1,
@@ -127,26 +127,70 @@ class Potential:
                     linewidth=0,
                     edgecolor="0.8",
                 )
+                plt.plot(x, y_values, "k--", linewidth=3)
+                plt.xlim(min(x_values), max(x_values))
+                plt.ylim(min(y_values), max(y_values))
                 # plt.fill_between(x1, y1, y2, facecolor="none",edgecolor='k',hatch='/',zorder=5)
-            if gas_phase == "S8":
+            elif gas_phase == "S8":
                 plt.fill_between(
                     x,
                     y_values,
                     0.001,
                     facecolor="w",
                     alpha=1,
-                    zorder=4,
+                    zorder=5,
                     hatch="///",
                     linewidth=0,
                     edgecolor="0.8",
                 )
+                x1 = [
+                    950,
+                    1000,
+                ]  # LW: I have shifted this without fully understanding the logic of x1,y1,y2...
+                y1 = [9500000, 9500000]
+                y2 = [0.001, 0.001]
+                plt.fill_between(
+                    x1,
+                    y1,
+                    y2,
+                    facecolor="w",
+                    alpha=1,
+                    zorder=3,
+                    hatch='///',
+                    linewidth=0,
+                    edgecolor="0.8",
+                )
+                plt.plot(x, y_values, "k--", linewidth=3)
+                plt.xlim(min(x_values), max(x_values))
+                plt.ylim(min(y_values), max(y_values))
+            elif gas_phase == "full":
+                x1 = [
+                    3,
+                    1000,
+                ]  # LW: I have shifted this without fully understanding the logic of x1,y1,y2...
+                y1 = [9500000, 9500000]
+                y2 = [0.001,0.001]
+                plt.fill_between(
+                    x1,
+                    y1,
+                    y2,
+                    facecolor="w",
+                    alpha=1,
+                    zorder=4,
+                    linewidth=0,
+                    edgecolor="0.8",
+                )
+                plt.plot(x, y_values, color="k", linestyle='--', dashes=(7.6, 3.5), linewidth=1.5,zorder=5)
+                plt.xlim(min(x_values), max(x_values))
+                plt.ylim(min(y_values), max(y_values))
 
         a = plt.contour(
-            x_values, (y_values), self.potential, 10, linewidths=1, colors="k", zorder=2
-        )
-        plt.clabel(a, fmt=precision, zorder=3)
+            x_values, (y_values), self.potential, linewidths=0.7, colors="k", zorder=2,
+            )
+        plt.clabel(a, fmt=precision, zorder=3,fontsize=17)
+
 
         if filename:
-            plt.savefig(filename, dpi=200)
+            plt.savefig(filename, dpi=200, bbox_inches = 'tight')
         else:
             return plt
