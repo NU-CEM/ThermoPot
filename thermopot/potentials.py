@@ -12,6 +12,7 @@ class Potentials:
         self.P = self.potentials[0].P
 
     # TODO: check that all the potentials are plottable over T/P range
+    # TODO: check that all the potentials are calculated for the same T/P range.
 
     def plot_TvsP(
         self,
@@ -78,79 +79,6 @@ class Potentials:
             zorder=1,
         )
 
-        if sulphur_gas:
-            T_tr_poly = [8.492e-01, 2.662e00, 3.849e01, 5.336e02]
-            # print(self.T)
-            pressure = self.P
-
-            def T_tr(P):
-                return np.polyval(T_tr_poly, np.log10(P))
-
-            x = T_tr(pressure).flatten()
-
-            if T_units == "C":
-                x = x - 273.15
-
-            plt.plot(x, y_values, "k--", linewidth=3)
-            plt.xlim(min(x_values), max(x_values))
-            if gas_phase == "S2":
-                plt.fill_between(
-                    x,
-                    y_values,
-                    10000000,
-                    facecolor="w",
-                    alpha=1,
-                    zorder=4,
-                    hatch="///",
-                    linewidth=0,
-                    edgecolor="0.8",
-                )
-                x1 = [1, 419.1596 - 273.15]
-                y1 = [9999900, 9999900]
-                y2 = [0.0001, 0.0001]
-                plt.fill_between(
-                    x1,
-                    y1,
-                    y2,
-                    facecolor="w",
-                    alpha=1,
-                    zorder=4,
-                    hatch="///",
-                    linewidth=0,
-                    edgecolor="0.8",
-                )
-                # plt.fill_between(x1, y1, y2, facecolor="none",edgecolor='k',hatch='/',zorder=5)
-            if gas_phase == "S8":
-                plt.fill_between(
-                    x,
-                    y_values,
-                    0.001,
-                    facecolor="w",
-                    alpha=1,
-                    zorder=4,
-                    hatch="///",
-                    linewidth=0,
-                    edgecolor="0.8",
-                )
-
-            # resolution = 1000
-            # temp = np.linspace(self.T[0], self.T[-1], resolution)
-            # plt.plot(T_tr(y_values),(y_values),'k--', linewidth=3)
-
-        #        if sulphur_gas:
-        #            T_tr_poly = [8.492e-01, 2.662e+00, 3.849e+01, 5.336e+02]
-        #
-        #            def T_tr(P):
-        #                return np.polyval(T_tr_poly, np.log10(self.P.flatten()))
-        #
-        #            resolution = 1000
-        #            temp = np.linspace(self.T[0], self.T[-1], resolution)
-        #            plt.plot(T_tr(y_values),(y_values),'k--', linewidth=3)
-        #        # TODO: sort the colour map out so consistent with grid. Now ranges from 0 to 1
-
-        # Set borders in the interval [0, 1]
-        # bound = np.linspace(0, 1, len(material_labels))
-
         # AT THE MOMENT THIS IS BROKEN!!!!
         # plt.legend([mpatches.Patch(color=colormap(i)) for i in bound],
         #    ["{:s}".format(material_labels[i]) for i in range(len(material_labels))],
@@ -158,10 +86,6 @@ class Potentials:
 
         plt.xlabel("Temperature ({0})".format(x_unitlabel))
         plt.ylabel("Pressure ({0})".format(P_units))
-        plt.ylim([0.001, 10000000])
-        plt.xlim([0, 1000])
-        if melting_point == True:
-            plt.axvline(x=554, zorder=20, color="k")
 
         if log_scale:
             ax.set_yscale("log")
@@ -188,3 +112,58 @@ class Potentials:
             minimum_potential[potential.potential == minimum_potential] = i
 
         return minimum_potential
+
+    def polynomial_intersection(
+        self,
+        pressures,
+        order=4,
+        pressure_for_fitting
+        ):
+        """
+        Conducts polynomial fittings to two potential datasets.
+        Calculates the temperature(s) at which the two polynomial fits intersects for given pressure(s).
+        pressure is given in pascals.
+        order is the order of the polynomial fitting. It defaults to 4.
+        pressure_for_fitting is a float and is given in pascals. It defaults to one bar.
+
+        If the calculated potential is not available at this pressure then an error is raised.
+
+        This broadly follows code published by Adam Jackson: 
+        https://github.com/WMD-group/sulfur-model/blob/master/parameterisation.ipynb
+        """
+
+        if len(self.potentials) != 2:
+            except: "this method can only be called for a Potentials object storing two potentials"
+
+        # generate polynomial fits to calculated data
+        poly1 = self.potentials[0].polyfit_potential(order,pressure_for_fitting)
+        poly2 = self.potentials[1].polyfit_potential(order,pressure_for_fitting)
+        
+        # xp1 is coefficient for potential 1
+        # xp2 is coefficient for potential 2
+
+        poly_to_solve = [xp1-xp2 for xp1,xp2 in zip(poly1,poly2)
+
+        # list to store temperatures at which intersect
+        T_intersect = []
+
+        # if pressure is float then convert to iterable
+        if not hasattr(P, '__iter__'):
+            P = [P]
+        
+        for p in pressures:
+        poly_to_solve = build_poly(poly1, poly2, ratio, p)
+        roots = np.roots(poly_to_solve)
+        best_root = False
+        for root in roots:
+            if root == root.real and root > 0 and best_root == False:
+                best_root = root.real
+            elif root == root.real and root > 0 and root < best_root:
+                best_root = root.real
+        if best_root:
+            T_intersect.append(best_root)
+        else:
+            T_intersect.append('NaN')
+    return [t.real for t in T_intersect]
+
+        
