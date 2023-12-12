@@ -6,7 +6,8 @@ Each class provides methods for calculating various thermodynamic properties.
 import numpy as np
 from scipy import constants, special
 from thermopot import interpolate
-#from phonopy import PhonopyQHA
+
+# from phonopy import PhonopyQHA
 from scipy.interpolate import interp1d
 
 import os  # get correct path for datafiles when called from another directory
@@ -17,14 +18,15 @@ materials_directory = os.path.dirname(__file__)
 if materials_directory:
     materials_directory = materials_directory + "/"
 
+
 class Sulfur_model(object):
     """
     Class with parameterised model for sulfur chemical potential.
     From work of Jackson et al, https://doi.org/10.1039/C5SC03088A.
     Region of validity is 400 - 1500 K, 10^0 - 10^7 Pa.
     """
-    
-    def __init__(self,reference_energy):
+
+    def __init__(self, reference_energy):
         self.reference_energy = reference_energy
 
     def mu(self, T, P, units="eV", xc=None):
@@ -45,37 +47,61 @@ class Sulfur_model(object):
 
             mu (float/ndarray): Chemical potential of one sulfur atom expressed as floats in a m x n Numpy array where T, P are orthogonal 2D arrays of length m and n
         """
-        
-        Kb = 8.617E-5
-        
-        if np.any(T > 1500) or np.any(T < 400) or np.any(P>10**7) or np.any(P<10**0):
-            print("""WARNING!: You are using the sulfur model beyond the temperature and/or pressure range it was fitted to.
-                 Region of validity is 400 - 1500 K, 10^0 - 10^7 Pa. """)
+
+        Kb = 8.617e-5
+
+        if (
+            np.any(T > 1500)
+            or np.any(T < 400)
+            or np.any(P > 10**7)
+            or np.any(P < 10**0)
+        ):
+            print(
+                """WARNING!: You are using the sulfur model beyond the temperature and/or pressure range it was fitted to.
+                 Region of validity is 400 - 1500 K, 10^0 - 10^7 Pa. """
+            )
 
         def T_tr(P):
-            
-            return 5.077E2 + 7.272E1*np.log10(P) - 8.295*np.log10(P)**2 + 1.828*np.log10(P)**3
-        
-        def mu_S_2(T,P): 
-            
-            return 1.207 - 1.848E-3*T - 8.566E-7*T**2 + 4.001E-10*T**3 - 8.654E-14*T**4 + Kb*T*np.log(P/1E5)
-        
-        def mu_S_8(T,P): 
-            
-            return 7.62E-1 - 2.457E-3*T - 4.012E-6*T**2 + 1.808E-9*T**3 - 3.810E-13*T**4 + Kb*T*np.log(P/1E5)
-        
+            return (
+                5.077e2
+                + 7.272e1 * np.log10(P)
+                - 8.295 * np.log10(P) ** 2
+                + 1.828 * np.log10(P) ** 3
+            )
+
+        def mu_S_2(T, P):
+            return (
+                1.207
+                - 1.848e-3 * T
+                - 8.566e-7 * T**2
+                + 4.001e-10 * T**3
+                - 8.654e-14 * T**4
+                + Kb * T * np.log(P / 1e5)
+            )
+
+        def mu_S_8(T, P):
+            return (
+                7.62e-1
+                - 2.457e-3 * T
+                - 4.012e-6 * T**2
+                + 1.808e-9 * T**3
+                - 3.810e-13 * T**4
+                + Kb * T * np.log(P / 1e5)
+            )
+
         def a_p(P):
-            
-            return 1.465E-02 - 2.115E-03*np.log10(P)+6.905E-04*np.log10(P)**2
-            
+            return 1.465e-02 - 2.115e-03 * np.log10(P) + 6.905e-04 * np.log10(P) ** 2
+
         b = 10
         c = 80
         w = 100
-        
-        mu_eV =  (  0.5*(special.erfc((T-T_tr(P))/w)*mu_S_8(T,P)/8) 
-                   +0.5*((special.erf((T-T_tr(P))/w)+1)*mu_S_2(T,P)/2)  
-                   -a_p(P)*np.exp(-((T-T_tr(P)+b)**2)/(2*c**2))
-                   +self.reference_energy)
+
+        mu_eV = (
+            0.5 * (special.erfc((T - T_tr(P)) / w) * mu_S_8(T, P) / 8)
+            + 0.5 * ((special.erf((T - T_tr(P)) / w) + 1) * mu_S_2(T, P) / 2)
+            - a_p(P) * np.exp(-((T - T_tr(P) + b) ** 2) / (2 * c**2))
+            + self.reference_energy
+        )
 
         if units == "eV":
             return mu_eV
@@ -94,6 +120,7 @@ class Sulfur_model(object):
                 * constants.N_A
                 * 0.001
             )
+
 
 class Material(object):
     """

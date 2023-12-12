@@ -87,7 +87,7 @@ class Potentials:
                 return np.polyval(T_tr_poly, np.log10(P))
 
             x = T_tr(pressure).flatten()
-            
+
             if T_units == "C":
                 x = x - 273.15
 
