@@ -87,6 +87,9 @@ class Potentials:
                 return np.polyval(T_tr_poly, np.log10(P))
 
             x = T_tr(pressure).flatten()
+            
+            if T_units == "C":
+                x = x - 273.15
 
             plt.plot(x, y_values, "k--", linewidth=3)
             plt.xlim(min(x_values), max(x_values))
@@ -102,7 +105,7 @@ class Potentials:
                     linewidth=0,
                     edgecolor="0.8",
                 )
-                x1 = [1, 419.1596]
+                x1 = [1, 419.1596 - 273.15]
                 y1 = [9999900, 9999900]
                 y2 = [0.0001, 0.0001]
                 plt.fill_between(

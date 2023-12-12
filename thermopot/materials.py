@@ -4,9 +4,9 @@ Each class provides methods for calculating various thermodynamic properties.
 """
 
 import numpy as np
-from scipy import constants
+from scipy import constants, special
 from thermopot import interpolate
-from phonopy import PhonopyQHA
+#from phonopy import PhonopyQHA
 from scipy.interpolate import interp1d
 
 import os  # get correct path for datafiles when called from another directory
@@ -17,6 +17,83 @@ materials_directory = os.path.dirname(__file__)
 if materials_directory:
     materials_directory = materials_directory + "/"
 
+class Sulfur_model(object):
+    """
+    Class with parameterised model for sulfur chemical potential.
+    From work of Jackson et al, https://doi.org/10.1039/C5SC03088A.
+    Region of validity is 400 - 1500 K, 10^0 - 10^7 Pa.
+    """
+    
+    def __init__(self,reference_energy):
+        self.reference_energy = reference_energy
+
+    def mu(self, T, P, units="eV", xc=None):
+        """
+        Returns the chemical potential of one atom of Sulfur
+
+        Args:
+
+            T (float/ndarray): 1D Numpy array containing temperature data (in Kelvin) as floats, or a single temperature as a float.
+            P (float/ndarray): 2D Numpy array with a single row containing pressure data (in Pa) as floats, or a single pressure as a float.
+
+        Note:
+
+            T, P are orthogonal 2D arrays of length m and n, populated in one row/column: in this case mu is an m x n matrix.
+            Other T, P arrays will result in undefined behaviour.
+
+        Returns:
+
+            mu (float/ndarray): Chemical potential of one sulfur atom expressed as floats in a m x n Numpy array where T, P are orthogonal 2D arrays of length m and n
+        """
+        
+        Kb = 8.617E-5
+        
+        if np.any(T > 1500) or np.any(T < 400) or np.any(P>10**7) or np.any(P<10**0):
+            print("""WARNING!: You are using the sulfur model beyond the temperature and/or pressure range it was fitted to.
+                 Region of validity is 400 - 1500 K, 10^0 - 10^7 Pa. """)
+
+        def T_tr(P):
+            
+            return 5.077E2 + 7.272E1*np.log10(P) - 8.295*np.log10(P)**2 + 1.828*np.log10(P)**3
+        
+        def mu_S_2(T,P): 
+            
+            return 1.207 - 1.848E-3*T - 8.566E-7*T**2 + 4.001E-10*T**3 - 8.654E-14*T**4 + Kb*T*np.log(P/1E5)
+        
+        def mu_S_8(T,P): 
+            
+            return 7.62E-1 - 2.457E-3*T - 4.012E-6*T**2 + 1.808E-9*T**3 - 3.810E-13*T**4 + Kb*T*np.log(P/1E5)
+        
+        def a_p(P):
+            
+            return 1.465E-02 - 2.115E-03*np.log10(P)+6.905E-04*np.log10(P)**2
+            
+        b = 10
+        c = 80
+        w = 100
+        
+        mu_eV =  (  0.5*(special.erfc((T-T_tr(P))/w)*mu_S_8(T,P)/8) 
+                   +0.5*((special.erf((T-T_tr(P))/w)+1)*mu_S_2(T,P)/2)  
+                   -a_p(P)*np.exp(-((T-T_tr(P)+b)**2)/(2*c**2))
+                   +self.reference_energy)
+
+        if units == "eV":
+            return mu_eV
+
+        elif units == "J":
+            return (
+                mu_eV
+                * constants.physical_constants["electron volt-joule relationship"][0]
+                * constants.N_A
+            )
+
+        elif units == "kJ":
+            return (
+                mu_eV
+                * constants.physical_constants["electron volt-joule relationship"][0]
+                * constants.N_A
+                * 0.001
+            )
 
 class Material(object):
     """
