@@ -97,7 +97,6 @@ class Potential:
             if T_units == "C":
                 x = x - 273.15
 
-            
             if gas_phase == "S2":
                 plt.fill_between(
                     x,
@@ -156,7 +155,7 @@ class Potential:
                     facecolor="w",
                     alpha=1,
                     zorder=3,
-                    hatch='///',
+                    hatch="///",
                     linewidth=0,
                     edgecolor="0.8",
                 )
@@ -169,7 +168,7 @@ class Potential:
                     1000,
                 ]  # LW: I have shifted this without fully understanding the logic of x1,y1,y2...
                 y1 = [9500000, 9500000]
-                y2 = [0.001,0.001]
+                y2 = [0.001, 0.001]
                 plt.fill_between(
                     x1,
                     y1,
@@ -180,17 +179,29 @@ class Potential:
                     linewidth=0,
                     edgecolor="0.8",
                 )
-                plt.plot(x, y_values, color="k", linestyle='--', dashes=(7.6, 3.5), linewidth=1.5,zorder=5)
+                plt.plot(
+                    x,
+                    y_values,
+                    color="k",
+                    linestyle="--",
+                    dashes=(7.6, 3.5),
+                    linewidth=1.5,
+                    zorder=5,
+                )
                 plt.xlim(min(x_values), max(x_values))
                 plt.ylim(min(y_values), max(y_values))
 
         a = plt.contour(
-            x_values, (y_values), self.potential, linewidths=0.7, colors="k", zorder=2,
-            )
-        plt.clabel(a, fmt=precision, zorder=3,fontsize=17)
-
+            x_values,
+            (y_values),
+            self.potential,
+            linewidths=0.7,
+            colors="k",
+            zorder=2,
+        )
+        plt.clabel(a, fmt=precision, zorder=3, fontsize=17)
 
         if filename:
-            plt.savefig(filename, dpi=200, bbox_inches = 'tight')
+            plt.savefig(filename, dpi=200, bbox_inches="tight")
         else:
             return plt

@@ -82,7 +82,6 @@ class Potentials:
             T_tr_poly = [8.492e-01, 2.662e00, 3.849e01, 5.336e02]
             # print(self.T)
             pressure = self.P
-            
 
             def T_tr(P):
                 return np.polyval(T_tr_poly, np.log10(P))
@@ -91,7 +90,12 @@ class Potentials:
             if T_units == "C":
                 x = x - 273.15
 
-            plt.plot(x, y_values, "k--", linewidth=3,)
+            plt.plot(
+                x,
+                y_values,
+                "k--",
+                linewidth=3,
+            )
             plt.xlim(min(x_values), max(x_values))
             if gas_phase == "S2":
                 plt.fill_between(
@@ -105,7 +109,7 @@ class Potentials:
                     linewidth=0,
                     edgecolor="0.8",
                 )
-                x1 = [3, 419.1596- 273.15]
+                x1 = [3, 419.1596 - 273.15]
                 y1 = [9500000, 9500000]
                 y2 = [0.0001, 0.0001]
                 plt.fill_between(
@@ -145,7 +149,7 @@ class Potentials:
                     facecolor="w",
                     alpha=1,
                     zorder=3,
-                    hatch='///',
+                    hatch="///",
                     linewidth=0,
                     edgecolor="0.8",
                 )
@@ -178,8 +182,8 @@ class Potentials:
 
         plt.xlabel("Temperature ({0})".format(x_unitlabel))
         plt.ylabel("Pressure ({0})".format(P_units))
-        #plt.ylim([0.001, 10000000])
-        #plt.xlim([0, 1000])
+        # plt.ylim([0.001, 10000000])
+        # plt.xlim([0, 1000])
         if melting_point == True:
             plt.axvline(x=554, zorder=20, color="k")
 
