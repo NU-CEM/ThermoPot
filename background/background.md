@@ -3,7 +3,7 @@ This software is used to calculate the thermodynamic potentials of materials and
 ## Research outputs
 
 - This model was originally developed for the photovoltaic material CZTS and published in a [2014 publication in *J. Mater. Chem. A*](http://dx.doi.org/10.1039/C4TA00892H).
-- It has been more recently applied to the chalcogenide perovskite BaZrS3, with a paper in preparation.
+- It has been more recently applied to the chalcogenide perovskite BaZrS3 and published in a [2023 publication in *Solar RRL*](https://doi.org/10.1002/solr.202201078).
 
 ## Experimental data
 
@@ -11,5 +11,5 @@ Experimental data is used to model the pressure and temperature dependance of ga
 
 ## Further reading
 
-- Materials Stability and Nature's bike shop: A comics guide to predicting new materials. Anubhav Jain (2014): https://hackingmaterials.files.wordpress.com/2014/05/phasediagram_comic2.pdf
-- Phase Diagrams: The Beginning of Wisdom. Rainer Schmid-Fetzer (2014): https://files.core.ac.uk/pdf/2612/81879090.pdf
+- Materials Stability and Nature's bike shop: A comics guide to predicting new materials, Anubhav Jain (2014). Link [here](https://hackingmaterials.files.wordpress.com/2014/05/phasediagram_comic2.pdf)
+- Phase Diagrams: The Beginning of Wisdom. Rainer Schmid-Fetzer (2014): Link [here](https://files.core.ac.uk/pdf/2612/81879090.pdf).
