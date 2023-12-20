@@ -465,20 +465,20 @@
   <h1>Welcome</h1>
 
 <p><img alt="example workflow" src="https://github.com/NU-CEM/ThermoPot/actions/workflows/build-docs.yml/badge.svg" /> <img alt="example workflow" src="https://github.com/NU-CEM/ThermoPot/actions/workflows/run-tests.yml/badge.svg" /> <img alt="example workflow" src="https://github.com/NU-CEM/ThermoPot/actions/workflows/lint-code.yml/badge.svg" /></p>
-<p>⚠️⚠️⚠️ This repository is still in development, and some functionality is untested. Use with caution, or wait until we fully test it! ⚠️⚠️⚠️</p>
+<p>⚠️  This repository is still in development, and some functionality is untested. Use with caution.</p>
 <p>ThermoPot is used for ab-initio thermodynamic modelling of material formation and decomposition.</p>
 <ul>
-<li>📚 The documentation is <a href="https://NU-CEM.github.io/ThermoPot">here</a>. </li>
-<li>🔄 This code is made available under the GNU General Public Licence (GPL) v3. See the LICENSE file for the full text.</li>
+<li>📚 The documentation is <a href="https://NU-CEM.github.io/ThermoPot">here</a>.</li>
 <li>🖊 If you use this package for your research please <a href="https://github.com/NU-CEM/ThermoPot/blob/main/citation.cff">cite accordingly</a>.</li>
+<li>🔄 This code is made available under the GNU General Public Licence (GPL) v3.</li>
 </ul>
-<p>This work adapts and extends a previous repository developed by <a href="https://orcid.org/0000-0001-5272-6530">Adam Jackson</a>: <a href="http://dx.doi.org/10.5281/zenodo.57130">Thermodynamic model of CZTS</a>. </p>
+<p>This work adapts and extends a previous repository developed by Adam Jackson and Aron Walsh: <a href="http://dx.doi.org/10.5281/zenodo.57130">Thermodynamic model of CZTS</a>. </p>
 <h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link"></a></h2>
-<p>ThermoPot calculates temperature and pressure dependent thermodynamic potentials using first-principles data. Thermopot can:</p>
+<p>ThermoPot calculates temperature and pressure dependent thermodynamic potentials using first-principles data as an input. Thermopot can:</p>
 <ul>
 <li>calculate the internal energy, enthalpy and Gibbs free energy at a given temperature and pressure</li>
 <li>calculate the change in energy/enthalpy for a given reaction</li>
-<li>work with solid or gases</li>
+<li>work with thermochemical tables to model gases</li>
 <li>plot potentials as a function of T and P</li>
 <li>predict thermodynamic stability as a function of T and P</li>
 <li>Parse DFT data from an FHI-aims output file and lattice dynamics data from Phonopy output</li>
@@ -487,10 +487,12 @@
 <h2 id="supported-software">Supported software<a class="headerlink" href="#supported-software" title="Permanent link"></a></h2>
 <p>ThermoPot is compatible with a range of materials modelling packages as DFT energies and thermal properties data can be provided by the user. ThermoPot also supports parsing of FHI-aims output files, phonopy output and NIST-JANAF thermochemical data tables.</p>
 <h2 id="related-software">Related software<a class="headerlink" href="#related-software" title="Permanent link"></a></h2>
-<p>There are other codes that can calculate thermodynamic potentials and phase diagrams. The best code depends on your use case:
-- <a href="https://github.com/symmy596/SurfinPy">Surfinpy</a> generates phase diagrams for bulk and surface systems. 
-- <a href="https://pycalphad.org/docs/latest/">pycalphad</a> uses the CALPHAD method to generate phase diagram and predict thermodynamic properties.
-- <a href="https://thermo.readthedocs.io/cubic_equations_of_state.html">thermo</a> uses cubic equations of state to generate phase diagrams for liquids and gases.</p>
+<p>There are other codes that can calculate thermodynamic potentials and phase diagrams. The best code depends on your use case:</p>
+<ul>
+<li><a href="https://github.com/symmy596/SurfinPy">Surfinpy</a> generates phase diagrams for bulk and surface systems. </li>
+<li><a href="https://pycalphad.org/docs/latest/">pycalphad</a> uses the CALPHAD method to generate phase diagram and predict thermodynamic properties.</li>
+<li><a href="https://thermo.readthedocs.io/cubic_equations_of_state.html">thermo</a> uses cubic equations of state to generate phase diagrams for liquids and gases.</li>
+</ul>
 
 
 
