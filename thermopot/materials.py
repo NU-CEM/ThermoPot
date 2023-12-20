@@ -4,13 +4,13 @@ Each class provides methods for calculating various thermodynamic properties.
 """
 
 import numpy as np
-from scipy import constants
+import scipy
+from scipy import constants, special
 from thermopot import interpolate
 
+from pathlib import Path # get correct path for datafiles when called from another directory
 
-import os  # get correct path for datafiles when called from another directory
-
-materials_directory = os.path.dirname(__file__)
+materials_directory = str(Path.cwd())
 # Append a trailing slash to make coherent directory name - this would select the
 # root directory in the case of no prefix, so we need to check
 if materials_directory:

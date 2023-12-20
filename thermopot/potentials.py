@@ -3,7 +3,6 @@ import matplotlib as mpl
 import matplotlib.patches as mpatches
 import numpy as np
 
-
 class Potentials:
     def __init__(self, *potentials):
         self.potentials = potentials
@@ -16,7 +15,6 @@ class Potentials:
     def plot_TvsP(
         self,
         material_labels=None,
-        filename=False,
         T_units="K",
         P_units="Pa",
         log_scale=True,
@@ -29,7 +27,6 @@ class Potentials:
         e.g. reactions.reaction({Ba:1,S:2}, {BaS2:1}},temperature=T,pressure=P).Dmu_eV_pbesol()
         potential_label is the label of the contour colorbar e.g. '$\Delta G_f$ / kJ mol$^{-1}$'
         scale_range is the scale of the colorbar e.g. [-380, -240]
-        filename is the output filename e.g. 'plots/Dmu-BaS2-Ba-S2.png'. If not provided `plt.show()` is called.
         log_scale determines if the Pressure y-axis is logarithmic
         """
 
@@ -89,10 +86,7 @@ class Potentials:
         if log_scale:
             ax.set_yscale("log")
 
-        if filename:
-            plt.savefig(filename, dpi=200)
-        else:
-            return plt
+        return plt
 
     def find_potential_minimum(self):
         assert (
