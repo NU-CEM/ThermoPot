@@ -4,7 +4,7 @@
 ThermoPot: An ab-initio thermodynamic modelling package [![DOI](https://zenodo.org/badge/490745937.svg)](https://zenodo.org/badge/latestdoi/490745937)
 ============================
 
-⚠️⚠️⚠️ This repository is still in development, and some functionality is untested. Use with caution, or wait until we fully test it! ⚠️⚠️⚠️
+⚠️ This repository is still in development, and some functionality is untested. Use with caution, or wait until we fully test it! 
 
 ![example workflow](https://github.com/NU-CEM/ThermoPot/actions/workflows/build-docs.yml/badge.svg) ![example workflow](https://github.com/NU-CEM/ThermoPot/actions/workflows/run-tests.yml/badge.svg) ![example workflow](https://github.com/NU-CEM/ThermoPot/actions/workflows/lint-code.yml/badge.svg)
 
