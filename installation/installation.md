@@ -10,10 +10,11 @@ conda activate thermopot
 pip install thermopot
 ```
 
-If you wish, you can install the very latest version of ThermoPot from Github. Note that although the latest Github version may include more features, it may not be stable. To install the latest, possibly unstable version:
+If you wish, you can install the latest developer version of ThermoPot from Github. For this you will may want to specify a particular branch. Note that although the latest Github versions may include more features, it may not be stable. To install the latest, possibly unstable version:
 
 ```
 git clone https://github.com/NU-CEM/ThermoPot.git
 cd ThermoPot
+git checkout <branch>
 pip install .
 ```
