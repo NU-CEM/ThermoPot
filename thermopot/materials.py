@@ -47,7 +47,7 @@ class Sulfur_model(object):
             mu (float/ndarray): Chemical potential of one sulfur atom expressed as floats in a m x n Numpy array where T, P are orthogonal 2D arrays of length m and n
         """
 
-        Kb = scipy.constants.physical_constants["Boltzmann constant in eV/K"][0]  
+        Kb = scipy.constants.physical_constants["Boltzmann constant in eV/K"][0]
 
         if (
             np.any(T > 1500)
