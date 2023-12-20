@@ -166,13 +166,16 @@ class Potential:
         
         Returns a tuple containing the polynomial fit coefficients, from highest power to lowest power.
         """    
-
         try:
-            pressure_index = np.where(self.P == pressure)
+            pressure_index = np.where(np.isclose(self.P,pressure,rtol=1E-3))[0][0]
         except:
             "this potential was not generated at the pressure specified"
+        
+        # if potential a 1d array set it as the data to fit to
+        if self.potential.ndim == 1:
+            potential_at_pressure = self.potential
+        else:
+            potential_at_pressure = self.potential[pressure_index]
 
-        potential_at_pressure = self.potential[:,pressure_index]
-
-        potential_polyfit = np.polyfit(self.T,potential_at_pressure,order)
+        return np.polyfit(self.T,potential_at_pressure,order)
             
