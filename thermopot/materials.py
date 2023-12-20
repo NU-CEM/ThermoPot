@@ -8,7 +8,9 @@ import scipy
 from scipy import constants, special
 from thermopot import interpolate
 
-from pathlib import Path # get correct path for datafiles when called from another directory
+from pathlib import (
+    Path,
+)  # get correct path for datafiles when called from another directory
 
 materials_directory = str(Path.cwd())
 # Append a trailing slash to make coherent directory name - this would select the

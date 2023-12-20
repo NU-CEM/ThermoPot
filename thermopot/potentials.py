@@ -3,6 +3,7 @@ import matplotlib as mpl
 import matplotlib.patches as mpatches
 import numpy as np
 
+
 class Potentials:
     def __init__(self, *potentials):
         self.potentials = potentials
