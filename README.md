@@ -10,9 +10,9 @@ ThermoPot: An ab-initio thermodynamic modelling package [![DOI](https://zenodo.o
 
 Software for ab-initio thermodynamic modelling of material formation and decomposition.
 
-- 📚 The documentation is [here](https://NU-CEM.github.io/ThermoPot). 
+- 📚 The documentation is [here](https://NU-CEM.github.io/ThermoPot).
+- 🖊 If you use this package for your own work please [cite accordingly](https://github.com/NU-CEM/ThermoPot/blob/main/citation.cff).
 - 🔄 This code is made available under the GNU General Public Licence (GPL) v3. See the LICENSE file for the full text.
-- 🖊 If you use this package for your research please [cite accordingly](https://github.com/NU-CEM/ThermoPot/blob/main/citation.cff).
 
 This work adapts and extends a previous repository developed by Adam Jackson: [Thermodynamic model of CZTS](http://dx.doi.org/10.5281/zenodo.57130). 
 
