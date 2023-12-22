@@ -151,31 +151,27 @@ class Potential:
         else:
             return plt
 
-    def polyfit_potential(
-        self,
-        order=4,
-        pressure=1E5):
+    def polyfit_potential(self, order=4, pressure=1e5):
         """
         Performs a least squares fit to the potential data at a specified pressure.
         order is the order of the polynomial fit.
         If no order is provided it defaults to 4.
         pressure is a float and is given in pascals.
-        If no pressure is specified this defaults to 1bar. 
+        If no pressure is specified this defaults to 1bar.
 
         If the calculated potential is not available at this pressure then an error is raised.
-        
+
         Returns a tuple containing the polynomial fit coefficients, from highest power to lowest power.
-        """    
+        """
         try:
-            pressure_index = np.where(np.isclose(self.P,pressure,rtol=1E-3))[0][0]
+            pressure_index = np.where(np.isclose(self.P, pressure, rtol=1e-3))[0][0]
         except:
             "this potential was not generated at the pressure specified"
-        
+
         # if potential a 1d array set it as the data to fit to
         if self.potential.ndim == 1:
             potential_at_pressure = self.potential
         else:
             potential_at_pressure = self.potential[pressure_index]
 
-        return np.polyfit(self.T,potential_at_pressure,order)
-            
+        return np.polyfit(self.T, potential_at_pressure, order)

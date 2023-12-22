@@ -117,16 +117,16 @@ class Potentials:
     def polynomial_intersection(
         self,
         ratio=4,
-        pressures=np.logspace(0,7,100),
+        pressures=np.logspace(0, 7, 100),
         order=4,
-        ref_pressure_for_fit=1E5
-        ):
+        ref_pressure_for_fit=1e5,
+    ):
         """
         Conducts polynomial fittings to two potential datasets.
         Calculates the temperature(s) at which the two polynomial fits intersects for given pressure(s).
-        Fits another polynomial to the transition-temp vs pressure data. 
+        Fits another polynomial to the transition-temp vs pressure data.
         This can then be evaluated and overlaid on potential contour plots (not implemented here).
-        
+
         pressures is given a iterable with units in pascals. It defaults to np.logspace(0,7,100).
         ratio is num_atoms_potential_1 / num_atoms_potential_2. It defaults to 4.
         order is the order of the polynomial fitting. It defaults to 4.
@@ -134,41 +134,50 @@ class Potentials:
 
         If the calculated potential is not available at this pressure then an error is raised.
 
-        This broadly follows code published by Adam Jackson: 
+        This broadly follows code published by Adam Jackson:
         https://github.com/WMD-group/sulfur-model/blob/master/parameterisation.ipynb
         """
 
         try:
             len(self.potentials) != 2
-        except: 
-            print("this method can only be called for a Potentials object storing two potentials")
+        except:
+            print(
+                "this method can only be called for a Potentials object storing two potentials"
+            )
 
         # generate polynomial fits to calculated data
-        poly1 = self.potentials[0].polyfit_potential(order,ref_pressure_for_fit)
-        poly2 = self.potentials[1].polyfit_potential(order,ref_pressure_for_fit)
-        
+        poly1 = self.potentials[0].polyfit_potential(order, ref_pressure_for_fit)
+        poly2 = self.potentials[1].polyfit_potential(order, ref_pressure_for_fit)
+
         # xp1 is coefficient for potential 1
         # xp2 is coefficient for potential 2
-        
+
         def build_poly_to_solve(poly1, poly2, ratio, pressure):
-            
-            k = scipy.constants.physical_constants['Boltzmann constant in eV/K'][0]
-            
-            return ([xp1-ratio*xp2 for xp1,xp2 in zip(poly1[:-2],poly2[:-2])]
-                           + [(poly1[-2]-ratio*poly2[-2]-(ratio-1)*k*np.log(pressure/ref_pressure_for_fit))]
-                           + [poly1[-1] - ratio*poly2[-1]])
+            k = scipy.constants.physical_constants["Boltzmann constant in eV/K"][0]
+
+            return (
+                [xp1 - ratio * xp2 for xp1, xp2 in zip(poly1[:-2], poly2[:-2])]
+                + [
+                    (
+                        poly1[-2]
+                        - ratio * poly2[-2]
+                        - (ratio - 1) * k * np.log(pressure / ref_pressure_for_fit)
+                    )
+                ]
+                + [poly1[-1] - ratio * poly2[-1]]
+            )
 
         # list to store temperatures at which intersect
         T_intersect = []
 
         # if pressure is float then convert to iterable
-        if not hasattr(pressures, '__iter__'):
+        if not hasattr(pressures, "__iter__"):
             pressures = [pressures]
-        
+
         for pressure in pressures:
             poly_to_solve = build_poly_to_solve(poly1, poly2, ratio, pressure)
             roots = np.roots(poly_to_solve)
-            
+
             best_root = False
             for root in roots:
                 if root == root.real and root > 0 and best_root == False:
@@ -178,12 +187,10 @@ class Potentials:
             if best_root:
                 T_intersect.append(best_root)
             else:
-                T_intersect.append('NaN')
-                
-        T_intersect = [t.real for t in T_intersect]
-        
-        T_intersect_fit = np.polyfit(np.log10(pressures), T_intersect, 3)
-        
-        return [T_intersect_fit,T_intersect]
+                T_intersect.append("NaN")
 
-        
+        T_intersect = [t.real for t in T_intersect]
+
+        T_intersect_fit = np.polyfit(np.log10(pressures), T_intersect, 3)
+
+        return [T_intersect_fit, T_intersect]
